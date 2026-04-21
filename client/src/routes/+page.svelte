@@ -1,2 +1,16 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+    import "../normalize.css";
+    import "../app.css";
+    import Header from "../lib/assets/components/Header.svelte";
+    import Footer from "$lib/assets/components/Footer.svelte";
+
+</script>
+<Header>
+</Header>
+<main>
+</main>
+<Footer>       
+</Footer>
+<style>
+    
+</style>
