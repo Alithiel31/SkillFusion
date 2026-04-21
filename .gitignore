@@ -8,7 +8,7 @@ api/generated/prisma
 .vercel
 .netlify
 .wrangler
-client/.svelte-kit
+
 client/build
 
 # OS
