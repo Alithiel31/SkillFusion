@@ -36,7 +36,7 @@ enum Visibilite {
   ARCHIVE
 }
 
-// ─── Main Entity ───────────────────────────────────────────────
+// ─── Entités principales ──────────────────────────────────
 
 model User {
   id               Int      @id @default(autoincrement())
@@ -48,8 +48,8 @@ model User {
   role             Role     @default(VISITOR)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
-  
-  cours_crees   Cours[]          
+
+  cours_crees   Cours[]          @relation("CourseCreator")
   badges        User_has_Badge[]
   enrollments   User_has_Cours[]
   activations   Cours_active[]
@@ -70,7 +70,7 @@ model Cours {
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
 
-  createur     User                         
+  createur     User                           @relation("CourseCreator", fields: [createur_id], references: [id], onDelete: Restrict)
   categories   Cours_has_Categories[]
   outils       Cours_has_Outils[]
   objectifs    Cours_has_Objectif_Pedagogique[]
@@ -87,24 +87,31 @@ model Categories {
   nom         String
   description String?
 
+  cours Cours_has_Categories[]
 }
 
 model Objectif_Pedagogique {
   id          Int    @id @default(autoincrement())
   titre       String
   description String?
+
+  cours Cours_has_Objectif_Pedagogique[]
 }
 
 model Outils {
   id          Int    @id @default(autoincrement())
   nom         String
   description String?
+
+  cours Cours_has_Outils[]
 }
 
 model Badge {
   id          Int    @id @default(autoincrement())
   nom         String
   description String?
+
+  users User_has_Badge[]
 }
 
 model Cour_content {
@@ -113,6 +120,121 @@ model Cour_content {
   numeros_page Int
   contenu      String
 
+  cours Cours @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+
+  @@unique([cours_id, numeros_page])
 }
 
-// ─── Junction Tables ────────────────────────────────────
+// ─── Tables de liaison ────────────────────────────────────
+
+model User_has_Cours {
+  id        Int      @id @default(autoincrement())
+  user_id   Int
+  cours_id  Int
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  cours Cours @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, cours_id])
+}
+
+model Cours_active {
+  id          Int      @id @default(autoincrement())
+  user_id     Int
+  cours_id    Int
+  est_termine Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  cours Cours @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, cours_id])
+}
+
+model User_has_Badge {
+  id        Int      @id @default(autoincrement())
+  user_id   Int
+  badge_id  Int
+  createdAt DateTime @default(now())
+
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  badge Badge @relation(fields: [badge_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, badge_id])
+}
+
+model Cours_has_Categories {
+  id            Int @id @default(autoincrement())
+  cours_id      Int
+  categories_id Int
+
+  cours     Cours      @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+  categorie Categories @relation(fields: [categories_id], references: [id], onDelete: Cascade)
+
+  @@unique([cours_id, categories_id])
+}
+
+model Cours_has_Outils {
+  id        Int @id @default(autoincrement())
+  cours_id  Int
+  outils_id Int
+
+  cours  Cours  @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+  outils Outils @relation(fields: [outils_id], references: [id], onDelete: Cascade)
+
+  @@unique([cours_id, outils_id])
+}
+
+model Cours_has_Objectif_Pedagogique {
+  id                      Int @id @default(autoincrement())
+  cours_id                Int
+  objectif_pedagogique_id Int
+
+  cours    Cours                @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+  objectif Objectif_Pedagogique @relation(fields: [objectif_pedagogique_id], references: [id], onDelete: Cascade)
+
+  @@unique([cours_id, objectif_pedagogique_id])
+
+}
+
+// ─── Social ───────────────────────────────────────────────
+
+model Commentaire {
+  id          Int      @id @default(autoincrement())
+  description String
+  cours_id    Int
+  id_auteur   Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  cours  Cours @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+  auteur User  @relation(fields: [id_auteur], references: [id], onDelete: Cascade)
+}
+
+model Opinion {
+  id        Int      @id @default(autoincrement())
+  message   String
+  note      Int      // valeur attendue : 1 à 5 (étoiles)
+  cours_id  Int
+  user_id   Int
+  createdAt DateTime @default(now())
+
+  cours Cours @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, cours_id])
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  contenu   String
+  cours_id  Int
+  user_id   Int
+  createdAt DateTime @default(now())
+
+  cours Cours @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
