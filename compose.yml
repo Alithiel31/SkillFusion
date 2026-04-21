@@ -24,8 +24,11 @@ services:
     container_name: skillfusion_api
     depends_on:
       - db
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./api:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
     networks:
@@ -40,8 +43,11 @@ services:
     depends_on:
       - api
       - db
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./client:/app
+      - /app/node_modules
     networks:
       - skillfusion_network
     command: npm run dev -- --host

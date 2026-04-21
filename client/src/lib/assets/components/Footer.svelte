@@ -28,6 +28,7 @@
 
 <style>
   .footer {
+    background-color: white;
     --blue: #1D4E89;
     --blue-light: #EBF2FA;
     --amber: #F5A623;
