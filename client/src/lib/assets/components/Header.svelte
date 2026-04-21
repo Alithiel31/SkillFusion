@@ -58,13 +58,12 @@
 		order: 1;
 		justify-content: center;
 	}
-
 	.header__nav-link {
 		padding: 8px 16px;
 		border-radius: var(--radius);
 		font-size: 14px;
 		font-weight: 500;
-		color: var(--dark);
+		color: #1D4E89;
 		text-decoration: none;
 		transition:
 			background 0.15s,
