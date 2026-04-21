@@ -159,14 +159,18 @@
 			/>
 
 			<div class="dropdown-wrapper">
-				<select id="categorie-select" class="category-btn" onclick={() => (showDropdown = !showDropdown)}>
+				<select
+					id="categorie-select"
+					class="category-btn"
+					onclick={() => (showDropdown = !showDropdown)}
+				>
 					{selectedCategory}
 					<span class="chevron">▾</span>
-							{#each categories as cat}
-								<option value="${cat}">
-									{cat}
-								</option>
-							{/each}
+					{#each categories as cat}
+						<option value="${cat}">
+							{cat}
+						</option>
+					{/each}
 				</select>
 			</div>
 
@@ -379,6 +383,88 @@
 	@media (max-width: 600px) {
 		.courses-grid {
 			grid-template-columns: 1fr;
+		}
+	}
+
+    /* --- mobile view --- */
+	@media (max-width: 768px) {
+		.main {
+			max-width: 100%;
+			padding: 1rem;
+		}
+
+		.page-title {
+			font-size: 1.4rem;
+			text-align: left;
+		}
+
+		.search {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.category-btn {
+			width: 100%;
+		}
+
+		.add-btn {
+			display: none;
+		}
+
+		.category-btn {
+			width: 100%;
+		}
+
+        .search {
+            flex-direction: row;
+        }
+
+		/* TRANSFORMATION GRID → LISTE MOBILE */
+		.courses-grid {
+			display: flex;
+			flex-direction: column;
+			gap: 0.8rem;
+		}
+
+		/* CARD STYLE MOBILE */
+		.course-card {
+			display: flex;
+			align-items: center;
+			gap: 0;
+			padding: 0;
+		}
+
+		.card-image {
+			width: 0px;
+			height: 0px;
+			border-radius: 0px;
+		}
+
+		.card-body {
+			flex: 1;
+		}
+
+		.card-title {
+			font-size: 0.95rem;
+			text-align: center;
+		}
+
+		.card-subtitle {
+			font-size: 0.75rem;
+		}
+
+		.level-row {
+			justify-content: space-between;
+		}
+
+		.card-subtitle {
+			display: none;
+		}
+
+		.bars {
+			display: none;
+			width: 0;
+			height: 0;
 		}
 	}
 
