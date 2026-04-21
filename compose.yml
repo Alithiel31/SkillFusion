@@ -31,11 +31,12 @@ services:
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./api:/app
-      - /app/node_modules     # protège le node_modules du container
+      - /app/node_modules
     ports:
       - "3000:3000"
     networks:
       - skillfusion_network
+    command: npm run dev
 
   client:
     build: ./client
@@ -47,10 +48,9 @@ services:
       - db
     environment:
       - CHOKIDAR_USEPOLLING=true
-
     volumes:
       - ./client:/app
-      - /app/node_modules     # protège le node_modules du container
-    command: ["npm", "run", "dev", "--", "--host"]   # ← surcharge serve par Vite dev
+      - /app/node_modules
     networks:
       - skillfusion_network
+    command: npm run dev -- --host

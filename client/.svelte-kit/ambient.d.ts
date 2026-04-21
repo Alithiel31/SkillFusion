@@ -68,7 +68,6 @@ declare module '$env/static/private' {
 	export const npm_execpath: string;
 	export const npm_config_global_prefix: string;
 	export const npm_command: string;
-	export const NODE_ENV: string;
 	export const INIT_CWD: string;
 	export const EDITOR: string;
 	export const PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS: string;
@@ -188,7 +187,6 @@ declare module '$env/dynamic/private' {
 		npm_execpath: string;
 		npm_config_global_prefix: string;
 		npm_command: string;
-		NODE_ENV: string;
 		INIT_CWD: string;
 		EDITOR: string;
 		PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS: string;
