@@ -12,8 +12,11 @@ services:
       POSTGRES_USER: usersf
       POSTGRES_PASSWORD: usersf
       POSTGRES_DB: usersf
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
+
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - ./database/:/docker-entrypoint-initdb.d
     networks:
