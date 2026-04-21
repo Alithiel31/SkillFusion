@@ -1,0 +1,45 @@
+volumes:
+  skillfusion_volume:
+
+networks:
+  skillfusion_network:
+
+services:
+  db:
+    image: postgres:18
+    container_name: skillfusion_db
+    environment:
+      POSTGRES_USER: usersf
+      POSTGRES_PASSWORD: usersf
+      POSTGRES_DB: usersf
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/:/docker-entrypoint-initdb.d
+    networks:
+      - skillfusion_network
+
+  api:
+    build: ./api
+    container_name: skillfusion_api
+    depends_on:
+      - db
+    volumes:
+      - ./api:/app
+    ports:
+      - "3000:3000"
+    networks:
+      - skillfusion_network
+
+  client:
+    build: ./client
+    container_name: skillfusion_client
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+      - db
+    volumes:
+      - ./client:/app
+    networks:
+      - skillfusion_network
