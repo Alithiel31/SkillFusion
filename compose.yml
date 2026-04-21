@@ -26,11 +26,11 @@ services:
       - db
     volumes:
       - ./api:/app
-      - /app/node_modules
     ports:
       - "3000:3000"
     networks:
       - skillfusion_network
+    command: npm run dev
 
   client:
     build: ./client
@@ -42,7 +42,6 @@ services:
       - db
     volumes:
       - ./client:/app
-      - /app/node_modules
-    command: ["npm", "run", "dev", "--", "--host"]
     networks:
       - skillfusion_network
+    command: npm run dev -- --host
