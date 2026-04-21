@@ -77,7 +77,7 @@ CREATE TABLE "Badge" (
 -- CreateTable
 CREATE TABLE "Cour_content" (
     "id" SERIAL NOT NULL,
-    "cours_id" INTEGER NOT NULL,
+    "cours_id" INTEGER ,
     "numeros_page" INTEGER NOT NULL,
     "contenu" TEXT NOT NULL,
 

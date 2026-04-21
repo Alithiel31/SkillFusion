@@ -5,7 +5,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "./generated"
 }
 
 datasource db {
@@ -65,15 +65,14 @@ model Cours {
   difficulte      Difficulte
   resume          String?
   visibilite      Visibilite @default(BROUILLON)
-  createur_id     Int
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
 
-  createur     User                           @relation("CourseCreator", fields: [createur_id], references: [id], onDelete: Restrict)
+  createur     User    @relation("CourseCreator", fields: [createur_id], references: [id], onDelete: Restrict)
   categories   Cours_has_Categories[]
   outils       Cours_has_Outils[]
   objectifs    Cours_has_Objectif_Pedagogique[]
-  contenu      Cour_content[]
+  contenu      Cour_content[] 
   enrollments  User_has_Cours[]
   activations  Cours_active[]
   commentaires Commentaire[]
@@ -115,13 +114,12 @@ model Badge {
 
 model Cour_content {
   id           Int    @id @default(autoincrement())
-  cours_id     Int
+  cours_id     Int?
   numeros_page Int
   contenu      String
 
-  cours Cours @relation(fields: [cours_id], references: [id], onDelete: Cascade)
+  cours Cours? @relation(fields: [cours_id], references: [id], onDelete: Cascade)
 
-  @@unique([cours_id, numeros_page])
 }
 
 // ─── Tables de liaison ────────────────────────────────────
