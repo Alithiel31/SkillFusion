@@ -26,6 +26,7 @@ services:
       - db
     volumes:
       - ./api:/app
+      - /app/node_modules     # protège le node_modules du container
     ports:
       - "3000:3000"
     networks:
@@ -41,5 +42,7 @@ services:
       - db
     volumes:
       - ./client:/app
+      - /app/node_modules     # protège le node_modules du container
+    command: ["npm", "run", "dev", "--", "--host"]   # ← surcharge serve par Vite dev
     networks:
       - skillfusion_network

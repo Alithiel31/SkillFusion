@@ -10,4 +10,109 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+
 }
+
+// ─── Enums ───────────────────────────────────────────────
+
+enum Role {
+  VISITOR
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+enum Difficulte {
+  DEBUTANT
+  FACILE
+  INTERMEDIAIRE
+  AVANCE
+}
+
+enum Visibilite {
+  BROUILLON
+  PUBLIE
+  ARCHIVE
+}
+
+// ─── Main Entity ───────────────────────────────────────────────
+
+model User {
+  id               Int      @id @default(autoincrement())
+  email            String   @unique
+  nom              String
+  prenom           String
+  mot_de_passe     String
+  url_image_profil String?
+  role             Role     @default(VISITOR)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  cours_crees   Cours[]          
+  badges        User_has_Badge[]
+  enrollments   User_has_Cours[]
+  activations   Cours_active[]
+  commentaires  Commentaire[]
+  opinions      Opinion[]
+  notifications Notification[]
+}
+
+model Cours {
+  id              Int        @id @default(autoincrement())
+  titre           String
+  phrase_resume   String?
+  url_image_intro String?
+  difficulte      Difficulte
+  resume          String?
+  visibilite      Visibilite @default(BROUILLON)
+  createur_id     Int
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  createur     User                         
+  categories   Cours_has_Categories[]
+  outils       Cours_has_Outils[]
+  objectifs    Cours_has_Objectif_Pedagogique[]
+  contenu      Cour_content[]
+  enrollments  User_has_Cours[]
+  activations  Cours_active[]
+  commentaires Commentaire[]
+  opinions     Opinion[]
+  notifications Notification[]
+}
+
+model Categories {
+  id          Int    @id @default(autoincrement())
+  nom         String
+  description String?
+
+}
+
+model Objectif_Pedagogique {
+  id          Int    @id @default(autoincrement())
+  titre       String
+  description String?
+}
+
+model Outils {
+  id          Int    @id @default(autoincrement())
+  nom         String
+  description String?
+}
+
+model Badge {
+  id          Int    @id @default(autoincrement())
+  nom         String
+  description String?
+}
+
+model Cour_content {
+  id           Int    @id @default(autoincrement())
+  cours_id     Int
+  numeros_page Int
+  contenu      String
+
+}
+
+// ─── Junction Tables ────────────────────────────────────
