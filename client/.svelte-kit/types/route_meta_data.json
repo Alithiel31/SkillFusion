@@ -2,5 +2,8 @@
 	"/": [
 		"src/routes/+layout.server.ts",
 		"src/routes/+layout.server.ts"
+	],
+	"/cours": [
+		"src/routes/+layout.server.ts"
 	]
 }
