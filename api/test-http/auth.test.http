@@ -1,22 +1,22 @@
 
 @BASE_URL=http://localhost:3000
 
-###
+### auth register
 POST {{BASE_URL}}/auth/register
 Content-Type: application/json
 
-###
+### auth login
 POST {{BASE_URL}}/auth/login
 Content-Type: application/json
 
-###
+### auth logout
 POST {{BASE_URL}}/auth/logout
 Content-Type: application/json
 
-###
+### auth refresh
 POST {{BASE_URL}}/auth/refresh
 Content-Type: application/json
-
-###
+ 
+### auth me
 GET {{BASE_URL}}/auth/me
 Content-Type: application/json
