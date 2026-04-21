@@ -57,6 +57,7 @@ declare module '$env/static/private' {
 	export const PATH: string;
 	export const NODE: string;
 	export const npm_package_name: string;
+	export const CHOKIDAR_USEPOLLING: string;
 	export const npm_lifecycle_script: string;
 	export const npm_package_version: string;
 	export const npm_lifecycle_event: string;
@@ -175,6 +176,7 @@ declare module '$env/dynamic/private' {
 		PATH: string;
 		NODE: string;
 		npm_package_name: string;
+		CHOKIDAR_USEPOLLING: string;
 		npm_lifecycle_script: string;
 		npm_package_version: string;
 		npm_lifecycle_event: string;
