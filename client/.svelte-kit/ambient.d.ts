@@ -58,7 +58,6 @@ declare module '$env/static/private' {
 	export const PATH: string;
 	export const NODE: string;
 	export const npm_package_name: string;
-	export const CHOKIDAR_USEPOLLING: string;
 	export const npm_lifecycle_script: string;
 	export const npm_package_version: string;
 	export const npm_lifecycle_event: string;
@@ -68,6 +67,7 @@ declare module '$env/static/private' {
 	export const npm_execpath: string;
 	export const npm_config_global_prefix: string;
 	export const npm_command: string;
+	export const NODE_ENV: string;
 	export const INIT_CWD: string;
 	export const EDITOR: string;
 	export const PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS: string;
@@ -177,7 +177,6 @@ declare module '$env/dynamic/private' {
 		PATH: string;
 		NODE: string;
 		npm_package_name: string;
-		CHOKIDAR_USEPOLLING: string;
 		npm_lifecycle_script: string;
 		npm_package_version: string;
 		npm_lifecycle_event: string;
@@ -187,6 +186,7 @@ declare module '$env/dynamic/private' {
 		npm_execpath: string;
 		npm_config_global_prefix: string;
 		npm_command: string;
+		NODE_ENV: string;
 		INIT_CWD: string;
 		EDITOR: string;
 		PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS: string;
