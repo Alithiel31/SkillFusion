@@ -1,15 +1,16 @@
 <script lang="ts">
+	let props = $props()
 	import LevelBar from './levelbar/LevelBar.svelte';
 </script>
 
 <div class="card-body">
 	<div class="card__cours__color"></div>
 	<div class="card__cours__tittle">
-		<h3 class="card-title">Mon super titre de cours</h3>
-		<span class="card-category"> Categorie </span>
+		<h3 class="card-title">{props.tittle}</h3>
+		<span class="card-category"> {props.category} </span>
 	</div>
 	<div class="card__cours__level-row">
-		<LevelBar level="1" />
+		<LevelBar level = {props.difficulty} />
 	</div>
 </div>
 
