@@ -3,7 +3,7 @@
 <a class="main__link" href="/">Découvrir les cours</a>
 
 <style>
-a{
+.main__link{
 display: flex;
 justify-content: center;
 background-color: #1D4E89;

@@ -4,7 +4,7 @@
     categorie: 'Plomberie',
     auteur: 'Marc Dupuis',
     difficulte: 'Débutant',
-    difficulteNiveau: 2,
+    difficulteNiveau: 2, // barres remplies sur 5
     resume: [
       "Dans ce cours, vous apprendrez à démonter un ancien robinet mitigeur et à installer un nouveau modèle. Nous verrons les différents types de raccordements, comment couper l'eau, préparer les arrivées et sécuriser l'installation avant la mise en service.",
       "Ce cours est adapté aux débutants complets. Aucune connaissance préalable en plomberie n'est nécessaire."
@@ -49,7 +49,6 @@
   }
 </script>
 
-<!-- ===== DESKTOP VIEW ===== -->
 <div class="desktop-view">
   <div class="desktop-header">
     <h1>{cours.titre}</h1>

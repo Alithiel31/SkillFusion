@@ -1,10 +1,26 @@
-<script>
+<script
+>
 	import '../normalize.css';
 	import '../app.css';
-	import Header from '../lib/assets/components/Header.svelte';
+        import api from "$lib/services/api.service";
+	import Header from '$lib/assets/components/Header.svelte';
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import BtnAllCours from '$lib/assets/components/BtnAllCours.svelte';
 	import CoursCard from '$lib/assets/components/Cours/CoursCard.svelte';
+	import { onMount } from 'svelte';
+
+
+        let courses = $state([
+                {tittle: "Mon super titre",
+                        littleSummary: "Test",
+                        urlImage :"" ,
+                        difficulty: 2,
+                        category: "plomperie"}
+        ]);
+
+// onMount(async ()=>{
+//         // courses = await api('api/cours')
+// })
 </script>
 
 <Header />
@@ -41,10 +57,17 @@
 			<a class="main__link" href="/">Voir tout ➔</a>
 		</div>
 		<div class="homepage__rightside__cours">
-			<CoursCard />
-			<CoursCard />
-			<CoursCard />
-			<CoursCard />
+                
+                        {#each courses as cours}
+                        <CoursCard
+                        tittle= {cours.tittle}
+                        littleSummary= {cours.littleSummary}
+                        urlImage ={cours.urlImage}
+                        difficulty= {cours.difficulty}
+                        category= {cours.category}
+                        />
+                        {/each} 
+			
 		</div>
 	</section>
 </main>

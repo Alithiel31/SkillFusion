@@ -71,6 +71,30 @@ declare module '$env/static/private' {
 	export const INIT_CWD: string;
 	export const EDITOR: string;
 	export const PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS: string;
+	export const SESSIONNAME: string;
+	export const SystemDrive: string;
+	export const SystemRoot: string;
+	export const TEMP: string;
+	export const TEST: string;
+	export const TMP: string;
+	export const USERDOMAIN: string;
+	export const USERDOMAIN_ROAMINGPROFILE: string;
+	export const USERNAME: string;
+	export const USERPROFILE: string;
+	export const VBOX_MSI_INSTALL_PATH: string;
+	export const VITEST: string;
+	export const VITEST_VSCODE: string;
+	export const VITEST_VSCODE_LOG: string;
+	export const VITEST_WS_ADDRESS: string;
+	export const VSCODE_CODE_CACHE_PATH: string;
+	export const VSCODE_CRASH_REPORTER_PROCESS_TYPE: string;
+	export const VSCODE_CWD: string;
+	export const VSCODE_ESM_ENTRYPOINT: string;
+	export const VSCODE_HANDLES_UNCAUGHT_ERRORS: string;
+	export const VSCODE_IPC_HOOK: string;
+	export const VSCODE_NLS_CONFIG: string;
+	export const VSCODE_PID: string;
+	export const windir: string;
 }
 
 /**
@@ -190,6 +214,30 @@ declare module '$env/dynamic/private' {
 		INIT_CWD: string;
 		EDITOR: string;
 		PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS: string;
+		SESSIONNAME: string;
+		SystemDrive: string;
+		SystemRoot: string;
+		TEMP: string;
+		TEST: string;
+		TMP: string;
+		USERDOMAIN: string;
+		USERDOMAIN_ROAMINGPROFILE: string;
+		USERNAME: string;
+		USERPROFILE: string;
+		VBOX_MSI_INSTALL_PATH: string;
+		VITEST: string;
+		VITEST_VSCODE: string;
+		VITEST_VSCODE_LOG: string;
+		VITEST_WS_ADDRESS: string;
+		VSCODE_CODE_CACHE_PATH: string;
+		VSCODE_CRASH_REPORTER_PROCESS_TYPE: string;
+		VSCODE_CWD: string;
+		VSCODE_ESM_ENTRYPOINT: string;
+		VSCODE_HANDLES_UNCAUGHT_ERRORS: string;
+		VSCODE_IPC_HOOK: string;
+		VSCODE_NLS_CONFIG: string;
+		VSCODE_PID: string;
+		windir: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
