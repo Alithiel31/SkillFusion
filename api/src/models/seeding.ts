@@ -1,67 +1,61 @@
 import { prisma } from "./client";
 
-async function main() {
+async function seed() {
+  console.log("Start seeding ->")
   await prisma.user.create({
     data: {
       email: "test@test.test",
-      nom: 'test',
-      prenom: "test",
-      mot_de_passe: "test",
-      role: "ADMIN"
+      firstname: 'test',
+      lastname: "test",
+      password: "test",
+      role:2
     }
   });
 
-  await prisma.categories.create({
+  await prisma.category.create({
     data: {
-      nom: "Test"
+      name: "Test"
     }
   });
 
-  await prisma.objectif_Pedagogique.create({
+  await prisma.learningObjective.create({
     data: {
-      titre: "objectifTest",
+      title: "objectifTest",
       description: "test"
     }
   });
 
-  await prisma.outils.create({
+  await prisma.tool.create({
     data: {
-      nom: "outilTest",
+      name: "outilTest",
       description: "test"
     }
   });
 
-  await prisma.cour_content.create({
-    data: {
-      contenu: 'test',
-      numeros_page: 1,
-    }
-  });
+  
 
   await prisma.cours.create({
     data: {
-      titre: "courTest",
-      phrase_resume: 'testTestTest',
-      resume: "test",
-      difficulte: "DEBUTANT",
-      createur: {connect: { id: 1 } },
-      outils: { connect: { id: 1 } },
-      categories: { connect: { id: 1 } },
-      objectifs: { connect: { id: 1 } },
-      contenu: { connect: { id: 1 } }
+      title: "courTest",
+      littleSummary: 'testTestTest',
+      summary: "test",
+      difficulty: 0,
+      author: {connect: { id: 1 } },
+      content: { connect: { id: 1 } },
+      category: { connect: { id: 1 } },
+      learningObjectives: { connect: {id: 1} },
+      tools: { connect: {id: 1} }  
     }
   });
-
-  
-
-  
+  await prisma.courContent.create({
+    data: {
+      content: 'test',
+      numberPage: 1,
+      cours:{connect:{id:1}}
+    }
+  });
 }
 
-main()
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+seed()
+
+console.log("Termined")

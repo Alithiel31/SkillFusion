@@ -123,10 +123,10 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  nom: 'nom',
-  prenom: 'prenom',
-  mot_de_passe: 'mot_de_passe',
-  url_image_profil: 'url_image_profil',
+  firstname: 'firstname',
+  lastname: 'lastname',
+  password: 'password',
+  urlProfilImage: 'urlProfilImage',
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -134,94 +134,105 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.CoursScalarFieldEnum = {
   id: 'id',
-  titre: 'titre',
-  phrase_resume: 'phrase_resume',
-  url_image_intro: 'url_image_intro',
-  difficulte: 'difficulte',
-  resume: 'resume',
-  visibilite: 'visibilite',
-  createur_id: 'createur_id',
+  title: 'title',
+  littleSummary: 'littleSummary',
+  urlImage: 'urlImage',
+  difficulty: 'difficulty',
+  summary: 'summary',
+  visibility: 'visibility',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  authorId: 'authorId',
+  categoryId: 'categoryId'
+};
+
+exports.Prisma.CourContentScalarFieldEnum = {
+  id: 'id',
+  coursId: 'coursId',
+  numberPage: 'numberPage',
+  content: 'content',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.CategoriesScalarFieldEnum = {
+exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
-  nom: 'nom',
-  description: 'description'
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Objectif_PedagogiqueScalarFieldEnum = {
+exports.Prisma.LearningObjectiveScalarFieldEnum = {
   id: 'id',
-  titre: 'titre',
-  description: 'description'
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
-exports.Prisma.OutilsScalarFieldEnum = {
+exports.Prisma.ToolScalarFieldEnum = {
   id: 'id',
-  nom: 'nom',
-  description: 'description'
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.BadgeScalarFieldEnum = {
   id: 'id',
-  nom: 'nom',
-  description: 'description'
-};
-
-exports.Prisma.Cour_contentScalarFieldEnum = {
-  id: 'id',
-  cours_id: 'cours_id',
-  numeros_page: 'numeros_page',
-  contenu: 'contenu'
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.User_has_CoursScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  cours_id: 'cours_id',
-  createdAt: 'createdAt'
+  userId: 'userId',
+  coursId: 'coursId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.Cours_activeScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  cours_id: 'cours_id',
-  est_termine: 'est_termine',
+  userId: 'userId',
+  coursId: 'coursId',
+  IsEnd: 'IsEnd',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
 exports.Prisma.User_has_BadgeScalarFieldEnum = {
   id: 'id',
-  user_id: 'user_id',
-  badge_id: 'badge_id',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.Cours_has_CategoriesScalarFieldEnum = {
-  id: 'id',
-  cours_id: 'cours_id',
-  categories_id: 'categories_id'
+  userId: 'userId',
+  badgeId: 'badgeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.Cours_has_OutilsScalarFieldEnum = {
   id: 'id',
-  cours_id: 'cours_id',
-  outils_id: 'outils_id'
+  coursId: 'coursId',
+  toolsId: 'toolsId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.Cours_has_Objectif_PedagogiqueScalarFieldEnum = {
   id: 'id',
-  cours_id: 'cours_id',
-  objectif_pedagogique_id: 'objectif_pedagogique_id'
+  coursId: 'coursId',
+  learningObjectiveId: 'learningObjectiveId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
-exports.Prisma.CommentaireScalarFieldEnum = {
+exports.Prisma.CommentScalarFieldEnum = {
   id: 'id',
   description: 'description',
-  cours_id: 'cours_id',
-  id_auteur: 'id_auteur',
+  coursId: 'coursId',
+  authorId: 'authorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -230,17 +241,19 @@ exports.Prisma.OpinionScalarFieldEnum = {
   id: 'id',
   message: 'message',
   note: 'note',
-  cours_id: 'cours_id',
-  user_id: 'user_id',
-  createdAt: 'createdAt'
+  coursId: 'coursId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.NotificationScalarFieldEnum = {
   id: 'id',
   contenu: 'contenu',
-  cours_id: 'cours_id',
-  user_id: 'user_id',
-  createdAt: 'createdAt'
+  coursId: 'coursId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -257,42 +270,22 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.Role = exports.$Enums.Role = {
-  VISITOR: 'VISITOR',
-  STUDENT: 'STUDENT',
-  INSTRUCTOR: 'INSTRUCTOR',
-  ADMIN: 'ADMIN'
-};
 
-exports.Difficulte = exports.$Enums.Difficulte = {
-  DEBUTANT: 'DEBUTANT',
-  FACILE: 'FACILE',
-  INTERMEDIAIRE: 'INTERMEDIAIRE',
-  DIFFICILE: 'DIFFICILE',
-  EXPERT: 'EXPERT'
-};
-
-exports.Visibilite = exports.$Enums.Visibilite = {
-  BROUILLON: 'BROUILLON',
-  PUBLIE: 'PUBLIE',
-  ARCHIVE: 'ARCHIVE'
-};
 
 exports.Prisma.ModelName = {
   User: 'User',
   Cours: 'Cours',
-  Categories: 'Categories',
-  Objectif_Pedagogique: 'Objectif_Pedagogique',
-  Outils: 'Outils',
+  CourContent: 'CourContent',
+  Category: 'Category',
+  LearningObjective: 'LearningObjective',
+  Tool: 'Tool',
   Badge: 'Badge',
-  Cour_content: 'Cour_content',
   User_has_Cours: 'User_has_Cours',
   Cours_active: 'Cours_active',
   User_has_Badge: 'User_has_Badge',
-  Cours_has_Categories: 'Cours_has_Categories',
   Cours_has_Outils: 'Cours_has_Outils',
   Cours_has_Objectif_Pedagogique: 'Cours_has_Objectif_Pedagogique',
-  Commentaire: 'Commentaire',
+  Comment: 'Comment',
   Opinion: 'Opinion',
   Notification: 'Notification'
 };
