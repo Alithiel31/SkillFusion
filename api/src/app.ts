@@ -2,8 +2,11 @@ import cors from "cors";
 import express from "express";
 import { config } from "./config";
 import cookieParser from "cookie-parser";
+import authRouter from "./routers/auth.router";
+
+
 // import { router as apiRouter } from "./routers/index.router";
-// import { globalErrorHandler } from "./middlewares/global-error-handler";
+import { globalErrorHandler } from "./middlewares/global-error-handler";
 // import { notFoundMiddleware } from "./middlewares/not-found.middleware";
 // import { infoMiddleware } from "./middlewares/info.middleware";
 
@@ -17,14 +20,12 @@ if (config.isProd) {
 
 // Autoriser les requêtes cross-origin
 app.use(cors({ origin: config.allowedOrigins }));
-
 app.use(cookieParser());
-
 // Body parser pour récupérer les body "application/json" dans req.body
 app.use(express.json());
 
-// Brancher le routeur de l'API
-// app.use("/api", apiRouter);
+// Route d'authentification
+app.use("/api/auth", authRouter);
 
 // Info route
 // app.get("/info", infoMiddleware);
@@ -33,4 +34,4 @@ app.use(express.json());
 // app.use(notFoundMiddleware);
 
 // Global error middleware
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler);
