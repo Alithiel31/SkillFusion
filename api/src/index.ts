@@ -5,6 +5,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 
 import authRouter from './routers/auth.router';
+import coursRouter from './routers/cours.router';
 
 const app = express();
 
@@ -14,7 +15,9 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(xss());
 
-app.use("/auth", authRouter);
+
+app.use("/auth", authRouter)
+app.use("/api",coursRouter)
 
 app.get('/', (req, res) => {
   res.send('Welcome to the SkillFusion API');

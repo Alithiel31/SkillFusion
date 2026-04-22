@@ -1,0 +1,7 @@
+
+@BASE_URL=http://localhost:3000
+
+### auth register
+GET {{BASE_URL}}/api/cours
+Content-Type: application/json
+

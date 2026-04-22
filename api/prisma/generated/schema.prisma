@@ -1,0 +1,247 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Entités principales ──────────────────────────────────
+
+model User {
+  id             Int     @id @default(autoincrement())
+  email          String  @unique
+  firstname      String
+  lastname       String
+  password       String
+  urlProfilImage String? @map("url_profil_image")
+  role           Int     @default(0)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  createdCours  Cours[]          @relation("CreatedCours")
+  badges        User_has_Badge[]
+  enrollments   User_has_Cours[]
+  activations   Cours_active[]
+  commentaires  Comment[]
+  opinions      Opinion[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+model Cours {
+  id            Int     @id @default(autoincrement())
+  title         String
+  littleSummary String? @map("little_summary")
+  urlImage      String? @map("url_image")
+  difficulty    Int
+  summary       String?
+  visibility    Boolean @default(false)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  author             User                             @relation("CreatedCours", fields: [authorId], references: [id], onDelete: Restrict)
+  authorId           Int                              @map("author_id")
+  category           Category                         @relation(fields: [categoryId], references: [id])
+  categoryId         Int                              @map("category_id")
+  tools              Cours_has_Outils[]
+  learningObjectives Cours_has_Objectif_Pedagogique[]
+  content            CourContent[]
+  enrollments        User_has_Cours[]
+  activations        Cours_active[]
+  comments           Comment[]
+  opinions           Opinion[]
+  notifications      Notification[]
+
+  @@map("courses")
+}
+
+model CourContent {
+  id         Int    @id @default(autoincrement())
+  coursId    Int    @map("cours_id")
+  numberPage Int    @map("number_page")
+  content    String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
+
+  @@map("cours_content")
+}
+
+model Category {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  courses Cours[]
+
+  @@map("categories")
+}
+
+model LearningObjective {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  courses Cours_has_Objectif_Pedagogique[]
+
+  @@map("learning_objectives")
+}
+
+model Tool {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cours Cours_has_Outils[]
+
+  @@map("tools")
+}
+
+model Badge {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  users User_has_Badge[]
+}
+
+// ─── Tables de liaison ────────────────────────────────────
+
+model User_has_Cours {
+  id      Int @id @default(autoincrement())
+  userId  Int @map("user_id")
+  coursId Int @map("cours_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, coursId])
+}
+
+model Cours_active {
+  id      Int     @id @default(autoincrement())
+  userId  Int     @map("user_id")
+  coursId Int     @map("cours_id")
+  IsEnd   Boolean @default(false) @map("is_end")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, coursId])
+}
+
+model User_has_Badge {
+  id      Int @id @default(autoincrement())
+  userId  Int @map("user_id")
+  badgeId Int @map("badge_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badge Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeId])
+}
+
+model Cours_has_Outils {
+  id      Int @id @default(autoincrement())
+  coursId Int @map("cours_id")
+  toolsId Int @map("tools_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
+  tools Tool  @relation(fields: [toolsId], references: [id], onDelete: Cascade)
+
+  @@unique([coursId, toolsId])
+}
+
+model Cours_has_Objectif_Pedagogique {
+  id                  Int @id @default(autoincrement())
+  coursId             Int @map("cours_id")
+  learningObjectiveId Int @map("lerning_objective")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cours    Cours             @relation(fields: [coursId], references: [id], onDelete: Cascade)
+  objectif LearningObjective @relation(fields: [learningObjectiveId], references: [id], onDelete: Cascade)
+
+  @@unique([coursId, learningObjectiveId])
+}
+
+// ─── Social ───────────────────────────────────────────────
+
+model Comment {
+  id          Int    @id @default(autoincrement())
+  description String
+  coursId     Int    @map("cours_id")
+  authorId    Int    @map("author_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cours  Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
+  auteur User  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
+model Opinion {
+  id      Int    @id @default(autoincrement())
+  message String
+  note    Int
+  coursId Int    @map("cours_id")
+  userId  Int    @map("user_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, coursId])
+}
+
+model Notification {
+  id      Int    @id @default(autoincrement())
+  contenu String
+  coursId Int    @map("cours_id")
+  userId  Int    @map("user_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
