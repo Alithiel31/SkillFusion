@@ -1,0 +1,36 @@
+import cors from "cors";
+import express from "express";
+import { config } from "./config";
+import cookieParser from "cookie-parser";
+// import { router as apiRouter } from "./routers/index.router";
+// import { globalErrorHandler } from "./middlewares/global-error-handler";
+// import { notFoundMiddleware } from "./middlewares/not-found.middleware";
+// import { infoMiddleware } from "./middlewares/info.middleware";
+
+// Créer une app Express
+export const app = express();
+
+// Faire confiance au proxy nginx (nécessaire pour que req.secure soit correct derrière une terminaison SSL)
+if (config.isProd) {
+  app.set("trust proxy", 1);
+}
+
+// Autoriser les requêtes cross-origin
+app.use(cors({ origin: config.allowedOrigins }));
+
+app.use(cookieParser());
+
+// Body parser pour récupérer les body "application/json" dans req.body
+app.use(express.json());
+
+// Brancher le routeur de l'API
+// app.use("/api", apiRouter);
+
+// Info route
+// app.get("/info", infoMiddleware);
+
+// Not found middleware
+// app.use(notFoundMiddleware);
+
+// Global error middleware
+// app.use(globalErrorHandler);

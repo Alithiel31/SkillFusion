@@ -6,20 +6,15 @@ import cookieParser from "cookie-parser";
 
 import authRouter from './routers/auth.router';
 
-
 const app = express();
 
 app.use(helmet());
-
-app.use(cors())
-
+app.use(cors());
 app.use(cookieParser());
-
 app.use(express.json());
 app.use(xss());
 
-
-app.use("/auth", authRouter)
+app.use("/auth", authRouter);
 
 app.get('/', (req, res) => {
   res.send('Welcome to the SkillFusion API');
