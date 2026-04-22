@@ -839,11 +839,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-<<<<<<< HEAD
       modelProps: "user" | "cours" | "courContent" | "category" | "learningObjective" | "tool" | "badge" | "userHasCours" | "coursActived" | "userHasBadge" | "coursHasTool" | "coursHasLearningObjective" | "comment" | "opinion" | "notification" | "refreshToken"
-=======
-      modelProps: "user" | "cours" | "courContent" | "category" | "learningObjective" | "tool" | "badge" | "user_has_Cours" | "cours_active" | "user_has_Badge" | "cours_has_Outils" | "cours_has_Objectif_Pedagogique" | "comment" | "opinion" | "notification" | "refreshToken"
->>>>>>> main
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -28265,7 +28261,6 @@ export namespace Prisma {
 
   export type UserCreateWithoutRefreshTokensInput = {
     email: string
-<<<<<<< HEAD
     firstname?: string | null
     lastname?: string | null
     password: string
@@ -28279,19 +28274,6 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-=======
-    firstname: string
-    lastname: string
-    password: string
-    urlProfilImage?: string | null
-    role?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    createdCours?: CoursCreateNestedManyWithoutAuthorInput
-    badges?: User_has_BadgeCreateNestedManyWithoutUserInput
-    enrollments?: User_has_CoursCreateNestedManyWithoutUserInput
-    activations?: Cours_activeCreateNestedManyWithoutUserInput
->>>>>>> main
     commentaires?: CommentCreateNestedManyWithoutAuteurInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -28300,7 +28282,6 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutRefreshTokensInput = {
     id?: number
     email: string
-<<<<<<< HEAD
     firstname?: string | null
     lastname?: string | null
     password: string
@@ -28314,19 +28295,6 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-=======
-    firstname: string
-    lastname: string
-    password: string
-    urlProfilImage?: string | null
-    role?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
-    badges?: User_has_BadgeUncheckedCreateNestedManyWithoutUserInput
-    enrollments?: User_has_CoursUncheckedCreateNestedManyWithoutUserInput
-    activations?: Cours_activeUncheckedCreateNestedManyWithoutUserInput
->>>>>>> main
     commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -28350,7 +28318,6 @@ export namespace Prisma {
 
   export type UserUpdateWithoutRefreshTokensInput = {
     email?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
@@ -28364,19 +28331,6 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-=======
-    firstname?: StringFieldUpdateOperationsInput | string
-    lastname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdCours?: CoursUpdateManyWithoutAuthorNestedInput
-    badges?: User_has_BadgeUpdateManyWithoutUserNestedInput
-    enrollments?: User_has_CoursUpdateManyWithoutUserNestedInput
-    activations?: Cours_activeUpdateManyWithoutUserNestedInput
->>>>>>> main
     commentaires?: CommentUpdateManyWithoutAuteurNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -28385,7 +28339,6 @@ export namespace Prisma {
   export type UserUncheckedUpdateWithoutRefreshTokensInput = {
     id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
-<<<<<<< HEAD
     firstname?: NullableStringFieldUpdateOperationsInput | string | null
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
@@ -28399,19 +28352,6 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-=======
-    firstname?: StringFieldUpdateOperationsInput | string
-    lastname?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
-    badges?: User_has_BadgeUncheckedUpdateManyWithoutUserNestedInput
-    enrollments?: User_has_CoursUncheckedUpdateManyWithoutUserNestedInput
-    activations?: Cours_activeUncheckedUpdateManyWithoutUserNestedInput
->>>>>>> main
     commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -28693,11 +28633,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-<<<<<<< HEAD
   export type CoursHasToolCreateManyCoursInput = {
-=======
-  export type Cours_has_OutilsCreateManyCoursInput = {
->>>>>>> main
     id?: number
     toolsId: number
     createdAt?: Date | string
