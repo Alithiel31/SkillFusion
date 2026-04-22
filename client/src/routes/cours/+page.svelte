@@ -95,11 +95,11 @@
 	};
 
 	const levels = {
-		Débutant: { color: '#4ade80', bars: [true, false, false, false] },
-		Facile: { color: '#4ade80', bars: [true, true, false, false] },
-		Intermédiaire: { color: '#f59e0b', bars: [true, true, true, false] },
-		Difficile: { color: '#ef4444', bars: [true, true, true, false] },
-		Expert: { color: '#ef4444', bars: [true, true, true, true] }
+		Débutant: { color: '#4ade80', bars: [true, false, false, false, false] },
+		Facile: { color: '#4ade80', bars: [true, true, false, false, false] },
+		Intermédiaire: { color: '#f59e0b', bars: [true, true, true, false, false] },
+		Difficile: { color: '#ef4444', bars: [true, true, true, true, false] },
+		Expert: { color: '#ef4444', bars: [true, true, true, true, true] }
 	};
 
 	const icons = {
