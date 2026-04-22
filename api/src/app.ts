@@ -6,7 +6,7 @@ import authRouter from "./routers/auth.router";
 
 
 // import { router as apiRouter } from "./routers/index.router";
-// import { globalErrorHandler } from "./middlewares/global-error-handler";
+import { globalErrorHandler } from "./middlewares/global-error-handler";
 // import { notFoundMiddleware } from "./middlewares/not-found.middleware";
 // import { infoMiddleware } from "./middlewares/info.middleware";
 
@@ -34,4 +34,4 @@ app.use("/api/auth", authRouter);
 // app.use(notFoundMiddleware);
 
 // Global error middleware
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler);
