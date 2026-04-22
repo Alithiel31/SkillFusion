@@ -1,14 +1,13 @@
 import express from 'express';
-import authController from '../controlleurs/auth.controller';
+import { verifyToken } from '../middlewares/auth.middleware';
+import { registerUser, loginUser, logoutUser, refreshAccessToken, getAuthenticatedUser } from '../controlleurs/auth.controller';
 
-const router= express.Router();
+const router = express.Router();
 
-router.post("/register",authController.register)
-router.post("/login",authController.login)
-router.post("/logout",authController.logout)
-router.post("/refresh",authController.refresh)
-router.get("/me",authController.me)
-
-
+router.post("/register", registerUser)
+router.post("/login", loginUser)
+router.post("/logout", verifyToken, logoutUser)
+router.post("/refresh", refreshAccessToken)
+router.get("/me", verifyToken, getAuthenticatedUser)
 
 export default router;
