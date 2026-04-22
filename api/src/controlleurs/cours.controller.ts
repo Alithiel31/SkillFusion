@@ -6,9 +6,14 @@ import { ConflictError, NotFoundError } from "../lib/errors";
 
 
 export default {
+<<<<<<< HEAD
+    getAll: async  (req:Request,res:Response) =>{
+        const cours = await prisma.cours.findMany({include:{category:true}})
+=======
     // Requête pour récuperer tous les cours
     getAll: async (req: Request, res: Response) => {
         const cours = await prisma.cours.findMany()
+>>>>>>> main
         res.json(cours)
     },
     // Requête pour récuperer les cours récents

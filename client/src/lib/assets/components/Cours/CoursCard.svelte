@@ -6,8 +6,8 @@
 <div class="card-body">
 	<div class="card__cours__color"></div>
 	<div class="card__cours__tittle">
-		<h3 class="card-title">{props.tittle}</h3>
-		<span class="card-category"> {props.category} </span>
+		<h3 class="card-title">{props.title}</h3>
+		<span class="card-category"> {props.category.name} </span>
 	</div>
 	<div class="card__cours__level-row">
 		<LevelBar level = {props.difficulty} />

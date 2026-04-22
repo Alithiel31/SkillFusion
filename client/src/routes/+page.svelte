@@ -10,10 +10,17 @@
 	import { onMount } from 'svelte';
 
 
+<<<<<<< HEAD
+        let courses = $state([]);
+
+onMount(async ()=>{
+ courses = await api('api/cours')
+=======
         let courses = $state();
 
 onMount(async ()=>{
         courses = await api('api/cours')
+>>>>>>> main
 })
 </script>
 
@@ -54,7 +61,11 @@ onMount(async ()=>{
                 
                         {#each courses as cours}
                         <CoursCard
+<<<<<<< HEAD
+                        title= {cours.title}
+=======
                         tittle= {cours.title}
+>>>>>>> main
                         littleSummary= {cours.littleSummary}
                         urlImage ={cours.urlImage}
                         difficulty= {cours.difficulty}
