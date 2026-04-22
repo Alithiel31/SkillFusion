@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillFusion — Document d'Identité Visuelle</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue:       #1D4E89;
+      --blue-light: #EBF2FA;
+      --blue-mid:   #B5D4F4;
+      --amber:      #F5A623;
+      --amber-light:#FEF5E7;
+      --amber-mid:  #FAC775;
+      --bg:         #F7F4EF;
+      --dark:       #2C3E50;
+      --green:      #27AE60;
+      --text:       #2C3E50;
+      --text-muted: #6B7280;
+      --border:     rgba(44,62,80,0.12);
+      --white:      #FFFFFF;
+      --radius-sm:  6px;
+      --radius-md:  10px;
+      --radius-lg:  16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    .cover {
+      text-align: center;
+      padding: 64px 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+    }
+    .cover-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .cover h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 48px;
+      line-height: 1.1;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+    .cover h1 span { color: var(--amber); }
+    .cover-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    /* ── Section ── */
+    .section {
+      margin-bottom: 56px;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin-bottom: 28px;
+    }
+
+    /* ── Logo ── */
+    .logo-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .logo-box {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+      min-width: 220px;
+    }
+    .logo-box.dark-bg { background: var(--blue); }
+    .logo-box.small { padding: 20px 24px; justify-content: center; flex-direction: column; min-width: 100px; max-width: 140px; gap: 10px; }
+
+    .wordmark { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: var(--blue); }
+    .wordmark span { color: var(--amber); }
+    .wordmark.light { color: #fff; }
+    .tagline { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .tagline.light { color: rgba(255,255,255,0.55); }
+
+    /* ── Palette ── */
+    .palette-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .swatch-col { flex: 1; min-width: 120px; }
+    .swatch { height: 60px; border-radius: var(--radius-md); margin-bottom: 8px; }
+    .swatch-name { font-size: 13px; font-weight: 500; }
+    .swatch-hex  { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .swatch-role { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+    /* ── Typo ── */
+    .typo-grid { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .typo-col { flex: 1; min-width: 200px; background: var(--white); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
+    .typo-specimen { font-size: 36px; line-height: 1.1; margin-bottom: 6px; }
+    .typo-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+    .typo-body { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── Badges ── */
+    .badge-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .badge {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 100px;
+    }
+
+    /* ── Difficulté 5 niveaux ── */
+    .diff-grid {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .diff-card {
+      flex: 1;
+      min-width: 100px;
+      border-radius: var(--radius-lg);
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bars { display: flex; gap: 3px; align-items: flex-end; height: 24px; }
+    .bar { width: 8px; border-radius: 2px; }
+    .diff-name { font-size: 13px; font-weight: 500; }
+    .diff-desc { font-size: 11px; line-height: 1.5; }
+
+    /* Inline diff */
+    .diff-inline-list { display: flex; flex-direction: column; gap: 10px; }
+    .diff-inline-item {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .diff-inline-item p { font-size: 14px; font-weight: 500; }
+    .diff-inline-right { display: flex; align-items: center; gap: 8px; }
+    .ibars { display: flex; gap: 2px; align-items: flex-end; height: 16px; }
+    .ibar { width: 5px; border-radius: 2px; }
+
+    /* Légende compacte */
+    .diff-legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 14px 18px;
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-top: 20px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 7px; }
+
+    /* ── Carte cours ── */
+    .course-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+    .course-card {
+      flex: 1;
+      min-width: 220px;
+      max-width: 300px;
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .course-thumb {
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .course-body { padding: 14px; }
+    .course-badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 100px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .course-title { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
+    .course-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-bottom: 10px; }
+    .course-footer { display: flex; align-items: center; justify-content: space-between; }
+    .course-time { font-size: 11px; color: var(--text-muted); }
+
+    /* ── Boutons ── */
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 22px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-accent  { background: var(--amber); color: var(--dark); }
+    .btn-outline { background: transparent; color: var(--blue); border: 1.5px solid var(--blue); }
+    .btn-ghost   { background: transparent; color: var(--text-muted); border: 0.5px solid var(--border); }
+
+    /* ── Ton marque ── */
+    .tone-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+    .tone-card {
+      flex: 1;
+      min-width: 160px;
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+    .tone-title { font-size: 13px; font-weight: 500; color: var(--blue); margin-bottom: 6px; }
+    .tone-body  { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── Footer ── */
+    .doc-footer {
+      text-align: center;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      margin-top: 48px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Cover -->
+  <div class="cover">
+    <p class="cover-tag">Document d'identité visuelle — MVP</p>
+    <h1>Skill<span>Fusion</span></h1>
+    <p class="cover-sub">Plateforme de cours en ligne pour les métiers du bricolage</p>
+    <p style="font-size:12px; color:var(--text-muted); margin-top:8px;">Menuiserie · Plomberie · Électricité · Chauffage · Carrelage · Peinture</p>
+  </div>
+
+  <!-- ══════════════════════════════════
+       1. LOGO
+  ══════════════════════════════════ -->
+  <div class="section">
+    <p class="section-label">01 — Logo &amp; identité</p>
+    <div class="logo-grid">
+
+      <!-- Principal -->
+      <div class="logo-box">
+        <svg width="52" height="52" viewBox="0 0 48 48" fill="none">
+          <polygon points="24,2 42,13 42,35 24,46 6,35 6,13" fill="#1D4E89"/>
+          <path d="M18 30 L26 18" stroke="#F5A623" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="28" cy="16" r="4" fill="none" stroke="#F5A623" stroke-width="2.5"/>
+          <circle cx="17" cy="31" r="3" fill="none" stroke="#F5A623" stroke-width="2.5"/>
+          <path d="M22 22 L19 27 L23 27 L21 32" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div>
+          <p class="wordmark">Skill<span>Fusion</span></p>
+          <p class="tagline">Apprends par la pratique</p>
+        </div>
+      </div>
+
+      <!-- Fond sombre -->
+      <div class="logo-box dark-bg">
+        <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+          <polygon points="24,2 42,13 42,35 24,46 6,35 6,13" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1"/>
+          <path d="M18 30 L26 18" stroke="#F5A623" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="28" cy="16" r="4" fill="none" stroke="#F5A623" stroke-width="2.5"/>
+          <circle cx="17" cy="31" r="3" fill="none" stroke="#F5A623" stroke-width="2.5"/>
+          <path d="M22 22 L19 27 L23 27 L21 32" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div>
+          <p class="wordmark light">Skill<span>Fusion</span></p>
+          <p class="tagline light">Version fond sombre</p>
+        </div>
+      </div>
+
+      <!-- Favicon -->
+      <div class="logo-box small">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <polygon points="24,2 42,13 42,35 24,46 6,35 6,13" fill="#1D4E89"/>
+          <path d="M18 30 L26 18" stroke="#F5A623" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="28" cy="16" r="4" fill="none" stroke="#F5A623" stroke-width="2.5"/>
+          <circle cx="17" cy="31" r="3" fill="none" stroke="#F5A623" stroke-width="2.5"/>
+          <path d="M22 22 L19 27 L23 27 L21 32" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <p style="font-size:11px; color:var(--text-muted);">Favicon / app</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       2. PALETTE
+  ══════════════════════════════════ -->
+  <div class="section">
+    <p class="section-label">02 — Palette de couleurs</p>
+    <div class="palette-grid">
+      <div class="swatch-col">
+        <div class="swatch" style="background:#1D4E89;"></div>
+        <p class="swatch-name">Bleu marine</p>
+        <p class="swatch-hex">#1D4E89</p>
+        <p class="swatch-role">Couleur principale</p>
+      </div>
+      <div class="swatch-col">
+        <div class="swatch" style="background:#F5A623;"></div>
+        <p class="swatch-name">Ambre chaud</p>
+        <p class="swatch-hex">#F5A623</p>
+        <p class="swatch-role">Accent / CTA</p>
+      </div>
+      <div class="swatch-col">
+        <div class="swatch" style="background:#F7F4EF; border:0.5px solid var(--border);"></div>
+        <p class="swatch-name">Blanc chantier</p>
+        <p class="swatch-hex">#F7F4EF</p>
+        <p class="swatch-role">Fond de page</p>
+      </div>
+      <div class="swatch-col">
+        <div class="swatch" style="background:#2C3E50;"></div>
+        <p class="swatch-name">Anthracite</p>
+        <p class="swatch-hex">#2C3E50</p>
+        <p class="swatch-role">Textes &amp; UI</p>
+      </div>
+      <div class="swatch-col">
+        <div class="swatch" style="background:#27AE60;"></div>
+        <p class="swatch-name">Vert succès</p>
+        <p class="swatch-hex">#27AE60</p>
+        <p class="swatch-role">Complétion / badges</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       3. TYPOGRAPHIE
+  ══════════════════════════════════ -->
+  <div class="section">
+    <p class="section-label">03 — Typographie</p>
+    <div class="typo-grid">
+      <div class="typo-col">
+        <p class="typo-specimen" style="font-family:'DM Serif Display',serif; color:var(--blue);">DM Serif Display</p>
+        <p class="typo-sub">Titres principaux &amp; hero</p>
+        <p style="font-family:'DM Serif Display',serif; font-size:20px; color:var(--text);">Aa Bb Cc Gg Tt</p>
+        <p style="font-family:'DM Serif Display',serif; font-size:14px; color:var(--text-muted); margin-top:6px;">0123456789</p>
+      </div>
+      <div class="typo-col">
+        <p class="typo-specimen" style="font-weight:500; color:var(--text);">DM Sans 500</p>
+        <p class="typo-sub">Sous-titres, labels &amp; boutons</p>
+        <p style="font-weight:500; font-size:20px; color:var(--text);">Aa Bb Cc Gg Tt</p>
+      </div>
+      <div class="typo-col">
+        <p class="typo-specimen" style="font-weight:400; color:var(--text);">DM Sans 400</p>
+        <p class="typo-sub">Corps de texte</p>
+        <p class="typo-body">Apprends la menuiserie, la plomberie et l'électricité avec des formateurs experts. Cours clairs, progressifs, à ton rythme.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       4. BADGES CATÉGORIES
+  ══════════════════════════════════ -->
+  <div class="section">
+    <p class="section-label">04 — Badges catégories</p>
+    <div class="badge-row">
+      <span class="badge" style="background:#EBF2FA; color:#1D4E89; border:0.5px solid #B5D4F4;">Plomberie</span>
+      <span class="badge" style="background:#FEF5E7; color:#BA7517; border:0.5px solid #FAC775;">Électricité</span>
+      <span class="badge" style="background:#EAF3DE; color:#27500A; border:0.5px solid #C0DD97;">Menuiserie</span>
+      <span class="badge" style="background:#F4ECF7; color:#7D3C98; border:0.5px solid #D7BDE2;">Chauffage</span>
+      <span class="badge" style="background:#FDEDEC; color:#A93226; border:0.5px solid #F1948A;">Carrelage</span>
+      <span class="badge" style="background:#F5F5F4; color:#57534E; border:0.5px solid #D6D3D1;">Peinture</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       5. INDICATEUR DE DIFFICULTÉ — 5 niveaux
+  ══════════════════════════════════ -->
+  <div class="section">
+    <p class="section-label">05 — Indicateur de difficulté — 5 niveaux</p>
+
+    <!-- Grandes cartes -->
+    <div class="diff-grid">
+
+      <div class="diff-card" style="background:#EAF3DE; border:0.5px solid #C0DD97;">
+        <div class="bars">
+          <div class="bar" style="height:10px; background:#3B6D11;"></div>
+          <div class="bar" style="height:14px; background:#C0DD97;"></div>
+          <div class="bar" style="height:18px; background:#C0DD97;"></div>
+          <div class="bar" style="height:22px; background:#C0DD97;"></div>
+          <div class="bar" style="height:22px; background:#C0DD97;"></div>
+        </div>
+        <p class="diff-name" style="color:#27500A;">Débutant</p>
+        <p class="diff-desc" style="color:#3B6D11;">Aucun prérequis, on part de zéro.</p>
+      </div>
+
+      <div class="diff-card" style="background:#E1F5EE; border:0.5px solid #9FE1CB;">
+        <div class="bars">
+          <div class="bar" style="height:10px; background:#0F6E56;"></div>
+          <div class="bar" style="height:14px; background:#0F6E56;"></div>
+          <div class="bar" style="height:18px; background:#9FE1CB;"></div>
+          <div class="bar" style="height:22px; background:#9FE1CB;"></div>
+          <div class="bar" style="height:22px; background:#9FE1CB;"></div>
+        </div>
+        <p class="diff-name" style="color:#085041;">Facile</p>
+        <p class="diff-desc" style="color:#0F6E56;">Quelques bases suffisent.</p>
+      </div>
+
+      <div class="diff-card" style="background:#FAEEDA; border:0.5px solid #FAC775;">
+        <div class="bars">
+          <div class="bar" style="height:10px; background:#854F0B;"></div>
+          <div class="bar" style="height:14px; background:#854F0B;"></div>
+          <div class="bar" style="height:18px; background:#854F0B;"></div>
+          <div class="bar" style="height:22px; background:#FAC775;"></div>
+          <div class="bar" style="height:22px; background:#FAC775;"></div>
+        </div>
+        <p class="diff-name" style="color:#633806;">Intermédiaire</p>
+        <p class="diff-desc" style="color:#854F0B;">Expérience préalable recommandée.</p>
+      </div>
+
+      <div class="diff-card" style="background:#FAECE7; border:0.5px solid #F5C4B3;">
+        <div class="bars">
+          <div class="bar" style="height:10px; background:#993C1D;"></div>
+          <div class="bar" style="height:14px; background:#993C1D;"></div>
+          <div class="bar" style="height:18px; background:#993C1D;"></div>
+          <div class="bar" style="height:22px; background:#993C1D;"></div>
+          <div class="bar" style="height:22px; background:#F5C4B3;"></div>
+        </div>
+        <p class="diff-name" style="color:#712B13;">Difficile</p>
+        <p class="diff-desc" style="color:#993C1D;">Maîtrise solide requise.</p>
+      </div>
+
+      <div class="diff-card" style="background:#FCEBEB; border:0.5px solid #F7C1C1;">
+        <div class="bars">
+          <div class="bar" style="height:10px; background:#A32D2D;"></div>
+          <div class="bar" style="height:14px; background:#A32D2D;"></div>
+          <div class="bar" style="height:18px; background:#A32D2D;"></div>
+          <div class="bar" style="height:22px; background:#A32D2D;"></div>
+          <div class="bar" style="height:22px; background:#A32D2D;"></div>
+        </div>
+        <p class="diff-name" style="color:#791F1F;">Expert</p>
+        <p class="diff-desc" style="color:#A32D2D;">Professionnel ou très expérimenté.</p>
+      </div>
+
+    </div>
+
+    <!-- Version inline -->
+    <p style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:12px;">Version inline — dans une carte ou fiche cours</p>
+    <div class="diff-inline-list">
+
+      <div class="diff-inline-item">
+        <p>Installer un robinet mitigeur</p>
+        <div class="diff-inline-right">
+          <div class="ibars">
+            <div class="ibar" style="height:8px; background:#3B6D11;"></div>
+            <div class="ibar" style="height:11px; background:#C0DD97;"></div>
+            <div class="ibar" style="height:14px; background:#C0DD97;"></div>
+            <div class="ibar" style="height:14px; background:#C0DD97;"></div>
+            <div class="ibar" style="height:14px; background:#C0DD97;"></div>
+          </div>
+          <span style="font-size:12px; font-weight:500; color:#27500A;">Débutant</span>
+        </div>
+      </div>
+
+      <div class="diff-inline-item">
+        <p>Poser une prise électrique</p>
+        <div class="diff-inline-right">
+          <div class="ibars">
+            <div class="ibar" style="height:8px; background:#854F0B;"></div>
+            <div class="ibar" style="height:11px; background:#854F0B;"></div>
+            <div class="ibar" style="height:14px; background:#854F0B;"></div>
+            <div class="ibar" style="height:14px; background:#FAC775;"></div>
+            <div class="ibar" style="height:14px; background:#FAC775;"></div>
+          </div>
+          <span style="font-size:12px; font-weight:500; color:#633806;">Intermédiaire</span>
+        </div>
+      </div>
+
+      <div class="diff-inline-item">
+        <p>Créer un tableau électrique</p>
+        <div class="diff-inline-right">
+          <div class="ibars">
+            <div class="ibar" style="height:8px; background:#A32D2D;"></div>
+            <div class="ibar" style="height:11px; background:#A32D2D;"></div>
+            <div class="ibar" style="height:14px; background:#A32D2D;"></div>
+            <div class="ibar" style="height:14px; background:#A32D2D;"></div>
+            <div class="ibar" style="height:14px; background:#A32D2D;"></div>
+          </div>
+          <span style="font-size:12px; font-weight:500; color:#791F1F;">Expert</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Légende compacte -->
+    <p style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin:20px 0 12px;">Légende compacte — filtres du catalogue</p>
+    <div class="diff-legend">
+      <div class="legend-item">
+        <div class="ibars"><div class="ibar" style="height:8px;background:#3B6D11;"></div><div class="ibar" style="height:11px;background:#C0DD97;"></div><div class="ibar" style="height:14px;background:#C0DD97;"></div><div class="ibar" style="height:14px;background:#C0DD97;"></div><div class="ibar" style="height:14px;background:#C0DD97;"></div></div>
+        <span style="font-size:12px; font-weight:500; color:#27500A;">Débutant</span>
+      </div>
+      <div class="legend-item">
+        <div class="ibars"><div class="ibar" style="height:8px;background:#0F6E56;"></div><div class="ibar" style="height:11px;background:#0F6E56;"></div><div class="ibar" style="height:14px;background:#9FE1CB;"></div><div class="ibar" style="height:14px;background:#9FE1CB;"></div><div class="ibar" style="height:14px;background:#9FE1CB;"></div></div>
+        <span style="font-size:12px; font-weight:500; color:#085041;">Facile</span>
+      </div>
+      <div class="legend-item">
+        <div class="ibars"><div class="ibar" style="height:8px;background:#854F0B;"></div><div class="ibar" style="height:11px;background:#854F0B;"></div><div class="ibar" style="height:14px;background:#854F0B;"></div><div class="ibar" style="height:14px;background:#FAC775;"></div><div class="ibar" style="height:14px;background:#FAC775;"></div></div>
+        <span style="font-size:12px; font-weight:500; color:#633806;">Intermédiaire</span>
+      </div>
+      <div class="legend-item">
+        <div class="ibars"><div class="ibar" style="height:8px;background:#993C1D;"></div><div class="ibar" style="height:11px;background:#993C1D;"></div><div class="ibar" style="height:14px;background:#993C1D;"></div><div class="ibar" style="height:14px;background:#993C1D;"></div><div class="ibar" style="height:14px;background:#F5C4B3;"></div></div>
+        <span style="font-size:12px; font-weight:500; color:#712B13;">Difficile</span>
+      </div>
+      <div class="legend-item">
+        <div class="ibars"><div class="ibar" style="height:8px;background:#A32D2D;"></div><div class="ibar" style="height:11px;background:#A32D2D;"></div><div class="ibar" style="height:14px;background:#A32D2D;"></div><div class="ibar" style="height:14px;background:#A32D2D;"></div><div class="ibar" style="height:14px;background:#A32D2D;"></div></div>
+        <span style="font-size:12px; font-weight:500; color:#791F1F;">Expert</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       6. CARTES COURS
+  ══════════════════════════════════ -->
+  <div class="section">
+    <p class="section-label">06 — Composant carte de cours</p>
+    <div class="course-grid">
+
+      <div class="course-card">
+        <div class="course-thumb" style="background:#1D4E89;">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="white" fill-opacity="0.15"/>
+            <path d="M12 26 L20 12 M20 12 L28 26 M14 21 L26 21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="course-body">
+          <span class="course-badge" style="background:#EBF2FA; color:#1D4E89; border:0.5px solid #B5D4F4;">Plomberie</span>
+          <p class="course-title">Installer un robinet mitigeur</p>
+          <p class="course-desc">Démontage, raccordement et mise en service d'un mitigeur standard.</p>
+          <div class="course-footer">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="ibars" style="height:14px;">
+                <div class="ibar" style="height:7px;background:#3B6D11;"></div>
+                <div class="ibar" style="height:10px;background:#C0DD97;"></div>
+                <div class="ibar" style="height:12px;background:#C0DD97;"></div>
+                <div class="ibar" style="height:12px;background:#C0DD97;"></div>
+                <div class="ibar" style="height:12px;background:#C0DD97;"></div>
+              </div>
+              <span style="font-size:11px;color:#27500A;font-weight:500;">Débutant</span>
+            </div>
+            <span class="course-time">45 min</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb" style="background:#BA7517;">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="white" fill-opacity="0.15"/>
+            <path d="M20 10 L20 30 M14 16 L20 10 L26 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="20" cy="26" r="3" stroke="white" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="course-body">
+          <span class="course-badge" style="background:#FEF5E7; color:#BA7517; border:0.5px solid #FAC775;">Électricité</span>
+          <p class="course-title">Poser une prise électrique</p>
+          <p class="course-desc">Câblage, mise à la terre et sécurité autour de l'installation d'une prise.</p>
+          <div class="course-footer">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="ibars" style="height:14px;">
+                <div class="ibar" style="height:7px;background:#854F0B;"></div>
+                <div class="ibar" style="height:10px;background:#854F0B;"></div>
+                <div class="ibar" style="height:12px;background:#854F0B;"></div>
+                <div class="ibar" style="height:12px;background:#FAC775;"></div>
+                <div class="ibar" style="height:12px;background:#FAC775;"></div>
+              </div>
+              <span style="font-size:11px;color:#633806;font-weight:500;">Intermédiaire</span>
+            </div>
+            <span class="course-time">1h 20</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb" style="background:#27500A;">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="white" fill-opacity="0.15"/>
+            <rect x="13" y="14" width="14" height="12" rx="2" stroke="white" stroke-width="2"/>
+            <path d="M16 14 L16 12 M24 14 L24 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M16 20 L18 22 L24 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="course-body">
+          <span class="course-badge" style="background:#EAF3DE; color:#27500A; border:0.5px solid #C0DD97;">Menuiserie</span>
+          <p class="course-title">Assembler un meuble en bois</p>
+          <p class="course-desc">Techniques d'assemblage tenon-mortaise et visserie invisible.</p>
+          <div class="course-footer">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="ibars" style="height:14px;">
+                <div class="ibar" style="height:7px;background:#993C1D;"></div>
+                <div class="ibar" style="height:10px;background:#993C1D;"></div>
+                <div class="ibar" style="height:12px;background:#993C1D;"></div>
+                <div class="ibar" style="height:12px;background:#993C1D;"></div>
+                <div class="ibar" style="height:12px;background:#F5C4B3;"></div>
+              </div>
+              <span style="font-size:11px;color:#712B13;font-weight:500;">Difficile</span>
+            </div>
+            <span class="course-time">2h 30</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       7. BOUTONS
+  ══════════════════════════════════ -->
+  <div class="section">
+    <p class="section-label">07 — Boutons</p>
+    <div class="btn-row">
+      <button class="btn btn-primary">Démarrer le cours</button>
+      <button class="btn btn-accent">S'inscrire gratuitement</button>
+      <button class="btn btn-outline">Voir le catalogue</button>
+      <button class="btn btn-ghost">Annuler</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       8. TON DE MARQUE
+  ══════════════════════════════════ -->
+  <div class="section">
+    <p class="section-label">08 — Ton &amp; voix de marque</p>
+    <div class="tone-grid">
+      <div class="tone-card">
+        <p class="tone-title">Direct &amp; concret</p>
+        <p class="tone-body">Pas de jargon inutile. On parle comme un bon voisin qui explique ce qu'il sait faire.</p>
+      </div>
+      <div class="tone-card">
+        <p class="tone-title">Encourageant</p>
+        <p class="tone-body">Valorise la progression, même petite. Chaque étape franchie mérite d'être soulignée.</p>
+      </div>
+      <div class="tone-card">
+        <p class="tone-title">Accessible</p>
+        <p class="tone-body">Pour tous les profils, du parfait débutant au bricoleur confirmé. Jamais condescendant.</p>
+      </div>
+      <div class="tone-card">
+        <p class="tone-title">Sécurisant</p>
+        <p class="tone-body">Les EPI et consignes de sécurité sont toujours mis en avant, surtout pour électricité et plomberie.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <p>SkillFusion — Document d'identité visuelle v1.0 — MVP</p>
+    <p style="margin-top:4px;">DM Serif Display · DM Sans · Bleu #1D4E89 · Ambre #F5A623</p>
+  </div>
+
+</div>
+</body>
+</html>
