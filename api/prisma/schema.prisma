@@ -33,6 +33,7 @@ model User {
   commentaires  Comment[]
   opinions      Opinion[]
   notifications Notification[]
+  refreshTokens RefreshToken[]
 
   @@map("users")
 }
@@ -244,4 +245,18 @@ model Notification {
 
   cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model RefreshToken {
+  id    Int    @id @default(autoincrement())
+  token String @unique
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user    User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int @map("user_id")
+
+  @@index([userId])
+  @@map("refresh_tokens")
 }

@@ -2,7 +2,7 @@ import { prisma } from "./client";
 
 async function seed() {
   console.log("Start seeding ->")
-  await prisma.user.create({
+  const users = await prisma.user.create({
     data: {
       email: "test@test.test",
       firstname: 'test',
@@ -11,51 +11,73 @@ async function seed() {
       role:2
     }
   });
+  console.log(users)
 
-  await prisma.category.create({
+  const categories = await prisma.category.create({
     data: {
       name: "Test"
     }
   });
+  console.log(categories)
 
-  await prisma.learningObjective.create({
+  const learningObjectives = await prisma.learningObjective.create({
     data: {
       title: "objectifTest",
       description: "test"
     }
   });
 
-  await prisma.tool.create({
+  console.log(learningObjectives)
+
+  const tools = await prisma.tool.create({
     data: {
       name: "outilTest",
       description: "test"
     }
   });
-
+  console.log(tools)
   
 
-  await prisma.cours.create({
+  const courses = await prisma.cours.create({
     data: {
       title: "courTest",
       littleSummary: 'testTestTest',
       summary: "test",
       difficulty: 0,
-      author: {connect: { id: 1 } },
-      content: { connect: { id: 1 } },
-      category: { connect: { id: 1 } },
-      learningObjectives: { connect: {id: 1} },
-      tools: { connect: {id: 1} }  
+      author: {connect: { id: users.id } },
+      tools: {
+      create: [
+        {
+          tools: { connect: { id: tools.id } }
+        }
+      ]
+    },
+
+    learningObjectives: {
+      create: [
+        {
+          objectif: { connect: { id: learningObjectives.id } }
+        }
+      ]
+    },
+      category: { connect: { id: categories.id } }
     }
   });
-  await prisma.courContent.create({
+  console.log(courses)
+
+  const coursContents = await prisma.courContent.create({
     data: {
       content: 'test',
       numberPage: 1,
       cours:{connect:{id:1}}
     }
   });
+
+  console.log(coursContents)
+
+
+  console.log("Termined")
 }
 
 seed()
 
-console.log("Termined")
