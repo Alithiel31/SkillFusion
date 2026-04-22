@@ -7,15 +7,11 @@ import cookieParser from "cookie-parser";
 import authRouter from './routers/auth.router';
 import coursRouter from './routers/cours.router';
 
-
 const app = express();
 
 app.use(helmet());
-
-app.use(cors())
-
+app.use(cors());
 app.use(cookieParser());
-
 app.use(express.json());
 app.use(xss());
 
