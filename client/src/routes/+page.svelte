@@ -1,4 +1,5 @@
-<script>
+<script
+>
 	import '../normalize.css';
 	import '../app.css';
         import api from "$lib/services/api.service";
@@ -17,9 +18,9 @@
                         category: "plomperie"}
         ]);
 
-onMount(async ()=>{
-        // courses = await api('api/cours')
-})
+// onMount(async ()=>{
+//         // courses = await api('api/cours')
+// })
 </script>
 
 <Header />
