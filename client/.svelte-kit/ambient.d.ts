@@ -44,7 +44,6 @@ declare module '$env/static/private' {
 	export const YARN_VERSION: string;
 	export const npm_node_execpath: string;
 	export const npm_config_noproxy: string;
-	export const PORT: string;
 	export const HOME: string;
 	export const npm_package_json: string;
 	export const npm_config_userconfig: string;
@@ -70,6 +69,7 @@ declare module '$env/static/private' {
 	export const NODE_ENV: string;
 	export const INIT_CWD: string;
 	export const EDITOR: string;
+	export const NODE_ENV: string;
 	export const PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS: string;
 	export const SESSIONNAME: string;
 	export const SystemDrive: string;
@@ -187,7 +187,6 @@ declare module '$env/dynamic/private' {
 		YARN_VERSION: string;
 		npm_node_execpath: string;
 		npm_config_noproxy: string;
-		PORT: string;
 		HOME: string;
 		npm_package_json: string;
 		npm_config_userconfig: string;
@@ -213,6 +212,7 @@ declare module '$env/dynamic/private' {
 		NODE_ENV: string;
 		INIT_CWD: string;
 		EDITOR: string;
+		NODE_ENV: string;
 		PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS: string;
 		SESSIONNAME: string;
 		SystemDrive: string;
