@@ -8,21 +8,30 @@ body{
 main{
         flex-grow: 1;
 }
+h1{
+  font-family: "DM Serif Display", serif;
+  font-weight: 500;
+  color: #1D4E89;
+  font-size: 30px;
+  margin: 5px 0px;
+}
 h2{
 font-family: "DM Sans", sans-serif;
 font-weight: 500;
 color: #F5A623;
 font-size:15px ;
+margin: 5px 0px;
 }
-h1{
-  font-family: "DM Serif Display", serif;
-  font-weight: 500;
-  color: #1D4E89;
-  font-size: 25px
+h3{
+        font-family: "DM Sans", sans-serif;
+font-weight: 500;
+color: #2C3E50;;
+font-size:18px ;
+margin: 5px 0px;
 }
-p{
+p, a{
 font-family: "DM Sans", sans-serif;
 font-weight: 400;
 color: #57534E;
-font-size:10px ;
+font-size:16px ;
 }
