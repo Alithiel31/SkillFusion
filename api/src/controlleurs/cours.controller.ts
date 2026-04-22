@@ -1,6 +1,5 @@
 import type { Request, Response } from "express"
 import { prisma } from "../models/client"
-
 import z from "zod";
 import { parseIdFromParams } from "./utils";
 import { ConflictError, NotFoundError } from "../lib/errors";
