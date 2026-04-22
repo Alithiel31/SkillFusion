@@ -54,7 +54,7 @@
 	main {
 		display: flex;
 		flex-direction: column;
-		margin: 20px;
+		margin: 50px;
 	}
 	.homepage__leftside {
 		display: flex;
@@ -77,7 +77,6 @@
 			background 0.15s,
 			color 0.15s;
 	}
-
 	.homepage__rightside__menu {
 		display: flex;
 		justify-content: space-between;
@@ -92,6 +91,7 @@
     .homepage__rightside__cours {
 			display: flex;
 			gap: 20px;
+			justify-content: center;
             flex-wrap: wrap;
 		}
 	@media (min-width: 768px) {
@@ -99,13 +99,19 @@
 			flex-direction: row;
 		}
 		.homepage__rightside {
-			min-width: 40%;
+			width: 50%;
 			gap: 10px;
 			display: flex;
 			flex-direction: column;
 		}
         .homepage__leftside {
-		width: 60%;
+		width: 50%;
 	}
+	}
+	@media (min-width: 1024px) {
+		.homepage__rightside__cours{
+			gap: 10px;
+			justify-content: start;
+		}
 	}
 </style>

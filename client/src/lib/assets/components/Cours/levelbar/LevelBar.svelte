@@ -86,4 +86,9 @@ let props = $props()
         font-size: 12px;
         font-weight: bold;
     }
+    @media (min-width: 768px){
+      .diff-card{
+        padding: 0;
+      }
+    }
 </style>

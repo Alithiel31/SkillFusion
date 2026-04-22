@@ -3,14 +3,12 @@
 </script>
 
 <div class="card-body">
-	<div class="card-body__presentation">
-		<div class="card__cours__color"></div>
-		<div>
-			<h3 class="card-title">Mon super titre de cours</h3>
-			<span class="card-category"> Categorie </span>
-		</div>
+	<div class="card__cours__color"></div>
+	<div class="card__cours__tittle">
+		<h3 class="card-title">Mon super titre de cours</h3>
+		<span class="card-category"> Categorie </span>
 	</div>
-	<div class="level-row">
+	<div class="card__cours__level-row">
 		<LevelBar level="1" />
 	</div>
 </div>
@@ -25,10 +23,7 @@
 		border: 1px solid #b5d4f4;
 		border-radius: 20px;
 		padding: 5px 15px;
-	}
-	.card-body__presentation {
-		display: flex;
-		flex-direction: row;
+		align-items: flex-end;
 	}
 	.card__cours__color {
 		padding: 15px;
@@ -41,7 +36,7 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 0;
-		padding: 0;
+		padding: 20px;
 		height: 10vh;
 	}
 	.card-body {
@@ -60,17 +55,34 @@
 	}
 	@media (min-width: 768px) {
 		.card-body {
-			height: 200px;
-                        width: 40%;
+			width: 100%;
+			height: 20%;
+			padding-top:  0;
 			flex-direction: column;
+			justify-content: start;
 		}
-		.card-body__presentation {
-			flex-direction: column;
+		.card__cours__tittle{
+			align-self: flex-start;
 		}
 		.card__cours__color {
 			margin: 0;
-                        height: 80px;
-			width: 100%;
+			width: 110%;
+		}
+		.card__cours__level-row {
+			display: flex;
+			align-self: flex-end;
+			padding: 0;
+		}
+	}
+	@media (min-width: 1024px) {
+		.card-body{
+			width: 40%;
+			height: 200px;
+		}
+		.card__cours__color {
+			margin: 0;
+			width: 110%;
+			height: 80px;
 		}
 	}
 </style>
