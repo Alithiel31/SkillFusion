@@ -40,6 +40,7 @@ describe("verifyToken", () => {
         email: "john@skillfusion.io",
         password: "hashedpassword",
         role: 0,
+        pseudo: "johndoe",
       },
     });
     const authedRequester = buildAuthedRequester(user);
