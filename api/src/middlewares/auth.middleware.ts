@@ -3,7 +3,6 @@ import jwt, { type JwtPayload } from 'jsonwebtoken';
 import { ForbiddenError, UnauthorizedError } from '../lib/errors';
 import { config } from '../config';
 import logger from '../lib/logger';
-import type { Role } from '../models';
 import type { AuthenticatedRequest } from '../@types/express';
 
 // Middleware pour vérifier le token 
@@ -18,7 +17,7 @@ export function verifyToken(req: AuthenticatedRequest, res: Response, next: Next
 
 // Middleware pour vérifier que le role de l'utilisateur est dans la liste des roles autorisés à accéder à la ressource
 
-export function checkRoles(roles: Role[]) {
+export function checkRoles(roles: number[]) {
   return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     const token = extractAccessToken(req);
     const { userId, role } = verifyAndDecodeJWT(token);
@@ -33,7 +32,6 @@ export function checkRoles(roles: Role[]) {
     next();
   };
 }
-
 
 // Middleware pour extraire le token du header Authorization
  
