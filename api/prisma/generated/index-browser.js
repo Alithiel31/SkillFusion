@@ -126,8 +126,10 @@ exports.Prisma.UserScalarFieldEnum = {
   firstname: 'firstname',
   lastname: 'lastname',
   password: 'password',
+  pseudo: 'pseudo',
   urlProfilImage: 'urlProfilImage',
   role: 'role',
+  note: 'note',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -187,7 +189,7 @@ exports.Prisma.BadgeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.User_has_CoursScalarFieldEnum = {
+exports.Prisma.UserHasCoursScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   coursId: 'coursId',
@@ -195,7 +197,7 @@ exports.Prisma.User_has_CoursScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Cours_activeScalarFieldEnum = {
+exports.Prisma.CoursActivedScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   coursId: 'coursId',
@@ -204,7 +206,7 @@ exports.Prisma.Cours_activeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.User_has_BadgeScalarFieldEnum = {
+exports.Prisma.UserHasBadgeScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   badgeId: 'badgeId',
@@ -212,7 +214,7 @@ exports.Prisma.User_has_BadgeScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Cours_has_OutilsScalarFieldEnum = {
+exports.Prisma.CoursHasToolScalarFieldEnum = {
   id: 'id',
   coursId: 'coursId',
   toolsId: 'toolsId',
@@ -220,7 +222,7 @@ exports.Prisma.Cours_has_OutilsScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.Cours_has_Objectif_PedagogiqueScalarFieldEnum = {
+exports.Prisma.CoursHasLearningObjectiveScalarFieldEnum = {
   id: 'id',
   coursId: 'coursId',
   learningObjectiveId: 'learningObjectiveId',
@@ -239,7 +241,7 @@ exports.Prisma.CommentScalarFieldEnum = {
 
 exports.Prisma.OpinionScalarFieldEnum = {
   id: 'id',
-  message: 'message',
+  content: 'content',
   note: 'note',
   coursId: 'coursId',
   userId: 'userId',
@@ -254,6 +256,14 @@ exports.Prisma.NotificationScalarFieldEnum = {
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {
@@ -280,14 +290,15 @@ exports.Prisma.ModelName = {
   LearningObjective: 'LearningObjective',
   Tool: 'Tool',
   Badge: 'Badge',
-  User_has_Cours: 'User_has_Cours',
-  Cours_active: 'Cours_active',
-  User_has_Badge: 'User_has_Badge',
-  Cours_has_Outils: 'Cours_has_Outils',
-  Cours_has_Objectif_Pedagogique: 'Cours_has_Objectif_Pedagogique',
+  UserHasCours: 'UserHasCours',
+  CoursActived: 'CoursActived',
+  UserHasBadge: 'UserHasBadge',
+  CoursHasTool: 'CoursHasTool',
+  CoursHasLearningObjective: 'CoursHasLearningObjective',
   Comment: 'Comment',
   Opinion: 'Opinion',
-  Notification: 'Notification'
+  Notification: 'Notification',
+  RefreshToken: 'RefreshToken'
 };
 
 /**

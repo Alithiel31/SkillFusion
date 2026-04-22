@@ -17,19 +17,21 @@ datasource db {
 model User {
   id             Int     @id @default(autoincrement())
   email          String  @unique
-  firstname      String
-  lastname       String
+  firstname      String?
+  lastname       String?
   password       String
+  pseudo         String
   urlProfilImage String? @map("url_profil_image")
   role           Int     @default(0)
+  note           Int     @default(0)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   createdCours  Cours[]          @relation("CreatedCours")
-  badges        User_has_Badge[]
-  enrollments   User_has_Cours[]
-  activations   Cours_active[]
+  badges        UserHasBadge[]
+  enrollments   UserHasCours[]
+  activations   CoursActived[]
   commentaires  Comment[]
   opinions      Opinion[]
   notifications Notification[]
@@ -54,11 +56,11 @@ model Cours {
   authorId      Int                              @map("author_id")
   category      Category                         @relation(fields: [categoryId], references: [id])
   categoryId    Int                              @map("category_id")
-  tools         Cours_has_Outils[]
-  learningObjectives     Cours_has_Objectif_Pedagogique[]
+  tools         CoursHasTool[]
+  learningObjectives     CoursHasLearningObjective[]
   content       CourContent[]
-  enrollments   User_has_Cours[]
-  activations   Cours_active[]
+  enrollments   UserHasCours[]
+  activations   CoursActived[]
   comments      Comment[]
   opinions      Opinion[]
   notifications Notification[]
@@ -101,7 +103,7 @@ model LearningObjective {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  courses Cours_has_Objectif_Pedagogique[]
+  courses CoursHasLearningObjective[]
 
   @@map("learning_objectives")
 }
@@ -114,7 +116,7 @@ model Tool {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  cours Cours_has_Outils[]
+  cours CoursHasTool[]
 
   @@map("tools")
 }
@@ -127,12 +129,13 @@ model Badge {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  users User_has_Badge[]
+  users UserHasBadge[]
+  @@map("badge")
 }
 
 // ─── Tables de liaison ────────────────────────────────────
 
-model User_has_Cours {
+model UserHasCours {
   id      Int @id @default(autoincrement())
   userId  Int @map("user_id")
   coursId Int @map("cours_id")
@@ -144,9 +147,10 @@ model User_has_Cours {
   cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
 
   @@unique([userId, coursId])
+  @@map("user_has_cours")
 }
 
-model Cours_active {
+model CoursActived {
   id      Int     @id @default(autoincrement())
   userId  Int     @map("user_id")
   coursId Int     @map("cours_id")
@@ -159,9 +163,10 @@ model Cours_active {
   cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
 
   @@unique([userId, coursId])
+  @@map("cours_actived")
 }
 
-model User_has_Badge {
+model UserHasBadge {
   id      Int @id @default(autoincrement())
   userId  Int @map("user_id")
   badgeId Int @map("badge_id")
@@ -173,9 +178,10 @@ model User_has_Badge {
   badge Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
 
   @@unique([userId, badgeId])
+  @@map("user_has_bagde")
 }
 
-model Cours_has_Outils {
+model CoursHasTool {
   id      Int @id @default(autoincrement())
   coursId Int @map("cours_id")
   toolsId Int @map("tools_id")
@@ -187,9 +193,10 @@ model Cours_has_Outils {
   tools Tool  @relation(fields: [toolsId], references: [id], onDelete: Cascade)
 
   @@unique([coursId, toolsId])
+  @@map("cours_has_tool")
 }
 
-model Cours_has_Objectif_Pedagogique {
+model CoursHasLearningObjective {
   id                  Int @id @default(autoincrement())
   coursId             Int @map("cours_id")
   learningObjectiveId Int @map("lerning_objective")
@@ -201,6 +208,7 @@ model Cours_has_Objectif_Pedagogique {
   objectif LearningObjective @relation(fields: [learningObjectiveId], references: [id], onDelete: Cascade)
 
   @@unique([coursId, learningObjectiveId])
+  @@map("cours_has_learning_objective")
 }
 
 // ─── Social ───────────────────────────────────────────────
@@ -216,11 +224,12 @@ model Comment {
 
   cours  Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
   auteur User  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  @@map("comments")
 }
 
 model Opinion {
   id      Int    @id @default(autoincrement())
-  message String
+  content String
   note    Int
   coursId Int    @map("cours_id")
   userId  Int    @map("user_id")
@@ -232,6 +241,7 @@ model Opinion {
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, coursId])
+  @@map("opinions")
 }
 
 model Notification {
@@ -245,6 +255,7 @@ model Notification {
 
   cours Cours @relation(fields: [coursId], references: [id], onDelete: Cascade)
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@map("notifications")
 }
 
 model RefreshToken {
