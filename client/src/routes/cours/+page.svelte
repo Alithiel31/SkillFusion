@@ -1,4 +1,6 @@
 <script>
+  import Footer from '$lib/assets/components/Footer.svelte';
+  import Header from '$lib/assets/components/Header.svelte';
 	// --- DONNÉES ---
 	const categories = [
 		'Toutes les catégories',
@@ -145,6 +147,8 @@
 	}
 </script>
 
+<Header />
+
 <div class="page">
 	<main class="main">
 		<h1 class="page-title">Tous les cours</h1>
@@ -222,6 +226,8 @@
 		{/if}
 	</main>
 </div>
+
+<Footer />
 
 <style>
 	:global(*, *::before, *::after) {
