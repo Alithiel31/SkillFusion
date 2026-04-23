@@ -224,7 +224,7 @@
 		align-items: center;
 		justify-content: center;
 		padding: 1.2rem;
-        background-color: #dbeafe;
+		background-color: #dbeafe;
 	}
 
 	.avatar-icon svg {
@@ -234,8 +234,8 @@
 
 	.avatar-edit {
 		position: absolute;
-        top: -15px;
-        right: 0;
+		top: -15px;
+		right: 0;
 		border-radius: 10px;
 		background: #fff;
 		border: 1px solid #e5e7eb;
@@ -313,5 +313,72 @@
 		text-align: center;
 		max-width: 60px;
 		line-height: 1.3;
+	}
+
+	@media screen and (max-width: 768px) {
+		.profil-form {
+			flex-direction: column;
+			padding: 20px;
+		}
+
+		.form-group,
+		.form-groups {
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.form-name,
+		.form-firstname,
+		.form-email,
+		.form-password {
+			width: 100%;
+		}
+
+		.btn-modify {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.btn-cancel {
+			margin-left: 0;
+		}
+
+		.avatar-box {
+			align-self: center;
+			margin-top: 10px;
+		}
+
+		.badges-list {
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 16px;
+		}
+
+		.badge-item {
+			width: 70px;
+		}
+
+		.badges-card {
+			padding: 20px;
+		}
+
+		.title-page {
+			font-size: 1.4rem;
+		}
+
+		.profil-form {
+			flex-direction: column;
+		}
+
+		.avatar-box {
+			order: -1;
+			align-self: center;
+			margin-bottom: 20px;
+		}
+
+		.form-fields {
+			order: 1;
+		}
 	}
 </style>
