@@ -3,13 +3,31 @@
 		"src/routes/+layout.server.ts",
 		"src/routes/+layout.server.ts"
 	],
+	"/accessibilite": [
+		"src/routes/+layout.server.ts"
+	],
+	"/conditions": [
+		"src/routes/+layout.server.ts"
+	],
 	"/connection": [
+		"src/routes/+layout.server.ts"
+	],
+	"/contact": [
 		"src/routes/+layout.server.ts"
 	],
 	"/cours": [
 		"src/routes/+layout.server.ts"
 	],
 	"/cours/[slug]": [
+		"src/routes/+layout.server.ts"
+	],
+	"/mentions-legales": [
+		"src/routes/+layout.server.ts"
+	],
+	"/plan-du-site": [
+		"src/routes/+layout.server.ts"
+	],
+	"/protection-donnees": [
 		"src/routes/+layout.server.ts"
 	],
 	"/register": [
