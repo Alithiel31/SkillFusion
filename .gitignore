@@ -1,7 +1,5 @@
 node_modules
 
-.env
-
 api/generated/prisma
 
 .output
@@ -10,6 +8,7 @@ api/generated/prisma
 .wrangler
 
 client/build
+client/.svelte-kit
 
 # OS
 .DS_Store
@@ -22,3 +21,5 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+.svelte-kit
