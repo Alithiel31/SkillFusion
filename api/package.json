@@ -7,8 +7,12 @@
     "schema": "./prisma/schema.prisma"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx --watch --env-file=.env app.ts"
+    "test:unit": "tsx --test ./**/*.unit.test.ts",
+    "test:spec": "tsx --test --env-file=./test/config/.env.test --import ./test/config/global-setup.ts --experimental-test-isolation=none ./**/*.spec.test.ts",
+    "test": "npm run test:unit && npm run test:spec",
+    "dev": "tsx --watch --env-file=.env app.ts",
+    "db:deploy":"npx prisma migrate deploy",
+    "db:seed":"npx tsx src/models/seeding.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +22,7 @@
     "@prisma/adapter-pg": "^7.6.0",
     "@prisma/client": "^7.6.0",
     "argon2": "^0.44.0",
+    "axios": "^1.15.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",

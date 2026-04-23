@@ -1,5 +1,5 @@
 volumes:
-  skillfusion_volume:
+  db_volume:
 
 networks:
   skillfusion_network:
@@ -12,13 +12,12 @@ services:
       POSTGRES_USER: usersf
       POSTGRES_PASSWORD: usersf
       POSTGRES_DB: usersf
-      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
-      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
 
     ports:
       - "5433:5432"
     volumes:
       - ./database/:/docker-entrypoint-initdb.d
+      - db_volume:/var/lib/postgresql
     networks:
       - skillfusion_network
 
@@ -36,7 +35,7 @@ services:
       - "3000:3000"
     networks:
       - skillfusion_network
-    command: npm run dev
+    command: sh -c "if [ ! -d node_modules ]; then npm install; fi && npm run dev"
 
   client:
     build: ./client
@@ -53,4 +52,4 @@ services:
       - /app/node_modules
     networks:
       - skillfusion_network
-    command: npm run dev -- --host
+    command: sh -c "if [ ! -d node_modules ]; then npm install; fi && npm run dev -- --host"

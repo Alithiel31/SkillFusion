@@ -126,7 +126,7 @@ export default {
             visibility,
             authorId,
             categoryId,
-            updated_at: new Date()}
+            updatedAt: new Date()}
         })
         res.json(updatedCours)
     }
