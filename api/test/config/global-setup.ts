@@ -1,7 +1,7 @@
 import { execSync } from "node:child_process";
 import type { Server } from "node:http";
 import { after, before, beforeEach, type TestContext } from "node:test";
-import { app } from "../../src/app.ts";
+import app from "../../src/index";
 import { prisma } from "../../src/models/client.ts";
 
 let server: Server;
