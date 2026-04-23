@@ -50,7 +50,7 @@ declare module "$app/types" {
 			"/tableau-de-bord/instructor": Record<string, never>;
 			"/tableau-de-bord/student": Record<string, never>
 		};
-		Pathname(): "/" | "/accessibilite" | "/conditions" | "/connection" | "/contact" | "/cours" | `/cours/${string}` & {} | "/mentions-legales" | "/plan-du-site" | "/protection-donnees" | "/register" | "/tableau-de-bord/admin" | "/tableau-de-bord/instructor" | "/tableau-de-bord/student";
+		Pathname(): "/" | "/accessibilite" | "/conditions" | "/connection" | "/contact" | "/cours" | `/cours/${string}` & {} | "/mentions-legales" | "/plan-du-site" | "/protection-donnees" | "/register" | "/tableau-de-bord" | "/tableau-de-bord/admin" | "/tableau-de-bord/instructor" | "/tableau-de-bord/student";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): "/robots.txt" | string & {};
 	}
