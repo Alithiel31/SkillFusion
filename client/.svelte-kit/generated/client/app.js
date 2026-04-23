@@ -20,10 +20,10 @@ export const dictionary = {
 		"/connection": [3],
 		"/cours": [4],
 		"/cours/[slug]": [5],
-		"/dashboard/admin": [6],
-		"/dashboard/instructor": [7],
-		"/dashboard/student": [8],
-		"/register": [9]
+		"/register": [6],
+		"/tableau-de-bord/admin": [7],
+		"/tableau-de-bord/instructor": [8],
+		"/tableau-de-bord/student": [9]
 	};
 
 export const hooks = {

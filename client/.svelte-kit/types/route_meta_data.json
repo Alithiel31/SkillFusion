@@ -12,16 +12,16 @@
 	"/cours/[slug]": [
 		"src/routes/+layout.server.ts"
 	],
-	"/dashboard/admin": [
-		"src/routes/+layout.server.ts"
-	],
-	"/dashboard/instructor": [
-		"src/routes/+layout.server.ts"
-	],
-	"/dashboard/student": [
-		"src/routes/+layout.server.ts"
-	],
 	"/register": [
+		"src/routes/+layout.server.ts"
+	],
+	"/tableau-de-bord/admin": [
+		"src/routes/+layout.server.ts"
+	],
+	"/tableau-de-bord/instructor": [
+		"src/routes/+layout.server.ts"
+	],
+	"/tableau-de-bord/student": [
 		"src/routes/+layout.server.ts"
 	]
 }
