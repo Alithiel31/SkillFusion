@@ -323,36 +323,6 @@
 		color: #6b7280;
 	}
 
-	.dropdown {
-		position: absolute;
-		top: calc(100% + 4px);
-		left: 0;
-		right: 0;
-		background: white;
-		border: 1px solid #e5e7eb;
-		border-radius: 8px;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-		z-index: 999;
-		list-style: none;
-		overflow: hidden;
-	}
-
-	.dropdown-item {
-		width: 100%;
-		text-align: left;
-		padding: 0.6rem 1rem;
-		background: none;
-		border: none;
-		cursor: pointer;
-		font-size: 0.9rem;
-		color: #374151;
-		transition: background 0.1s;
-	}
-
-	.dropdown-item:hover {
-		background: #f3f4f6;
-	}
-
 	.add-btn {
 		width: 40px;
 		height: 40px;
