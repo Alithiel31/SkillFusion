@@ -6,9 +6,9 @@
 <Header/>
 <div>
 
-        <button><a href="/admin">admin</a></button>
-        <button><a href="/instructor">instructor</a></button>
-        <button><a href="/student">student</a></button>
+        <button><a href="/tableau-de-bord/admin">admin</a></button>
+        <button><a href="/tableau-de-bord/instructor">instructor</a></button>
+        <button><a href="/tableau-de-bord/student">student</a></button>
 
 </div>
 
@@ -18,5 +18,6 @@
 div{
         display: flex;
         justify-content:  center;
+
 }
 </style>
