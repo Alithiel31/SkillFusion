@@ -12,6 +12,9 @@
 	"/cours/[slug]": [
 		"src/routes/+layout.server.ts"
 	],
+	"/profil": [
+		"src/routes/+layout.server.ts"
+	],
 	"/register": [
 		"src/routes/+layout.server.ts"
 	]
