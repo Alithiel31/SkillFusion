@@ -6,7 +6,7 @@
     { label: 'Plan du site',          href: '/plan-du-site' },
     { label: 'Contact',               href: '/contact' },
     { label: 'Conditions',            href: '/conditions' },
-    { label: 'Protection des données',href: '/donnees-personnelles' },
+    { label: 'Protection des données',href: '/protection-donnees' },
     { label: 'Accessibilité',         href: '/accessibilite' },
   ];
 </script>
@@ -41,6 +41,8 @@
     background: var(--white);
     border-top: 1px solid var(--border);
     font-family: var(--font);
+    bottom: 0;
+    position: relative;
   }
 
   .footer__inner {
