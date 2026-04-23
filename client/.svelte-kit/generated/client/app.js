@@ -8,18 +8,36 @@ export const nodes = [
 	() => import('./nodes/4'),
 	() => import('./nodes/5'),
 	() => import('./nodes/6'),
-	() => import('./nodes/7')
+	() => import('./nodes/7'),
+	() => import('./nodes/8'),
+	() => import('./nodes/9'),
+	() => import('./nodes/10'),
+	() => import('./nodes/11'),
+	() => import('./nodes/12'),
+	() => import('./nodes/13'),
+	() => import('./nodes/14'),
+	() => import('./nodes/15'),
+	() => import('./nodes/16')
 ];
 
 export const server_loads = [0];
 
 export const dictionary = {
 		"/": [2],
-		"/connection": [3],
-		"/cours": [4],
-		"/cours/[slug]": [5],
-		"/profil": [6],
-		"/register": [7]
+		"/accessibilite": [3],
+		"/conditions": [4],
+		"/connection": [5],
+		"/contact": [6],
+		"/cours": [7],
+		"/cours/[slug]": [8],
+		"/mentions-legales": [9],
+		"/plan-du-site": [10],
+		"/profil": [11],
+		"/protection-donnees": [12],
+		"/register": [13],
+		"/tableau-de-bord/admin": [14],
+		"/tableau-de-bord/instructor": [15],
+		"/tableau-de-bord/student": [16]
 	};
 
 export const hooks = {
