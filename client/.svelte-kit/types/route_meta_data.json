@@ -1,0 +1,21 @@
+{
+	"/": [
+		"src/routes/+layout.server.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/connection": [
+		"src/routes/+layout.server.ts"
+	],
+	"/cours": [
+		"src/routes/+layout.server.ts"
+	],
+	"/cours/[slug]": [
+		"src/routes/+layout.server.ts"
+	],
+	"/profil": [
+		"src/routes/+layout.server.ts"
+	],
+	"/register": [
+		"src/routes/+layout.server.ts"
+	]
+}
