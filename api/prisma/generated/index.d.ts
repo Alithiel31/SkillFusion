@@ -6496,6 +6496,8 @@ export namespace Prisma {
     id: number | null
     name: string | null
     description: string | null
+    textColor: string | null
+    borderColor: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6504,6 +6506,8 @@ export namespace Prisma {
     id: number | null
     name: string | null
     description: string | null
+    textColor: string | null
+    borderColor: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6512,6 +6516,8 @@ export namespace Prisma {
     id: number
     name: number
     description: number
+    textColor: number
+    borderColor: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6530,6 +6536,8 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    textColor?: true
+    borderColor?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6538,6 +6546,8 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    textColor?: true
+    borderColor?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6546,6 +6556,8 @@ export namespace Prisma {
     id?: true
     name?: true
     description?: true
+    textColor?: true
+    borderColor?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6641,6 +6653,8 @@ export namespace Prisma {
     id: number
     name: string
     description: string | null
+    textColor: string
+    borderColor: string
     createdAt: Date
     updatedAt: Date
     _count: CategoryCountAggregateOutputType | null
@@ -6668,6 +6682,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    textColor?: boolean
+    borderColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     courses?: boolean | Category$coursesArgs<ExtArgs>
@@ -6678,6 +6694,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    textColor?: boolean
+    borderColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["category"]>
@@ -6686,6 +6704,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    textColor?: boolean
+    borderColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["category"]>
@@ -6694,11 +6714,13 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    textColor?: boolean
+    borderColor?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "textColor" | "borderColor" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     courses?: boolean | Category$coursesArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -6715,6 +6737,8 @@ export namespace Prisma {
       id: number
       name: string
       description: string | null
+      textColor: string
+      borderColor: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["category"]>
@@ -7144,6 +7168,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Category", 'Int'>
     readonly name: FieldRef<"Category", 'String'>
     readonly description: FieldRef<"Category", 'String'>
+    readonly textColor: FieldRef<"Category", 'String'>
+    readonly borderColor: FieldRef<"Category", 'String'>
     readonly createdAt: FieldRef<"Category", 'DateTime'>
     readonly updatedAt: FieldRef<"Category", 'DateTime'>
   }
@@ -21046,6 +21072,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     description: 'description',
+    textColor: 'textColor',
+    borderColor: 'borderColor',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -21576,6 +21604,8 @@ export namespace Prisma {
     id?: IntFilter<"Category"> | number
     name?: StringFilter<"Category"> | string
     description?: StringNullableFilter<"Category"> | string | null
+    textColor?: StringFilter<"Category"> | string
+    borderColor?: StringFilter<"Category"> | string
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
     courses?: CoursListRelationFilter
@@ -21585,6 +21615,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
+    textColor?: SortOrder
+    borderColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     courses?: CoursOrderByRelationAggregateInput
@@ -21597,6 +21629,8 @@ export namespace Prisma {
     NOT?: CategoryWhereInput | CategoryWhereInput[]
     name?: StringFilter<"Category"> | string
     description?: StringNullableFilter<"Category"> | string | null
+    textColor?: StringFilter<"Category"> | string
+    borderColor?: StringFilter<"Category"> | string
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
     courses?: CoursListRelationFilter
@@ -21606,6 +21640,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
+    textColor?: SortOrder
+    borderColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CategoryCountOrderByAggregateInput
@@ -21622,6 +21658,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Category"> | number
     name?: StringWithAggregatesFilter<"Category"> | string
     description?: StringNullableWithAggregatesFilter<"Category"> | string | null
+    textColor?: StringWithAggregatesFilter<"Category"> | string
+    borderColor?: StringWithAggregatesFilter<"Category"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
   }
@@ -22679,6 +22717,8 @@ export namespace Prisma {
   export type CategoryCreateInput = {
     name: string
     description?: string | null
+    textColor: string
+    borderColor: string
     createdAt?: Date | string
     updatedAt?: Date | string
     courses?: CoursCreateNestedManyWithoutCategoryInput
@@ -22688,6 +22728,8 @@ export namespace Prisma {
     id?: number
     name: string
     description?: string | null
+    textColor: string
+    borderColor: string
     createdAt?: Date | string
     updatedAt?: Date | string
     courses?: CoursUncheckedCreateNestedManyWithoutCategoryInput
@@ -22696,6 +22738,8 @@ export namespace Prisma {
   export type CategoryUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: StringFieldUpdateOperationsInput | string
+    borderColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     courses?: CoursUpdateManyWithoutCategoryNestedInput
@@ -22705,6 +22749,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: StringFieldUpdateOperationsInput | string
+    borderColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     courses?: CoursUncheckedUpdateManyWithoutCategoryNestedInput
@@ -22714,6 +22760,8 @@ export namespace Prisma {
     id?: number
     name: string
     description?: string | null
+    textColor: string
+    borderColor: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -22721,6 +22769,8 @@ export namespace Prisma {
   export type CategoryUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: StringFieldUpdateOperationsInput | string
+    borderColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22729,6 +22779,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: StringFieldUpdateOperationsInput | string
+    borderColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23813,6 +23865,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    textColor?: SortOrder
+    borderColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -23825,6 +23879,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    textColor?: SortOrder
+    borderColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -23833,6 +23889,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    textColor?: SortOrder
+    borderColor?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -26112,6 +26170,8 @@ export namespace Prisma {
   export type CategoryCreateWithoutCoursesInput = {
     name: string
     description?: string | null
+    textColor: string
+    borderColor: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26120,6 +26180,8 @@ export namespace Prisma {
     id?: number
     name: string
     description?: string | null
+    textColor: string
+    borderColor: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26391,6 +26453,8 @@ export namespace Prisma {
   export type CategoryUpdateWithoutCoursesInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: StringFieldUpdateOperationsInput | string
+    borderColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26399,6 +26463,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    textColor?: StringFieldUpdateOperationsInput | string
+    borderColor?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
