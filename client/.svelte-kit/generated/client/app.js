@@ -17,7 +17,8 @@ export const nodes = [
 	() => import('./nodes/13'),
 	() => import('./nodes/14'),
 	() => import('./nodes/15'),
-	() => import('./nodes/16')
+	() => import('./nodes/16'),
+	() => import('./nodes/17')
 ];
 
 export const server_loads = [0];
@@ -35,9 +36,10 @@ export const dictionary = {
 		"/profil": [11],
 		"/protection-donnees": [12],
 		"/register": [13],
-		"/tableau-de-bord/admin": [14],
-		"/tableau-de-bord/instructor": [15],
-		"/tableau-de-bord/student": [16]
+		"/tableau-de-bord": [14],
+		"/tableau-de-bord/admin": [15],
+		"/tableau-de-bord/instructor": [16],
+		"/tableau-de-bord/student": [17]
 	};
 
 export const hooks = {

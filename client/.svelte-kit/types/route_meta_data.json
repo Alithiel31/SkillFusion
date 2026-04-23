@@ -36,6 +36,9 @@
 	"/register": [
 		"src/routes/+layout.server.ts"
 	],
+	"/tableau-de-bord": [
+		"src/routes/+layout.server.ts"
+	],
 	"/tableau-de-bord/admin": [
 		"src/routes/+layout.server.ts"
 	],
