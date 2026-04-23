@@ -8,6 +8,8 @@
 	import BtnAllCours from '$lib/assets/components/BtnAllCours.svelte';
 	import CoursCard from '$lib/assets/components/Cours/CoursCard.svelte';
 	import { onMount } from 'svelte';
+	import App from '$lib/assets/components/App.svelte';
+	import Main from '$lib/assets/components/Main.svelte';
 
 
         let courses = $state([]);
@@ -16,8 +18,9 @@ onMount(async ()=>{
  courses = await api('api/cours')
 })
 </script>
-
+<App> 
 <Header />
+<Main>
 <main>
 	<section class="homepage__leftside">
 		<h2>Apprends par la pratique</h2>
@@ -59,6 +62,7 @@ onMount(async ()=>{
                         urlImage ={cours.urlImage}
                         difficulty= {cours.difficulty}
                         category= {cours.category}
+						--card__image__color={cours.category.textColor}
 						--border_color={cours.category.borderColor}
 						--text_color={cours.category.textColor}
                         />
@@ -67,14 +71,13 @@ onMount(async ()=>{
 		</div>
 	</section>
 </main>
+</Main>
 <Footer />
-
+</App>
 <style>
 	main {
 		display: flex;
 		flex-direction: column;
-		margin: 50px;
-		flex-grow: 1;
 	}
 	.homepage__leftside {
 		display: flex;
@@ -130,8 +133,7 @@ onMount(async ()=>{
 	}
 	@media (min-width: 1024px) {
 		.homepage__rightside__cours{
-			gap: 10px;
-			justify-content: start;
+			gap :10px;
 		}
 	}
 </style>

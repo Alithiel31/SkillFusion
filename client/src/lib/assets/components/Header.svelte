@@ -8,7 +8,7 @@
 		<a class="logo_site" href="/"> <img src={logoSkillFusion} alt="SkillFusion" /></a>
     <!-- Bouton de connxion/d'inscription -->
 		<div class="header__actions">
-			<a href="/connection" class="header__btn-login">Connexion</a>
+			<a href="/login" class="header__btn-login">Connexion</a>
 			<a href="/register" class="header__btn-register">S'inscrire</a>
 		</div>
 	</div>

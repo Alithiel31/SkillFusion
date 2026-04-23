@@ -172,9 +172,7 @@
     --font:       'DM Sans', sans-serif;
 
     font-family: var(--font);
-    background:  var(--bg);
-    min-height:  100vh;
-    padding:     32px 40px 60px;
+    background:  var(--bg)
   }
 
   /* ── Header ─────────────────────────────────────────────── */

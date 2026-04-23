@@ -1,6 +1,8 @@
 <script>
+	import App from '$lib/assets/components/App.svelte';
   import Footer from '$lib/assets/components/Footer.svelte';
   import Header from '$lib/assets/components/Header.svelte';
+	import Main from '$lib/assets/components/Main.svelte';
 	// --- DONNÉES ---
 	const categories = [
 		'Toutes les catégories',
@@ -146,9 +148,9 @@
 		showCount += 4;
 	}
 </script>
-
+<App>
 <Header />
-
+<Main>
 <div class="page">
 	<main class="main">
 		<h1 class="page-title">Tous les cours</h1>
@@ -226,9 +228,9 @@
 		{/if}
 	</main>
 </div>
-
+</Main>
 <Footer />
-
+</App>
 <style>
 	:global(*, *::before, *::after) {
 		box-sizing: border-box;
