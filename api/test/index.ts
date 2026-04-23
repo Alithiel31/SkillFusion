@@ -2,7 +2,7 @@ import axios from "axios";
 import { generateAuthTokens } from "../src/lib/token";
 import type { User } from "../src/models/client.ts";
 
-export const apiBaseUrl = `http://localhost:${process.env.PORT}/api`;
+export const apiBaseUrl = `http://localhost:${process.env.PORT}`;
 
 let fakeUserId = 0;
 

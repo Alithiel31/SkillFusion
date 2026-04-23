@@ -45,6 +45,7 @@ declare module '$env/static/private' {
 	export const YARN_VERSION: string;
 	export const npm_node_execpath: string;
 	export const npm_config_noproxy: string;
+	export const PORT: string;
 	export const HOME: string;
 	export const npm_package_json: string;
 	export const npm_config_userconfig: string;
@@ -165,6 +166,7 @@ declare module '$env/dynamic/private' {
 		YARN_VERSION: string;
 		npm_node_execpath: string;
 		npm_config_noproxy: string;
+		PORT: string;
 		HOME: string;
 		npm_package_json: string;
 		npm_config_userconfig: string;

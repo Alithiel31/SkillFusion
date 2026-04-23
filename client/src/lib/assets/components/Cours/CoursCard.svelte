@@ -16,12 +16,11 @@
 
 <style>
 	.card-category {
-		color: #1d4e89;
+		color: var(--text_color);
 		font-size: 10px;
 		font-family: 'DM Sans', sans-serif;
 		font-weight: 500;
-		background-color: #ebf2fa;
-		border: 1px solid #b5d4f4;
+		border: 1px solid var(--border_color);
 		border-radius: 20px;
 		padding: 5px 15px;
 		align-items: flex-end;

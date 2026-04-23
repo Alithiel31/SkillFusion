@@ -27,6 +27,9 @@
 	"/plan-du-site": [
 		"src/routes/+layout.server.ts"
 	],
+	"/profil": [
+		"src/routes/+layout.server.ts"
+	],
 	"/protection-donnees": [
 		"src/routes/+layout.server.ts"
 	],
