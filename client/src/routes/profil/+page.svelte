@@ -55,7 +55,7 @@
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 24 24"
 						fill="none"
-						stroke="#94a3b8"
+						stroke="#1d4e89"
 						stroke-width="1.5"
 						stroke-linecap="round"
 						stroke-linejoin="round"
@@ -66,6 +66,27 @@
 				</div>
 			</div>
 		</form>
+		<div class="badges-card">
+			<h2 class="badges-title">Mes badges</h2>
+			<div class="badges-list">
+				<div class="badge-item">
+					<div class="badge-icon badge-icon--gold">☆</div>
+					<span class="badge-label">Première réalisation</span>
+				</div>
+				<div class="badge-item">
+					<div class="badge-icon badge-icon--green">✓</div>
+					<span class="badge-label">Cours terminé</span>
+				</div>
+				<div class="badge-item">
+					<div class="badge-icon badge-icon--blue">↝</div>
+					<span class="badge-label">En progression</span>
+				</div>
+				<div class="badge-item">
+					<div class="badge-icon badge-icon--gray">☆</div>
+					<span class="badge-label">À débloquer</span>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -87,11 +108,11 @@
 		margin: 2rem auto;
 		padding: 0 1.5rem;
 	}
-.form-fields {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
+	.form-fields {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
 	.profil-form {
 		display: flex;
 		flex-direction: row;
@@ -203,6 +224,7 @@
 		align-items: center;
 		justify-content: center;
 		padding: 1.2rem;
+        background-color: #dbeafe;
 	}
 
 	.avatar-icon svg {
@@ -212,18 +234,84 @@
 
 	.avatar-edit {
 		position: absolute;
-		top: 6px;
-		right: 6px;
-		width: 22px;
-		height: 22px;
-		border-radius: 4px;
+        top: -15px;
+        right: 0;
+		border-radius: 10px;
 		background: #fff;
 		border: 1px solid #e5e7eb;
 		font-size: 0.7rem;
 		cursor: pointer;
+		padding: 5px;
+	}
+
+	.avatar-edit:hover {
+		background-color: #f3f4f6;
+	}
+
+	.badges-card {
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		padding: 30px 40px;
+		margin-top: 20px;
+	}
+
+	.badges-title {
+		color: #1d4e89;
+		font-size: 1rem;
+		font-weight: 700;
+		margin-bottom: 20px;
+	}
+
+	.badges-list {
+		display: flex;
+		gap: 24px;
+	}
+
+	.badge-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.badge-icon {
+		width: 52px;
+		height: 52px;
+		border-radius: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0;
+		font-size: 1.3rem;
+		border: 2px solid;
+	}
+
+	.badge-icon--gold {
+		border-color: #f59e0b;
+		color: #f59e0b;
+		background: #fffbeb;
+	}
+	.badge-icon--green {
+		border-color: #22c55e;
+		color: #22c55e;
+		background: #f0fdf4;
+	}
+	.badge-icon--blue {
+		border-color: #1d4e89;
+		color: #1d4e89;
+		background: #eff6ff;
+	}
+	.badge-icon--gray {
+		border-color: #d1d5db;
+		color: #d1d5db;
+		background: #f9fafb;
+	}
+
+	.badge-label {
+		font-size: 0.72rem;
+		color: #6b7280;
+		text-align: center;
+		max-width: 60px;
+		line-height: 1.3;
 	}
 </style>
