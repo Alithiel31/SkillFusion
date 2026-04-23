@@ -59,6 +59,8 @@ onMount(async ()=>{
                         urlImage ={cours.urlImage}
                         difficulty= {cours.difficulty}
                         category= {cours.category}
+						--border_color={cours.category.borderColor}
+						--text_color={cours.category.textColor}
                         />
                         {/each} 
 			
@@ -72,6 +74,7 @@ onMount(async ()=>{
 		display: flex;
 		flex-direction: column;
 		margin: 50px;
+		flex-grow: 1;
 	}
 	.homepage__leftside {
 		display: flex;

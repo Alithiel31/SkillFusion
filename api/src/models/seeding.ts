@@ -43,11 +43,15 @@ async function seed() {
   const categories = await prisma.category.createMany({
     data: [{
       name: "Menuiserie",
-      description: "Travail du bois"
+      description: "Travail du bois",
+      borderColor: '#22c55e',
+      textColor: '#15803d'
     },
     {
       name: "Plomberie",
-      description: "Anti fuite"
+      description: "Anti fuite",
+      borderColor: '#3b82f6',
+      textColor: '#1d4ed8'
     }]
   });
   console.log("Categories : ", categories.count)
