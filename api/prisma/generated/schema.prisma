@@ -31,7 +31,7 @@ model User {
   firstname      String?
   lastname       String?
   password       String
-  pseudo         String
+  pseudo         String  @unique
   urlProfilImage String? @map("url_profil_image")
 
   note Int @default(0)
