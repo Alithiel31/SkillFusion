@@ -1,11 +1,11 @@
+/* eslint-disable indent */
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import api from '../../../services/api.service';
 	import {setAuth} from "../../../services/localstorage.service.svelte"
 
 	const onSubmitForm = async (event:SubmitEvent):Promise<void> => {
-		event.preventDefault();
-		const formData = new FormData(event.target as HTMLFormElement);
+		event.preventDefault();	const formData = new FormData(event.target as HTMLFormElement);
 		const email = formData.get('email');
 		const password = formData.get('password');
 		const token = await api("auth/login","POST",{ email, password });
