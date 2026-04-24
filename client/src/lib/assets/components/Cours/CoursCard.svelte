@@ -24,7 +24,7 @@
 	}
 	.card__body{
 		padding: 5px 10px;
-		height: 90px;
+		height: 100px;
 		display: flex;
 		flex-direction: column;
 		width: 100%;

@@ -67,7 +67,6 @@
 		gap: 3px;
 		align-items: flex-end;
 		height: 24px;
-
 	}
 	.bar {
 		width: 8px;
@@ -75,17 +74,16 @@
 	}
 	.diff-card {
 		flex: 1;
-    display: flex;
-    flex-direction: column;
+		flex-direction: column;
 		min-width: 30px;
-    width: 130px;
+		width: 130px;
 		display: flex;
 		align-items: center;
 	}
 	p {
 		font-size: 12px;
 		font-weight: bold;
-    margin: 5px;
+		margin: 5px;
 	}
 	@media (min-width: 768px) {
 		.diff-card {
