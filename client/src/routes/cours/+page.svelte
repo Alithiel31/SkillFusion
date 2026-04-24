@@ -43,7 +43,7 @@
 					/>
 
 					<div class="dropdown-wrapper">
-						<select id="categorie-select" class="category-btn" bind:value={selectedCategory} onchange={()=>{console.log(selectedCategory)}}>
+						<select id="categorie-select" class="category-btn" bind:value={selectedCategory}>
 							<option value="Toutes les catégories"> Toutes les catégories </option>
 							{#each categories as category}
 								<option value={category.name}>
