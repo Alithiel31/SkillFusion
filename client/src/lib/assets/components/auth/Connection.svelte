@@ -31,7 +31,7 @@
 			<p class="not-acompte">
 				<span class="desktop-text">Pas encore de compte ?</span>
 				<span class="mobile-text">Pas de compte ?</span>
-				<a class="btn-register" href="/register">S'inscrire</a>
+				<a class="btn-register" href="/inscription">S'inscrire</a>
 			</p>
 		</div>
 	</form>

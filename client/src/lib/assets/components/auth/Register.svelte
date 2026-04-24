@@ -30,7 +30,7 @@
 		<div>
 			<p class="already-account">
 				Déjà inscrit ?
-				<a class="btn-login" href="/login">Se connecter</a>
+				<a class="btn-login" href="/connexion">Se connecter</a>
 			</p>
 		</div>
 	</form>
