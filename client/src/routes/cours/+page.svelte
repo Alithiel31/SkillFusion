@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import App from '$lib/assets/components/App.svelte';
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import Header from '$lib/assets/components/Header.svelte';
@@ -18,7 +18,7 @@
 	let selectedCategory = $state('Toutes les catégories');
 	let showDropdown = $state(false);
 
-	// --- DÉRIVÉ (Svelte 5 : $derived) ---
+	
 	let filteredCourses = $derived(
 	    courses.filter((c) => {
 	        const matchSearch = c.title.toLowerCase().includes(searchQuery.toLowerCase());
