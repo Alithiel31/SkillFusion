@@ -1,6 +1,14 @@
+import argon2 from "argon2";
+
 import { prisma } from "./client_seeding";
+import { connect } from "node:http2";
 
 async function seed() {
+
+  const roles = await prisma.role.createMany({
+    data: [{name:"student"},{name:"instructor"},{name:"admin"}]
+  })
+
   console.log("Start seeding ->")
   const users = await prisma.user.createMany({
     data: [{
@@ -8,31 +16,31 @@ async function seed() {
       firstname: 'test',
       lastname: "test",
       pseudo: "admin",
-      password: "test",
-      role: 2
+      password: await argon2.hash("test"),
+      roleId: 3
     }, {
-      email: "samed@celik.oclock",
+      email: "samed@celik.oclock",  
       pseudo: "TheKingOfLyon",
-      password: "samed",
-      role: 0
+      password: await argon2.hash("samed"),
+      roleId: 1
     },
     {
       email: "jacques@suchamplecheval.oclock",
       pseudo: "President",
-      password: "jacques",
-      role: 0
+      password: await argon2.hash("jacques"),
+      roleId: 1
     },
     {
       email: "loic@leger.oclock",
       pseudo: "GifMaster",
-      password: "loic",
-      role: 1
+      password: await argon2.hash("loic"),
+      roleId: 2
     },
     {
       email: "adrien@poncet.oclock",
       pseudo: "DreadMaster",
-      password: "adrien",
-      role: 1
+      password: await argon2.hash("adrien"),
+      roleId: 2
     },]
   });
   console.log("User : ", users.count)
