@@ -12,7 +12,8 @@
     "test": "npm run test:unit && npm run test:spec",
     "dev": "tsx --watch --env-file=.env app.ts",
     "db:deploy":"npx prisma migrate deploy",
-    "db:seed":"npx tsx src/models/seeding.ts"
+    "db:seed":"npx tsx src/models/seeding.ts",
+    "db:reset":"npx prisma migrate reset && npx prisma generate && npm run db:deploy && npm run db:seed"
   },
   "keywords": [],
   "author": "",

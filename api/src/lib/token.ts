@@ -1,7 +1,7 @@
 import crypto from "node:crypto";
 import jwt from "jsonwebtoken";
 import { config } from "../config";
-import type { User } from "../models/index.js";
+import type { User } from "../models/client";
 
 export function generateAuthTokens(user: User) {
   const payload = {
@@ -9,12 +9,12 @@ export function generateAuthTokens(user: User) {
     role: user.role,
   };
 
-  const accessToken = jwt.sign(payload, config.jwtSecret, { expiresIn: "15m", audience: "access" });
+  const accessToken = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtAccesExpireIn, audience: "access" });
   const refreshUniqueId = crypto.randomBytes(128).toString("base64");
   const refreshToken = jwt.sign(
     { refreshId: refreshUniqueId },
     config.jwtSecret,
-    { expiresIn: "7d", audience: "refresh" },
+    { expiresIn: config.jwtRefreshExpireIn, audience: "refresh" },
   );
 
   return {
