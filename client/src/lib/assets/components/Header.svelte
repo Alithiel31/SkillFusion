@@ -16,7 +16,6 @@
 
 	async function logout() {
 		const response= await api("auth/logout","POST")
-		console.log(response.status)
 		clearAuth()
 	    user = null;
 		goto('/')
