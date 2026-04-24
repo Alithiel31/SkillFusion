@@ -14,6 +14,7 @@ import categorieRouter from './routers/categorie.router';
 import badgeRouter from './routers/badge.router';
 import commentRouter from './routers/comment.router';
 import { router as usersRouter } from './routers/users.router';
+import opinionRouter from './routers/opinion.router';
 
 const app = express();
 
@@ -33,12 +34,14 @@ app.use(xss());
 app.use(globalLimiter);    
 
 
-app.use("/auth", authRouter);
-app.use("/api",coursRouter);
+app.use("/auth", authRouter)
+app.use("/api", coursRouter)
+app.use("/api", categorieRouter)
+app.use("/api", badgeRouter)
+app.use("/api", commentRouter)
+app.use("/api", opinionRouter)
 app.use("/api", usersRouter);
-app.use("/api", categorieRouter);
-app.use("/api", badgeRouter);
-app.use("/api", commentRouter);
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to the SkillFusion API');

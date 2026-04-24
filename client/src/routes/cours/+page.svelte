@@ -16,23 +16,14 @@
 		categories = categoriesResponse.data;
 		const coursesResponse = await api('api/cours');
 		courses = coursesResponse.data;
-		console.log(courses)
 	});
 	let searchQuery = $state('');
 	let selectedCategory = $state('Toutes les catégories');
-	let showDropdown = $state(false);
 
 	let filteredCourses = $derived(
-		courses.filter((c) => {
-			const matchSearch = c.title.toLowerCase().includes(searchQuery.toLowerCase());
-
-			const matchCat =
-				selectedCategory === 'Toutes les catégories' || c.category.name === selectedCategory;
-
-			return matchSearch && matchCat;
-		})
+		courses.filter((cours) => selectedCategory === 'Toutes les catégories' || cours.category.name == selectedCategory)
+		.filter((cours) => cours.title.toLowerCase().includes(searchQuery.toLowerCase()))
 	);
-
 </script>
 
 <App>
@@ -52,16 +43,11 @@
 					/>
 
 					<div class="dropdown-wrapper">
-						<select
-							id="categorie-select"
-							class="category-btn"
-							onclick={() => (showDropdown = !showDropdown)}
-						>
-							{selectedCategory}
-							<span class="chevron">▾</span>
+						<select id="categorie-select" class="category-btn" bind:value={selectedCategory} onchange={()=>{console.log(selectedCategory)}}>
+							<option value="Toutes les catégories"> Toutes les catégories </option>
 							{#each categories as category}
-								<option value="${category}">
-									{category}
+								<option value={category.name}>
+									{category.name}
 								</option>
 							{/each}
 						</select>
