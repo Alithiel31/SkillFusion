@@ -15,6 +15,7 @@ import badgeRouter from './routers/badge.router';
 import commentRouter from './routers/comment.router';
 import { router as usersRouter } from './routers/users.router';
 import opinionRouter from './routers/opinion.router';
+import courContent from './routers/cour-content.router';
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use("/api", categorieRouter)
 app.use("/api", badgeRouter)
 app.use("/api", commentRouter)
 app.use("/api", opinionRouter)
+app.use("/api", courContent)
 app.use("/api", usersRouter);
 
 
