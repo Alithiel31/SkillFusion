@@ -1,4 +1,5 @@
 export default async function api(endpoint:string, method = "GET", body?:{}) {
+  console.log(localStorage.getItem("token"))
   const response = await fetch(`http://localhost:3000/${endpoint}`, {
     method,
     headers: {
@@ -11,6 +12,9 @@ export default async function api(endpoint:string, method = "GET", body?:{}) {
   if (!response.ok) {
     console.error(`Failed to fetch ${endpoint}: ${response.statusText}`);
   }
-  const data = await response.json();
+  let data=null
+    if (response.statusText!="No Content"){
+      data = await response.json();
+    }
   return {data,status:response.status};
 }

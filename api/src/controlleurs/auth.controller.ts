@@ -155,7 +155,6 @@ export async function getAuthenticatedUser(req: AuthenticatedRequest, res: Respo
 // logoutUser controller --------------------------------------------------------------------
 
 export async function logoutUser(req: AuthenticatedRequest, res: Response) {
-    res.clearCookie("accessToken");
     res.clearCookie("refreshToken", { path: "/api/auth/refresh" });
     if (req.user) {
         await prisma.refreshToken.deleteMany({ where: { userId: req.user.userId } });
