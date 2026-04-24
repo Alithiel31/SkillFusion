@@ -1,5 +1,4 @@
 export default async function api(endpoint:string, method = "GET", body?:{}) {
-  console.log(localStorage.getItem("token"))
   const response = await fetch(`http://localhost:3000/${endpoint}`, {
     method,
     headers: {
