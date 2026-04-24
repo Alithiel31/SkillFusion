@@ -14,8 +14,8 @@
 	<ul>
 		<li><a href="/">Accueil</a> - Découvrez SkillFusion et nos cours mis en avant</li>
 		<li><a href="/cours">Cours</a> - Catalogue complet de nos formations en bricolage et DIY</li>
-		<li><a href="/connection">Connexion</a> - Accédez à votre compte</li>
-		<li><a href="/register">Inscription</a> - Créez votre compte pour accéder aux cours</li>
+		<li><a href="/connexion">Connexion</a> - Accédez à votre compte</li>
+		<li><a href="/inscription">Inscription</a> - Créez votre compte pour accéder aux cours</li>
 	</ul>
 	
 	<h2>Espace utilisateur</h2>
