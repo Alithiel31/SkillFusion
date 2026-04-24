@@ -1,7 +1,19 @@
 
 @BASE_URL=http://localhost:3000
 
-### auth register
+### all cours
 GET {{BASE_URL}}/api/cours
 Content-Type: application/json
+
+
+### cours avec id
+GET {{BASE_URL}}/api/cours/1
+Content-Type: application/json
+
+
+
+### supprimer un cours
+DELETE {{BASE_URL}}/api/cours/1
+Content-Type: application/json
+
 
