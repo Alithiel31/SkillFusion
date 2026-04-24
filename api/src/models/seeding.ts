@@ -197,8 +197,16 @@ async function seed() {
       content: "C'est nul"
     }]
   })
-
   console.log("Avis :", avis.count)
+
+  const comments = await prisma.comment.create({
+    data: {
+      description:"aaaa",
+      authorId:1,
+      coursId:1
+    }
+  })
+console.log("Commentaires :", comments)
 
   console.log("Termined")
 }
