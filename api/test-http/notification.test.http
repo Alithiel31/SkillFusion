@@ -1,0 +1,33 @@
+
+@BASE_URL=http://localhost:3000
+
+### notifications
+GET {{BASE_URL}}/api/notifications
+Content-Type: application/json
+
+### notifications avec id
+GET {{BASE_URL}}/api/notifications/1
+Content-Type: application/json
+
+### creer une notification
+POST {{BASE_URL}}/api/notifications
+Content-Type: application/json
+
+{
+    "content": "Ceci est une notification",
+    "userId": 1,
+    "coursId": 1
+}
+
+### modifier une notification
+PATCH {{BASE_URL}}/api/notifications/1
+Content-Type: application/json
+
+{
+    "content": "Ceci est une notification modifiée"
+}
+
+### supprimer une notification
+DELETE {{BASE_URL}}/api/notifications/1
+Content-Type: application/json
+

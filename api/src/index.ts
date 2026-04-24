@@ -16,6 +16,7 @@ import commentRouter from './routers/comment.router';
 import { router as usersRouter } from './routers/users.router';
 import opinionRouter from './routers/opinion.router';
 import courContent from './routers/cour-content.router';
+import notification from './routers/notification.router';
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use("/api", commentRouter)
 app.use("/api", opinionRouter)
 app.use("/api", courContent)
 app.use("/api", usersRouter);
+app.use("/api", notification);
 
 
 app.get('/', (req, res) => {
