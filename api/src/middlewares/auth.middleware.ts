@@ -36,6 +36,7 @@ export function checkRoles(roles: number[]) {
  
 function extractAccessToken(req: Request): string {
   const authHeader = req.headers.authorization;
+    console.log(authHeader)
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     throw new UnauthorizedError(

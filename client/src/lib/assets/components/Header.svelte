@@ -1,20 +1,29 @@
-<script>
+<script lang="ts">
 	import logoSkillFusion from '$lib/assets/img/testlogo.png';
-	import { browser } from '$app/environment';
+	import {getAuth, authStore, clearAuth} from "$lib/services/localstorage.service.svelte"
+	import { onMount } from 'svelte';
 
-	let user = $state(null);
+	import type {IUserLocalStorage} from "$lib/@types/type.localStorage"
+	import { goto } from '$app/navigation';
+	import api from '$lib/services/api.service';
 
-	if (browser) {
-	    const stored = localStorage.getItem('user');
-	    if (stored) user = JSON.parse(stored);
-	}
+	let user:IUserLocalStorage|null = $state(null);
 
-	function logout() {
-	    localStorage.removeItem('user');
-	    localStorage.removeItem('token');
+	onMount(()=>{
+		getAuth()
+		user= authStore.user
+	})
+
+	async function logout() {
+		const response= await api("auth/logout","POST")
+		console.log(response.status)
+		clearAuth()
 	    user = null;
-	    window.location.href = '/';
+		goto('/')
+
 	}
+	
+
 </script>
 
 <header class="header">
@@ -24,7 +33,7 @@
 		<!-- Bouton de connxion/d'inscription -->
 		<div class="header__actions">
 			{#if user}
-				<span class="header__pseudo">{user?.pseudo}</span>
+				<span class="header__pseudo">{user.pseudo}</span>
 				<button class="header__btn-logout" onclick={logout}>⏻</button>
 			{:else}
 				<a href="/connexion" class="header__btn-login">Connexion</a>

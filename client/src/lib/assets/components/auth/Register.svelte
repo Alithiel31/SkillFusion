@@ -10,7 +10,6 @@
 		const password = formData.get('password');
 		const confirmPassword = formData.get('confirm-password');
 		const response = await api("auth/register","POST",{ pseudo,email, password,confirmPassword });
-		console.log(response);
 		if (response.status!=201){
 			if (response.data.error=="Pseudo déjà utilisé"){
 				errorPseudo=true

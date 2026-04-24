@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import api from '$lib/services/api.service';
@@ -9,8 +8,7 @@
 		const email = formData.get('email');
 		const password = formData.get('password');
 		const token = await api("auth/login","POST",{ email, password });
-		console.log(token)
-		setAuth(token.user, token.token);
+		setAuth(token.data.user, token.data.accessToken.token);
 		goto('/');
 	};
 </script>
