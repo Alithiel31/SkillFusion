@@ -1,0 +1,55 @@
+name: Sync to Railway
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # tous les jours à 3h du matin
+  workflow_dispatch:       # déclenchement manuel possible
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout org repo (main)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "GitHub Actions"
+
+      - name: Add deployment repo as remote
+        run: |
+          git remote add deploy https://x-access-token:${{ secrets.DEPLOY_REPO_TOKEN }}@github.com/Alithiel31/SkillFusion.git
+
+      - name: Fetch deployment repo
+        run: git fetch deploy
+
+      - name: Checkout deployment main branch
+        run: |
+          git checkout -b deploy-main deploy/main
+
+      - name: Merge org main into deployment
+        run: |
+          git merge origin/main --no-commit --no-ff || true
+
+      - name: Restore production files
+        run: |
+          git checkout deploy/main -- api/dockerfile
+          git checkout deploy/main -- api/package.json
+          git checkout deploy/main -- api/src/models/seeding.ts
+          git checkout deploy/main -- api/src/models/client.ts
+          git checkout deploy/main -- client/dockerfile
+          git checkout deploy/main -- client/svelte.config.js
+          git checkout deploy/main -- client/package.json
+          git checkout deploy/main -- client/tsconfig.json
+          git checkout deploy/main -- client/src/lib/services/api.service.ts
+       
+
+      - name: Commit and push
+        run: |
+          git add .
+          git diff --cached --quiet || git commit -m "sync: merge from org main [$(date +'%Y-%m-%d')]"
+          git push deploy deploy-main:main
