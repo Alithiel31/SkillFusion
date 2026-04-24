@@ -1,15 +1,35 @@
 <script>
 	import logoSkillFusion from '$lib/assets/img/testlogo.png';
+	import { browser } from '$app/environment';
+
+	let user = $state(null);
+
+	if (browser) {
+	    const stored = localStorage.getItem('user');
+	    if (stored) user = JSON.parse(stored);
+	}
+
+	function logout() {
+	    localStorage.removeItem('user');
+	    localStorage.removeItem('token');
+	    user = null;
+	    window.location.href = '/';
+	}
 </script>
 
 <header class="header">
 	<!-- Logo du site  -->
 	<div class="header_top">
 		<a class="logo_site" href="/"> <img src={logoSkillFusion} alt="SkillFusion" /></a>
-    <!-- Bouton de connxion/d'inscription -->
+		<!-- Bouton de connxion/d'inscription -->
 		<div class="header__actions">
-			<a href="/connexion" class="header__btn-login">Connexion</a>
-			<a href="/inscription" class="header__btn-register">S'inscrire</a>
+			{#if user}
+				<span class="header__pseudo">{user?.pseudo}</span>
+				<button class="header__btn-logout" onclick={logout}>⏻</button>
+			{:else}
+				<a href="/connection" class="header__btn-login">Connexion</a>
+				<a href="/register" class="header__btn-register">S'inscrire</a>
+			{/if}
 		</div>
 	</div>
 
@@ -18,13 +38,12 @@
 		<a href="/cours" class="header__nav-link"> Nos cours </a>
 		<a href="/tableau-de-bord" class="header__nav-link"> Tableau de bord </a>
 	</nav>
-	
 </header>
 
 <style>
 	.header {
-    background-color: white;
-    position: relative;
+		background-color: white;
+		position: relative;
 		--blue: #1d4e89;
 		--blue-light: #ebf2fa;
 		--amber: #f5a623;
@@ -44,11 +63,11 @@
 	img {
 		width: 40px;
 	}
-.header_top{
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
+	.header_top {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+	}
 	/* ── Nav desktop ── */
 	.header__nav {
 		display: flex;
@@ -63,13 +82,13 @@
 		border-radius: var(--radius);
 		font-size: 14px;
 		font-weight: 500;
-		color: #1D4E89;
+		color: #1d4e89;
 		text-decoration: none;
 		transition:
 			background 0.15s,
 			color 0.15s;
-    text-align: center;
-    width: 70%;
+		text-align: center;
+		width: 70%;
 	}
 
 	.header__nav-link:hover {
@@ -83,9 +102,9 @@
 		gap: 8px;
 		flex-shrink: 0;
 	}
-nav a{
-background-color: #EBF2FA;
-}
+	nav a {
+		background-color: #ebf2fa;
+	}
 	.header__btn-login {
 		padding: 8px 18px;
 		border-radius: var(--radius);
@@ -122,16 +141,43 @@ background-color: #EBF2FA;
 		opacity: 0.88;
 	}
 
+	.header__pseudo {
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--blue);
+	}
+
+	.header__btn-logout {
+		padding: 8px 18px;
+		border-radius: var(--radius);
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--blue);
+		border: 1.5px solid var(--blue);
+		background: transparent;
+		cursor: pointer;
+		font-family: var(--font);
+		transition:
+			background 0.15s,
+			color 0.15s;
+		white-space: nowrap;
+	}
+
+	.header__btn-logout:hover {
+		background: var(--blue);
+		color: white;
+	}
+
 	/* ── Responsive ── */
-	@media(min-width: 800px) {
-		.header__nav{
-      position: absolute;
-      left: 50%;
-      bottom: 14px;
-      transform: translateX(-50%);
-    }
-    	.header__nav-link {
-        width: auto;
-      }
+	@media (min-width: 800px) {
+		.header__nav {
+			position: absolute;
+			left: 50%;
+			bottom: 14px;
+			transform: translateX(-50%);
+		}
+		.header__nav-link {
+			width: auto;
+		}
 	}
 </style>
