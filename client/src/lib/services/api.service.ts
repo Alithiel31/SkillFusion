@@ -1,4 +1,4 @@
-export default async function api(endpoint:string, method = "GET", body:{}) {
+export default async function api(endpoint:string, method = "GET", body?:{}) {
   const response = await fetch(`http://localhost:3000/${endpoint}`, {
     method,
     headers: {

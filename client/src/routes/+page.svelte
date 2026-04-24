@@ -1,4 +1,4 @@
-<script
+<script lang='ts'
 >
 	import '../normalize.css';
 	import '../app.css';
@@ -10,12 +10,14 @@
 	import { onMount } from 'svelte';
 	import App from '$lib/assets/components/App.svelte';
 	import Main from '$lib/assets/components/Main.svelte';
+	import type { Cours } from '$lib/@types/types';
 
 
-        let courses = $state([]);
+       let courses: Cours[] = $state([]);
 
 onMount(async ()=>{
- courses = await api('api/cours')
+ const coursesResponse = await api('api/cours');
+		courses = coursesResponse.data;
 })
 </script>
 <App> 

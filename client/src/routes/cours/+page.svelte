@@ -6,29 +6,33 @@
 	import CoursCard from '$lib/assets/components/Cours/CoursCard.svelte';
 	import api from '$lib/services/api.service';
 	import { onMount } from 'svelte';
+	import type { Cours, Category } from '$lib/@types/types';
 
-	let courses = $state([]);
-	let categories = $state([]);
+	let courses: Cours[] = $state([]);
+	let categories: Category[] = $state([]);
 
 	onMount(async () => {
-        categories = await api('api/categories');
-	    courses = await api('api/cours');
+		const categoriesResponse = await api('api/categories');
+		categories = categoriesResponse.data;
+		const coursesResponse = await api('api/cours');
+		courses = coursesResponse.data;
+		console.log(courses)
 	});
 	let searchQuery = $state('');
 	let selectedCategory = $state('Toutes les catégories');
 	let showDropdown = $state(false);
 
-	
 	let filteredCourses = $derived(
-	    courses.filter((c) => {
-	        const matchSearch = c.title.toLowerCase().includes(searchQuery.toLowerCase());
+		courses.filter((c) => {
+			const matchSearch = c.title.toLowerCase().includes(searchQuery.toLowerCase());
 
-	        const matchCat =
-				selectedCategory === 'Toutes les catégories' || c.category === selectedCategory;
+			const matchCat =
+				selectedCategory === 'Toutes les catégories' || c.category.name === selectedCategory;
 
-	        return matchSearch && matchCat;
-	    })
+			return matchSearch && matchCat;
+		})
 	);
+
 </script>
 
 <App>
@@ -66,7 +70,7 @@
 					<button type="button" class="add-btn">+</button>
 				</div>
 				<div class="courses-grid">
-					{#each courses as cours (cours.id)}
+					{#each filteredCourses as cours (cours.id)}
 						<CoursCard
 							title={cours.title}
 							littleSummary={cours.littleSummary}
@@ -87,14 +91,15 @@
 
 <style>
 	:global(*, *::before, *::after) {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }	
-    :global(body) {
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        background-color: #F3F0EA;
-        color: #1A1A1A;}
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+	:global(body) {
+		font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+		background-color: #f3f0ea;
+		color: #1a1a1a;
+	}
 	.page {
 		min-height: 100vh;
 		display: flex;
@@ -254,5 +259,5 @@
 			flex-direction: column;
 			gap: 0.8rem;
 		}
-    }
+	}
 </style>
