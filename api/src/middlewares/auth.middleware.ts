@@ -10,7 +10,6 @@ import type { AuthenticatedRequest } from '../@types/express';
 export function verifyToken(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const token = extractAccessToken(req);
   const { userId, role } = verifyAndDecodeJWT(token);
-
   req.user = { userId, role };
   next();
 }

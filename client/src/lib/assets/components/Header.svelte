@@ -27,8 +27,8 @@
 				<span class="header__pseudo">{user?.pseudo}</span>
 				<button class="header__btn-logout" onclick={logout}>⏻</button>
 			{:else}
-				<a href="/connection" class="header__btn-login">Connexion</a>
-				<a href="/register" class="header__btn-register">S'inscrire</a>
+				<a href="/connexion" class="header__btn-login">Connexion</a>
+				<a href="/inscription" class="header__btn-register">S'inscrire</a>
 			{/if}
 		</div>
 	</div>

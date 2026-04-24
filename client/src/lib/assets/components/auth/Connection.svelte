@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import api from '../../../services/api.service';
-	import {setAuth} from "../../../services/localstorage.service.svelte"
+	import api from '$lib/services/api.service';
+	import {setAuth} from "$lib/services/localstorage.service.svelte"
 
 	const onSubmitForm = async (event:SubmitEvent):Promise<void> => {
 		event.preventDefault();

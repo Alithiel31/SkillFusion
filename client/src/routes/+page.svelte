@@ -2,7 +2,7 @@
 >
 	import '../normalize.css';
 	import '../app.css';
-        import api from "$lib/services/api.service";
+    import api from "$lib/services/api.service";
 	import Header from '$lib/assets/components/Header.svelte';
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import BtnAllCours from '$lib/assets/components/BtnAllCours.svelte';

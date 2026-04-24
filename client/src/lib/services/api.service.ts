@@ -1,4 +1,4 @@
-export default async function api(endpoint, method = "GET", body) {
+export default async function api(endpoint:string, method = "GET", body:{}) {
   const response = await fetch(`http://localhost:3000/${endpoint}`, {
     method,
     headers: {
@@ -9,9 +9,8 @@ export default async function api(endpoint, method = "GET", body) {
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch ${endpoint}: ${response.statusText}`);
+    console.error(`Failed to fetch ${endpoint}: ${response.statusText}`);
   }
-
   const data = await response.json();
-  return data;
+  return {data,status:response.status};
 }

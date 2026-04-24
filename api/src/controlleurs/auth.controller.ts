@@ -35,25 +35,24 @@ async function replaceRefreshTokenInDatabase(refreshToken: Token, user: User) {
 // Register controller --------------------------------------------------------------------
 export async function registerUser(req: Request, res: Response) {
     const registerUserBodySchema = z.object({
-        firstname: z.string().min(3),
-        lastname: z.string().min(2),
+        pseudo: z.string().min(3),
         email: z.email(),
         password: z
             .string()
-            .min(12)
-            .max(100)
-            .regex(/[a-z]/)
+            .min(2)
+            .max(100),
+/*            .regex(/[a-z]/)
             .regex(/[A-Z]/)
-            .regex(/[!@#$%&*-+{}?]/),
-        confirm: z.string(),
+            .regex(/[!@#$%&*-+{}?]/), */
+        confirmPassword: z.string(),
     });
 
     // Vérifier le typage d'entrée
-    const { firstname, lastname, email, password, confirm } =
+    const { pseudo, email, password, confirmPassword } =
         await registerUserBodySchema.parseAsync(req.body);
 
     // verifier pwd/confirmation
-    if (password !== confirm) {
+    if (password !== confirmPassword) {
         throw new BadRequestError(
             "Mot de passe et confirmation ne correspondent pas",
         );
@@ -63,20 +62,27 @@ export async function registerUser(req: Request, res: Response) {
     if (existingUser) {
         throw new ConflictError("Email déjà utilisé");
     }
+
+    const existingUserPseudo = await prisma.user.findUnique({ where:{pseudo:pseudo}});
+    if (existingUserPseudo) {
+        throw new ConflictError("Pseudo déjà utilisé");
+    }
+    
     // Hasher le password
     const hashedPassword = await argon2.hash(password);
 
     // crée l'utilisateur en db
     const user = await prisma.user.create({
         data: {
-            firstname,
-            lastname,
+            pseudo,
             email,
             password: hashedPassword,
+            roleId:1
         },
     });
     res.status(201).json({
         id: user.id,
+        pseudo:user.pseudo,
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,

@@ -208,6 +208,9 @@ CREATE TABLE "refresh_tokens" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "users_pseudo_key" ON "users"("pseudo");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "user_has_cours_user_id_cours_id_key" ON "user_has_cours"("user_id", "cours_id");
 
 -- CreateIndex

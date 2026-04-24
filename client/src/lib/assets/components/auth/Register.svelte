@@ -1,17 +1,48 @@
-<script>
-/** Il faut importer le logo */
+<script lang="ts">
+	import { goto } from "$app/navigation";
+	import api from '$lib/services/api.service';
+
+	const onSubmitForm = async (event:SubmitEvent):Promise<void> => {
+		event.preventDefault();
+		const formData = new FormData(event.target as HTMLFormElement);
+		const pseudo = formData.get('pseudo');
+		const email = formData.get('email');
+		const password = formData.get('password');
+		const confirmPassword = formData.get('confirm-password');
+		const response = await api("auth/register","POST",{ pseudo,email, password,confirmPassword });
+		console.log(response);
+		if (response.status!=201){
+			if (response.data.error=="Pseudo déjà utilisé"){
+				errorPseudo=true
+			}
+			if (response.data.error=="Email déjà utilisé"){
+				errorEmail=true
+			}
+		}else{
+			goto('/connexion');
+		}
+		
+	};
+
+	let errorEmail=$state(false)
+	let errorPseudo=$state(false)
 </script>
 
 <!-- Composant d'inscription -->
 <div class="register-container">
 	<h1>Inscription</h1>
 	<span class="introduction"><p>Rejoins SkillFusion gratuitement</p></span>
-	<form class="register-form">
-		<label for="name">Pseudo</label>
-		<input type="text" id="name" name="name" placeholder="Jeannot#336" required />
-
+	<form class="register-form" onsubmit={onSubmitForm}>
+		<label for="pseudo">Pseudo</label>
+		<input type="text" id="pseudo" name="pseudo" placeholder="Jeannot#336" required />
+		{#if errorPseudo}
+			<p style="color:red;">Pseudo déjà utilisé</p>
+		{/if}
 		<label for="email">E-mail</label>
 		<input type="email" id="email" name="email" placeholder="JeanPaul@nanana.com" required />
+		{#if errorEmail}
+			<p style="color:red;">Email déja utilisé</p>
+		{/if}
 
 		<label for="password">Mot de passe</label>
 		<input type="password" id="password" name="password" placeholder="••••••••" required />
