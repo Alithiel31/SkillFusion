@@ -26,7 +26,6 @@ export interface User {
         commentaires: Comment[]
         opinions: Opinion[]
         notifications: Notification[]
-        refreshTokens: RefreshToken[]
 }
 
 export interface Cours {
@@ -178,13 +177,4 @@ export interface Notification {
   updatedAt :Date
   cours :Cours
   user : User
-}
-
-export interface  RefreshToken {
-  id :Number
-  token :String
-  createdAt: Date
-  updatedAt: Date
-  user  : User 
-  userId : Number 
 }
