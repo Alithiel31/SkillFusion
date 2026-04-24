@@ -1,0 +1,61 @@
+import type { Request, Response } from "express"
+import { prisma } from "../models/client"
+import z from "zod";
+import { parseIdFromParams } from "./utils";
+import { ConflictError, NotFoundError } from "../lib/errors";
+
+export default {
+    getAll: async (req: Request, res: Response) => {
+        const notifications = await prisma.notification.findMany();
+        res.json(notifications);
+    },
+
+    getOneNotification: async (req: Request, res: Response) => {
+        const notificationId = await parseIdFromParams(req.params.id);
+        const notification = await prisma.notification.findUnique({ where: { id: notificationId } });
+        if (!notification) {
+            throw new NotFoundError(`Notification with id ${notificationId} not found`);
+        }
+        res.json(notification);
+    },
+
+    createNotification: async (req: Request, res: Response) => {
+        const createNotificationBodySchema = z.object({
+            content: z.string().min(1),
+            coursId: z.number().int(),
+            userId: z.number().int(),
+        });
+        const data = await createNotificationBodySchema.parseAsync(req.body);
+
+        const createdNotification = await prisma.notification.create({
+            data: {
+                content: data.content,
+                userId: data.userId,
+                coursId: data.coursId,
+            }
+        });
+        res.status(201).json(createdNotification);
+    },
+
+    updatingNotification: async (req: Request, res: Response) => {
+        const notificationId = await parseIdFromParams(req.params);
+        const updateNotificationBodySchema = z.object({
+            content: z.string().min(1).optional(),
+        });
+        const { content } = await updateNotificationBodySchema.parseAsync(req.body);
+
+        const updatedNotification = await prisma.notification.update({
+            where: { id: notificationId },
+            data: {
+                content,
+            }
+        });
+        res.json(updatedNotification);
+    },
+
+    deleteNotification: async (req: Request, res: Response) => {
+        const notificationId = await parseIdFromParams(req.params.id);
+        await prisma.notification.delete({ where: { id: notificationId } });
+        res.status(204).send();
+    },
+}

@@ -184,7 +184,7 @@ CREATE TABLE "opinions" (
 -- CreateTable
 CREATE TABLE "notifications" (
     "id" SERIAL NOT NULL,
-    "contenu" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
     "cours_id" INTEGER NOT NULL,
     "user_id" INTEGER NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

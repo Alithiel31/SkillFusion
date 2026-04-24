@@ -260,7 +260,7 @@ exports.Prisma.OpinionScalarFieldEnum = {
 
 exports.Prisma.NotificationScalarFieldEnum = {
   id: 'id',
-  contenu: 'contenu',
+  content: 'content',
   coursId: 'coursId',
   userId: 'userId',
   createdAt: 'createdAt',
