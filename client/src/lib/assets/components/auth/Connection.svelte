@@ -1,11 +1,25 @@
-<script>
+<script lang="ts">
+	import { goto } from "$app/navigation";
+	import api from '../../../services/api.service';
+	import {setAuth} from "../../../services/localstorage.service.svelte"
+
+	const onSubmitForm = async (event:SubmitEvent):Promise<void> => {
+		event.preventDefault();
+		const formData = new FormData(event.target as HTMLFormElement);
+		const email = formData.get('email');
+		const password = formData.get('password');
+		const token = await api("auth/login","POST",{ email, password });
+		console.log(token)
+		setAuth(token.user, token.token);
+		goto('/');
+	};
 </script>
 
 <!-- Composant de connexion -->
 <div class="connection-container">
 	<h1>Connexion</h1>
 	<span class="introduction"><p>Content de te revoir !</p></span>
-	<form class="connection-form">
+	<form class="connection-form" onsubmit={onSubmitForm}>
 		<label for="email">Identifiant</label>
 		<input type="email" id="email" name="email" placeholder="Email ou pseudo" required />
 
@@ -125,9 +139,9 @@
 		}
 	}
 
-    @media (min-width: 768px) and (max-width: 1024px) {
-        .mobile-text {
-            display: none;
-        }
-    }
+	@media (min-width: 768px) and (max-width: 1024px) {
+		.mobile-text {
+			display: none;
+		}
+	}
 </style>

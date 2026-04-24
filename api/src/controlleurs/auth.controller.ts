@@ -1,6 +1,6 @@
 import type { Request, Response } from "express"
 import argon2 from "argon2";
-import { z } from "zod";
+import {z } from "zod";
 import { prisma, User } from "../models/client";
 import { config } from "../config";
 import type { Token } from "../@types/index.d.ts";
@@ -12,14 +12,6 @@ import { AuthenticatedRequest } from "../@types/express";
 
 // Token management functions --------------------------------------------------------------------
 
-function setAccessTokenCookie(res: Response, accessToken: Token) {
-    res.cookie("accessToken", accessToken.token, {
-        httpOnly: true,
-        secure: config.isProd,
-        sameSite: config.isProd ? "none" : "lax",
-        maxAge: accessToken.expiresIn,
-    });
-}
 
 function setRefreshTokenCookie(res: Response, refreshToken: Token) {
     res.cookie("refreshToken", refreshToken.token, {
@@ -100,13 +92,15 @@ export async function loginUser(req: Request, res: Response) {
 
     // valider le payload de la requete (nature des valeurs)
     const loginUserSchema = z.object({
-        email: z.email(),
+        email: z.string(),
         password: z.string(),
     });
     const { email, password } = await loginUserSchema.parseAsync(req.body);
 
     // récupérer l'utilisateur ds la db
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({ 
+        where: { email },
+        include:{role:true}});
     if (!user) {
         throw new UnauthorizedError(
             "Le login et le mot de passe ne correspondent pas",
@@ -126,11 +120,9 @@ export async function loginUser(req: Request, res: Response) {
     // stockage du refresh token en DB
     await replaceRefreshTokenInDatabase(refreshToken, user);
 
-    setAccessTokenCookie(res, accessToken);
     setRefreshTokenCookie(res, refreshToken);
-
     // renvoyer les token vers l'utilisateur
-    res.json({ accessToken });
+    res.json({ accessToken, user:{id:user.id,pseudo:user.pseudo,role:user.role.name }});
 }
 
 // Authenticated user controller --------------------------------------------------------------------
