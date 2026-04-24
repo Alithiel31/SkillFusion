@@ -8,6 +8,7 @@
 	import { onMount } from 'svelte';
 
 	let courses = $state([]);
+	let categories = $state([]);
 
 	onMount(async () => {
         categories = await api('api/categories');
