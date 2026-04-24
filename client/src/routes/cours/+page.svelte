@@ -8,9 +8,10 @@
 	import { onMount } from 'svelte';
 
 	let courses = $state([]);
+	let categories = $state([]);
 
 	onMount(async () => {
-        categories = await api('api/cours');
+        categories = await api('api/categories');
 	    courses = await api('api/cours');
 	});
 	let searchQuery = $state('');
@@ -54,11 +55,11 @@
 						>
 							{selectedCategory}
 							<span class="chevron">▾</span>
-							<!-- {#each categories as category}
+							{#each categories as category}
 								<option value="${category}">
 									{category}
 								</option>
-							{/each} -->
+							{/each}
 						</select>
 					</div>
 
