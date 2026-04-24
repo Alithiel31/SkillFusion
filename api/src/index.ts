@@ -13,6 +13,7 @@ import coursRouter from './routers/cours.router';
 import categorieRouter from './routers/categorie.router';
 import badgeRouter from './routers/badge.router';
 import commentRouter from './routers/comment.router';
+import opinionRouter from './routers/opinion.router';
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use("/api",coursRouter)
 app.use("/api", categorieRouter)
 app.use("/api", badgeRouter)
 app.use("/api", commentRouter)
+app.use("/api", opinionRouter)
 
 app.get('/', (req, res) => {
   res.send('Welcome to the SkillFusion API');
