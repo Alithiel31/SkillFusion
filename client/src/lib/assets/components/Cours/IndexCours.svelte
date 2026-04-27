@@ -1,5 +1,10 @@
-<script>
-  const cours = {
+<script lang="ts">
+import api from "$lib/services/api.service";
+import { onMount } from "svelte";
+import {page} from "$app/state";
+	
+
+  const courses = {
     titre: 'Installer un robinet mitigeur',
     categorie: 'Plomberie',
     auteur: 'Marc Dupuis',
@@ -38,6 +43,17 @@
     ]
   }
 
+  let cours=$state(null)
+
+  
+   onMount(async ()=>{
+    const response = await api("api/cours?slug="+page.params.slug,"GET")
+    cours=response.data
+    console.log(cours)
+  })
+
+ 
+
   function getStars(note) {
     const stars = []
     for (let i = 1; i <= 5; i++) {
@@ -51,10 +67,10 @@
 
 <div class="desktop-view">
   <div class="desktop-header">
-    <h1>{cours.titre}</h1>
+    <h1>{cours?.title}</h1>
     <div class="header-right">
-      <span class="badge-categorie">{cours.categorie}</span>
-      <span class="author">par <span>{cours.auteur}</span></span>
+      <span class="badge-categorie">{cours?.categorie}</span>
+      <span class="author">par <span>{cours?.author.pseudo}</span></span>
     </div>
   </div>
 
@@ -64,15 +80,13 @@
       <!-- Résumé -->
       <div class="card">
         <div class="card-title">Résumé du cours</div>
-        {#each cours.resume as paragraphe}
-          <p>{paragraphe}</p>
-        {/each}
+          <p>{cours?.littleSummary}</p>
       </div>
 
       <!-- Avis -->
       <div class="card">
         <div class="reviews-title">Avis des apprenants</div>
-        {#each cours.avis as avis, i}
+        {#each cours?.avis as avis, i}
           <div class="review-item" class:first={i === 0}>
             <div class="reviewer">
               <div class="avatar">{avis.initiales}</div>
@@ -99,23 +113,23 @@
         <div class="difficulty-row">
           <div class="diff-bars">
             {#each Array(5) as _, i}
-              <div class="diff-bar {i < cours.difficulteNiveau ? 'filled' : 'empty'}"></div>
+              <div class="diff-bar {i < cours?.difficulty ? 'filled' : 'empty'}"></div>
             {/each}
           </div>
-          <span class="diff-label">{cours.difficulte}</span>
+          <span class="diff-label">{cours?.difficulty}</span>
         </div>
 
         <!-- Objectifs -->
         <div class="info-section-title">OBJECTIFS PÉDAGOGIQUES</div>
         <ul class="obj-list">
-          {#each cours.objectifs as obj}
+          {#each cours?.leaningObjectives as obj}
             <li>{obj}</li>
           {/each}
         </ul>
 
         <!-- Outils -->
         <div class="info-section-title tools-title">OUTILS NÉCESSAIRES</div>
-        <div class="tools-text">{cours.outils}</div>
+        <div class="tools-text">{cours?.tools}</div>
       </div>
 
       <button class="cta-btn">Démarrer le cours →</button>
@@ -128,10 +142,10 @@
   <div class="mobile-topbar">
     <div class="mobile-back">Tous les cours</div>
     <div class="mobile-header-row">
-      <div class="mobile-title">{cours.titre}</div>
+      <div class="mobile-title">{cours?.title}</div>
       <div class="mobile-header-right">
-        <span class="mobile-badge">{cours.categorie}</span>
-        <span class="mobile-author">{cours.auteur}</span>
+        <span class="mobile-badge">{cours?.categories}</span>
+        <span class="mobile-author">{cours?.author}</span>
       </div>
     </div>
   </div>
@@ -143,24 +157,24 @@
       <div class="m-difficulty-row">
         <div class="diff-bars">
           {#each Array(5) as _, i}
-            <div class="diff-bar {i < cours.difficulteNiveau ? 'filled' : 'empty'}"></div>
+            <div class="diff-bar {i < cours?.difficulty ? 'filled' : 'empty'}"></div>
           {/each}
         </div>
-        <span class="diff-label">{cours.difficulte}</span>
+        <span class="diff-label">{cours?.difficulty}</span>
       </div>
     </div>
 
     <!-- Résumé -->
     <div class="m-card">
       <div class="m-card-title">Résumé</div>
-      <div class="m-resume-text">{cours.resumeCourt}</div>
+      <div class="m-resume-text">{cours?.resumeCourt}</div>
     </div>
 
     <!-- Objectifs -->
     <div class="m-card">
       <div class="m-card-title-dark">Objectifs</div>
       <ul class="m-obj-list">
-        {#each cours.objectifsMobile as obj}
+        {#each cours?.objectifsMobile as obj}
           <li>{obj}</li>
         {/each}
       </ul>

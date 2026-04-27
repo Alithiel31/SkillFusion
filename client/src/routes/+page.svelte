@@ -16,7 +16,7 @@
        let courses: Cours[] = $state([]);
 
 onMount(async ()=>{
- const coursesResponse = await api('api/cours');
+ const coursesResponse = await api('api/cours/homepage');
 		courses = coursesResponse.data;
 })
 </script>
@@ -59,11 +59,7 @@ onMount(async ()=>{
                 
                         {#each courses as cours}
                         <CoursCard
-                        title= {cours.title}
-                        littleSummary= {cours.littleSummary}
-                        urlImage ={cours.urlImage}
-                        difficulty= {cours.difficulty}
-                        category= {cours.category}
+                        cours={cours}
 						--card__image__color={cours.category.textColor}
 						--border_color={cours.category.borderColor}
 						--text_color={cours.category.textColor}

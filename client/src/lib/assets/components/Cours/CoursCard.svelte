@@ -4,17 +4,22 @@
 </script>
 
 <article class="cours-card">
-	<div class="card__image"></div>
-	<div class="card__body">
-		<h3 class="card__title">{props.title}</h3>
-		<div class="card__information">
-			<span class="card-category"> {props.category.name} </span>
-			<LevelBar level={props.difficulty} />
+	<a class="cours__link" href="/cours/{props.cours.slug}">
+		<div class="card__image"></div>
+		<div class="card__body">
+			<h3 class="card__title">{props.cours.title}</h3>
+			<div class="card__information">
+				<span class="card-category"> {props.cours.category.name} </span>
+				<LevelBar level={props.cours.difficulty} />
+			</div>
 		</div>
-	</div>
+	</a>
 </article>
 
 <style>
+	.cours__link{
+		width:100%;
+	}
 	.card__information{
 		display: flex;
 		bottom: 0;
