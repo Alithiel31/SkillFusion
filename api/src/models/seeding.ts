@@ -16,30 +16,36 @@ async function seed() {
       lastname: "test",
       pseudo: "admin",
       password: await argon2.hash("test"),
-      roleId: 3
+      roleId: 3,
+      verified: true
     }, {
       email: "samed@celik.oclock",  
       pseudo: "TheKingOfLyon",
       password: await argon2.hash("samed"),
-      roleId: 1
+      roleId: 1,
+      verified: true
     },
     {
       email: "jacques@suchamplecheval.oclock",
       pseudo: "President",
       password: await argon2.hash("jacques"),
-      roleId: 1
+      roleId: 1,
+      verified: true
+
     },
     {
       email: "loic@leger.oclock",
       pseudo: "GifMaster",
       password: await argon2.hash("loic"),
-      roleId: 2
+      roleId: 2,
+      verified: true
     },
     {
       email: "adrien@poncet.oclock",
       pseudo: "DreadMaster",
       password: await argon2.hash("adrien"),
-      roleId: 2
+      roleId: 2,
+      verified: true
     },]
   });
   console.log("User : ", users.count)
