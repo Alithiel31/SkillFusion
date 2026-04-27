@@ -22,7 +22,7 @@ Content-Type: application/json
 
 
 ### modifier une opinion
-PATCH {{BASE_URL}}/api/opinions/1
+PATCH {{BASE_URL}}/api/opinions/3
 Content-Type: application/json
 
 {
@@ -33,5 +33,5 @@ Content-Type: application/json
 }
 
 ### supprimer une opinion
-DELETE {{BASE_URL}}/api/opinions/4
+DELETE {{BASE_URL}}/api/opinions/3
 Content-Type: application/json

@@ -21,16 +21,16 @@ Content-Type: application/json
 }
 
 ### modifier une categorie
-PATCH {{BASE_URL}}/api/categories/3
+PATCH {{BASE_URL}}/api/categories/4
 Content-Type: application/json
 
 {
-    "name": "Charpentier",
+    "name": "blabla",
     "description": "Cours de charpente pour tous les niveaux",
     "textColor": "#9e1212ff",
     "borderColor": "#cccccc"
 }
 
 ### supprimer une categorie
-DELETE {{BASE_URL}}/api/categories/3
+DELETE {{BASE_URL}}/api/categories/4
 Content-Type: application/json

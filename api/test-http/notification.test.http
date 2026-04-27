@@ -20,14 +20,16 @@ Content-Type: application/json
 }
 
 ### modifier une notification
-PATCH {{BASE_URL}}/api/notifications/1
+PATCH {{BASE_URL}}/api/notifications/3
 Content-Type: application/json
 
 {
-    "content": "Ceci est une notification modifiée"
+    "content": "Ceci est une notification modifiée",
+    "userId": 3,
+    "coursId": 2
 }
 
 ### supprimer une notification
-DELETE {{BASE_URL}}/api/notifications/1
+DELETE {{BASE_URL}}/api/notifications/2
 Content-Type: application/json
 

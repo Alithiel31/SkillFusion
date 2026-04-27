@@ -15,24 +15,22 @@ Content-Type: application/json
 
 {
     "userId": 1,
-    "coursId": 1,
+    "coursId": 2,
     "IsEnd": false
 }
 
 
 
 ### modifier une cours active
-PATCH {{BASE_URL}}/api/cours-active/1
+PATCH {{BASE_URL}}/api/cours-active/4
 Content-Type: application/json
 
 {
-    "title": "Cours de charpente",
-    "description": "Apprenez les bases de la charpente avec ce cours complet.",
-    "categoryId": 1,
-    "instructorId": 1,
-    "isActive": true
+    "userId": 1,
+    "coursId": 3,
+    "IsEnd": false
 }
 
 ### supprimer une cours active
-DELETE {{BASE_URL}}/api/cours-active/3
+DELETE {{BASE_URL}}/api/cours-active/4
 Content-Type: application/json

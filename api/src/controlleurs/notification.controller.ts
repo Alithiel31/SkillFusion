@@ -45,13 +45,17 @@ export default {
         const notificationId = await parseIdFromParams(req.params.id);
         const updateNotificationBodySchema = z.object({
             content: z.string().min(1).optional(),
+            coursId: z.number().int(),
+            userId: z.number().int(),
         });
-        const { content } = await updateNotificationBodySchema.parseAsync(req.body);
+        const { content, coursId, userId } = await updateNotificationBodySchema.parseAsync(req.body);
 
         const updatedNotification = await prisma.notification.update({
             where: { id: notificationId },
             data: {
                 content,
+                coursId,
+                userId,
             }
         });
         res.json(updatedNotification);

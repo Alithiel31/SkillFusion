@@ -1,0 +1,32 @@
+
+@BASE_URL=http://localhost:3000
+
+### tous les objectifs d'apprentissage
+GET {{BASE_URL}}/api/learning-objectifs
+Content-Type: application/json
+
+### objectif d'apprentissage avec id
+GET {{BASE_URL}}/api/learning-objectifs/1
+Content-Type: application/json
+
+### creer un objectif d'apprentissage
+POST {{BASE_URL}}/api/learning-objectifs
+Content-Type: application/json
+
+{
+    "title": "Informatique",
+    "description": "Cours d'informatique pour tous les niveaux" 
+}
+
+### modifier un objectif d'apprentissage
+PATCH {{BASE_URL}}/api/learning-objectifs/5
+Content-Type: application/json
+
+{
+    "title": "Charpentier",
+    "description": "Cours de charpente pour tous les niveaux"
+}
+
+### supprimer un objectif d'apprentissage
+DELETE {{BASE_URL}}/api/learning-objectifs/5
+Content-Type: application/json
