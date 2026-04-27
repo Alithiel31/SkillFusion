@@ -29,6 +29,7 @@ CREATE TABLE "users" (
 CREATE TABLE "courses" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "little_summary" TEXT,
     "url_image" TEXT,
     "difficulty" INTEGER NOT NULL,
@@ -209,6 +210,12 @@ CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_pseudo_key" ON "users"("pseudo");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "courses_title_key" ON "courses"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "courses_slug_key" ON "courses"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "user_has_cours_user_id_cours_id_key" ON "user_has_cours"("user_id", "cours_id");

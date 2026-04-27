@@ -5198,6 +5198,7 @@ export namespace Prisma {
   export type CoursMinAggregateOutputType = {
     id: number | null
     title: string | null
+    slug: string | null
     littleSummary: string | null
     urlImage: string | null
     difficulty: number | null
@@ -5212,6 +5213,7 @@ export namespace Prisma {
   export type CoursMaxAggregateOutputType = {
     id: number | null
     title: string | null
+    slug: string | null
     littleSummary: string | null
     urlImage: string | null
     difficulty: number | null
@@ -5226,6 +5228,7 @@ export namespace Prisma {
   export type CoursCountAggregateOutputType = {
     id: number
     title: number
+    slug: number
     littleSummary: number
     urlImage: number
     difficulty: number
@@ -5256,6 +5259,7 @@ export namespace Prisma {
   export type CoursMinAggregateInputType = {
     id?: true
     title?: true
+    slug?: true
     littleSummary?: true
     urlImage?: true
     difficulty?: true
@@ -5270,6 +5274,7 @@ export namespace Prisma {
   export type CoursMaxAggregateInputType = {
     id?: true
     title?: true
+    slug?: true
     littleSummary?: true
     urlImage?: true
     difficulty?: true
@@ -5284,6 +5289,7 @@ export namespace Prisma {
   export type CoursCountAggregateInputType = {
     id?: true
     title?: true
+    slug?: true
     littleSummary?: true
     urlImage?: true
     difficulty?: true
@@ -5385,6 +5391,7 @@ export namespace Prisma {
   export type CoursGroupByOutputType = {
     id: number
     title: string
+    slug: string
     littleSummary: string | null
     urlImage: string | null
     difficulty: number
@@ -5418,6 +5425,7 @@ export namespace Prisma {
   export type CoursSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    slug?: boolean
     littleSummary?: boolean
     urlImage?: boolean
     difficulty?: boolean
@@ -5443,6 +5451,7 @@ export namespace Prisma {
   export type CoursSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    slug?: boolean
     littleSummary?: boolean
     urlImage?: boolean
     difficulty?: boolean
@@ -5459,6 +5468,7 @@ export namespace Prisma {
   export type CoursSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
+    slug?: boolean
     littleSummary?: boolean
     urlImage?: boolean
     difficulty?: boolean
@@ -5475,6 +5485,7 @@ export namespace Prisma {
   export type CoursSelectScalar = {
     id?: boolean
     title?: boolean
+    slug?: boolean
     littleSummary?: boolean
     urlImage?: boolean
     difficulty?: boolean
@@ -5486,7 +5497,7 @@ export namespace Prisma {
     categoryId?: boolean
   }
 
-  export type CoursOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "littleSummary" | "urlImage" | "difficulty" | "summary" | "visibility" | "createdAt" | "updatedAt" | "authorId" | "categoryId", ExtArgs["result"]["cours"]>
+  export type CoursOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "littleSummary" | "urlImage" | "difficulty" | "summary" | "visibility" | "createdAt" | "updatedAt" | "authorId" | "categoryId", ExtArgs["result"]["cours"]>
   export type CoursInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
@@ -5526,6 +5537,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       title: string
+      slug: string
       littleSummary: string | null
       urlImage: string | null
       difficulty: number
@@ -5970,6 +5982,7 @@ export namespace Prisma {
   interface CoursFieldRefs {
     readonly id: FieldRef<"Cours", 'Int'>
     readonly title: FieldRef<"Cours", 'String'>
+    readonly slug: FieldRef<"Cours", 'String'>
     readonly littleSummary: FieldRef<"Cours", 'String'>
     readonly urlImage: FieldRef<"Cours", 'String'>
     readonly difficulty: FieldRef<"Cours", 'Int'>
@@ -22288,6 +22301,7 @@ export namespace Prisma {
   export const CoursScalarFieldEnum: {
     id: 'id',
     title: 'title',
+    slug: 'slug',
     littleSummary: 'littleSummary',
     urlImage: 'urlImage',
     difficulty: 'difficulty',
@@ -22728,6 +22742,7 @@ export namespace Prisma {
     NOT?: CoursWhereInput | CoursWhereInput[]
     id?: IntFilter<"Cours"> | number
     title?: StringFilter<"Cours"> | string
+    slug?: StringFilter<"Cours"> | string
     littleSummary?: StringNullableFilter<"Cours"> | string | null
     urlImage?: StringNullableFilter<"Cours"> | string | null
     difficulty?: IntFilter<"Cours"> | number
@@ -22752,6 +22767,7 @@ export namespace Prisma {
   export type CoursOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
+    slug?: SortOrder
     littleSummary?: SortOrderInput | SortOrder
     urlImage?: SortOrderInput | SortOrder
     difficulty?: SortOrder
@@ -22775,10 +22791,11 @@ export namespace Prisma {
 
   export type CoursWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    title?: string
+    slug?: string
     AND?: CoursWhereInput | CoursWhereInput[]
     OR?: CoursWhereInput[]
     NOT?: CoursWhereInput | CoursWhereInput[]
-    title?: StringFilter<"Cours"> | string
     littleSummary?: StringNullableFilter<"Cours"> | string | null
     urlImage?: StringNullableFilter<"Cours"> | string | null
     difficulty?: IntFilter<"Cours"> | number
@@ -22798,11 +22815,12 @@ export namespace Prisma {
     comments?: CommentListRelationFilter
     opinions?: OpinionListRelationFilter
     notifications?: NotificationListRelationFilter
-  }, "id">
+  }, "id" | "title" | "slug">
 
   export type CoursOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
+    slug?: SortOrder
     littleSummary?: SortOrderInput | SortOrder
     urlImage?: SortOrderInput | SortOrder
     difficulty?: SortOrder
@@ -22825,6 +22843,7 @@ export namespace Prisma {
     NOT?: CoursScalarWhereWithAggregatesInput | CoursScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Cours"> | number
     title?: StringWithAggregatesFilter<"Cours"> | string
+    slug?: StringWithAggregatesFilter<"Cours"> | string
     littleSummary?: StringNullableWithAggregatesFilter<"Cours"> | string | null
     urlImage?: StringNullableWithAggregatesFilter<"Cours"> | string | null
     difficulty?: IntWithAggregatesFilter<"Cours"> | number
@@ -23882,6 +23901,7 @@ export namespace Prisma {
 
   export type CoursCreateInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -23904,6 +23924,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -23925,6 +23946,7 @@ export namespace Prisma {
 
   export type CoursUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -23947,6 +23969,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -23969,6 +23992,7 @@ export namespace Prisma {
   export type CoursCreateManyInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -23982,6 +24006,7 @@ export namespace Prisma {
 
   export type CoursUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -23994,6 +24019,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -25150,6 +25176,7 @@ export namespace Prisma {
   export type CoursCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    slug?: SortOrder
     littleSummary?: SortOrder
     urlImage?: SortOrder
     difficulty?: SortOrder
@@ -25171,6 +25198,7 @@ export namespace Prisma {
   export type CoursMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    slug?: SortOrder
     littleSummary?: SortOrder
     urlImage?: SortOrder
     difficulty?: SortOrder
@@ -25185,6 +25213,7 @@ export namespace Prisma {
   export type CoursMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
+    slug?: SortOrder
     littleSummary?: SortOrder
     urlImage?: SortOrder
     difficulty?: SortOrder
@@ -27226,6 +27255,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutAuthorInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -27247,6 +27277,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutAuthorInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -27492,6 +27523,7 @@ export namespace Prisma {
     NOT?: CoursScalarWhereInput | CoursScalarWhereInput[]
     id?: IntFilter<"Cours"> | number
     title?: StringFilter<"Cours"> | string
+    slug?: StringFilter<"Cours"> | string
     littleSummary?: StringNullableFilter<"Cours"> | string | null
     urlImage?: StringNullableFilter<"Cours"> | string | null
     difficulty?: IntFilter<"Cours"> | number
@@ -28209,6 +28241,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutContentInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -28230,6 +28263,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutContentInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -28266,6 +28300,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutContentInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -28287,6 +28322,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutContentInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -28307,6 +28343,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutCategoryInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -28328,6 +28365,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutCategoryInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -28537,6 +28575,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutEnrollmentsInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -28558,6 +28597,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutEnrollmentsInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -28646,6 +28686,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutEnrollmentsInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -28667,6 +28708,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutEnrollmentsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -28733,6 +28775,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutActivationsInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -28754,6 +28797,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutActivationsInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -28842,6 +28886,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutActivationsInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -28863,6 +28908,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutActivationsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29027,6 +29073,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutToolsInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29048,6 +29095,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutToolsInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29104,6 +29152,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutToolsInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29125,6 +29174,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutToolsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29171,6 +29221,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutLearningObjectivesInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29192,6 +29243,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutLearningObjectivesInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29248,6 +29300,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutLearningObjectivesInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29269,6 +29322,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutLearningObjectivesInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29315,6 +29369,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutCommentsInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29336,6 +29391,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutCommentsInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29418,6 +29474,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutCommentsInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29439,6 +29496,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutCommentsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29511,6 +29569,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutOpinionsInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29532,6 +29591,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutOpinionsInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29614,6 +29674,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutOpinionsInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29635,6 +29696,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutOpinionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29707,6 +29769,7 @@ export namespace Prisma {
 
   export type CoursCreateWithoutNotificationsInput = {
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29728,6 +29791,7 @@ export namespace Prisma {
   export type CoursUncheckedCreateWithoutNotificationsInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -29810,6 +29874,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutNotificationsInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -29831,6 +29896,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutNotificationsInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -30069,6 +30135,7 @@ export namespace Prisma {
   export type CoursCreateManyAuthorInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -30135,6 +30202,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutAuthorInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -30156,6 +30224,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutAuthorInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -30177,6 +30246,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateManyWithoutAuthorInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -30585,6 +30655,7 @@ export namespace Prisma {
   export type CoursCreateManyCategoryInput = {
     id?: number
     title: string
+    slug: string
     littleSummary?: string | null
     urlImage?: string | null
     difficulty: number
@@ -30597,6 +30668,7 @@ export namespace Prisma {
 
   export type CoursUpdateWithoutCategoryInput = {
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -30618,6 +30690,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateWithoutCategoryInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number
@@ -30639,6 +30712,7 @@ export namespace Prisma {
   export type CoursUncheckedUpdateManyWithoutCategoryInput = {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
     littleSummary?: NullableStringFieldUpdateOperationsInput | string | null
     urlImage?: NullableStringFieldUpdateOperationsInput | string | null
     difficulty?: IntFieldUpdateOperationsInput | number

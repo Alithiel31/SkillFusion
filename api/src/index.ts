@@ -36,7 +36,7 @@ app.use(cors({ origin: config.allowedOrigins }));
 app.use(cookieParser());
 app.use(express.json());
 app.use(xss());
-app.use(globalLimiter);    
+app.use(globalLimiter);
 
 
 app.use("/auth", authRouter)
