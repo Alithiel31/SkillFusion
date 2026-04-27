@@ -7,7 +7,7 @@ const router = express.Router();
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,   
-  max: 5,                    
+  max: 50,                    
   standardHeaders: true,       
   legacyHeaders: false,        
   message: { message: "Trop de requêtes, veuillez réessayer plus tard." }

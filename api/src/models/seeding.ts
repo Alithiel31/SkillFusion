@@ -1,7 +1,6 @@
 import argon2 from "argon2";
 
 import { prisma } from "./client_seeding";
-import { connect } from "node:http2";
 
 async function seed() {
 
