@@ -128,15 +128,15 @@
 			<!-- Résumé -->
 			<div class="m-card">
 				<div class="m-card-title">Résumé</div>
-				<div class="m-resume-text">{cours?.resumeCourt}</div>
+				<div class="m-resume-text">{cours.littleSummary}</div>
 			</div>
 
 			<!-- Objectifs -->
 			<div class="m-card">
 				<div class="m-card-title-dark">Objectifs</div>
 				<ul class="m-obj-list">
-					{#each cours?.objectifsMobile as obj}
-						<li>{obj}</li>
+					{#each cours.learningObjectives as obj}
+						<li>{obj.objectif.title}</li>
 					{/each}
 				</ul>
 			</div>

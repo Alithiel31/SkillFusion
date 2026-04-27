@@ -7,7 +7,9 @@ import { ConflictError, NotFoundError } from "../lib/errors";
 
 export default {
     getAll: async  (req:Request,res:Response) =>{
-        const cours = await prisma.cours.findMany({
+        let data=[]
+        if(req.query.slug){
+            const cours = await prisma.cours.findMany({
             where:{slug:{contains:req.query.slug as string}},
             include:{
                 category:true,
@@ -25,8 +27,29 @@ export default {
                         omit:{password:true}
                     }}}
             }})
-        console.log(cours[0])
-        res.json(cours[0])
+            data=cours[0]
+        }
+        else{
+            const cours = await prisma.cours.findMany({
+            include:{
+                category:true,
+                author:{
+                    omit:{password:true}
+                },
+                learningObjectives:{
+                    include:{objectif:true}
+                },
+                tools:{
+                    include:{tools:true}
+                },
+                opinions:{
+                    include:{user:{
+                        omit:{password:true}
+                    }}}
+            }})
+            data=cours
+        }
+        res.json(data)
     },
     // Requête pour récuperer les cours récents
     getForHomePage: async (req: Request, res: Response) => {
