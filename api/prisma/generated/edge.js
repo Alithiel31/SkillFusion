@@ -118,6 +118,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.CoursScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  slug: 'slug',
   littleSummary: 'littleSummary',
   urlImage: 'urlImage',
   difficulty: 'difficulty',

@@ -6,16 +6,17 @@
 	import CoursCard from '$lib/assets/components/Cours/CoursCard.svelte';
 	import api from '$lib/services/api.service';
 	import { onMount } from 'svelte';
-	import type { Cours, Category } from '$lib/@types/types';
+	import type { ICours, Category } from '$lib/@types/types';
 
-	let courses: Cours[] = $state([]);
+	let courses: ICours[] = $state([]);
 	let categories: Category[] = $state([]);
 
 	onMount(async () => {
 		const categoriesResponse = await api('api/categories');
 		categories = categoriesResponse.data;
-		const coursesResponse = await api('api/cours');
+		const coursesResponse = await api('api/cours','GET');
 		courses = coursesResponse.data;
+		console.log(courses)
 	});
 	let searchQuery = $state('');
 	let selectedCategory = $state('Toutes les catégories');
@@ -58,11 +59,7 @@
 				<div class="courses-grid">
 					{#each filteredCourses as cours (cours.id)}
 						<CoursCard
-							title={cours.title}
-							littleSummary={cours.littleSummary}
-							urlImage={cours.urlImage}
-							difficulty={cours.difficulty}
-							category={cours.category}
+							cours={cours}
 							--card__image__color={cours.category.textColor}
 							--border_color={cours.category.borderColor}
 							--text_color={cours.category.textColor}

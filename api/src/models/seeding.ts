@@ -106,6 +106,7 @@ async function seed() {
     data: [
       {
         title: "Installer un robinet mitigeur",
+        slug:"installer-un-robinet-mitigeur",
         littleSummary: "Apprenez à démonter et installer un robinet mitigeur. Raccordements, coupure d'eau, mise en service.",
         summary: "Dans ce cours, vous apprendrez à démonter un ancien robinet mitigeur et à installer un nouveau modèle. Nous verrons les différents types de raccordements, comment couper l'eau, préparer les arrivées et sécuriser l'installation avant la mise en service. Ce cours est adapté aux débutants complets. Aucune connaissance préalable en plomberie n'est nécessaire.",
         difficulty: 2,
@@ -114,6 +115,7 @@ async function seed() {
       },
       {
         title: "Installer un deuxieme robinet mitigeur",
+        slug: "installer-un-deuxieme-robinet-mitigeur",
         littleSummary: "Apprenez à démonter et installer un robinet mitigeur. Raccordements, coupure d'eau, mise en service.",
         summary: "Dans ce cours, vous apprendrez à démonter un ancien robinet mitigeur et à installer un nouveau modèle. Nous verrons les différents types de raccordements, comment couper l'eau, préparer les arrivées et sécuriser l'installation avant la mise en service. Ce cours est adapté aux débutants complets. Aucune connaissance préalable en plomberie n'est nécessaire.",
         difficulty: 3,
@@ -122,6 +124,7 @@ async function seed() {
       },
       {
         title: "Installer une poigner de porte",
+        slug: "installer-une-poigner-de-porte",
         littleSummary: "Changer une poignée de porte est une tâche simple et rapide.",
         summary: "Changer une poignée de porte est une tâche simple et rapide qui ne nécessite que quelques outils de base. Ce cours vous guide tout au long du processus",
         difficulty: 4,

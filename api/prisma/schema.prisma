@@ -59,7 +59,8 @@ model User {
 
 model Cours {
   id            Int     @id @default(autoincrement())
-  title         String
+  title         String  @unique
+  slug          String  @unique
   littleSummary String? @map("little_summary")
   urlImage      String? @map("url_image")
   difficulty    Int
