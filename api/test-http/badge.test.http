@@ -24,7 +24,7 @@ Content-Type: application/json
 
 {
     "name": "Bravo",
-    "description": "Tu as réussi à terminer un cours !",
+    "description": "Tu as réussi à terminer un cours !"
 
 }
 

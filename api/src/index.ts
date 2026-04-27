@@ -19,6 +19,7 @@ import courContent from './routers/cour-content.router';
 import notification from './routers/notification.router';
 import coursActive from './routers/cour-active.router';
 import tool from './routers/tool.router';
+import learningObjectifRouter from './routers/learning-objectif.router';
 
 const app = express();
 
@@ -49,6 +50,7 @@ app.use("/api", usersRouter);
 app.use("/api", notification);
 app.use("/api", coursActive);
 app.use("/api", tool);
+app.use("/api", learningObjectifRouter);
 
 
 app.get('/', (req, res) => {

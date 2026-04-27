@@ -49,11 +49,18 @@ export default {
         const updateOpinionBodySchema = z.object({
             content: z.string().min(1).optional(),
             note: z.number().min(0).max(5).int().optional(),
+            coursId: z.number(),
+            userId: z.number(),
         });
         const data = await updateOpinionBodySchema.parseAsync(req.body);
         const updatedOpinion = await prisma.opinion.update({
             where: { id: opinionId },
-            data,
+            data: {
+                content: data.content,
+                note: data.note,
+                coursId: data.coursId,
+                userId: data.userId,
+            }
         });
         res.json(updatedOpinion);
     },

@@ -21,7 +21,7 @@ Content-Type: application/json
 
 
 ### modifier un contenu de cours
-PATCH {{BASE_URL}}/api/cour-contents/1
+PATCH {{BASE_URL}}/api/cour-contents/6
 Content-Type: application/json
 
 {
@@ -32,5 +32,5 @@ Content-Type: application/json
 
 
 ### supprimer un contenu de cours
-DELETE {{BASE_URL}}/api/cour-contents/7
+DELETE {{BASE_URL}}/api/cour-contents/6
 Content-Type: application/json

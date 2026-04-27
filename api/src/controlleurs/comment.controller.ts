@@ -44,14 +44,18 @@ export default {
     updatingComment: async (req: Request, res: Response) => {
         const commentId = await parseIdFromParams(req.params.id);
         const updateCommentBodySchema = z.object({
-            content: z.string().min(1).optional(),
+            description: z.string().min(1),
+            authorId: z.number(),
+            coursId: z.number(),
         });
-        const { content } = await updateCommentBodySchema.parseAsync(req.body);
+        const { description, authorId, coursId } = await updateCommentBodySchema.parseAsync(req.body);
 
         const updatedComment = await prisma.comment.update({
             where: { id: commentId },
             data: {
-                description: content,
+                description: description,
+                authorId: authorId,
+                coursId: coursId,
             }
         });
         res.json(updatedComment);

@@ -21,7 +21,7 @@ Content-Type: application/json
 
 
 ### modifier une commentaire
-PATCH {{BASE_URL}}/api/comments/1
+PATCH {{BASE_URL}}/api/comments/2
 Content-Type: application/json
 
 {
@@ -32,5 +32,5 @@ Content-Type: application/json
 
 
 ### supprimer une commentaire
-DELETE {{BASE_URL}}/api/comments/14
+DELETE {{BASE_URL}}/api/comments/2
 Content-Type: application/json

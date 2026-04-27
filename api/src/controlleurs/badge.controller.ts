@@ -45,13 +45,12 @@ export default {
 
     // Requête pour mettre à jour un badge
     updatingBadge: async (req: Request, res: Response) => {
-        const badgeId = await parseIdFromParams(req.params);
+        const badgeId = await parseIdFromParams(req.params.id);
         const updateBadgeBodySchema = z.object({
             name: z.string().min(1).optional(),
             description: z.string().optional(),
-            imageUrl: z.string().optional(),
         });
-        const { name, description, imageUrl } = await updateBadgeBodySchema.parseAsync(req.body);
+        const { name, description } = await updateBadgeBodySchema.parseAsync(req.body);
         const badgeToUpdate = await prisma.badge.findUnique({ where: { id: badgeId } });
         if (!badgeToUpdate) {
             throw new NotFoundError(`Badge with id ${badgeId} not found`);
@@ -67,7 +66,6 @@ export default {
             data: {
                 name,
                 description,
-                imageUrl,
             }
         });
         res.json(updatedBadge);

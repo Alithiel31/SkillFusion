@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ### modifier une tool
-PATCH {{BASE_URL}}/api/tools/5
+PATCH {{BASE_URL}}/api/tools/6
 Content-Type: application/json
 
 {
@@ -28,5 +28,5 @@ Content-Type: application/json
 }
 
 ### supprimer une tool
-DELETE {{BASE_URL}}/api/tools/3
+DELETE {{BASE_URL}}/api/tools/6
 Content-Type: application/json
