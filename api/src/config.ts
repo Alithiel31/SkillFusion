@@ -11,6 +11,8 @@ export const config = {
   allowedOrigins: process.env.ALLOWED_ORIGINS,
   isProd: process.env.NODE_ENV === "production" || false,
   jwtSecret: process.env.JWT_SECRET,
-  jwtAccesExpireIn:process.env.JWT_ACCES_EXPIRES_IN,
-  jwtRefreshExpireIn:process.env.JWT_ACCES_EXPIRES_IN,
+  jwtAccesExpireIn: process.env.JWT_ACCES_EXPIRES_IN,
+  jwtRefreshExpireIn: process.env.JWT_ACCES_EXPIRES_IN,
+  emailUser: process.env.EMAIL_USER ?? "",
+  emailPass: process.env.EMAIL_PASS ?? "",
 };
