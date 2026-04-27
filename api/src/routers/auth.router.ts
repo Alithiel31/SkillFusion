@@ -1,7 +1,7 @@
 import express from 'express';
 import rateLimit from "express-rate-limit";           
 import { verifyToken } from '../middlewares/auth.middleware';
-import { registerUser, loginUser, logoutUser, refreshAccessToken, getAuthenticatedUser } from '../controlleurs/auth.controller';
+import { registerUser, loginUser, logoutUser, refreshAccessToken, getAuthenticatedUser, verifyEmail } from '../controlleurs/auth.controller';
 
 const router = express.Router();
 
@@ -18,5 +18,5 @@ router.post("/login", authLimiter, loginUser)
 router.post("/logout", verifyToken, logoutUser)
 router.post("/refresh", refreshAccessToken)
 router.get("/me", verifyToken, getAuthenticatedUser)
-
+router.get("/verify-email", verifyEmail)
 export default router;

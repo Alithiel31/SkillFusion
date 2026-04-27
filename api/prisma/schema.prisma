@@ -37,6 +37,9 @@ model User {
 
   note           Int     @default(0)
 
+  verified       Boolean @default(false)
+  verifyToken    String? @map("verify_token")  
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

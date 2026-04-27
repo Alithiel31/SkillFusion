@@ -1,6 +1,6 @@
 import type { Request, Response } from "express"
 import argon2 from "argon2";
-import {z } from "zod";
+import { z } from "zod";
 import { prisma, User } from "../models/client";
 import { config } from "../config";
 import type { Token } from "../@types/index.d.ts";
@@ -8,6 +8,9 @@ import { BadRequestError, ConflictError, UnauthorizedError } from "../lib/errors
 import { generateAuthTokens } from "../lib/token";
 import jwt from "jsonwebtoken";
 import { AuthenticatedRequest } from "../@types/express";
+import { send } from "node:process";
+import crypto from "crypto";
+import { sendVerificationEmail } from "../lib/mailer";
 
 
 // Token management functions --------------------------------------------------------------------
@@ -41,9 +44,9 @@ export async function registerUser(req: Request, res: Response) {
             .string()
             .min(2)
             .max(100),
-/*            .regex(/[a-z]/)
-            .regex(/[A-Z]/)
-            .regex(/[!@#$%&*-+{}?]/), */
+        /*            .regex(/[a-z]/)
+                    .regex(/[A-Z]/)
+                    .regex(/[!@#$%&*-+{}?]/), */
         confirmPassword: z.string(),
     });
 
@@ -63,11 +66,11 @@ export async function registerUser(req: Request, res: Response) {
         throw new ConflictError("Email déjà utilisé");
     }
 
-    const existingUserPseudo = await prisma.user.findUnique({ where:{pseudo:pseudo}});
+    const existingUserPseudo = await prisma.user.findUnique({ where: { pseudo: pseudo } });
     if (existingUserPseudo) {
         throw new ConflictError("Pseudo déjà utilisé");
     }
-    
+
     // Hasher le password
     const hashedPassword = await argon2.hash(password);
 
@@ -77,17 +80,27 @@ export async function registerUser(req: Request, res: Response) {
             pseudo,
             email,
             password: hashedPassword,
-            roleId:1
+            roleId: 1
         },
     });
+
+    const token = crypto.randomBytes(32).toString("hex");
+    await prisma.user.update({
+        where: { id: user.id },
+        data: { verifyToken: token },
+    });
+    await sendVerificationEmail(email, token);
+
     res.status(201).json({
         id: user.id,
-        pseudo:user.pseudo,
+        pseudo: user.pseudo,
         firstname: user.firstname,
         lastname: user.lastname,
         email: user.email,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
+        message: "Inscription réussie ! Vérifie ton email pour activer ton compte.",
+
     });
 }
 
@@ -104,14 +117,21 @@ export async function loginUser(req: Request, res: Response) {
     const { email, password } = await loginUserSchema.parseAsync(req.body);
 
     // récupérer l'utilisateur ds la db
-    const user = await prisma.user.findUnique({ 
+    const user = await prisma.user.findUnique({
         where: { email },
-        include:{role:true}});
+        include: { role: true }
+    });
     if (!user) {
         throw new UnauthorizedError(
             "Le login et le mot de passe ne correspondent pas",
         );
     }
+
+    if (!user.verified) {
+    throw new UnauthorizedError(
+        "Confirme ton email avant de te connecter.",
+    );
+}
     // vérifier que le mot de passe et le hash correspondent
     const isMatching = await argon2.verify(user.password, password);
     if (!isMatching) {
@@ -128,7 +148,7 @@ export async function loginUser(req: Request, res: Response) {
 
     setRefreshTokenCookie(res, refreshToken);
     // renvoyer les token vers l'utilisateur
-    res.json({ accessToken, user:{id:user.id,pseudo:user.pseudo,role:user.role.name }});
+    res.json({ accessToken, user: { id: user.id, pseudo: user.pseudo, role: user.role.name } });
 }
 
 // Authenticated user controller --------------------------------------------------------------------
@@ -202,4 +222,23 @@ export async function refreshAccessToken(req: Request, res: Response) {
     setRefreshTokenCookie(res, refreshToken);
 
     res.json({ accessToken });
+}
+
+export async function verifyEmail(req: Request, res: Response) {
+    const { token } = req.query as { token: string };
+
+    const user = await prisma.user.findFirst({
+        where: { verifyToken: token },
+    });
+
+    if (!user) {
+        throw new BadRequestError("Token invalide ou expiré");
+    }
+
+    await prisma.user.update({
+        where: { id: user.id },
+        data: { verified: true, verifyToken: null },
+    });
+
+    res.json({ message: "Compte vérifié ! Tu peux maintenant te connecter." });
 }

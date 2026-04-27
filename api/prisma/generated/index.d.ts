@@ -3793,6 +3793,8 @@ export namespace Prisma {
     pseudo: string | null
     urlProfilImage: string | null
     note: number | null
+    verified: boolean | null
+    verifyToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
     roleId: number | null
@@ -3807,6 +3809,8 @@ export namespace Prisma {
     pseudo: string | null
     urlProfilImage: string | null
     note: number | null
+    verified: boolean | null
+    verifyToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
     roleId: number | null
@@ -3821,6 +3825,8 @@ export namespace Prisma {
     pseudo: number
     urlProfilImage: number
     note: number
+    verified: number
+    verifyToken: number
     createdAt: number
     updatedAt: number
     roleId: number
@@ -3849,6 +3855,8 @@ export namespace Prisma {
     pseudo?: true
     urlProfilImage?: true
     note?: true
+    verified?: true
+    verifyToken?: true
     createdAt?: true
     updatedAt?: true
     roleId?: true
@@ -3863,6 +3871,8 @@ export namespace Prisma {
     pseudo?: true
     urlProfilImage?: true
     note?: true
+    verified?: true
+    verifyToken?: true
     createdAt?: true
     updatedAt?: true
     roleId?: true
@@ -3877,6 +3887,8 @@ export namespace Prisma {
     pseudo?: true
     urlProfilImage?: true
     note?: true
+    verified?: true
+    verifyToken?: true
     createdAt?: true
     updatedAt?: true
     roleId?: true
@@ -3978,6 +3990,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage: string | null
     note: number
+    verified: boolean
+    verifyToken: string | null
     createdAt: Date
     updatedAt: Date
     roleId: number
@@ -4011,6 +4025,8 @@ export namespace Prisma {
     pseudo?: boolean
     urlProfilImage?: boolean
     note?: boolean
+    verified?: boolean
+    verifyToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     roleId?: boolean
@@ -4035,6 +4051,8 @@ export namespace Prisma {
     pseudo?: boolean
     urlProfilImage?: boolean
     note?: boolean
+    verified?: boolean
+    verifyToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     roleId?: boolean
@@ -4050,6 +4068,8 @@ export namespace Prisma {
     pseudo?: boolean
     urlProfilImage?: boolean
     note?: boolean
+    verified?: boolean
+    verifyToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     roleId?: boolean
@@ -4065,12 +4085,14 @@ export namespace Prisma {
     pseudo?: boolean
     urlProfilImage?: boolean
     note?: boolean
+    verified?: boolean
+    verifyToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     roleId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "pseudo" | "urlProfilImage" | "note" | "createdAt" | "updatedAt" | "roleId", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "pseudo" | "urlProfilImage" | "note" | "verified" | "verifyToken" | "createdAt" | "updatedAt" | "roleId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
     createdCours?: boolean | User$createdCoursArgs<ExtArgs>
@@ -4112,6 +4134,8 @@ export namespace Prisma {
       pseudo: string
       urlProfilImage: string | null
       note: number
+      verified: boolean
+      verifyToken: string | null
       createdAt: Date
       updatedAt: Date
       roleId: number
@@ -4555,6 +4579,8 @@ export namespace Prisma {
     readonly pseudo: FieldRef<"User", 'String'>
     readonly urlProfilImage: FieldRef<"User", 'String'>
     readonly note: FieldRef<"User", 'Int'>
+    readonly verified: FieldRef<"User", 'Boolean'>
+    readonly verifyToken: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly roleId: FieldRef<"User", 'Int'>
@@ -22277,6 +22303,8 @@ export namespace Prisma {
     pseudo: 'pseudo',
     urlProfilImage: 'urlProfilImage',
     note: 'note',
+    verified: 'verified',
+    verifyToken: 'verifyToken',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     roleId: 'roleId'
@@ -22623,6 +22651,8 @@ export namespace Prisma {
     pseudo?: StringFilter<"User"> | string
     urlProfilImage?: StringNullableFilter<"User"> | string | null
     note?: IntFilter<"User"> | number
+    verified?: BoolFilter<"User"> | boolean
+    verifyToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     roleId?: IntFilter<"User"> | number
@@ -22646,6 +22676,8 @@ export namespace Prisma {
     pseudo?: SortOrder
     urlProfilImage?: SortOrderInput | SortOrder
     note?: SortOrder
+    verified?: SortOrder
+    verifyToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     roleId?: SortOrder
@@ -22672,6 +22704,8 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     urlProfilImage?: StringNullableFilter<"User"> | string | null
     note?: IntFilter<"User"> | number
+    verified?: BoolFilter<"User"> | boolean
+    verifyToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     roleId?: IntFilter<"User"> | number
@@ -22695,6 +22729,8 @@ export namespace Prisma {
     pseudo?: SortOrder
     urlProfilImage?: SortOrderInput | SortOrder
     note?: SortOrder
+    verified?: SortOrder
+    verifyToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     roleId?: SortOrder
@@ -22717,6 +22753,8 @@ export namespace Prisma {
     pseudo?: StringWithAggregatesFilter<"User"> | string
     urlProfilImage?: StringNullableWithAggregatesFilter<"User"> | string | null
     note?: IntWithAggregatesFilter<"User"> | number
+    verified?: BoolWithAggregatesFilter<"User"> | boolean
+    verifyToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     roleId?: IntWithAggregatesFilter<"User"> | number
@@ -23762,6 +23800,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
@@ -23784,6 +23824,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -23805,6 +23847,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -23827,6 +23871,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -23849,6 +23895,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -23862,6 +23910,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23875,6 +23925,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -24940,6 +24992,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type RoleScalarRelationFilter = {
     is?: RoleWhereInput
     isNot?: RoleWhereInput
@@ -25039,6 +25096,8 @@ export namespace Prisma {
     pseudo?: SortOrder
     urlProfilImage?: SortOrder
     note?: SortOrder
+    verified?: SortOrder
+    verifyToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     roleId?: SortOrder
@@ -25059,6 +25118,8 @@ export namespace Prisma {
     pseudo?: SortOrder
     urlProfilImage?: SortOrder
     note?: SortOrder
+    verified?: SortOrder
+    verifyToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     roleId?: SortOrder
@@ -25073,6 +25134,8 @@ export namespace Prisma {
     pseudo?: SortOrder
     urlProfilImage?: SortOrder
     note?: SortOrder
+    verified?: SortOrder
+    verifyToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     roleId?: SortOrder
@@ -25102,9 +25165,12 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -25201,14 +25267,6 @@ export namespace Prisma {
     difficulty?: SortOrder
     authorId?: SortOrder
     categoryId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type CoursScalarRelationFilter = {
@@ -25953,6 +26011,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type RoleUpdateOneRequiredWithoutUsersNestedInput = {
     create?: XOR<RoleCreateWithoutUsersInput, RoleUncheckedCreateWithoutUsersInput>
     connectOrCreate?: RoleCreateOrConnectWithoutUsersInput
@@ -26307,10 +26369,6 @@ export namespace Prisma {
     connectOrCreate?: NotificationCreateOrConnectWithoutCoursInput | NotificationCreateOrConnectWithoutCoursInput[]
     createMany?: NotificationCreateManyCoursInputEnvelope
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutCreatedCoursNestedInput = {
@@ -27081,6 +27139,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -27109,11 +27172,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
@@ -27130,6 +27188,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
@@ -27151,6 +27211,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
@@ -27201,6 +27263,8 @@ export namespace Prisma {
     pseudo?: StringFilter<"User"> | string
     urlProfilImage?: StringNullableFilter<"User"> | string | null
     note?: IntFilter<"User"> | number
+    verified?: BoolFilter<"User"> | boolean
+    verifyToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     roleId?: IntFilter<"User"> | number
@@ -27705,6 +27769,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
@@ -27726,6 +27792,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -27982,6 +28050,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -28003,6 +28073,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -28497,6 +28569,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
@@ -28518,6 +28592,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -28600,6 +28676,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -28621,6 +28699,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -28693,6 +28773,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
@@ -28714,6 +28796,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -28796,6 +28880,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -28817,6 +28903,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -28889,6 +28977,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
@@ -28910,6 +29000,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -28966,6 +29058,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -28987,6 +29081,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -29367,6 +29463,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
@@ -29388,6 +29486,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -29476,6 +29576,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -29497,6 +29599,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -29563,6 +29667,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
@@ -29584,6 +29690,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -29672,6 +29780,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -29693,6 +29803,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -29759,6 +29871,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
@@ -29780,6 +29894,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -29868,6 +29984,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -29889,6 +30007,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -29909,6 +30029,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     role?: RoleCreateNestedOneWithoutUsersInput
@@ -29930,6 +30052,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     roleId?: number
@@ -29966,6 +30090,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: RoleUpdateOneRequiredWithoutUsersNestedInput
@@ -29987,6 +30113,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     roleId?: IntFieldUpdateOperationsInput | number
@@ -30008,6 +30136,8 @@ export namespace Prisma {
     pseudo: string
     urlProfilImage?: string | null
     note?: number
+    verified?: boolean
+    verifyToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -30020,6 +30150,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
@@ -30041,6 +30173,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
@@ -30062,6 +30196,8 @@ export namespace Prisma {
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
     note?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
