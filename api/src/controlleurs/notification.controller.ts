@@ -5,11 +5,13 @@ import { parseIdFromParams } from "./utils";
 import { ConflictError, NotFoundError } from "../lib/errors";
 
 export default {
+    // Requête pour récuperer toutes les notifications
     getAll: async (req: Request, res: Response) => {
         const notifications = await prisma.notification.findMany();
         res.json(notifications);
     },
 
+    // Requête pour récuperer une notification par son id
     getOneNotification: async (req: Request, res: Response) => {
         const notificationId = await parseIdFromParams(req.params.id);
         const notification = await prisma.notification.findUnique({ where: { id: notificationId } });
@@ -19,6 +21,7 @@ export default {
         res.json(notification);
     },
 
+    // Requête pour créer une notification
     createNotification: async (req: Request, res: Response) => {
         const createNotificationBodySchema = z.object({
             content: z.string().min(1),
@@ -37,8 +40,9 @@ export default {
         res.status(201).json(createdNotification);
     },
 
+    // Requête pour mettre à jour une notification
     updatingNotification: async (req: Request, res: Response) => {
-        const notificationId = await parseIdFromParams(req.params);
+        const notificationId = await parseIdFromParams(req.params.id);
         const updateNotificationBodySchema = z.object({
             content: z.string().min(1).optional(),
         });
@@ -53,6 +57,7 @@ export default {
         res.json(updatedNotification);
     },
 
+    // Requête pour supprimer une notification
     deleteNotification: async (req: Request, res: Response) => {
         const notificationId = await parseIdFromParams(req.params.id);
         await prisma.notification.delete({ where: { id: notificationId } });

@@ -42,7 +42,7 @@ export default {
 
     // Requête pour mettre à jour un cours active
     updatingCoursActive: async (req: Request, res: Response) => {
-        const coursActiveId = await parseIdFromParams(req.params);
+        const coursActiveId = await parseIdFromParams(req.params.id);
         const updateCoursActiveBodySchema = z.object({
             coursId: z.number(),
             userId: z.number(),

@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### modifier une categorie
-PATCH {{BASE_URL}}/api/categories/1
+PATCH {{BASE_URL}}/api/categories/3
 Content-Type: application/json
 
 {

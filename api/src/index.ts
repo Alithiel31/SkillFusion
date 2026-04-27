@@ -18,6 +18,7 @@ import opinionRouter from './routers/opinion.router';
 import courContent from './routers/cour-content.router';
 import notification from './routers/notification.router';
 import coursActive from './routers/cour-active.router';
+import tool from './routers/tool.router';
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use("/api", courContent)
 app.use("/api", usersRouter);
 app.use("/api", notification);
 app.use("/api", coursActive);
+app.use("/api", tool);
 
 
 app.get('/', (req, res) => {

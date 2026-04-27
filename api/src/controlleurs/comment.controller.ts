@@ -42,7 +42,7 @@ export default {
 
     // Requête pour mettre à jour un commentaire
     updatingComment: async (req: Request, res: Response) => {
-        const commentId = await parseIdFromParams(req.params);
+        const commentId = await parseIdFromParams(req.params.id);
         const updateCommentBodySchema = z.object({
             content: z.string().min(1).optional(),
         });
