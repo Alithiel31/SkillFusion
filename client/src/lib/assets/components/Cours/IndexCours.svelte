@@ -5,14 +5,11 @@
 	import type { ICours } from '$lib/@types/types';
 
 	let cours: ICours | null = $state(null);
-	let stars = $state([]);
 
 	onMount(async () => {
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
 		cours = response.data;
-		console.log(cours);
 	});
-
 	function getStars(note: number) {
 		const stars = [];
 		for (let i = 1; i <= 5; i++) {
@@ -46,20 +43,20 @@
 				<!-- Avis -->
 				<div class="card">
 					<div class="reviews-title">Avis des apprenants</div>
-					{#each cours.avis as avis, i}
+					{#each cours.opinions as opinion, i}
 						<div class="review-item" class:first={i === 0}>
 							<div class="reviewer">
-								<div class="avatar">{avis.initiales}</div>
+								<div class="avatar"></div>
 								<div class="reviewer-info">
-									<span class="reviewer-name">{avis.nom}</span>
+									<span class="reviewer-name">{opinion.user.pseudo}</span>
 									<div class="stars">
-										{#each getStars(avis.note) as type}
+										{#each getStars(opinion.note) as type}
 											<span class="star-{type}">★</span>
 										{/each}
 									</div>
 								</div>
 							</div>
-							<div class="review-text">{avis.commentaire}</div>
+							<div class="review-text">{opinion.content}</div>
 						</div>
 					{/each}
 				</div>
@@ -76,20 +73,24 @@
 								<div class="diff-bar {i < cours.difficulty ? 'filled' : 'empty'}"></div>
 							{/each}
 						</div>
-						<span class="diff-label">{cours?.difficulty}</span>
+						<span class="diff-label">{cours.difficulty}</span>
 					</div>
 
 					<!-- Objectifs -->
 					<div class="info-section-title">OBJECTIFS PÉDAGOGIQUES</div>
 					<ul class="obj-list">
-						{#each cours?.leaningObjectives as obj}
-							<li>{obj}</li>
+						{#each cours.learningObjectives as obj}
+							<li>{obj.objectif.title}</li>
 						{/each}
 					</ul>
 
 					<!-- Outils -->
 					<div class="info-section-title tools-title">OUTILS NÉCESSAIRES</div>
-					<div class="tools-text">{cours?.tools}</div>
+					<ul class="obj-list">
+						{#each cours.tools as tool}
+							<li>{tool.tools.name}</li>
+						{/each}
+					</ul>
 				</div>
 
 				<button class="cta-btn">Démarrer le cours →</button>
@@ -104,8 +105,8 @@
 			<div class="mobile-header-row">
 				<div class="mobile-title">{cours?.title}</div>
 				<div class="mobile-header-right">
-					<span class="mobile-badge">{cours?.categories}</span>
-					<span class="mobile-author">{cours?.author}</span>
+					<span class="mobile-badge">{cours.category}</span>
+					<span class="mobile-author">{cours.author}</span>
 				</div>
 			</div>
 		</div>

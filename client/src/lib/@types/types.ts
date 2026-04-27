@@ -33,7 +33,7 @@ export interface ICours {
         title: String
         littleSummary: String
         urlImage: String
-        difficulty: Number
+        difficulty: number
         summary: String
         visibility: Boolean
         createdAt: Date
@@ -157,11 +157,11 @@ export interface Comment {
         auteur: User
 }
 export interface Opinion {
-  id :Number
-  content: String
-  note  :  Number
-  coursId: Number    
-  userId  :Number    
+  id :number
+  content: string
+  note  :  number
+  coursId: number    
+  userId  :number    
   createdAt :Date
   updatedAt :Date
   cours :ICours 
