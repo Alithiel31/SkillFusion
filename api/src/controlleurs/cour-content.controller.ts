@@ -42,7 +42,7 @@ export default {
 
      // Requête pour mettre à jour un contenu de cours
      updatingCourContent: async (req: Request, res: Response) => {
-        const courContentId = await parseIdFromParams(req.params);
+        const courContentId = await parseIdFromParams(req.params.id);
         const updateCourContentBodySchema = z.object({
             content: z.string().min(1).optional(),
             numberPage: z.number().min(1).int().optional(),
