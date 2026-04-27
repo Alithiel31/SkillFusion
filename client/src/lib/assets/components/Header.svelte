@@ -19,7 +19,6 @@
 		clearAuth()
 	    user = null;
 		goto('/')
-
 	}
 	
 
@@ -44,7 +43,9 @@
 	<!-- Navigation -->
 	<nav class="header__nav" aria-label="Navigation principale">
 		<a href="/cours" class="header__nav-link"> Nos cours </a>
+		{#if user}
 		<a href="/tableau-de-bord" class="header__nav-link"> Tableau de bord </a>
+		{/if}
 	</nav>
 </header>
 
