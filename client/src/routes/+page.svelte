@@ -10,10 +10,10 @@
 	import { onMount } from 'svelte';
 	import App from '$lib/assets/components/App.svelte';
 	import Main from '$lib/assets/components/Main.svelte';
-	import type { Cours } from '$lib/@types/types';
+	import type { ICours } from '$lib/@types/types';
 
 
-       let courses: Cours[] = $state([]);
+       let courses: ICours[] = $state([]);
 
 onMount(async ()=>{
  const coursesResponse = await api('api/cours/homepage');

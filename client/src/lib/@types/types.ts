@@ -19,7 +19,7 @@ export interface User {
         updatedAt: Date
         role: Role
         roleId: String
-        createdCours: Cours[]
+        createdCours: ICours[]
         badges: UserHasBadge[]
         enrollments: UserHasCours[]
         activations: CoursActived[]
@@ -28,7 +28,7 @@ export interface User {
         notifications: Notification[]
 }
 
-export interface Cours {
+export interface ICours {
         id: Number
         title: String
         littleSummary: String
@@ -58,7 +58,7 @@ export interface CourContent {
         content: String
         createdAt: Date
         updatedAt: Date
-        cours: Cours
+        cours: ICours
 }
 
 export interface Category {
@@ -69,7 +69,7 @@ export interface Category {
         borderColor: String
         createdAt: Date
         updatedAt: Date
-        courses: Cours[]
+        courses: ICours[]
 }
 
 export interface LearningObjective {
@@ -105,7 +105,7 @@ export interface UserHasCours {
         createdAt: Date
         updatedAt: Date
         user: User
-        cours: Cours
+        cours: ICours
 }
 
 export interface CoursActived {
@@ -116,7 +116,7 @@ export interface CoursActived {
         createdAt: Date
         updatedAt: Date
         user: User
-        cours: Cours
+        cours: ICours
 }
 export interface UserHasBadge {
         id: Number
@@ -133,7 +133,7 @@ export interface CoursHasTool {
         toolsId: Number
         createdAt: Date
         updatedAt: Date
-        cours: Cours
+        cours: ICours
         tools: Tool
 }
 export interface CoursHasLearningObjective {
@@ -142,7 +142,7 @@ export interface CoursHasLearningObjective {
         learningObjectiveId: Number
         createdAt: Date
         updatedAt: Date
-        cours: Cours
+        cours: ICours
         objectif: LearningObjective
 }
 
@@ -153,7 +153,7 @@ export interface Comment {
         authorId: Number
         createdAt: Date
         updatedAt: Date
-        cours: Cours
+        cours: ICours
         auteur: User
 }
 export interface Opinion {
@@ -164,7 +164,7 @@ export interface Opinion {
   userId  :Number    
   createdAt :Date
   updatedAt :Date
-  cours :Cours 
+  cours :ICours 
   user : User  
 }
 
@@ -175,6 +175,6 @@ export interface Notification {
   userId  :Number
   createdAt :Date
   updatedAt :Date
-  cours :Cours
+  cours :ICours
   user : User
 }
