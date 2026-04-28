@@ -76,14 +76,14 @@
 		flex: 1;
 		flex-direction: column;
 		min-width: 30px;
-		width: 130px;
+		width: 90px;
 		display: flex;
 		align-items: center;
 	}
 	p {
 		font-size: 12px;
 		font-weight: bold;
-		margin: 5px;
+		margin: 0px;
 	}
 	@media (min-width: 768px) {
 		.diff-card {
