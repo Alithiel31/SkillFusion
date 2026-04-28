@@ -1,6 +1,6 @@
 <script></script>
 
-<a class="main__link" href="/">Découvrir les cours</a>
+<a class="main__link" href="/cours">Découvrir les cours</a>
 
 <style>
 .main__link{

@@ -58,7 +58,7 @@ import LevelBar from './levelbar/LevelBar.svelte';
 	}
 
 	.card__body{
-		padding: 5px 10px;
+		padding: 10px 10px;
 		height: 100px;
 		display: flex;
 		flex-direction: column;
