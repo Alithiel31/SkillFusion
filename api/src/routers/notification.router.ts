@@ -1,5 +1,5 @@
 import express from 'express';
-import notificationController from '../controlleurs/notification.controller';
+import notificationController from '../controllers/notification.controller';
 
 const router = express.Router();
 

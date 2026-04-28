@@ -5,7 +5,7 @@ import { prisma } from "./client_seeding";
 async function seed() {
 
   const roles = await prisma.role.createMany({
-    data: [{name:"student"},{name:"instructor"},{name:"admin"}]
+    data: [{name:"student",frName:'Etudiant'},{name:"instructor",frName:'Formateur'},{name:"admin",frName:'Administrateur'}]
   })
 
   console.log("Start seeding ->")

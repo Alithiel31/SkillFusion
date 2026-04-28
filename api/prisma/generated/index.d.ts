@@ -2686,6 +2686,7 @@ export namespace Prisma {
 
   export type RoleMinAggregateOutputType = {
     id: number | null
+    frName: string | null
     name: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2693,6 +2694,7 @@ export namespace Prisma {
 
   export type RoleMaxAggregateOutputType = {
     id: number | null
+    frName: string | null
     name: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2700,6 +2702,7 @@ export namespace Prisma {
 
   export type RoleCountAggregateOutputType = {
     id: number
+    frName: number
     name: number
     createdAt: number
     updatedAt: number
@@ -2717,6 +2720,7 @@ export namespace Prisma {
 
   export type RoleMinAggregateInputType = {
     id?: true
+    frName?: true
     name?: true
     createdAt?: true
     updatedAt?: true
@@ -2724,6 +2728,7 @@ export namespace Prisma {
 
   export type RoleMaxAggregateInputType = {
     id?: true
+    frName?: true
     name?: true
     createdAt?: true
     updatedAt?: true
@@ -2731,6 +2736,7 @@ export namespace Prisma {
 
   export type RoleCountAggregateInputType = {
     id?: true
+    frName?: true
     name?: true
     createdAt?: true
     updatedAt?: true
@@ -2825,6 +2831,7 @@ export namespace Prisma {
 
   export type RoleGroupByOutputType = {
     id: number
+    frName: string
     name: string
     createdAt: Date
     updatedAt: Date
@@ -2851,6 +2858,7 @@ export namespace Prisma {
 
   export type RoleSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    frName?: boolean
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2860,6 +2868,7 @@ export namespace Prisma {
 
   export type RoleSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    frName?: boolean
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2867,6 +2876,7 @@ export namespace Prisma {
 
   export type RoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    frName?: boolean
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2874,12 +2884,13 @@ export namespace Prisma {
 
   export type RoleSelectScalar = {
     id?: boolean
+    frName?: boolean
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["role"]>
+  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "frName" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["role"]>
   export type RoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Role$usersArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -2894,6 +2905,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      frName: string
       name: string
       createdAt: Date
       updatedAt: Date
@@ -3322,6 +3334,7 @@ export namespace Prisma {
    */
   interface RoleFieldRefs {
     readonly id: FieldRef<"Role", 'Int'>
+    readonly frName: FieldRef<"Role", 'String'>
     readonly name: FieldRef<"Role", 'String'>
     readonly createdAt: FieldRef<"Role", 'DateTime'>
     readonly updatedAt: FieldRef<"Role", 'DateTime'>
@@ -22316,6 +22329,7 @@ export namespace Prisma {
 
   export const RoleScalarFieldEnum: {
     id: 'id',
+    frName: 'frName',
     name: 'name',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -22624,6 +22638,7 @@ export namespace Prisma {
     OR?: RoleWhereInput[]
     NOT?: RoleWhereInput | RoleWhereInput[]
     id?: IntFilter<"Role"> | number
+    frName?: StringFilter<"Role"> | string
     name?: StringFilter<"Role"> | string
     createdAt?: DateTimeFilter<"Role"> | Date | string
     updatedAt?: DateTimeFilter<"Role"> | Date | string
@@ -22632,6 +22647,7 @@ export namespace Prisma {
 
   export type RoleOrderByWithRelationInput = {
     id?: SortOrder
+    frName?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22643,6 +22659,7 @@ export namespace Prisma {
     AND?: RoleWhereInput | RoleWhereInput[]
     OR?: RoleWhereInput[]
     NOT?: RoleWhereInput | RoleWhereInput[]
+    frName?: StringFilter<"Role"> | string
     name?: StringFilter<"Role"> | string
     createdAt?: DateTimeFilter<"Role"> | Date | string
     updatedAt?: DateTimeFilter<"Role"> | Date | string
@@ -22651,6 +22668,7 @@ export namespace Prisma {
 
   export type RoleOrderByWithAggregationInput = {
     id?: SortOrder
+    frName?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -22666,6 +22684,7 @@ export namespace Prisma {
     OR?: RoleScalarWhereWithAggregatesInput[]
     NOT?: RoleScalarWhereWithAggregatesInput | RoleScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Role"> | number
+    frName?: StringWithAggregatesFilter<"Role"> | string
     name?: StringWithAggregatesFilter<"Role"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Role"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Role"> | Date | string
@@ -23785,6 +23804,7 @@ export namespace Prisma {
   }
 
   export type RoleCreateInput = {
+    frName: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23793,6 +23813,7 @@ export namespace Prisma {
 
   export type RoleUncheckedCreateInput = {
     id?: number
+    frName: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23800,6 +23821,7 @@ export namespace Prisma {
   }
 
   export type RoleUpdateInput = {
+    frName?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23808,6 +23830,7 @@ export namespace Prisma {
 
   export type RoleUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    frName?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23816,12 +23839,14 @@ export namespace Prisma {
 
   export type RoleCreateManyInput = {
     id?: number
+    frName: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type RoleUpdateManyMutationInput = {
+    frName?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23829,6 +23854,7 @@ export namespace Prisma {
 
   export type RoleUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    frName?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24958,6 +24984,7 @@ export namespace Prisma {
 
   export type RoleCountOrderByAggregateInput = {
     id?: SortOrder
+    frName?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -24969,6 +24996,7 @@ export namespace Prisma {
 
   export type RoleMaxOrderByAggregateInput = {
     id?: SortOrder
+    frName?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -24976,6 +25004,7 @@ export namespace Prisma {
 
   export type RoleMinOrderByAggregateInput = {
     id?: SortOrder
+    frName?: SortOrder
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -27335,6 +27364,7 @@ export namespace Prisma {
   }
 
   export type RoleCreateWithoutUsersInput = {
+    frName: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27342,6 +27372,7 @@ export namespace Prisma {
 
   export type RoleUncheckedCreateWithoutUsersInput = {
     id?: number
+    frName: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27590,6 +27621,7 @@ export namespace Prisma {
   }
 
   export type RoleUpdateWithoutUsersInput = {
+    frName?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27597,6 +27629,7 @@ export namespace Prisma {
 
   export type RoleUncheckedUpdateWithoutUsersInput = {
     id?: IntFieldUpdateOperationsInput | number
+    frName?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

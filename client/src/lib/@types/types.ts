@@ -1,12 +1,13 @@
-export interface Role {
+export interface IRole {
         id: number
         name: string
-        users: User[]
+        frName: string
+        users: IUser[]
         createdAt: Date
         updatedAt: Date
 }
 
-export interface User {
+export interface IUser {
         id: number
         email: String
         firstname: String
@@ -17,7 +18,7 @@ export interface User {
         note: number
         createdAt: Date
         updatedAt: Date
-        role: Role
+        role: IRole
         roleId: String
         createdCours: ICours[]
         badges: UserHasBadge[]
@@ -38,9 +39,9 @@ export interface ICours {
         visibility: Boolean
         createdAt: Date
         updatedAt: Date
-        author: User
+        author: IUser
         authorId: Number
-        category: Category
+        category: ICategory
         categoryId: Number
         numberPage:number
         tools: CoursHasTool[]
@@ -62,12 +63,12 @@ export interface CourContent {
         cours: ICours
 }
 
-export interface Category {
+export interface ICategory {
         id: Number
-        name: String
-        description: String
-        textColor: String
-        borderColor: String
+        name: string
+        description: string    
+        textColor: string
+        borderColor: string
         createdAt: Date
         updatedAt: Date
         courses: ICours[]
@@ -105,7 +106,7 @@ export interface UserHasCours {
         coursId: Number
         createdAt: Date
         updatedAt: Date
-        user: User
+        user: IUser
         cours: ICours
 }
 
@@ -116,7 +117,7 @@ export interface CoursActived {
         IsEnd: Boolean
         createdAt: Date
         updatedAt: Date
-        user: User
+        user: IUser
         cours: ICours
 }
 export interface UserHasBadge {
@@ -125,7 +126,7 @@ export interface UserHasBadge {
         badgeId: Number
         createdAt: Date
         updatedAt: Date
-        user: User
+        user: IUser
         badge: Badge
 }
 export interface CoursHasTool {
@@ -155,7 +156,7 @@ export interface Comment {
         createdAt: Date
         updatedAt: Date
         cours: ICours
-        auteur: User
+        auteur: IUser
 }
 export interface Opinion {
   id :number
@@ -166,7 +167,7 @@ export interface Opinion {
   createdAt :Date
   updatedAt :Date
   cours :ICours 
-  user : User  
+  user : IUser  
 }
 
 export interface Notification {
@@ -177,5 +178,5 @@ export interface Notification {
   createdAt :Date
   updatedAt :Date
   cours :ICours
-  user : User
+  user : IUser
 }
