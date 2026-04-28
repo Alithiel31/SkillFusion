@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import type { ICours } from '$lib/@types/types';
-	import LevelBar from './levelbar/LevelBar.svelte';
+	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '../Category/Category.svelte';
 
 	let cours: ICours | null = $state(null);
@@ -25,7 +25,6 @@
 </script>
 
 {#if cours}
-	<div class="desktop-view">
 		<div class="desktop-header">
 			<h1>{cours.title}</h1>
 			<Category 
@@ -88,10 +87,9 @@
 					</ul>
 				</div>
 
-				<button class="cta-btn">Démarrer le cours →</button>
+				<a class="cta-btn" href="/cours/{cours.slug}/cours">Démarrer le cours →</a>
 			</div>
 		</div>
-	</div>
 {/if}
 
 <style>
@@ -378,147 +376,4 @@
 		font-family: inherit;
 	}
 
-
-	@media (min-width: 768px) {
-		
-
-		.mobile-view {
-			display: block;
-			background: #f5f5f5;
-			min-height: 100vh;
-			padding: 0 0 24px;
-			font-family: 'Inter', sans-serif;
-		}
-	}
-
-	.mobile-topbar {
-		background: #fff;
-		padding: 14px 16px 0;
-	}
-
-	.mobile-back {
-		font-size: 13px;
-		color: #555;
-		display: flex;
-		align-items: center;
-		gap: 4px;
-		margin-bottom: 10px;
-		cursor: pointer;
-	}
-
-	.mobile-back::before {
-		content: '←';
-		font-size: 14px;
-	}
-
-	.mobile-header-row {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		padding-bottom: 14px;
-	}
-
-	.mobile-title {
-		font-size: 20px;
-		font-weight: 700;
-		color: #1a1a1a;
-		max-width: 210px;
-		line-height: 1.25;
-	}
-
-	.mobile-header-right {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		gap: 3px;
-	}
-
-	.mobile-badge {
-		border: 1.5px solid #1a1a1a;
-		border-radius: 20px;
-		padding: 2px 12px;
-		font-size: 12px;
-		font-weight: 500;
-		color: #1a1a1a;
-	}
-
-	.mobile-author {
-		font-size: 12px;
-		color: #555;
-	}
-
-	.mobile-body {
-		padding: 12px 14px;
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	.m-card {
-		background: #fff;
-		border-radius: 12px;
-		padding: 16px 18px;
-	}
-
-	.m-section-label {
-		font-size: 10px;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: #888;
-		margin-bottom: 8px;
-	}
-
-	.m-difficulty-row {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
-
-	.m-card-title {
-		font-size: 14px;
-		font-weight: 700;
-		color: #e8a020;
-		margin-bottom: 8px;
-	}
-
-	.m-resume-text {
-		font-size: 13px;
-		color: #444;
-		line-height: 1.55;
-	}
-
-	.m-card-title-dark {
-		font-size: 14px;
-		font-weight: 700;
-		color: #1a1a1a;
-		margin-bottom: 10px;
-	}
-
-	.m-obj-list {
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		gap: 7px;
-	}
-
-	.mobile-cta-wrap {
-		padding: 0 14px;
-		margin-top: 4px;
-	}
-
-	.mobile-cta-btn {
-		background: #f4a623;
-		color: #fff;
-		border: none;
-		border-radius: 10px;
-		padding: 15px;
-		font-size: 15px;
-		font-weight: 600;
-		cursor: pointer;
-		width: 100%;
-		text-align: center;
-		display: block;
-		font-family: inherit;
-	}
 </style>

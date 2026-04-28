@@ -13,6 +13,7 @@ export default {
 
     // Requête pour récuperer un contenu de cours par son id
     getOneCourContent: async (req: Request, res: Response) => {
+        console.log("Cours content : ", req.params.id)
         const courContentId = await parseIdFromParams(req.params.id);
         const courContent = await prisma.courContent.findUnique({ where: { id: courContentId } });
         if (!courContent) {

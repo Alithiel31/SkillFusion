@@ -173,23 +173,33 @@ async function seed() {
       coursId: 1
     },
     {
+      content: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea",
+      numberPage: 1,
+      coursId: 2
+    },
+    {
+      content: "aliquip ex ea consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad min veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea",
+      numberPage: 2,
+      coursId: 2
+    },
+    {
       content: " 1. Retirer l’ancienne poignée\
                 Commence par dévisser les vis visibles sur la poignée(souvent sur la plaque ou la rosace).\
                 Tire doucement pour séparer les deux côtés de la poignée.",
       numberPage: 1,
-      coursId: 2
+      coursId: 3
     },
     {
       content: "2. Enlever le carré (axe)\
                 Une fois les poignées retirées, enlève la tige métallique (le carré) qui relie les deux côtés.",
       numberPage: 2,
-      coursId: 2
+      coursId: 3
     },
     {
       content: "3. Démonter le mécanisme (si nécessaire)\
                   Si tu changes aussi le mécanisme (le loquet), dévisse la plaque sur le chant de la porte et retire le système.",
       numberPage: 3,
-      coursId: 2
+      coursId: 3
     }]
   });
 

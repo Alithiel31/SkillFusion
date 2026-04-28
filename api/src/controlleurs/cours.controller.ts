@@ -7,7 +7,7 @@ import { ConflictError, NotFoundError } from "../lib/errors";
 
 export default {
     getAll: async  (req:Request,res:Response) =>{
-        let data=[]
+        let data=null
         if(req.query.slug){
             const cours = await prisma.cours.findMany({
             where:{slug:{contains:req.query.slug as string}},
@@ -19,6 +19,7 @@ export default {
                 learningObjectives:{
                     include:{objectif:true}
                 },
+                content:true,
                 tools:{
                     include:{tools:true}
                 },
