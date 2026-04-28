@@ -122,6 +122,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.RoleScalarFieldEnum = {
   id: 'id',
+  frName: 'frName',
   name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -174,6 +175,7 @@ exports.Prisma.CategoryScalarFieldEnum = {
   description: 'description',
   textColor: 'textColor',
   borderColor: 'borderColor',
+  backgroundColor: 'backgroundColor',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

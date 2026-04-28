@@ -47,7 +47,8 @@
 				<Category
 				category={indexCours.category}
 				--border_color={indexCours.category.borderColor}
-				--text_color={indexCours.category.textColor}/>
+				--text_color={indexCours.category.textColor}
+				--background-color={indexCours.category.backgroundColor}/>
 				<span class="author">par <span>{indexCours.author.pseudo}</span></span>
 			</div>
 		</div>

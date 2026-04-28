@@ -6,15 +6,15 @@
 	import CoursCard from '$lib/assets/components/Cours/CoursCard.svelte';
 	import api from '$lib/services/api.service';
 	import { onMount } from 'svelte';
-	import type { ICours, Category } from '$lib/@types/types';
+	import type { ICours, ICategory } from '$lib/@types/types';
 
 	let courses: ICours[] = $state([]);
-	let categories: Category[] = $state([]);
+	let categories: ICategory[] = $state([]);
 
 	onMount(async () => {
 		const categoriesResponse = await api('api/categories');
 		categories = categoriesResponse.data;
-		const coursesResponse = await api('api/cours','GET');
+		const coursesResponse = await api('api/cours');
 		courses = coursesResponse.data;
 		console.log(courses)
 	});

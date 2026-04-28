@@ -1,5 +1,5 @@
 import express from 'express';
-import toolController from '../controlleurs/tool.controller';
+import toolController from '../controllers/tool.controller';
 
 const router = express.Router();
 

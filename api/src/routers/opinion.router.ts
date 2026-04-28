@@ -1,5 +1,5 @@
 import express from 'express';
-import opinionController from '../controlleurs/opinion.controller';
+import opinionController from '../controllers/opinion.controller';
 
 const router = express.Router();
 

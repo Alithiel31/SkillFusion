@@ -1,5 +1,5 @@
 import express from 'express';
-import learningObjectifController from '../controlleurs/learning-objectif.controller';
+import learningObjectifController from '../controllers/learning-objectif.controller';
 
 const router = express.Router();
 
