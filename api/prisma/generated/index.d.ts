@@ -5210,6 +5210,7 @@ export namespace Prisma {
   export type CoursAvgAggregateOutputType = {
     id: number | null
     difficulty: number | null
+    numberPage: number | null
     authorId: number | null
     categoryId: number | null
   }
@@ -5217,6 +5218,7 @@ export namespace Prisma {
   export type CoursSumAggregateOutputType = {
     id: number | null
     difficulty: number | null
+    numberPage: number | null
     authorId: number | null
     categoryId: number | null
   }
@@ -5230,6 +5232,7 @@ export namespace Prisma {
     difficulty: number | null
     summary: string | null
     visibility: boolean | null
+    numberPage: number | null
     createdAt: Date | null
     updatedAt: Date | null
     authorId: number | null
@@ -5245,6 +5248,7 @@ export namespace Prisma {
     difficulty: number | null
     summary: string | null
     visibility: boolean | null
+    numberPage: number | null
     createdAt: Date | null
     updatedAt: Date | null
     authorId: number | null
@@ -5260,6 +5264,7 @@ export namespace Prisma {
     difficulty: number
     summary: number
     visibility: number
+    numberPage: number
     createdAt: number
     updatedAt: number
     authorId: number
@@ -5271,6 +5276,7 @@ export namespace Prisma {
   export type CoursAvgAggregateInputType = {
     id?: true
     difficulty?: true
+    numberPage?: true
     authorId?: true
     categoryId?: true
   }
@@ -5278,6 +5284,7 @@ export namespace Prisma {
   export type CoursSumAggregateInputType = {
     id?: true
     difficulty?: true
+    numberPage?: true
     authorId?: true
     categoryId?: true
   }
@@ -5291,6 +5298,7 @@ export namespace Prisma {
     difficulty?: true
     summary?: true
     visibility?: true
+    numberPage?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -5306,6 +5314,7 @@ export namespace Prisma {
     difficulty?: true
     summary?: true
     visibility?: true
+    numberPage?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -5321,6 +5330,7 @@ export namespace Prisma {
     difficulty?: true
     summary?: true
     visibility?: true
+    numberPage?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -5423,6 +5433,7 @@ export namespace Prisma {
     difficulty: number
     summary: string | null
     visibility: boolean
+    numberPage: number
     createdAt: Date
     updatedAt: Date
     authorId: number
@@ -5457,6 +5468,7 @@ export namespace Prisma {
     difficulty?: boolean
     summary?: boolean
     visibility?: boolean
+    numberPage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
@@ -5483,6 +5495,7 @@ export namespace Prisma {
     difficulty?: boolean
     summary?: boolean
     visibility?: boolean
+    numberPage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
@@ -5500,6 +5513,7 @@ export namespace Prisma {
     difficulty?: boolean
     summary?: boolean
     visibility?: boolean
+    numberPage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
@@ -5517,13 +5531,14 @@ export namespace Prisma {
     difficulty?: boolean
     summary?: boolean
     visibility?: boolean
+    numberPage?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
     categoryId?: boolean
   }
 
-  export type CoursOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "littleSummary" | "urlImage" | "difficulty" | "summary" | "visibility" | "createdAt" | "updatedAt" | "authorId" | "categoryId", ExtArgs["result"]["cours"]>
+  export type CoursOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "littleSummary" | "urlImage" | "difficulty" | "summary" | "visibility" | "numberPage" | "createdAt" | "updatedAt" | "authorId" | "categoryId", ExtArgs["result"]["cours"]>
   export type CoursInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
@@ -5569,6 +5584,7 @@ export namespace Prisma {
       difficulty: number
       summary: string | null
       visibility: boolean
+      numberPage: number
       createdAt: Date
       updatedAt: Date
       authorId: number
@@ -6014,6 +6030,7 @@ export namespace Prisma {
     readonly difficulty: FieldRef<"Cours", 'Int'>
     readonly summary: FieldRef<"Cours", 'String'>
     readonly visibility: FieldRef<"Cours", 'Boolean'>
+    readonly numberPage: FieldRef<"Cours", 'Int'>
     readonly createdAt: FieldRef<"Cours", 'DateTime'>
     readonly updatedAt: FieldRef<"Cours", 'DateTime'>
     readonly authorId: FieldRef<"Cours", 'Int'>
@@ -22335,6 +22352,7 @@ export namespace Prisma {
     difficulty: 'difficulty',
     summary: 'summary',
     visibility: 'visibility',
+    numberPage: 'numberPage',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     authorId: 'authorId',
@@ -22786,6 +22804,7 @@ export namespace Prisma {
     difficulty?: IntFilter<"Cours"> | number
     summary?: StringNullableFilter<"Cours"> | string | null
     visibility?: BoolFilter<"Cours"> | boolean
+    numberPage?: IntFilter<"Cours"> | number
     createdAt?: DateTimeFilter<"Cours"> | Date | string
     updatedAt?: DateTimeFilter<"Cours"> | Date | string
     authorId?: IntFilter<"Cours"> | number
@@ -22811,6 +22830,7 @@ export namespace Prisma {
     difficulty?: SortOrder
     summary?: SortOrderInput | SortOrder
     visibility?: SortOrder
+    numberPage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -22839,6 +22859,7 @@ export namespace Prisma {
     difficulty?: IntFilter<"Cours"> | number
     summary?: StringNullableFilter<"Cours"> | string | null
     visibility?: BoolFilter<"Cours"> | boolean
+    numberPage?: IntFilter<"Cours"> | number
     createdAt?: DateTimeFilter<"Cours"> | Date | string
     updatedAt?: DateTimeFilter<"Cours"> | Date | string
     authorId?: IntFilter<"Cours"> | number
@@ -22864,6 +22885,7 @@ export namespace Prisma {
     difficulty?: SortOrder
     summary?: SortOrderInput | SortOrder
     visibility?: SortOrder
+    numberPage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -22887,6 +22909,7 @@ export namespace Prisma {
     difficulty?: IntWithAggregatesFilter<"Cours"> | number
     summary?: StringNullableWithAggregatesFilter<"Cours"> | string | null
     visibility?: BoolWithAggregatesFilter<"Cours"> | boolean
+    numberPage?: IntWithAggregatesFilter<"Cours"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Cours"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Cours"> | Date | string
     authorId?: IntWithAggregatesFilter<"Cours"> | number
@@ -23959,6 +23982,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -23982,6 +24006,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -24004,6 +24029,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -24027,6 +24053,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -24050,6 +24077,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -24064,6 +24092,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24077,6 +24106,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -25248,6 +25278,7 @@ export namespace Prisma {
     difficulty?: SortOrder
     summary?: SortOrder
     visibility?: SortOrder
+    numberPage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -25257,6 +25288,7 @@ export namespace Prisma {
   export type CoursAvgOrderByAggregateInput = {
     id?: SortOrder
     difficulty?: SortOrder
+    numberPage?: SortOrder
     authorId?: SortOrder
     categoryId?: SortOrder
   }
@@ -25270,6 +25302,7 @@ export namespace Prisma {
     difficulty?: SortOrder
     summary?: SortOrder
     visibility?: SortOrder
+    numberPage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -25285,6 +25318,7 @@ export namespace Prisma {
     difficulty?: SortOrder
     summary?: SortOrder
     visibility?: SortOrder
+    numberPage?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -25294,6 +25328,7 @@ export namespace Prisma {
   export type CoursSumOrderByAggregateInput = {
     id?: SortOrder
     difficulty?: SortOrder
+    numberPage?: SortOrder
     authorId?: SortOrder
     categoryId?: SortOrder
   }
@@ -27325,6 +27360,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutCoursesInput
@@ -27347,6 +27383,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryId: number
@@ -27593,6 +27630,7 @@ export namespace Prisma {
     difficulty?: IntFilter<"Cours"> | number
     summary?: StringNullableFilter<"Cours"> | string | null
     visibility?: BoolFilter<"Cours"> | boolean
+    numberPage?: IntFilter<"Cours"> | number
     createdAt?: DateTimeFilter<"Cours"> | Date | string
     updatedAt?: DateTimeFilter<"Cours"> | Date | string
     authorId?: IntFilter<"Cours"> | number
@@ -28319,6 +28357,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28341,6 +28380,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28378,6 +28418,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -28400,6 +28441,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -28421,6 +28463,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28443,6 +28486,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28657,6 +28701,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28679,6 +28724,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28772,6 +28818,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -28794,6 +28841,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -28865,6 +28913,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28887,6 +28936,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28980,6 +29030,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29002,6 +29053,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29175,6 +29227,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29197,6 +29250,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29254,6 +29308,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29276,6 +29331,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29323,6 +29379,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29345,6 +29402,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29402,6 +29460,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29424,6 +29483,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29471,6 +29531,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29493,6 +29554,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29580,6 +29642,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29602,6 +29665,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29679,6 +29743,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29701,6 +29766,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29788,6 +29854,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29810,6 +29877,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29887,6 +29955,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29909,6 +29978,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29996,6 +30066,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -30018,6 +30089,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -30277,6 +30349,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryId: number
@@ -30344,6 +30417,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutCoursesNestedInput
@@ -30366,6 +30440,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: IntFieldUpdateOperationsInput | number
@@ -30388,6 +30463,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: IntFieldUpdateOperationsInput | number
@@ -30797,6 +30873,7 @@ export namespace Prisma {
     difficulty: number
     summary?: string | null
     visibility?: boolean
+    numberPage: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -30810,6 +30887,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -30832,6 +30910,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -30854,6 +30933,7 @@ export namespace Prisma {
     difficulty?: IntFieldUpdateOperationsInput | number
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
+    numberPage?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
