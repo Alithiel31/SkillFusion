@@ -124,6 +124,7 @@ exports.Prisma.CoursScalarFieldEnum = {
   difficulty: 'difficulty',
   summary: 'summary',
   visibility: 'visibility',
+  numberPage: 'numberPage',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   authorId: 'authorId',

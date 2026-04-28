@@ -30,8 +30,6 @@
 <App>
 	<Header />
 	<Main>
-		<div class="page">
-			<main class="main">
 				<h1 class="page-title">Tous les cours</h1>
 
 				<!-- Recherche & Filtre -->
@@ -66,9 +64,7 @@
 						/>
 					{/each}
 				</div>
-			</main>
-		</div></Main
-	>
+		</Main>
 	<Footer />
 </App>
 
@@ -82,20 +78,6 @@
 		font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 		background-color: #f3f0ea;
 		color: #1a1a1a;
-	}
-	.page {
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-		background-color: #f3f0ea;
-	}
-
-	.main {
-		flex: 1;
-		max-width: 1120px;
-		width: 100%;
-		margin: 0 auto;
-		padding: 2.5rem 1.5rem 3rem;
 	}
 
 	.page-title {
@@ -159,10 +141,6 @@
 		border-color: #9ca3af;
 	}
 
-	.chevron {
-		font-size: 0.8rem;
-		color: #6b7280;
-	}
 
 	.add-btn {
 		width: 40px;
@@ -187,28 +165,14 @@
 	/* Grille */
 	.courses-grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(1, 1fr);
 		gap: 1.25rem;
 	}
 
-	@media (max-width: 1024px) {
-		.courses-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (max-width: 600px) {
-		.courses-grid {
-			grid-template-columns: 1fr;
-		}
-	}
 
 	/* --- mobile view --- */
-	@media (max-width: 768px) {
-		.main {
-			max-width: 100%;
-			padding: 1rem;
-		}
+	@media (min-width: 768px) {
+
 
 		.page-title {
 			font-size: 1.4rem;
@@ -236,11 +200,15 @@
 			flex-direction: row;
 		}
 
-		/* TRANSFORMATION GRID → LISTE MOBILE */
 		.courses-grid {
-			display: flex;
-			flex-direction: column;
-			gap: 0.8rem;
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+	}
+
+	@media (min-width: 1024px) {
+		.courses-grid {
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 </style>

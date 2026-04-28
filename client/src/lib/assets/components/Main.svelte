@@ -11,6 +11,7 @@
 		padding: 20px;
 		flex-grow: 1;
 		background-color: var(--background-color);
+		padding: auto;
 	}
 	@media (min-width: 1024px){
 		.section__main {
