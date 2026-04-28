@@ -171,6 +171,8 @@
 		border: 1px solid #e8e8e8;
 		border-radius: 12px;
 		margin-top: 40px;
+		margin-left: 20px;
+		margin-right: 20px;
 	}
 
 	.nav-btn {

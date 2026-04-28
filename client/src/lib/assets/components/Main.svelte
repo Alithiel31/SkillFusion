@@ -21,5 +21,8 @@
 		.section__main {
 			padding: 25px 100px;
 		}
+		.main-cours{
+			padding: 0;
+		}
 	}
 </style>
