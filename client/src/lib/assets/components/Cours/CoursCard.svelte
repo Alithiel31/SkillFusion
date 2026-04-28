@@ -1,6 +1,8 @@
 <script lang="ts">
+import LevelBar from './levelbar/LevelBar.svelte';
+	import Category from '../Category/Category.svelte';
 	let props = $props();
-	import LevelBar from './levelbar/LevelBar.svelte';
+	
 </script>
 
 <article class="cours-card">
@@ -9,7 +11,7 @@
 		<div class="card__body">
 			<h3 class="card__title">{props.cours.title}</h3>
 			<div class="card__information">
-				<span class="card-category"> {props.cours.category.name} </span>
+				<Category category={props.cours.category}/>
 				<LevelBar level={props.cours.difficulty} />
 			</div>
 		</div>
@@ -56,7 +58,7 @@
 	}
 
 	.card__body{
-		padding: 5px 10px;
+		padding: 10px 10px;
 		height: 100px;
 		display: flex;
 		flex-direction: column;
@@ -64,7 +66,7 @@
 	}
 
 	.card__title{
-		width: 90%;
+		width: 100%;
 		flex-grow: 1;
 	}
 	.card__information{
@@ -74,19 +76,6 @@
 		justify-content: space-between;
 		align-items: flex-end;
 	}
-	
-	.card-category {
-		color: var(--text_color);
-		font-size: 10px;
-		font-family: 'DM Sans', sans-serif;
-		font-weight: 500;
-		border: 1px solid var(--border_color);
-		border-radius: 20px;
-		padding: 5px 15px;
-		align-items: flex-end;
-		margin: 10px;
-	}
-	
 	
 	@media (min-width: 768px) {
 		.card__body{
@@ -98,10 +87,19 @@
 
 	}
 	@media (min-width: 1024px) {
+		
 		.cours-card {
 			height: 240px;
 			flex-direction: column;
 			min-width: unset;
+		}
+
+		.cours__link{
+			width:100%;
+			text-decoration: none;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
 		}
 		.card__image {
 			height: 100px;
@@ -114,6 +112,8 @@
 		.card__body{
 			overflow: unset;
 			padding: 10px;
+			width: unset;
+			flex-grow: 1;
 		}
 		.card__title{
 			width: 100%;

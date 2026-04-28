@@ -1,10 +1,13 @@
 <script lang="ts">
+	import '../../../../app.css';
 	import api from '$lib/services/api.service';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import type { ICours } from '$lib/@types/types';
+	import Category from '../Category/Category.svelte';
+	import LevelBar from './levelbar/LevelBar.svelte';
 
-	let course: ICours | null = $state(null);
+	let cours: ICours | null = $state(null);
 	let currentPage: number = $state(1);
 	let indexCours: ICours|null = $state(null);
 
@@ -41,7 +44,10 @@
 		<div class="desktop-header">
 			<h1>{indexCours.title}</h1>
 			<div class="header-right">
-				<span class="badge-categorie">{indexCours.category.name}</span>
+				<Category
+				category={indexCours.category}
+				--border_color={indexCours.category.borderColor}
+				--text_color={indexCours.category.textColor}/>
 				<span class="author">par <span>{indexCours.author.pseudo}</span></span>
 			</div>
 		</div>
@@ -73,14 +79,7 @@
 					<!-- Difficulté -->
 					<div class="edu-section">
 						<div class="edu-label">Niveau de difficulté</div>
-						<div class="difficulty-row">
-							<div class="diff-bars">
-								{#each Array(5) as _, i}
-									<div class="diff-bar {i < indexCours.difficulty ? 'filled' : 'empty'}"></div>
-								{/each}
-							</div>
-							<span class="diff-label">{indexCours.difficulty}/5</span>
-						</div>
+						<LevelBar level={indexCours.difficulty} />
 					</div>
 
 					<!-- Objectifs pédagogiques -->
@@ -138,88 +137,7 @@
 		</div>
 	</div>
 
-	<!-- MOBILE VIEW -->
-	<div class="mobile-view">
-		<div class="mobile-topbar">
-			<div class="mobile-back">Tous les cours</div>
-			<div class="mobile-header-row">
-				<div class="mobile-title">{indexCours?.title}</div>
-				<div class="mobile-header-right">
-					<span class="mobile-badge">{indexCours?.category.name}</span>
-					<span class="mobile-author">{indexCours?.author.pseudo}</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="mobile-body">
-			<!-- Contenu du cours -->
-			<div class="m-card">
-				<div class="m-card-title">Contenu</div>
-				<div class="m-resume-text">{indexCours?.littleSummary}</div>
-			</div>
-
-			<!-- Difficulté -->
-			<div class="m-card">
-				<div class="m-section-label">Niveau de difficulté</div>
-				<div class="m-difficulty-row">
-					<div class="diff-bars">
-						{#each Array(5) as _, i}
-							<div class="diff-bar {i < indexCours?.difficulty ? 'filled' : 'empty'}"></div>
-						{/each}
-					</div>
-					<span class="diff-label">{indexCours?.difficulty}/5</span>
-				</div>
-			</div>
-
-			<!-- Objectifs -->
-			<div class="m-card">
-				<div class="m-card-title-dark">Objectifs pédagogiques</div>
-				<ul class="m-obj-list">
-					{#each indexCours?.learningObjectives as obj}
-						<li>{obj.objectif.title}</li>
-					{/each}
-				</ul>
-			</div>
-
-			<!-- Commentaires -->
-			<div class="m-card">
-				<div class="m-card-title-dark">Commentaires</div>
-				{#if indexCours?.opinions && indexCours?.opinions.length > 0}
-					{#each indexCours?.opinions.slice(0, 3) as opinion, i}
-						<div class="m-review-item" class:first={i === 0}>
-							<div class="m-reviewer">
-								<div class="m-avatar"></div>
-								<span class="m-reviewer-name">{opinion.user.pseudo}</span>
-							</div>
-							<div class="m-review-text">{opinion.content}</div>
-						</div>
-					{/each}
-				{:else}
-					<p class="m-no-comments">Aucun commentaire</p>
-				{/if}
-			</div>
-
-			<!-- Navigation -->
-			<div class="m-navigation">
-				<button 
-					class="m-nav-btn" 
-					disabled={currentPage === 1}
-					onclick={goToPrevious}
-				>
-					← Précédent
-				</button>
-				<span class="m-page-indicator">{currentPage}/{indexCours?.numberPage}</span>
-				<button 
-					class="m-nav-btn" 
-					disabled={currentPage === indexCours?.numberPage}
-					onclick={goToNext}
-				>
-					Suivant →
-				</button>
-			</div>
-		</div>
-
-	</div>
+	
 {/if}
 
 <style>
@@ -233,7 +151,7 @@
 	/* ===================== DESKTOP ===================== */
 	.desktop-view {
 		display: block;
-		background: #f3f0eaff;
+		background: var(--background-color);
 		min-height: 100vh;
 		padding: 32px 48px;
 		font-family: 'Inter', sans-serif;
@@ -502,236 +420,10 @@
 	}
 
 	/* ===================== MOBILE ===================== */
-	.mobile-view {
-		display: none;
-		background-color: #f3f0ea;
-	}
 
 	@media (max-width: 768px) {
-		.desktop-view {
-			display: none;
-		}
 
-		.mobile-view {
-			display: block;
-			background: #f3f0ea;
-			min-height: 100vh;
-			font-family: 'Inter', sans-serif;
-		}
-	}
 
-	.mobile-topbar {
-		background: #fff;
-		padding: 14px 16px 0;
-	}
-
-	.mobile-back {
-		font-size: 13px;
-		color: #555;
-		display: flex;
-		align-items: center;
-		gap: 4px;
-		margin-bottom: 10px;
-		cursor: pointer;
-	}
-
-	.mobile-back::before {
-		content: '←';
-		font-size: 14px;
-	}
-
-	.mobile-header-row {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		padding-bottom: 14px;
-	}
-
-	.mobile-title {
-		font-size: 20px;
-		font-weight: 700;
-		color: #1a1a1a;
-		max-width: 210px;
-		line-height: 1.25;
-	}
-
-	.mobile-header-right {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		gap: 3px;
-	}
-
-	.mobile-badge {
-		border: 1.5px solid #1a1a1a;
-		border-radius: 20px;
-		padding: 2px 12px;
-		font-size: 12px;
-		font-weight: 500;
-		color: #1a1a1a;
-	}
-
-	.mobile-author {
-		font-size: 12px;
-		color: #555;
-	}
-
-	.mobile-body {
-		padding: 12px 14px;
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	.m-card {
-		background: #fff;
-		border-radius: 12px;
-		padding: 16px 18px;
-	}
-
-	.m-section-label {
-		font-size: 10px;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: #888;
-		margin-bottom: 8px;
-	}
-
-	.m-difficulty-row {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
-
-	.m-card-title {
-		font-size: 14px;
-		font-weight: 700;
-		color: #e8a020;
-		margin-bottom: 8px;
-	}
-
-	.m-resume-text {
-		font-size: 13px;
-		color: #444;
-		line-height: 1.55;
-	}
-
-	.m-card-title-dark {
-		font-size: 14px;
-		font-weight: 700;
-		color: #1a1a1a;
-		margin-bottom: 10px;
-	}
-
-	.m-obj-list {
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		gap: 7px;
-	}
-
-	.m-obj-list li {
-		display: flex;
-		align-items: flex-start;
-		gap: 8px;
-		font-size: 13px;
-		color: #1a1a1a;
-	}
-
-	.m-obj-list li::before {
-		content: '✓';
-		color: #3ab55b;
-		font-weight: 700;
-		font-size: 13px;
-		flex-shrink: 0;
-		margin-top: 1px;
-	}
-
-	.m-review-item {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-		padding: 10px 0;
-		border-top: 1px solid #f0f0f0;
-	}
-
-	.m-review-item.first {
-		border-top: none;
-		padding-top: 0;
-	}
-
-	.m-reviewer {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
-
-	.m-avatar {
-		width: 28px;
-		height: 28px;
-		border-radius: 50%;
-		background: #d0d0d0;
-		flex-shrink: 0;
-	}
-
-	.m-reviewer-name {
-		font-size: 12px;
-		font-weight: 600;
-		color: #1a1a1a;
-	}
-
-	.m-review-text {
-		font-size: 12px;
-		color: #555;
-		margin-left: 36px;
-	}
-
-	.m-no-comments {
-		font-size: 13px;
-		color: #999;
-		font-style: italic;
-	}
-
-	.m-navigation {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 10px;
-		padding: 16px 0;
-		margin-top: 10px;
-	}
-
-	.m-nav-btn {
-		background: #f4a623;
-		color: #fff;
-		border: none;
-		border-radius: 8px;
-		padding: 10px 12px;
-		font-size: 12px;
-		font-weight: 600;
-		cursor: pointer;
-		font-family: inherit;
-		flex: 1;
-		transition: background 0.2s;
-	}
-
-	.m-nav-btn:hover:not(:disabled) {
-		background: #e89b1c;
-	}
-
-	.m-nav-btn:disabled {
-		background: #d0d0d0;
-		cursor: not-allowed;
-		color: #999;
-	}
-
-	.m-page-indicator {
-		font-size: 12px;
-		font-weight: 600;
-		color: #1a1a1a;
-		flex: 1;
-		text-align: center;
 	}
 
 </style>

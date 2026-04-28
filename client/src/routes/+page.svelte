@@ -53,7 +53,7 @@
 			<section class="homepage__rightside">
 				<div class="homepage__rightside__menu">
 					<h3>Nos cours</h3>
-					<a class="main__link" href="/">Voir tout ➔</a>
+					<a class="main__link" href="/cours">Voir tout ➔</a>
 				</div>
 				<div class="courses-grid">
 					{#each courses as cours}
@@ -92,6 +92,7 @@
 		border-radius: 10px;
 		border: #1d4e89 1px solid;
 		padding: 8px 18px;
+		margin-top: 40px;
 		font-weight: 400;
 		transition:
 			background 0.15s,

@@ -1,8 +1,11 @@
 <script lang="ts">
+	import '../../../../app.css';
 	import api from '$lib/services/api.service';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import type { ICours } from '$lib/@types/types';
+	import LevelBar from './levelbar/LevelBar.svelte';
+	import Category from '../Category/Category.svelte';
 
 	let cours: ICours | null = $state(null);
 
@@ -24,11 +27,11 @@
 {#if cours}
 	<div class="desktop-view">
 		<div class="desktop-header">
-			<h1>{cours?.title}</h1>
-			<div class="header-right">
-				<span class="badge-categorie">{cours.category.name}</span>
-				<span class="author">par <span>{cours.author.pseudo}</span></span>
-			</div>
+			<h1>{cours.title}</h1>
+			<Category 
+				category={cours.category}
+				--border_color={cours.category.borderColor}
+				--text_color={cours.category.textColor}/>
 		</div>
 
 		<div class="desktop-main">
@@ -66,15 +69,7 @@
 			<div class="right-col">
 				<div class="info-card">
 					<!-- Difficulté -->
-					<div class="info-section-title">DIFFICULTÉ</div>
-					<div class="difficulty-row">
-						<div class="diff-bars">
-							{#each Array(5) as _, i}
-								<div class="diff-bar {i < cours.difficulty ? 'filled' : 'empty'}"></div>
-							{/each}
-						</div>
-						<span class="diff-label">{cours.difficulty}</span>
-					</div>
+					<LevelBar level={cours.difficulty} />
 
 					<!-- Objectifs -->
 					<div class="info-section-title">OBJECTIFS PÉDAGOGIQUES</div>
@@ -97,55 +92,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- ===== MOBILE VIEW ===== -->
-	<div class="mobile-view">
-		<div class="mobile-topbar">
-			<div class="mobile-back">Tous les cours</div>
-			<div class="mobile-header-row">
-				<div class="mobile-title">{cours?.title}</div>
-				<div class="mobile-header-right">
-					<span class="mobile-badge">{cours.category}</span>
-					<span class="mobile-author">{cours.author}</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="mobile-body">
-			<!-- Difficulté -->
-			<div class="m-card">
-				<div class="m-section-label">DIFFICULTÉ</div>
-				<div class="m-difficulty-row">
-					<div class="diff-bars">
-						{#each Array(5) as _, i}
-							<div class="diff-bar {i < cours?.difficulty ? 'filled' : 'empty'}"></div>
-						{/each}
-					</div>
-					<span class="diff-label">{cours?.difficulty}</span>
-				</div>
-			</div>
-
-			<!-- Résumé -->
-			<div class="m-card">
-				<div class="m-card-title">Résumé</div>
-				<div class="m-resume-text">{cours.littleSummary}</div>
-			</div>
-
-			<!-- Objectifs -->
-			<div class="m-card">
-				<div class="m-card-title-dark">Objectifs</div>
-				<ul class="m-obj-list">
-					{#each cours.learningObjectives as obj}
-						<li>{obj.objectif.title}</li>
-					{/each}
-				</ul>
-			</div>
-		</div>
-
-		<div class="mobile-cta-wrap">
-			<button class="mobile-cta-btn">Démarrer le cours →</button>
-		</div>
-	</div>
 {/if}
 
 <style>
@@ -159,7 +105,7 @@
 	/* ===================== DESKTOP ===================== */
 	.desktop-view {
 		display: block;
-		background: #f3f0eaff;
+		background: var(--background-color);
 		min-height: 100vh;
 		padding: 32px 48px;
 		font-family: 'Inter', sans-serif;
@@ -199,11 +145,6 @@
 		color: #555;
 	}
 
-	.author span {
-		font-weight: 600;
-		color: #1a1a1a;
-	}
-
 	.desktop-main {
 		display: grid;
 		grid-template-columns: 1fr 340px;
@@ -235,10 +176,6 @@
 		font-size: 14px;
 		color: #333;
 		line-height: 1.65;
-	}
-
-	.card p + p {
-		margin-top: 12px;
 	}
 
 	/* Reviews */
@@ -441,16 +378,9 @@
 		font-family: inherit;
 	}
 
-	/* ===================== MOBILE ===================== */
-	.mobile-view {
-		display: none;
-		background-color: #f3f0ea;
-	}
 
-	@media (max-width: 640px) {
-		.desktop-view {
-			display: none;
-		}
+	@media (min-width: 768px) {
+		
 
 		.mobile-view {
 			display: block;
@@ -570,23 +500,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 7px;
-	}
-
-	.m-obj-list li {
-		display: flex;
-		align-items: flex-start;
-		gap: 8px;
-		font-size: 13px;
-		color: #1a1a1a;
-	}
-
-	.m-obj-list li::before {
-		content: '✓';
-		color: #3ab55b;
-		font-weight: 700;
-		font-size: 13px;
-		flex-shrink: 0;
-		margin-top: 1px;
 	}
 
 	.mobile-cta-wrap {

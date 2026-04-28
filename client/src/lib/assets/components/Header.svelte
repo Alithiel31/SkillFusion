@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logoSkillFusion from '$lib/assets/img/testlogo.png';
+	import logoSkillFusion from '$lib/assets/img/logo_title.png';
 	import {getAuth, authStore, clearAuth} from "$lib/services/localstorage.service.svelte"
 	import { onMount } from 'svelte';
 
@@ -70,7 +70,7 @@
 		gap: 20px;
 	}
 	img {
-		width: 40px;
+		width: 100px;
 	}
 	.header_top {
 		display: flex;
@@ -178,7 +178,7 @@
 	}
 
 	/* ── Responsive ── */
-	@media (min-width: 800px) {
+	@media (min-width: 768px) {
 		.header__nav {
 			position: absolute;
 			left: 50%;
@@ -188,5 +188,11 @@
 		.header__nav-link {
 			width: auto;
 		}
+	}
+
+	@media (min-width: 1024px) {
+		img {
+		width: 200px;
+	}
 	}
 </style>
