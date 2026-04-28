@@ -4,8 +4,8 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import type { ICours } from '$lib/@types/types';
-	import LevelBar from './levelbar/LevelBar.svelte';
-	import Category from '../Category/Category.svelte';
+	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
+	import Category from '$lib/assets/components/Category/Category.svelte';
 
 	let cours: ICours | null = $state(null);
 
@@ -122,7 +122,7 @@
 					</div>
 				</div>
 
-				<button class="cta">Démarrer le cours →</button>
+				<a class="cta" href="/cours/{cours.slug}/cours">Démarrer le cours →</a>
 			</div>
 		</div>
 	</div>

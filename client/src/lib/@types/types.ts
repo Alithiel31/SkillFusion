@@ -31,6 +31,7 @@ export interface IUser {
 
 export interface ICours {
         id: Number
+        slug:string
         title: String
         littleSummary: String
         urlImage: String

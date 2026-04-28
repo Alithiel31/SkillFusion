@@ -3,13 +3,13 @@ import courContent from "../controllers/cour-content.controller";
 
 const router = express.Router();
 
-router.get("/cour-contents", courContent.getAll)
-router.get("/cour-contents/:id", courContent.getOneCourContent)
+router.get("/cours-contents", courContent.getAll)
+router.get("/cours-contents/:id", courContent.getOneCourContent)
 
-router.post("/cour-contents", courContent.createCourContent)
+router.post("/cours-contents", courContent.createCourContent)
 
-router.patch("/cour-contents/:id", courContent.updatingCourContent)
+router.patch("/cours-contents/:id", courContent.updatingCourContent)
 
-router.delete("/cour-contents/:id", courContent.deleteCourContent)
+router.delete("/cours-contents/:id", courContent.deleteCourContent)
 
 export default router;
