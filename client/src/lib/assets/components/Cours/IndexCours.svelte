@@ -5,7 +5,7 @@
 	import { page } from '$app/state';
 	import type { ICours } from '$lib/@types/types';
 	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
-	import Category from '../Category/Category.svelte';
+	import Category from '$lib/assets/components/Category/Category.svelte';
 
 	let cours: ICours | null = $state(null);
 
@@ -125,6 +125,7 @@
 				<a class="cta" href="/cours/{cours.slug}/cours">Démarrer le cours →</a>
 			</div>
 		</div>
+	</div>
 {/if}
 
 <style>

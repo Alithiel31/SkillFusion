@@ -4,8 +4,8 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
 	import type { ICours } from '$lib/@types/types';
-	import Category from '../Category/Category.svelte';
-	import LevelBar from './levelbar/LevelBar.svelte';
+	import Category from '$lib/assets/components/Category/Category.svelte';
+	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 
 	let cours: ICours | null = $state(null);
 	let currentPage: number = $state(1);

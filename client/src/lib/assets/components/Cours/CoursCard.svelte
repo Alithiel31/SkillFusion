@@ -1,6 +1,6 @@
 <script lang="ts">
 import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
-	import Category from '../Category/Category.svelte';
+	import Category from '$lib/assets/components/Category/Category.svelte';
 	let props = $props();
 	
 </script>

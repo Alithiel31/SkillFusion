@@ -1,5 +1,5 @@
 <script>
-    import Login from '$lib/assets/components/Auth/Connection.svelte';
+    import Login from '$lib/assets/components/Auth/componantConnection.svelte';
 </script>
 
 <Login />

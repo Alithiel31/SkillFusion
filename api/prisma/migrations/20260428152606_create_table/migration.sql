@@ -1,6 +1,7 @@
 -- CreateTable
 CREATE TABLE "roles" (
     "id" SERIAL NOT NULL,
+    "frName" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
@@ -65,6 +66,7 @@ CREATE TABLE "categories" (
     "description" TEXT,
     "text_color" TEXT NOT NULL,
     "border_color" TEXT NOT NULL,
+    "background_color" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
 

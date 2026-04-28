@@ -74,7 +74,7 @@
 						category={cours.category}
 						--border_color={cours.category.borderColor}
 						--text_color={cours.category.textColor}
-					/>
+						--background-color={cours.category.backgroundColor}/>
 					<span class="author">par <span>{cours.author.pseudo}</span></span>
 				</div>
 			</div>
