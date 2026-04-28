@@ -1,5 +1,5 @@
 import express from 'express';
-import badgeController from '../controlleurs/badge.controller';
+import badgeController from '../controllers/badge.controller';
 
 const router = express.Router();
 

@@ -20,6 +20,7 @@ import notification from './routers/notification.router';
 import coursActive from './routers/cour-active.router';
 import tool from './routers/tool.router';
 import learningObjectifRouter from './routers/learning-objectif.router';
+import rolesRouter from "./routers/roles.router"
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use("/api", notification);
 app.use("/api", coursActive);
 app.use("/api", tool);
 app.use("/api", learningObjectifRouter);
+app.use("/api",rolesRouter)
 
 
 app.get('/', (req, res) => {

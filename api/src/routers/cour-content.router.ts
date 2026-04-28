@@ -1,5 +1,5 @@
 import express from "express";
-import courContent from "../controlleurs/cour-content.controller";
+import courContent from "../controllers/cour-content.controller";
 
 const router = express.Router();
 

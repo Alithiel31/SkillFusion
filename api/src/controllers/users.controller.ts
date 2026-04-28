@@ -7,12 +7,14 @@ import { NotFoundError } from "../lib/errors";
 export async function getAllUsers(req: Request, res: Response) {
   // Requête pour la BDD
   const users = await prisma.user.findMany({
-    omit: { password: true }
+    omit: { password: true },
+    include: {
+      role: true
+    }
   });
   // Réponse envoyé coté client
   res.json(users);
 }
-
 
 // Export des données de l'utiliateur connecté (RGPD) ------------------------------------------------
 

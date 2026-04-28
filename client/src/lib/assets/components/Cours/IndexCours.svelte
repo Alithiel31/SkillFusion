@@ -13,6 +13,7 @@
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
 		cours = response.data;
 	});
+
 	function getStars(note: number) {
 		const stars = [];
 		for (let i = 1; i <= 5; i++) {
@@ -24,356 +25,303 @@
 	}
 </script>
 
+<div class="back-cours">
+	<a href="/cours" class="back-link">← Tous les cours</a>
+</div>
+
 {#if cours}
-		<div class="desktop-header">
+	<div class="page">
+		<!-- HEADER -->
+		<div class="header">
 			<h1>{cours.title}</h1>
-			<Category 
+			<Category
 				category={cours.category}
 				--border_color={cours.category.borderColor}
-				--text_color={cours.category.textColor}/>
+				--text_color={cours.category.textColor}
+			/>
 		</div>
 
-		<div class="desktop-main">
+		<!-- MAIN -->
+
+		<div class="layout">
+			<div class="card side mobile-only">
+				<div class="section">
+					<p class="label">Difficulté</p>
+					<LevelBar class="difficulty-bar" level={cours.difficulty} />
+				</div>
+			</div>
 			<!-- LEFT -->
-			<div class="left-col">
-				<!-- Résumé -->
+			<div class="left">
 				<div class="card">
-					<div class="card-title">Résumé du cours</div>
+					<div class="card-title">Résumé</div>
 					<p>{cours.littleSummary}</p>
 				</div>
 
-				<!-- Avis -->
-				<div class="card">
-					<div class="reviews-title">Avis des apprenants</div>
-					{#each cours.opinions as opinion, i}
-						<div class="review-item" class:first={i === 0}>
-							<div class="reviewer">
-								<div class="avatar"></div>
-								<div class="reviewer-info">
-									<span class="reviewer-name">{opinion.user.pseudo}</span>
-									<div class="stars">
-										{#each getStars(opinion.note) as type}
-											<span class="star-{type}">★</span>
-										{/each}
-									</div>
-								</div>
-							</div>
-							<div class="review-text">{opinion.content}</div>
-						</div>
-					{/each}
-				</div>
-			</div>
-
-			<!-- RIGHT -->
-			<div class="right-col">
-				<div class="info-card">
-					<!-- Difficulté -->
-					<LevelBar level={cours.difficulty} />
-
-					<!-- Objectifs -->
-					<div class="info-section-title">OBJECTIFS PÉDAGOGIQUES</div>
-					<ul class="obj-list">
+				<!-- MOBILE OBJECTIFS -->
+				<div class="card mobile-only">
+					<div class="card-title">Objectifs</div>
+					<ul class="list">
 						{#each cours.learningObjectives as obj}
 							<li>{obj.objectif.title}</li>
 						{/each}
 					</ul>
-
-					<!-- Outils -->
-					<div class="info-section-title tools-title">OUTILS NÉCESSAIRES</div>
-					<ul class="obj-list">
-						{#each cours.tools as tool}
-							<li>{tool.tools.name}</li>
-						{/each}
-					</ul>
 				</div>
 
-				<a class="cta-btn" href="/cours/{cours.slug}/cours">Démarrer le cours →</a>
+				<!-- AVIS -->
+				<div class="opinion">
+					<div class="card opinions">
+						<div class="card-title dark">Avis des apprenants</div>
+
+						{#each cours.opinions as opinion, i}
+							<div class="review {i === 0 ? 'first' : ''}">
+								<div class="review-top">
+									<div class="avatar"></div>
+
+									<div>
+										<div class="name">{opinion.user.pseudo}</div>
+										<div class="stars">
+											{#each getStars(opinion.note) as type}
+												<span class="star-{type}">★</span>
+											{/each}
+										</div>
+									</div>
+								</div>
+
+								<div class="text">{opinion.content}</div>
+							</div>
+						{/each}
+					</div>
+				</div>
+			</div>
+
+			<!-- RIGHT -->
+			<div class="right">
+				<div class="card side desktop-only">
+					<div class="section">
+						<p class="label">Difficulté</p>
+						<LevelBar class="difficulty-bar" level={cours.difficulty} />
+					</div>
+
+					<div class="section desktop-only">
+						<p class="label">OBJECTIFS PÉDAGOGIQUES</p>
+						<ul class="list">
+							{#each cours.learningObjectives as obj}
+								<li>{obj.objectif.title}</li>
+							{/each}
+						</ul>
+					</div>
+					<div class="tool-mobile">
+						<div class="section">
+							<p class="label">OUTILS NÉCESSAIRES</p>
+							<ul class="list">
+								{#each cours.tools as tool}
+									<li>{tool.tools.name}</li>
+								{/each}
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<a class="cta" href="/cours/{cours.slug}/cours">Démarrer le cours →</a>
 			</div>
 		</div>
 {/if}
 
 <style>
-	/* ===================== RESET ===================== */
+	/* RESET */
 	* {
 		box-sizing: border-box;
 		margin: 0;
 		padding: 0;
 	}
 
-	/* ===================== DESKTOP ===================== */
-	.desktop-view {
-		display: block;
+	/* PAGE */
+	.page {
+		padding: 32px 48px;
 		background: var(--background-color);
 		min-height: 100vh;
-		padding: 32px 48px;
 		font-family: 'Inter', sans-serif;
 	}
 
-	.desktop-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		margin-bottom: 32px;
-	}
-
-	.desktop-header h1 {
-		font-size: 26px;
-		font-weight: 700;
-		color: #1a1a1a;
-	}
-
-	.header-right {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		gap: 4px;
-	}
-
-	.badge-categorie {
-		border: 1.5px solid #1a1a1a;
-		border-radius: 20px;
-		padding: 3px 14px;
-		font-size: 13px;
-		font-weight: 500;
-		color: #1a1a1a;
-	}
-
-	.author {
-		font-size: 13px;
+	/* BACK */
+	.back-link {
+		text-decoration: none;
+		font-size: 14px;
 		color: #555;
 	}
 
-	.desktop-main {
+	/* HEADER */
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 24px;
+	}
+
+	.header h1 {
+		font-size: 26px;
+		font-weight: 700;
+	}
+
+	/* LAYOUT */
+	.layout {
 		display: grid;
-		grid-template-columns: 1fr 340px;
+		grid-template-columns: 1fr 320px;
 		gap: 24px;
 	}
 
-	/* Left column */
-	.left-col {
+	/* LEFT */
+	.left {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
 	}
 
+	/* RIGHT */
+	.right {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+
+	/* CARD */
 	.card {
-		background: #fff;
+		background: white;
 		border: 1px solid #e8e8e8;
 		border-radius: 12px;
-		padding: 24px 28px;
+		padding: 20px;
 	}
 
 	.card-title {
-		font-size: 15px;
 		font-weight: 700;
-		color: #e8a020;
-		margin-bottom: 14px;
+		color: #f4a623;
+		margin-bottom: 10px;
 	}
 
-	.card :global(p) {
-		font-size: 14px;
-		color: #333;
-		line-height: 1.65;
-	}
-
-	/* Reviews */
-	.reviews-title {
-		font-size: 15px;
-		font-weight: 700;
+	.card-title.dark {
 		color: #1a1a1a;
-		margin-bottom: 16px;
 	}
 
-	.review-item {
+	/* LIST */
+	.list {
+		list-style: none;
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
-		padding-bottom: 14px;
-		border-top: 1px solid #f0f0f0;
-		padding-top: 14px;
+		gap: 6px;
 	}
 
-	.review-item.first {
+	.list li::before {
+		content: '✓';
+		color: #3ab55b;
+		margin-right: 6px;
+	}
+
+	/* SIDE */
+	.side .section {
+		margin-bottom: 12px;
+	}
+
+	.label {
+		font-size: 11px;
+		font-weight: 700;
+		color: #888;
+		margin-bottom: 6px;
+	}
+
+	/* CTA */
+	.cta {
+		background: #f4a623;
+		color: #1d4e89;
+		border: none;
+		border-radius: 10px;
+		padding: 14px;
+		font-weight: 600;
+		cursor: pointer;
+	}
+
+	/* REVIEWS */
+	.review {
+		border-top: 1px solid #eee;
+		padding-top: 12px;
+		margin-top: 12px;
+	}
+
+	.review.first {
 		border-top: none;
+		margin-top: 0;
 		padding-top: 0;
 	}
 
-	.reviewer {
+	.review-top {
 		display: flex;
-		align-items: center;
 		gap: 10px;
+		align-items: center;
 	}
 
 	.avatar {
 		width: 32px;
 		height: 32px;
+		background: #ddd;
 		border-radius: 50%;
-		background: #d0d0d0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 11px;
+	}
+
+	.name {
 		font-weight: 600;
-		color: #555;
-		flex-shrink: 0;
-	}
-
-	.reviewer-info {
-		display: flex;
-		flex-direction: column;
-		gap: 1px;
-	}
-
-	.reviewer-name {
 		font-size: 13px;
-		font-weight: 600;
-		color: #1a1a1a;
 	}
 
-	.stars {
-		display: flex;
-		gap: 1px;
+	.text {
+		margin-left: 42px;
+		font-size: 13px;
+		color: #555;
 	}
 
+	/* STARS */
 	.star-full,
 	.star-half {
 		color: #f4a623;
-		font-size: 13px;
 	}
-
 	.star-empty {
 		color: #ddd;
-		font-size: 13px;
 	}
-
-	.review-text {
-		font-size: 13px;
-		color: #555;
-		margin-left: 42px;
+	.mobile-only {
+		display: none;
 	}
-
-	/* Right column */
-	.right-col {
-		display: flex;
-		flex-direction: column;
-		gap: 20px;
-	}
-
-	.info-card {
-		background: #fff;
-		border: 1px solid #e8e8e8;
-		border-radius: 12px;
-		padding: 20px 22px;
-	}
-
-	.info-section-title {
-		font-size: 10px;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: #888;
-		margin-bottom: 8px;
-	}
-
-	/* Difficulty bars */
-	.difficulty-row {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		margin-bottom: 18px;
-	}
-
-	.diff-bars {
-		display: flex;
-		gap: 3px;
-		align-items: flex-end;
-	}
-
-	.diff-bar {
-		width: 5px;
-		border-radius: 2px;
-	}
-
-	.diff-bar.filled {
-		background: #3ab55b;
-	}
-
-	.diff-bar.empty {
-		background: #d8d8d8;
-	}
-
-	.diff-bar:nth-child(1) {
-		height: 8px;
-	}
-	.diff-bar:nth-child(2) {
-		height: 12px;
-	}
-	.diff-bar:nth-child(3) {
-		height: 16px;
-	}
-	.diff-bar:nth-child(4) {
-		height: 16px;
-	}
-	.diff-bar:nth-child(5) {
-		height: 16px;
-	}
-
-	.diff-label {
-		font-size: 13px;
-		font-weight: 600;
-		color: #1a1a1a;
-	}
-
-	/* Objectives */
-	.obj-list {
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-		margin-bottom: 4px;
-	}
-
-	.obj-list li {
-		display: flex;
-		align-items: flex-start;
-		gap: 8px;
-		font-size: 13px;
-		color: #1a1a1a;
-	}
-
-	.obj-list li::before {
-		content: '✓';
-		color: #3ab55b;
-		font-weight: 700;
-		font-size: 13px;
-		flex-shrink: 0;
-		margin-top: 1px;
-	}
-
-	/* Tools */
-	.tools-title {
-		margin-top: 18px;
-	}
-
-	.tools-text {
-		font-size: 13px;
-		color: #1a1a1a;
-	}
-
-	/* CTA */
-	.cta-btn {
-		background: #f4a623;
-		color: #fff;
-		border: none;
-		border-radius: 10px;
-		padding: 16px;
-		font-size: 15px;
-		font-weight: 600;
-		cursor: pointer;
-		width: 100%;
-		text-align: center;
+	.desktop-only {
 		display: block;
-		font-family: inherit;
 	}
 
+	/* RESPONSIVE */
+	@media (max-width: 768px) {
+		.page {
+			padding: 16px;
+		}
+
+		.layout {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.desktop-only {
+			display: none;
+		}
+
+		.mobile-only {
+			display: block;
+		}
+
+		.cta {
+			position: sticky;
+			bottom: 10px;
+		}
+		.opinion {
+			display: none;
+		}
+		.tool-mobile {
+			display: none;
+		}
+		.desktop-only {
+			display: none;
+		}
+	}
 </style>
