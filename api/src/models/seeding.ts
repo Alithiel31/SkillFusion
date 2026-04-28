@@ -163,41 +163,37 @@ async function seed() {
 
   const coursContents = await prisma.courContent.createMany({
     data: [{
-      content: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea",
+      content: "# Introduction\n\nDécouvrez les bases de l'installation d'un robinet mitigeur. Ce guide vous accompagnera pas à pas dans le processus de remplacement de votre ancien robinet.",
       numberPage: 1,
       coursId: 1
     },
     {
-      content: "aliquip ex ea consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad min veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea",
+      content: "# Étape 1 : Préparation\n\nAvant de commencer, assurez-vous de couper l'arrivée d'eau principale et de préparer tous les outils nécessaires pour une installation sécurisée.",
       numberPage: 2,
       coursId: 1
     },
     {
-      content: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea",
+      content: "# Introduction\n\nApprenez à installer un deuxième robinet mitigeur dans votre cuisine ou salle de bain. Suivez ces étapes pour une installation réussie.",
       numberPage: 1,
       coursId: 2
     },
     {
-      content: "aliquip ex ea consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad min veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea",
+      content: "# Étape 1 : Préparation avancée\n\nPour une installation de niveau intermédiaire, commencez par vérifier la compatibilité des raccordements existants avec le nouveau robinet.",
       numberPage: 2,
       coursId: 2
     },
     {
-      content: " 1. Retirer l’ancienne poignée\
-                Commence par dévisser les vis visibles sur la poignée(souvent sur la plaque ou la rosace).\
-                Tire doucement pour séparer les deux côtés de la poignée.",
+      content: "# Étape 1 : Retirer l'ancienne poignée\n\nCommencez par dévisser les vis visibles sur la poignée, souvent situées sur la plaque ou la rosace. Tirez doucement pour séparer les deux côtés de la poignée.",
       numberPage: 1,
       coursId: 3
     },
     {
-      content: "2. Enlever le carré (axe)\
-                Une fois les poignées retirées, enlève la tige métallique (le carré) qui relie les deux côtés.",
+      content: "# Étape 2 : Enlever le carré\n\nUne fois les poignées retirées, retirez la tige métallique appelée carré qui relie les deux côtés de la porte.",
       numberPage: 2,
       coursId: 3
     },
     {
-      content: "3. Démonter le mécanisme (si nécessaire)\
-                  Si tu changes aussi le mécanisme (le loquet), dévisse la plaque sur le chant de la porte et retire le système.",
+      content: "# Étape 3 : Démonter le mécanisme\n\nSi vous changez également le mécanisme de verrouillage, dévissez la plaque sur le chant de la porte et retirez le système complet.",
       numberPage: 3,
       coursId: 3
     }]

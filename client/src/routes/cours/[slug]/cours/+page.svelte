@@ -9,28 +9,35 @@
 	import { page } from '$app/state';
 	import type { ICours } from '$lib/@types/types';
 	import Category from '$lib/assets/components/Category/Category.svelte';
+	import { marked } from 'marked';
+	import { getAuth,authStore } from '$lib/services/localstorage.service.svelte';
+	import DOMPurify from 'dompurify';
+
 
 	let isLoading = $state(false);
 	let cours: ICours | null = $state(null);
 	let currentPage: number = $state(1);
 	let coursContent = $state(null);
+	let modifier=$state(false)
+	let currentPageId=$state()
 
 	onMount(async () => {
 		isLoading = true;
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
 		cours = response.data;
 		if (cours) {
-			const currentPageId = cours.content.find((content) => content.numberPage == currentPage);
-			const response = await api('api/cours-contents/' + currentPageId?.id, 'GET');
-			coursContent = response.data;
+			currentPageId = cours.content.find((content) => content.numberPage == currentPage);
+			getCours()
 			isLoading = false;
 		}
+		getAuth()
 	});
 
 	async function getCours() {
-		const currentPageId = cours?.content.find((content) => content.numberPage == currentPage);
+		currentPageId = cours?.content.find((content) => content.numberPage == currentPage);
 		const response = await api('api/cours-contents/' + currentPageId?.id, 'GET');
 		coursContent = response.data;
+		coursContent.content = await DOMPurify.sanitize(coursContent.content)
 	}
 
 	function goToPrevious() {
@@ -45,6 +52,13 @@
 			currentPage++;
 			getCours();
 		}
+	}
+
+	async function valider(){
+
+		const response = await api('api/cours-contents/' + currentPageId?.id, 'PATCH',{
+			content:document.getElementById('text_area')?.value
+		});
 	}
 </script>
 
@@ -68,12 +82,26 @@
 			</div>
 
 			<div class="cours-main">
-				<div class="card-title">Contenu du cours</div>
+			{#if authStore.user.role=="instructor"}
+			<button onclick={()=>{modifier=!modifier}}>modifier</button>
+				
+				{#if !modifier}
+					<div class="cours-content">
+						{@html marked.parse(coursContent.content)}
+					</div>
+					
+				{:else}
 				<div class="cours-content">
-					<p>{coursContent.content}</p>
+					<textarea id="text_area">{coursContent.content}</textarea>
+					<button onclick={valider}>Valider</button>
 				</div>
+				{/if}
+			{:else}
+			<div class="cours-content">
+					{@html marked.parse(coursContent.content)}
+				</div>
+			{/if}
 			</div>
-
 			<div class="navigation-footer">
 				<button class="nav-btn prev-btn" disabled={currentPage === 1} onclick={goToPrevious}
 					>← Précédent</button
