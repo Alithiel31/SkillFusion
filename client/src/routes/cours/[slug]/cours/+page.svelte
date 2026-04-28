@@ -10,34 +10,33 @@
 	import type { ICours } from '$lib/@types/types';
 	import Category from '$lib/assets/components/Category/Category.svelte';
 	import { marked } from 'marked';
-	import { getAuth,authStore } from '$lib/services/localstorage.service.svelte';
+	import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
 	import DOMPurify from 'dompurify';
-
 
 	let isLoading = $state(false);
 	let cours: ICours | null = $state(null);
 	let currentPage: number = $state(1);
 	let coursContent = $state(null);
-	let modifier=$state(false)
-	let currentPageId=$state()
+	let modifier = $state(false);
+	let currentPageId = $state();
+	let textButton = $derived(modifier ? 'Annuler' : 'Modifier');
 
 	onMount(async () => {
 		isLoading = true;
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
 		cours = response.data;
 		if (cours) {
-			currentPageId = cours.content.find((content) => content.numberPage == currentPage);
-			getCours()
+			getCours();
 			isLoading = false;
 		}
-		getAuth()
+		getAuth();
 	});
 
 	async function getCours() {
 		currentPageId = cours?.content.find((content) => content.numberPage == currentPage);
 		const response = await api('api/cours-contents/' + currentPageId?.id, 'GET');
 		coursContent = response.data;
-		coursContent.content = await DOMPurify.sanitize(coursContent.content)
+		coursContent.content = DOMPurify.sanitize(coursContent.content);
 	}
 
 	function goToPrevious() {
@@ -54,10 +53,9 @@
 		}
 	}
 
-	async function valider(){
-
-		const response = await api('api/cours-contents/' + currentPageId?.id, 'PATCH',{
-			content:document.getElementById('text_area')?.value
+	async function valider() {
+		const response = await api('api/cours-contents/' + currentPageId?.id, 'PATCH', {
+			content: document.getElementById('text_area')?.value
 		});
 	}
 </script>
@@ -82,25 +80,23 @@
 			</div>
 
 			<div class="cours-main">
-			{#if authStore.user.role=="instructor"}
-			<button onclick={()=>{modifier=!modifier}}>modifier</button>
-				
-				{#if !modifier}
-					<div class="cours-content">
+				{#if authStore.user.role == 'instructor'}
+					<button
+						class="button_modify"
+						onclick={() => {
+							modifier = !modifier;
+						}}>{textButton}</button
+					>
+
+					{#if !modifier}
 						{@html marked.parse(coursContent.content)}
-					</div>
-					
+					{:else}
+						<textarea id="text_area">{coursContent.content}</textarea>
+						<button onclick={valider} class="button_modify">Valider</button>
+					{/if}
 				{:else}
-				<div class="cours-content">
-					<textarea id="text_area">{coursContent.content}</textarea>
-					<button onclick={valider}>Valider</button>
-				</div>
-				{/if}
-			{:else}
-			<div class="cours-content">
 					{@html marked.parse(coursContent.content)}
-				</div>
-			{/if}
+				{/if}
 			</div>
 			<div class="navigation-footer">
 				<button class="nav-btn prev-btn" disabled={currentPage === 1} onclick={goToPrevious}
@@ -159,13 +155,15 @@
 		border: 1px solid #e8e8e8;
 		border-radius: 12px;
 		padding: 24px 28px;
+		display: flex;
+		flex-direction: column;
+		gap:20px;
 	}
 
-	.card-title {
-		font-size: 15px;
-		font-weight: 700;
-		color: #e8a020;
-		margin-bottom: 14px;
+
+	.button_modify {
+		width: max-content;
+		align-self: end;
 	}
 
 	.card :global(p) {
@@ -174,12 +172,7 @@
 		line-height: 1.65;
 	}
 
-	.cours-content {
-		font-size: 14px;
-		color: #333;
-		line-height: 1.65;
-	}
-
+	
 	/* Reviews */
 	.reviews-title {
 		font-size: 15px;
