@@ -66,6 +66,7 @@ model Cours {
   difficulty    Int
   summary       String?
   visibility    Boolean @default(false)
+  numberPage    Int @map("number_page")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

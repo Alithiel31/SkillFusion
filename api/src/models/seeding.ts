@@ -117,7 +117,8 @@ async function seed() {
         summary: "Dans ce cours, vous apprendrez à démonter un ancien robinet mitigeur et à installer un nouveau modèle. Nous verrons les différents types de raccordements, comment couper l'eau, préparer les arrivées et sécuriser l'installation avant la mise en service. Ce cours est adapté aux débutants complets. Aucune connaissance préalable en plomberie n'est nécessaire.",
         difficulty: 2,
         authorId: 4,
-        categoryId: 2
+        categoryId: 2,
+        numberPage:2
       },
       {
         title: "Installer un deuxieme robinet mitigeur",
@@ -126,7 +127,8 @@ async function seed() {
         summary: "Dans ce cours, vous apprendrez à démonter un ancien robinet mitigeur et à installer un nouveau modèle. Nous verrons les différents types de raccordements, comment couper l'eau, préparer les arrivées et sécuriser l'installation avant la mise en service. Ce cours est adapté aux débutants complets. Aucune connaissance préalable en plomberie n'est nécessaire.",
         difficulty: 3,
         authorId: 5,
-        categoryId: 2
+        categoryId: 2,
+        numberPage:2
       },
       {
         title: "Installer une poigner de porte",
@@ -135,7 +137,8 @@ async function seed() {
         summary: "Changer une poignée de porte est une tâche simple et rapide qui ne nécessite que quelques outils de base. Ce cours vous guide tout au long du processus",
         difficulty: 4,
         authorId: 5,
-        categoryId: 1
+        categoryId: 1,
+        numberPage:3
       }
     ]
   });

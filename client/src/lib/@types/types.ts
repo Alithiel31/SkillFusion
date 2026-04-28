@@ -42,6 +42,7 @@ export interface ICours {
         authorId: Number
         category: Category
         categoryId: Number
+        numberPage:number
         tools: CoursHasTool[]
         learningObjectives: CoursHasLearningObjective[]
         content: CourContent[]
