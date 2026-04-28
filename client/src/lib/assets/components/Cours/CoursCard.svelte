@@ -11,7 +11,8 @@ import LevelBar from './levelbar/LevelBar.svelte';
 		<div class="card__body">
 			<h3 class="card__title">{props.cours.title}</h3>
 			<div class="card__information">
-				<Category category={props.cours.category}/>
+				<Category category={props.cours.category}
+				--background_color={props.cours.category.backgroundColor}/>
 				<LevelBar level={props.cours.difficulty} />
 			</div>
 		</div>

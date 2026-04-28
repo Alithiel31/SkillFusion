@@ -68,6 +68,7 @@ export interface ICategory {
         name: string
         description: string    
         textColor: string
+        backgroundColor:string
         borderColor: string
         createdAt: Date
         updatedAt: Date

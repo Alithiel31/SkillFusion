@@ -102,11 +102,12 @@ model CourContent {
 }
 
 model Category {
-  id          Int     @id @default(autoincrement())
-  name        String
-  description String?
-  textColor   String  @map("text_color")
-  borderColor String  @map("border_color")
+  id              Int     @id @default(autoincrement())
+  name            String
+  description     String?
+  textColor       String  @map("text_color")
+  borderColor     String  @map("border_color")
+  backgroundColor String  @map("background_color")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

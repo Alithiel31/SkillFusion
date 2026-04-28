@@ -175,6 +175,7 @@ exports.Prisma.CategoryScalarFieldEnum = {
   description: 'description',
   textColor: 'textColor',
   borderColor: 'borderColor',
+  backgroundColor: 'backgroundColor',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

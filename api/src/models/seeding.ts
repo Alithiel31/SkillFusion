@@ -50,22 +50,50 @@ async function seed() {
   });
   console.log("User : ", users.count)
 
-
-
-
   const categories = await prisma.category.createMany({
     data: [{
       name: "Menuiserie",
       description: "Travail du bois",
-      borderColor: '#22c55e',
-      textColor: '#15803d'
+      borderColor: '#C0DD97',
+      textColor: '#27500A',
+      backgroundColor: "#EAF3DE"
     },
     {
       name: "Plomberie",
       description: "Anti fuite",
-      borderColor: '#3b82f6',
-      textColor: '#1d4ed8'
-    }]
+      borderColor: '#B5D4F4',
+      textColor: '#1D4E89',
+      backgroundColor: "#EBF2FA"
+    },
+    {
+      name: "Electricité",
+      description: "Etre au courant",
+      borderColor: '#FAC775',
+      textColor: '#BA7517',
+      backgroundColor: "#FEF5E7"
+    },
+    {
+      name: "Chauffage",
+      description: "Anti Froid",
+      borderColor: '#D7BDE2',
+      textColor: '#7D3C98',
+      backgroundColor: "#F4ECF7"
+    },
+    {
+      name: "Carrelage",
+      description: "Mettre un habillage sur le mur",
+      borderColor: '#F1948A',
+      textColor: '#A93226',
+      backgroundColor: "#FDEDEC"
+    },
+    {
+      name: "Peinture",
+      description: "Picasso de la maison ",
+      borderColor: '#D6D3D1',
+      textColor: '#57534E',
+      backgroundColor: "#F5F5F4"
+    },
+  ]
   });
   console.log("Categories : ", categories.count)
 
