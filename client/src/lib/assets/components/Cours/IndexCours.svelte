@@ -24,68 +24,85 @@
 	}
 </script>
 
+		<div class="back-cours">
+			<a href="/cours" class="back-link">← Tous les cours</a>
+		</div>
+
 {#if cours}
 	<div class="desktop-view">
 		<div class="desktop-header">
 			<h1>{cours.title}</h1>
-			<Category 
+			<Category
 				category={cours.category}
 				--border_color={cours.category.borderColor}
-				--text_color={cours.category.textColor}/>
+				--text_color={cours.category.textColor}
+			/>
 		</div>
 
-		<div class="desktop-main">
-			<!-- LEFT -->
-			<div class="left-col">
-				<!-- Résumé -->
-				<div class="card">
-					<div class="card-title">Résumé du cours</div>
-					<p>{cours.littleSummary}</p>
+		<!-- RIGHT -->
+		<div class="right-col">
+			<div class="info-card">
+				<!-- Difficulté -->
+				<div class="difficulty-mobile">
+					<p>Difficulté</p>
+					<LevelBar class="difficulty-bar" level={cours.difficulty} />
 				</div>
 
-				<!-- Avis -->
-				<div class="card">
-					<div class="reviews-title">Avis des apprenants</div>
-					{#each cours.opinions as opinion, i}
-						<div class="review-item" class:first={i === 0}>
-							<div class="reviewer">
-								<div class="avatar"></div>
-								<div class="reviewer-info">
-									<span class="reviewer-name">{opinion.user.pseudo}</span>
-									<div class="stars">
-										{#each getStars(opinion.note) as type}
-											<span class="star-{type}">★</span>
-										{/each}
-									</div>
-								</div>
-							</div>
-							<div class="review-text">{opinion.content}</div>
-						</div>
+				<!-- Objectifs -->
+				<div class="info-section-title">OBJECTIFS PÉDAGOGIQUES</div>
+				<ul class="obj-list">
+					{#each cours.learningObjectives as obj}
+						<li>{obj.objectif.title}</li>
 					{/each}
-				</div>
+				</ul>
+
+				<!-- Outils -->
+				<div class="info-section-title tools-title">OUTILS NÉCESSAIRES</div>
+				<ul class="obj-list">
+					{#each cours.tools as tool}
+						<li>{tool.tools.name}</li>
+					{/each}
+				</ul>
 			</div>
 
-			<!-- RIGHT -->
-			<div class="right-col">
-				<div class="info-card">
-					<!-- Difficulté -->
-					<LevelBar level={cours.difficulty} />
+			<div class="desktop-main">
+				<!-- LEFT -->
+				<div class="left-col">
+					<!-- Résumé -->
+					<div class="card">
+						<div class="card-title">Résumé</div>
+						<p>{cours.littleSummary}</p>
+					</div>
 
-					<!-- Objectifs -->
-					<div class="info-section-title">OBJECTIFS PÉDAGOGIQUES</div>
-					<ul class="obj-list">
-						{#each cours.learningObjectives as obj}
-							<li>{obj.objectif.title}</li>
-						{/each}
-					</ul>
+					<div class="objectifs-mobile">
+						<div class="info-title-mobile">Objectifs</div>
+						<ul class="obj-list-mobile">
+							{#each cours.learningObjectives as obj}
+								<li>{obj.objectif.title}</li>
+							{/each}
+						</ul>
+					</div>
 
-					<!-- Outils -->
-					<div class="info-section-title tools-title">OUTILS NÉCESSAIRES</div>
-					<ul class="obj-list">
-						{#each cours.tools as tool}
-							<li>{tool.tools.name}</li>
+					<!-- Avis -->
+					<div class="card-opinions">
+						<div class="reviews-title">Avis des apprenants</div>
+						{#each cours.opinions as opinion, i}
+							<div class="review-item" class:first={i === 0}>
+								<div class="reviewer">
+									<div class="avatar"></div>
+									<div class="reviewer-info">
+										<span class="reviewer-name">{opinion.user.pseudo}</span>
+										<div class="stars">
+											{#each getStars(opinion.note) as type}
+												<span class="star-{type}">★</span>
+											{/each}
+										</div>
+									</div>
+								</div>
+								<div class="review-text">{opinion.content}</div>
+							</div>
 						{/each}
-					</ul>
+					</div>
 				</div>
 
 				<button class="cta-btn">Démarrer le cours →</button>
@@ -103,6 +120,7 @@
 	}
 
 	/* ===================== DESKTOP ===================== */
+	
 	.desktop-view {
 		display: block;
 		background: var(--background-color);
@@ -116,6 +134,8 @@
 		justify-content: space-between;
 		align-items: flex-start;
 		margin-bottom: 32px;
+		background-color: white;
+		padding: 20px;
 	}
 
 	.desktop-header h1 {
@@ -139,6 +159,7 @@
 		font-weight: 500;
 		color: #1a1a1a;
 	}
+	
 
 	.author {
 		font-size: 13px;
@@ -159,6 +180,13 @@
 	}
 
 	.card {
+		background: #fff;
+		border: 1px solid #e8e8e8;
+		border-radius: 12px;
+		padding: 24px 28px;
+	}
+
+	.card-opinions {
 		background: #fff;
 		border: 1px solid #e8e8e8;
 		border-radius: 12px;
@@ -275,6 +303,7 @@
 		text-transform: uppercase;
 		color: #888;
 		margin-bottom: 8px;
+		margin-top: 10px;
 	}
 
 	/* Difficulty bars */
@@ -365,7 +394,7 @@
 	/* CTA */
 	.cta-btn {
 		background: #f4a623;
-		color: #fff;
+		color: #1d4e89;
 		border: none;
 		border-radius: 10px;
 		padding: 16px;
@@ -378,147 +407,52 @@
 		font-family: inherit;
 	}
 
-
-	@media (min-width: 768px) {
-		
-
-		.mobile-view {
-			display: block;
-			background: #f5f5f5;
-			min-height: 100vh;
-			padding: 0 0 24px;
-			font-family: 'Inter', sans-serif;
+	@media (max-width: 768px) {
+		.desktop-view {
+			padding: 48px 64px;
 		}
-	}
 
-	.mobile-topbar {
-		background: #fff;
-		padding: 14px 16px 0;
-	}
+		.desktop-header h1 {
+			font-size: 25px;
+		}
 
-	.mobile-back {
-		font-size: 13px;
-		color: #555;
-		display: flex;
-		align-items: center;
-		gap: 4px;
-		margin-bottom: 10px;
-		cursor: pointer;
-	}
+		.desktop-main {
+			display: flex;
+			flex-direction: column;
+			gap: 32px;
+		}
+		.card-opinions {
+			display: none;
+		}
+		.card {
+			flex-direction: column;
+		}
+		.card-title {
+			color: #1d4e89;
+		}
+		.obj-list {
+			display: none;
+		}
+		.info-section-title {
+			display: none;
+		}
+		.desktop-header {
+			background-color: transparent;
+		}
+		.objectifs-mobile {
+			background: #fff;
+			border: 1px solid #e8e8e8;
+			border-radius: 12px;
+			padding: 24px 28px;
+		}
+		.obj-list-mobile {
+			background: #fff;
 
-	.mobile-back::before {
-		content: '←';
-		font-size: 14px;
-	}
-
-	.mobile-header-row {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-		padding-bottom: 14px;
-	}
-
-	.mobile-title {
-		font-size: 20px;
-		font-weight: 700;
-		color: #1a1a1a;
-		max-width: 210px;
-		line-height: 1.25;
-	}
-
-	.mobile-header-right {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		gap: 3px;
-	}
-
-	.mobile-badge {
-		border: 1.5px solid #1a1a1a;
-		border-radius: 20px;
-		padding: 2px 12px;
-		font-size: 12px;
-		font-weight: 500;
-		color: #1a1a1a;
-	}
-
-	.mobile-author {
-		font-size: 12px;
-		color: #555;
-	}
-
-	.mobile-body {
-		padding: 12px 14px;
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	.m-card {
-		background: #fff;
-		border-radius: 12px;
-		padding: 16px 18px;
-	}
-
-	.m-section-label {
-		font-size: 10px;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: #888;
-		margin-bottom: 8px;
-	}
-
-	.m-difficulty-row {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-	}
-
-	.m-card-title {
-		font-size: 14px;
-		font-weight: 700;
-		color: #e8a020;
-		margin-bottom: 8px;
-	}
-
-	.m-resume-text {
-		font-size: 13px;
-		color: #444;
-		line-height: 1.55;
-	}
-
-	.m-card-title-dark {
-		font-size: 14px;
-		font-weight: 700;
-		color: #1a1a1a;
-		margin-bottom: 10px;
-	}
-
-	.m-obj-list {
-		list-style: none;
-		display: flex;
-		flex-direction: column;
-		gap: 7px;
-	}
-
-	.mobile-cta-wrap {
-		padding: 0 14px;
-		margin-top: 4px;
-	}
-
-	.mobile-cta-btn {
-		background: #f4a623;
-		color: #fff;
-		border: none;
-		border-radius: 10px;
-		padding: 15px;
-		font-size: 15px;
-		font-weight: 600;
-		cursor: pointer;
-		width: 100%;
-		text-align: center;
-		display: block;
-		font-family: inherit;
+			padding: 24px 28px;
+		}
+		 .back-link {
+			font-size: 14px;
+			text-decoration: none;
+		 }
 	}
 </style>
