@@ -77,7 +77,7 @@ export async function exportMyData(req: AuthenticatedRequest, res: Response) {
         publiéLe: o.createdAt,
       })),
       notifications: user.notifications.map(n => ({
-        contenu: n.contenu,
+        contenu: n.content,
         cours: n.cours.title,
         reçuLe: n.createdAt,
       })),

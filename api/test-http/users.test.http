@@ -1,0 +1,5 @@
+@BASE_URL=http://localhost:3000
+
+### export données personnelles (RGPD)
+GET {{BASE_URL}}/api/users/me/export
+Content-Type: application/json

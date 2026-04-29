@@ -1,6 +1,8 @@
 <script>
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import Header from '$lib/assets/components/Header.svelte';
+	import BtnExportRGPD from '$lib/assets/components/BtnExportRGPD.svelte';
+
 </script>
 
 <Header />
@@ -45,6 +47,8 @@
 				<div class="btn-modify">
 					<button class="btn-update" type="submit">Enregistrer les modifications</button>
 					<button class="btn-cancel" type="submit">Annuler</button>
+					<BtnExportRGPD />
+
 				</div>
 			</div>
 
