@@ -77,7 +77,7 @@ export async function exportMyData(req: AuthenticatedRequest, res: Response) {
         publiéLe: o.createdAt,
       })),
       notifications: user.notifications.map(n => ({
-        contenu: n.contenu,
+        contenu: n.content,
         cours: n.cours.title,
         reçuLe: n.createdAt,
       })),
@@ -95,3 +95,27 @@ export async function exportMyData(req: AuthenticatedRequest, res: Response) {
     );
     res.status(200).json(exportData);
   }
+
+
+  // Suppression du compte de l'utilisateur (RGPD) ------------------------------------------------
+
+  export async function deleteMyAccount(req: AuthenticatedRequest, res: Response) {
+  const userId = req.user!.userId;
+
+  const coursCreés = await prisma.cours.findMany({
+    where: { authorId: userId },
+    select: { id: true, title: true }
+  });
+
+  if (coursCreés.length > 0) {
+    res.status(409).json({
+      code: "HAS_CREATED_COURSES",
+      message: "Vous avez des cours créés. Veuillez les transférer ou les supprimer avant de continuer.",
+      cours: coursCreés
+    });
+    return;
+  }
+
+  await prisma.user.delete({ where: { id: userId } });
+  res.status(204).send();
+}

@@ -6,56 +6,64 @@ import { ConflictError, NotFoundError } from "../lib/errors";
 
 
 export default {
-    getAll: async  (req:Request,res:Response) =>{
-        let data=null
-        if(req.query.slug){
+    getAll: async (req: Request, res: Response) => {
+        let data = null
+        if (req.query.slug) {
             const cours = await prisma.cours.findMany({
-            where:{slug:{contains:req.query.slug as string}},
-            include:{
-                category:true,
-                author:{
-                    omit:{password:true}
-                },
-                learningObjectives:{
-                    include:{objectif:true}
-                },
-                content:true,
-                tools:{
-                    include:{tools:true}
-                },
-                opinions:{
-                    include:{user:{
-                        omit:{password:true}
-                    }}}
-            }})
-            data=cours[0]
+                where: { slug: { contains: req.query.slug as string } },
+                include: {
+                    category: true,
+                    author: {
+                        omit: { password: true }
+                    },
+                    learningObjectives: {
+                        include: { objectif: true }
+                    },
+                    content: true,
+                    tools: {
+                        include: { tools: true }
+                    },
+                    opinions: {
+                        include: {
+                            user: {
+                                omit: { password: true }
+                            }
+                        }
+                    }
+                }
+            })
+            data = cours[0]
         }
-        else{
+        else {
             const cours = await prisma.cours.findMany({
-            include:{
-                category:true,
-                author:{
-                    omit:{password:true}
-                },
-                learningObjectives:{
-                    include:{objectif:true}
-                },
-                tools:{
-                    include:{tools:true}
-                },
-                opinions:{
-                    include:{user:{
-                        omit:{password:true}
-                    }}}
-            }})
-            data=cours
+                include: {
+                    category: true,
+                    author: {
+                        omit: { password: true }
+                    },
+                    learningObjectives: {
+                        include: { objectif: true }
+                    },
+                    tools: {
+                        include: { tools: true }
+                    },
+                    opinions: {
+                        include: {
+                            user: {
+                                omit: { password: true }
+                            }
+                        }
+                    }
+                }
+            })
+            data = cours
         }
         res.json(data)
     },
     // Requête pour récuperer les cours récents
     getForHomePage: async (req: Request, res: Response) => {
         const cours = await prisma.cours.findMany({
-            include:{category:true},
+            include: { category: true },
             orderBy: { createdAt: "desc" }
         })
         res.json(cours)
@@ -79,6 +87,8 @@ export default {
             comments: z.array(z.number().int()),
             opinions: z.array(z.number().int()),
             notifications: z.array(z.number().int()),
+            slug: z.string().min(1),
+            numberPage: z.number().int().min(1),
         });
         const data = await createCoursBodySchema.parseAsync(req.body);
 
@@ -88,6 +98,8 @@ export default {
         const createdCours = await prisma.cours.create({
             data: {
                 title: data.title,
+                slug: data.slug,
+                numberPage: data.numberPage,
                 littleSummary: data.littleSummary,
                 urlImage: data.urlImage,
                 difficulty: data.difficulty,
@@ -107,7 +119,7 @@ export default {
         res.json(cours);
     },
     //Suprimer un cours par son id
-    deleteCours: async (req: Request, res: Response)=>{
+    deleteCours: async (req: Request, res: Response) => {
         const coursId = await parseIdFromParams(req.params.id);
         const cours = await prisma.cours.findUnique({ where: { id: coursId } });
         if (!cours) { throw new NotFoundError("Cours not found"); }
@@ -121,6 +133,8 @@ export default {
         const coursId = await parseIdFromParams(req.params.id);
         const updateCoursBodyScheme = z.object({
             title: z.string().min(1),
+            slug: z.string().min(1),
+            numberPage: z.number().int().min(1),
             littleSummary: z.string().optional(),
             urlImage: z.string().optional(),
             difficulty: z.number().int().min(0).max(4),
@@ -139,6 +153,8 @@ export default {
         });
         const {
             title,
+            slug,
+            numberPage, 
             littleSummary,
             urlImage,
             difficulty,
@@ -151,25 +167,31 @@ export default {
         const cours = await prisma.cours.findUnique({ where: { id: coursId } });
         if (!cours) { throw new NotFoundError("Cours not found"); }
 
-        const alreadyExistingCours = await prisma.cours.findFirst({ where: { title: title } });
+        const alreadyExistingCours = await prisma.cours.findFirst({
+             where: { title: title, id: { not: coursId } } 
+            });
         if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
-        
+
 
         // SHOULD TO DO ? 
         // if (req.user?.role !== "admin") { throw new UnauthorizedError('Not autorisation'); }
         // else if (req.user?.role !== "author" && req.user?.id !== quiz.user_id) { throw new UnauthorizedError('Not autorisation'); }
-    
+
         const updatedCours = await prisma.cours.update({
-            where: {id: coursId},
-            data:{title,
-            littleSummary,
-            urlImage,
-            difficulty,
-            summary,
-            visibility,
-            authorId,
-            categoryId,
-            updatedAt: new Date()}
+            where: { id: coursId },
+            data: {
+                title,
+                slug,
+                numberPage,
+                littleSummary,
+                urlImage,
+                difficulty,
+                summary,
+                visibility,
+                authorId,
+                categoryId,
+                updatedAt: new Date()
+            }
         })
         res.json(updatedCours)
     }
