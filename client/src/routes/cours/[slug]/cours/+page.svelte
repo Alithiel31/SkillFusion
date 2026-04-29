@@ -17,6 +17,7 @@
 
 		import type { ICours, ICoursContent, ITextArea } from '$lib/@types/types';
 	import ModalValidator from '$lib/assets/components/Validator/ModalValidator.svelte';
+	import type { IModal } from '$lib/@types/html';
 	
 
 	let isLoading = $state(false);
@@ -103,12 +104,12 @@
 	}
 
 	function modalDeletePage(){
-		const modal = document.getElementById("ModalValidator")
+		const modal = document.getElementById("ModalValidator") as IModal
 		modal.show()
 	}
 
 	function closeDeletePageModale(){
-		const modal = document.getElementById("ModalValidator")
+		const modal = document.getElementById("ModalValidator") as IModal
 		modal.close()
 	}
 	async function deletePage(){
