@@ -78,7 +78,7 @@ model Cours {
   categoryId    Int                              @map("category_id")
   tools         CoursHasTool[]
   learningObjectives     CoursHasLearningObjective[]
-  content       CourContent[]
+  content       CoursContent[]
   enrollments   UserHasCours[]
   activations   CoursActived[]
   comments      Comment[]
@@ -88,7 +88,7 @@ model Cours {
   @@map("courses")
 }
 
-model CourContent {
+model CoursContent {
   id         Int    @id @default(autoincrement())
   coursId    Int    @map("cours_id")
   numberPage Int    @map("number_page")

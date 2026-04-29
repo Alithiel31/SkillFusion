@@ -189,7 +189,7 @@ async function seed() {
   })
 
 
-  const coursContents = await prisma.courContent.createMany({
+  const coursContents = await prisma.coursContent.createMany({
     data: [{
       content: "# Introduction\n\nDécouvrez les bases de l'installation d'un robinet mitigeur. Ce guide vous accompagnera pas à pas dans le processus de remplacement de votre ancien robinet.",
       numberPage: 1,
