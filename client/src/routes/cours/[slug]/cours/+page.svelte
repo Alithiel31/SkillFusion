@@ -21,6 +21,12 @@
 	let currentPageId = $state();
 	let textButton = $derived(modifier ? 'Annuler' : 'Modifier');
 
+	$effect(() => {
+		if (modifier ) {
+			textAreaAdjust(document.getElementById('text_area'));
+		}
+	});
+
 	onMount(async () => {
 		isLoading = true;
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
@@ -30,13 +36,25 @@
 			isLoading = false;
 		}
 		getAuth();
+		
 	});
 
+	function handleModify(){
+		modifier = !modifier;
+	}
+
 	async function getCours() {
-		currentPageId = cours?.content.find((content) => content.numberPage == currentPage);
-		const response = await api('api/cours-contents/' + currentPageId?.id, 'GET');
-		coursContent = response.data;
-		coursContent.content = DOMPurify.sanitize(coursContent.content);
+		isLoading = true;
+		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
+		cours = response.data;
+		if (cours) {
+			currentPageId = cours?.content.find((content) => content.numberPage == currentPage);
+			const response = await api('api/cours-contents/' + currentPageId?.id, 'GET');
+			coursContent = response.data;
+			coursContent.content = DOMPurify.sanitize(coursContent.content);
+			isLoading = false;
+		}
+		
 	}
 
 	function goToPrevious() {
@@ -57,6 +75,21 @@
 		const response = await api('api/cours-contents/' + currentPageId?.id, 'PATCH', {
 			content: document.getElementById('text_area')?.value
 		});
+	}
+
+	function textAreaAdjust(element) {
+		console.log(element)
+		element.style.height = "1px";
+		element.style.height = (25+element.scrollHeight)+"px";
+	}
+
+	function createPage(){
+
+	}
+
+	async function deletePage(){
+		const response = await api('api/cours-contents/' + currentPageId?.id, 'DELETE')
+		getCours()
 	}
 </script>
 
@@ -83,16 +116,14 @@
 				{#if authStore.user.role == 'instructor'}
 					<button
 						class="button_modify"
-						onclick={() => {
-							modifier = !modifier;
-						}}>{textButton}</button
-					>
+						onclick={() => {handleModify()}}>{textButton}</button>
 
 					{#if !modifier}
 						{@html marked.parse(coursContent.content)}
 					{:else}
-						<textarea id="text_area">{coursContent.content}</textarea>
+						<textarea class="text_area" id="text_area" onkeyup={()=>textAreaAdjust(this)}>{coursContent.content}</textarea>
 						<button onclick={valider} class="button_modify">Valider</button>
+						
 					{/if}
 				{:else}
 					{@html marked.parse(coursContent.content)}
@@ -102,7 +133,17 @@
 				<button class="nav-btn prev-btn" disabled={currentPage === 1} onclick={goToPrevious}
 					>← Précédent</button
 				>
+				{#if authStore.user.role == 'instructor'}
+					<button
+						class="button_modify"
+						onclick={() => {deletePage()}}>Supprimer une Page</button>
+				{/if}
 				<span class="page-indicator">Page {currentPage} sur {cours?.numberPage}</span>
+				{#if authStore.user.role == 'instructor'}
+					<button
+						class="button_modify"
+						onclick={() => {createPage()}}>Ajouter une Page</button>
+				{/if}
 				<button
 					class="nav-btn next-btn"
 					disabled={currentPage === cours?.numberPage}
@@ -158,6 +199,11 @@
 		display: flex;
 		flex-direction: column;
 		gap:20px;
+	}
+
+	.text_area{
+		max-width:100%;
+
 	}
 
 

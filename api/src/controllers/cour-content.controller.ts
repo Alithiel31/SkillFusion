@@ -2,7 +2,7 @@ import type { Request, Response } from "express"
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { ConflictError, NotFoundError } from "../lib/errors";
+import {  NotFoundError } from "../lib/errors";
 
 export default {
     // Requête pour récuperer tous les contenus de cours
@@ -65,7 +65,19 @@ export default {
      // Requête pour supprimer un contenu de cours
      deleteCourContent: async (req: Request, res: Response) => {
         const courContentId = await parseIdFromParams(req.params.id);
-        await prisma.courContent.delete({ where: { id: courContentId } });
+
+        const coursToBeDeleted = await prisma.courContent.findFirst({ where: { id: courContentId } })
+
+        const coursPages = await prisma.cours.findFirst({where:{id:coursToBeDeleted.coursId}});
+
+        await prisma.cours.update({where:{id:coursPages.id},data:{numberPage:coursPages?.numberPage-1}})
+        const coursDeleted= await prisma.courContent.delete({ where: { id: courContentId } });
+
+        let allContentCours= await prisma.courContent.findMany({where:{coursId:coursPages.id}})
+        allContentCours.forEach(async (cours)=>{if(cours.numberPage>=coursDeleted.numberPage){
+            cours.numberPage--
+            await prisma.courContent.update({where:{id:cours.id},data:cours})
+        }})
         res.status(204).send();
     },
 }

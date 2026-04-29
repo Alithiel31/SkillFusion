@@ -64,7 +64,7 @@ export default {
     // Requête pour supprimer un cours active
     deleteCoursActive: async (req: Request, res: Response) => {
         const coursActiveId = await parseIdFromParams(req.params.id);
-        await prisma.coursActived.delete({ where: { id: coursActiveId } });
+        const coursDeleted = await prisma.coursActived.delete({ where: { id: coursActiveId } });
         res.status(204).send();
     },
 
