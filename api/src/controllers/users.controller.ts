@@ -1,7 +1,12 @@
 import type { Request, Response } from "express";
 import { prisma } from "../models/client"
 import { AuthenticatedRequest } from "../@types/express";
-import { NotFoundError } from "../lib/errors";
+import { NotFoundError, ConflictError } from "../lib/errors";
+import z from "zod";
+import { url } from "node:inspector";
+import { parseIdFromParams } from "./utils";
+import rolesController from "./roles.controller";
+
 
 
 export async function getAllUsers(req: Request, res: Response) {
@@ -37,61 +42,160 @@ export async function exportMyData(req: AuthenticatedRequest, res: Response) {
   }
 
   const exportData = {
-      exportedAt: new Date().toISOString(),
-      profil: {
-        id: user.id,
-        pseudo: user.pseudo,
-        email: user.email,
-        firstname: user.firstname,
-        lastname: user.lastname,
-        urlProfilImage: user.urlProfilImage,
-        role: user.role.name,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-      },
-      coursInscrits: user.enrollments.map(e => ({
-        id: e.cours.id,
-        titre: e.cours.title,
-        inscritLe: e.createdAt,
-      })),
-      progression: user.activations.map(a => ({
-        id: a.cours.id,
-        titre: a.cours.title,
-        termine: a.IsEnd,
-        depuis: a.createdAt,
-      })),
-      badges: user.badges.map(b => ({
-        nom: b.badge.name,
-        description: b.badge.description,
-        obtenuLe: b.createdAt,
-      })),
-      commentaires: user.commentaires.map(c => ({
-        cours: c.cours.title,
-        contenu: c.description,
-        publiéLe: c.createdAt,
-      })),
-      avis: user.opinions.map(o => ({
-        cours: o.cours.title,
-        contenu: o.content,
-        note: o.note,
-        publiéLe: o.createdAt,
-      })),
-      notifications: user.notifications.map(n => ({
-        contenu: n.contenu,
-        cours: n.cours.title,
-        reçuLe: n.createdAt,
-      })),
-      coursCreés: user.createdCours.map(c => ({
-        id: c.id,
-        titre: c.title,
-        créeLe: c.createdAt,
-      })),
-    };
+    exportedAt: new Date().toISOString(),
+    profil: {
+      id: user.id,
+      pseudo: user.pseudo,
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      urlProfilImage: user.urlProfilImage,
+      role: user.role.name,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    },
+    coursInscrits: user.enrollments.map(e => ({
+      id: e.cours.id,
+      titre: e.cours.title,
+      inscritLe: e.createdAt,
+    })),
+    progression: user.activations.map(a => ({
+      id: a.cours.id,
+      titre: a.cours.title,
+      termine: a.IsEnd,
+      depuis: a.createdAt,
+    })),
+    badges: user.badges.map(b => ({
+      nom: b.badge.name,
+      description: b.badge.description,
+      obtenuLe: b.createdAt,
+    })),
+    commentaires: user.commentaires.map(c => ({
+      cours: c.cours.title,
+      contenu: c.description,
+      publiéLe: c.createdAt,
+    })),
+    avis: user.opinions.map(o => ({
+      cours: o.cours.title,
+      contenu: o.content,
+      note: o.note,
+      publiéLe: o.createdAt,
+    })),
+    notifications: user.notifications.map(n => ({
+      contenu: n.content,
+      cours: n.cours.title,
+      reçuLe: n.createdAt,
+    })),
+    coursCreés: user.createdCours.map(c => ({
+      id: c.id,
+      titre: c.title,
+      créeLe: c.createdAt,
+    })),
+  };
 
-    res.setHeader("Content-Type", "application/json");
-    res.setHeader(
-      "Content-Disposition",
-      `attachment; filename="mes-donnees-skillfusion-${user.id}.json"`
-    );
-    res.status(200).json(exportData);
+  res.setHeader("Content-Type", "application/json");
+  res.setHeader(
+    "Content-Disposition",
+    `attachment; filename="mes-donnees-skillfusion-${user.id}.json"`
+  );
+  res.status(200).json(exportData);
+}
+
+// Récupérer un utilisateur par son id
+export async function getUserById(req: Request, res: Response) {
+  const userId = await parseIdFromParams(req.params.id);
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    omit: { password: true },
+    include: {
+      role: true
+    }
+  });
+  if (!user) {
+    throw new NotFoundError(`Utilisateur avec l'id ${userId} non trouvé`);
   }
+  res.status(200).json(user);
+}
+
+// Créer un nouvel utilisateur
+export async function createUser(req: Request, res: Response) {
+  const createUserBodySchema = z.object({
+    pseudo: z.string().min(1),
+    email: z.string().email(),
+    password: z.string().min(6),
+    firstname: z.string().min(1),
+    lastname: z.string().min(1),
+    urlProfilImage: z.string().optional(),
+    roleId: z.number().optional(),
+  });
+  const data = await createUserBodySchema.parseAsync(req.body);
+
+  if (data.roleId) {
+    const roleExists = await prisma.role.findUnique({
+      where: { id: data.roleId }
+    });
+
+    if (!roleExists) {
+      return res.status(400).json({ error: `Le rôle avec l'ID ${data.roleId} n'existe pas.` });
+    }
+  }
+
+  const createdUser = await prisma.user.create({
+    data: {
+      pseudo: data.pseudo,
+      email: data.email,
+      password: data.password,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      urlProfilImage: data.urlProfilImage,
+      roleId: data.roleId,
+    }
+  });
+  res.status(201).json(createdUser);
+}
+
+// Mettre à jour un utilisateur
+export async function updateUser(req: Request, res: Response) {
+  const userId = await parseIdFromParams(req.params.id);
+  const updateUserBodySchema = z.object({
+    pseudo: z.string().min(1).optional(),
+    email: z.string().optional(),
+    password: z.string().min(6).optional(),
+    firstname: z.string().min(1).optional(),
+    lastname: z.string().min(1).optional(),
+    urlProfilImage: z.string().optional(),
+    rolesId: z.number().optional(),
+  });
+  const data = await updateUserBodySchema.parseAsync(req.body);
+
+  const { email } = data;
+
+      // vérifier que l'email est unique
+      const existingUser = await prisma.user.findUnique({ where: { email } });
+      if (existingUser) {
+          throw new ConflictError("Email déjà utilisé");
+      }
+
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      pseudo: data.pseudo,
+      email: data.email,
+      password: data.password,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      urlProfilImage: data.urlProfilImage,
+      roleId: data.rolesId,
+    }
+  });
+  res.status(200).json(updatedUser);
+}
+
+// Supprimer un utilisateur
+export async function deleteUser(req: Request, res: Response) {
+  const userId = await parseIdFromParams(req.params.id);
+  await prisma.user.delete({
+    where: { id: userId }
+  });
+  res.status(204).send();
+}

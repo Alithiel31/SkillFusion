@@ -31,7 +31,7 @@
 		<!-- Bouton de connxion/d'inscription -->
 		<div class="header__actions">
 			{#if user}
-				<span class="header__pseudo">{user.pseudo}</span>
+				<a href="/profil" class="header__pseudo">{user.pseudo}</a>
 				<button class="header__btn-logout" onclick={logout}>⏻</button>
 			{:else}
 				<a href="/connexion" class="header__btn-login">Connexion</a>
@@ -103,6 +103,10 @@
 	.header__nav-link:hover {
 		background: var(--blue-light);
 		color: var(--blue);
+	}
+
+	.header__pseudo {
+		text-decoration: none;
 	}
 
 	.header__actions {

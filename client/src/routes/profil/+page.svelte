@@ -1,6 +1,75 @@
 <script>
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import Header from '$lib/assets/components/Header.svelte';
+	import { onMount } from 'svelte';
+	import api from '$lib/services/api.service';
+	import { writable } from 'svelte/store';
+	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
+
+
+	let user = writable({ firstname: '', lastname: '', email: '', password: '' });
+
+	let errorEmail = $state(false);
+
+	onMount(async () => {
+		try {
+			const response = await api('auth/me', 'GET');
+			user.set(response.data);
+		} catch (error) {
+			console.error('Erreur lors de la récupération des informations utilisateur :', error);
+		}
+	});
+
+	async function handleSubmit(event) {
+		event.preventDefault();
+		const formData = new FormData(event.target);
+		const updatedUser = {
+			lastname: formData.get('name'),
+			firstname: formData.get('firstname'),
+			email: formData.get('email'),
+			password: formData.get('password')
+		};
+
+
+		if (!updatedUser.password) {
+			delete updatedUser.password; // Ne pas inclure le champ password si il est vide
+		};
+
+		if (!updatedUser.email) {
+			delete updatedUser.email; 
+		};
+
+		if (!updatedUser.firstname) {
+			delete updatedUser.firstname; 
+		};
+
+		if (!updatedUser.lastname) {
+			delete updatedUser.lastname; 
+		};
+
+		const response = await api(`api/users/${authStore?.user?.id}`, 'PATCH', updatedUser);
+		if (response.status!=201){
+			if (response.data.error=="Email déjà utilisé"){
+				errorEmail=true
+			}
+		}else{
+				errorEmail=false
+		}
+
+		try {
+			getAuth();
+			const response = await api(`api/users/${authStore?.user?.id}`, 'PATCH', updatedUser);
+			console.log('Informations mises à jour avec succès :', response.data);
+		} catch (error) {
+			throw new Error('Erreur lors de la mise à jour des informations utilisateur :' + error);
+		}
+	}
+
+	async function handleCancel(event) {
+		event?.preventDefault();
+		const currentUser = $user;
+		user.set({ ...currentUser });
+	}
 </script>
 
 <Header />
@@ -8,16 +77,28 @@
 <div class="profil-container">
 	<h1 class="title-page">Mes informations</h1>
 	<div class="profil-wrapper">
-		<form class="profil-form">
+		<form class="profil-form" onsubmit={handleSubmit}>
 			<div class="form-fields">
 				<div class="form-group">
 					<span class="form-name">
 						<label for="name">Nom </label>
-						<input type="text" id="name" name="name" placeholder="Dupont" />
+						<input
+							type="text"
+							id="name"
+							name="name"
+							bind:value={$user.lastname}
+							placeholder="Dupont"
+						/>
 					</span>
 					<span class="form-firstname">
 						<label for="firstname">Prénom </label>
-						<input type="text" id="firstname" name="firstname" placeholder="Jean" />
+						<input
+							type="text"
+							id="firstname"
+							name="firstname"
+							bind:value={$user.firstname}
+							placeholder="Jean"
+						/>
 					</span>
 				</div>
 				<div class="form-groups">
@@ -27,9 +108,12 @@
 							type="email"
 							id="email"
 							name="email"
+							value={$user?.email}
 							placeholder="jean.dupont@email.com"
-							required
 						/>
+						{#if errorEmail}
+							<p style="color:red;">Email déjà utilisé</p>
+						{/if}
 					</span>
 					<span class="form-password">
 						<label for="password">Mot de passe</label>
@@ -38,13 +122,12 @@
 							id="password"
 							name="password"
 							placeholder="Modifier mon mot de passe"
-							required
 						/>
 					</span>
 				</div>
 				<div class="btn-modify">
 					<button class="btn-update" type="submit">Enregistrer les modifications</button>
-					<button class="btn-cancel" type="submit">Annuler</button>
+					<button class="btn-cancel" type="submit" onclick={handleCancel}>Annuler</button>
 				</div>
 			</div>
 
