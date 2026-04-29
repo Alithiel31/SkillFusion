@@ -13,7 +13,6 @@
 		// Fetch tous les cours du formateur connecté
 		const responseCours = await api('api/cours/instructor/' + authStore?.user?.id);
 		cours = responseCours.data;
-    console.log(filteredCours)
 	});
 
 	const notifications = [
@@ -106,9 +105,7 @@
 			<div class="panel__list">
 				{#each filteredCours as c}
 					<CoursCard isDashboard={true}
-          cours={
-            c
-          }
+					cours={c}
           --card__image__color={c.category.textColor}
 							--border_color={c.category.borderColor}
 							--text_color={c.category.textColor}
