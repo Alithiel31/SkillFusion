@@ -2,7 +2,7 @@ import type { Request, Response } from "express"
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { ConflictError, NotFoundError } from "../lib/errors";
+import {  NotFoundError } from "../lib/errors";
 
 export default {
     // Requête pour récuperer tous les contenus de cours
@@ -13,7 +13,6 @@ export default {
 
     // Requête pour récuperer un contenu de cours par son id
     getOneCourContent: async (req: Request, res: Response) => {
-        console.log("Cours content : ", req.params.id)
         const courContentId = await parseIdFromParams(req.params.id);
         const courContent = await prisma.courContent.findUnique({ where: { id: courContentId } });
         if (!courContent) {
@@ -55,17 +54,30 @@ export default {
             where: { id: courContentId },
             data: {
                 content,
-                numberPage,
-                coursId,
+                numberPage
             }
         });
         res.json(updatedCourContent);
     },
 
-     // Requête pour supprimer un contenu de cours
      deleteCourContent: async (req: Request, res: Response) => {
         const courContentId = await parseIdFromParams(req.params.id);
-        await prisma.courContent.delete({ where: { id: courContentId } });
+        const coursToBeDeleted = await prisma.courContent.findFirst({ where: { id: courContentId } })
+        if(coursToBeDeleted){
+            const coursPages = await prisma.cours.findFirst({where:{id:coursToBeDeleted.coursId}});
+            if (coursPages){
+                if (coursPages.numberPage>1){
+                    await prisma.cours.update({where:{id:coursPages.id},data:{numberPage:coursPages?.numberPage-1}})
+                    const coursDeleted= await prisma.courContent.delete({ where: { id: courContentId } });
+                    const allContentCours= await prisma.courContent.findMany({where:{coursId:coursPages.id}})
+                    allContentCours.forEach(async (cours)=>{if(cours.numberPage>=coursDeleted.numberPage){
+                        cours.numberPage--
+                        await prisma.courContent.update({where:{id:cours.id},data:cours})
+                    }})
+                }
+            }
+
+        }
         res.status(204).send();
     },
 }
