@@ -53,6 +53,7 @@ export interface ICours {
         comments: Comment[]
         opinions: Opinion[]
         notifications: Notification[]
+        cours: 
 }
 export interface CourContent {
         id: Number
@@ -112,7 +113,7 @@ export interface UserHasCours {
         cours: ICours
 }
 
-export interface CoursActived {
+export interface ICoursActived {
         id: Number
         userId: Number
         coursId: Number
@@ -120,7 +121,7 @@ export interface CoursActived {
         createdAt: Date
         updatedAt: Date
         user: IUser
-        cours: ICours
+        cours: ICours[]
 }
 export interface UserHasBadge {
         id: Number
@@ -129,7 +130,7 @@ export interface UserHasBadge {
         createdAt: Date
         updatedAt: Date
         user: IUser
-        badge: Badge
+        badge: Badge[]
 }
 export interface CoursHasTool {
         id: Number
@@ -138,7 +139,7 @@ export interface CoursHasTool {
         createdAt: Date
         updatedAt: Date
         cours: ICours
-        tools: Tool
+        tools: Tool[]
 }
 export interface CoursHasLearningObjective {
         id: Number

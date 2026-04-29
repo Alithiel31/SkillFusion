@@ -1,11 +1,12 @@
 <script lang="ts">
+import "../../../../app.css"
 import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '$lib/assets/components/Category/Category.svelte';
-	let props = $props();
+	let { isDashboard = false, ...props } = $props();
 	
 </script>
 
-<article class="cours-card">
+<article class="cours-card {props.class}" >
 	<a class="cours__link" href="/cours/{props.cours.slug}">
 		<div class="card__image"></div>
 		<div class="card__body">
@@ -13,13 +14,15 @@ import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 			<div class="card__information">
 				<Category category={props.cours.category}
 				--background_color={props.cours.category.backgroundColor}/>
-				<LevelBar level={props.cours.difficulty} />
+				<LevelBar {isDashboard}
+				 level={props.cours.difficulty} />
 			</div>
 		</div>
 	</a>
 </article>
 
 <style>
+
 	.cours-card {
 		display: flex;
 		flex-direction: row;
@@ -119,5 +122,10 @@ import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 		.card__title{
 			width: 100%;
 		}
+	}
+.dashboard{
+	width: 20%;
+	height: 100%;
+
 	}
 </style>

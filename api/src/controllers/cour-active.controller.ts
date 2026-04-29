@@ -3,14 +3,28 @@ import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
 import { ConflictError, NotFoundError } from "../lib/errors";
+import { id } from "zod/v4/locales";
 
 export default {
     // Requête pour récuperer tous les cours actives
     getAll: async (req: Request, res: Response) => {
         const coursActives = await prisma.coursActived.findMany();
         res.json(coursActives);
+
     },
 
+    getByUser: async (req: Request, res: Response) => {
+        const userId = await parseIdFromParams(req.params.id);
+        const coursByUser = await prisma.coursActived.findMany({
+            where: { userId: userId },
+            include: { cours: {include: {category: true}},
+    }})
+        if (!coursByUser) {
+            throw new NotFoundError(`Cours active with id ${coursByUser} not found`);
+        }
+        console.log(coursByUser[0].cours.category.backgroundColor)
+        res.json(coursByUser);
+    },
     // Requête pour récuperer un cours active par son id
     getOneCoursActive: async (req: Request, res: Response) => {
         const coursActiveId = await parseIdFromParams(req.params.id);
