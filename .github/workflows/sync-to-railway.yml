@@ -33,8 +33,8 @@ jobs:
 
       - name: Merge org main into deployment
         run: |
-          if ! git merge origin/main --no-commit --no-ff; then
-            echo "::error::Conflit de merge détecté — sync annulé"
+          if ! git merge origin/main --no-commit --no-ff -X theirs; then
+            echo "::error::Erreur inattendue lors du merge — sync annulé"
             git merge --abort
             exit 1
           fi
