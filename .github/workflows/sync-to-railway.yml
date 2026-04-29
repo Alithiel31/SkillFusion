@@ -2,8 +2,8 @@ name: Sync to Railway
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # tous les jours à 3h du matin
-  workflow_dispatch:       # déclenchement manuel possible
+    - cron: '0 3 * * *'
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -52,13 +52,9 @@ jobs:
           git checkout deploy/main -- client/src/lib/services/api.service.ts
           git rm --ignore-unmatch client/src/lib/services/api.service.js
 
-      - name: Set deploy credentials
-        run: |
-          git config --local http.https://github.com/Alithiel31/SkillFusion.git.extraheader \
-            "AUTHORIZATION: basic $(echo -n 'x-access-token:${{ secrets.DEPLOY_REPO_TOKEN }}' | base64 -w 0)"
-
       - name: Commit and push
         run: |
+          git config --local --unset http.https://github.com/.extraheader
           git add .
           git diff --cached --quiet || git commit -m "sync: merge from org main [$(date +'%Y-%m-%d')]"
           git push deploy deploy-main:main
