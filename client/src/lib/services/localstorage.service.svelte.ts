@@ -1,6 +1,13 @@
-export const authStore = $state({ user: null, token: null });
+interface IUser{
+  id:number
+  pseudo:string
+  role:string
+}
 
-export const setAuth = (user, token) => {
+
+export const authStore : {user:IUser|null, token:string|null}= $state({ user: null, token: null });
+
+export const setAuth = (user:IUser, token:string) => {
   localStorage.setItem("token", token);
   localStorage.setItem("user", JSON.stringify(user));
   authStore.user = user;

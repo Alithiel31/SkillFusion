@@ -47,18 +47,18 @@ export interface ICours {
         numberPage:number
         tools: CoursHasTool[]
         learningObjectives: CoursHasLearningObjective[]
-        content: CourContent[]
+        content: ICoursContent[]
         enrollments: UserHasCours[]
         activations: CoursActived[]
         comments: Comment[]
         opinions: Opinion[]
         notifications: Notification[]
 }
-export interface CourContent {
-        id: Number
-        coursId: Number
-        numberPage: Number
-        content: String
+export interface ICoursContent {
+        id: number
+        coursId: number
+        numberPage: number
+        content: string
         createdAt: Date
         updatedAt: Date
         cours: ICours
@@ -181,4 +181,8 @@ export interface Notification {
   updatedAt :Date
   cours :ICours
   user : IUser
+}
+
+export interface ITextArea extends HTMLElement{
+        value: string;
 }

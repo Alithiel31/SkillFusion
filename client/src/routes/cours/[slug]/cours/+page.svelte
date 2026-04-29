@@ -7,7 +7,7 @@
 	import api from '$lib/services/api.service';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
-	import type { ICours } from '$lib/@types/types';
+	import type { ICours, ICoursContent, ITextArea } from '$lib/@types/types';
 	import Category from '$lib/assets/components/Category/Category.svelte';
 	import { marked } from 'marked';
 	import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
@@ -16,14 +16,14 @@
 	let isLoading = $state(false);
 	let cours: ICours | null = $state(null);
 	let currentPage: number = $state(1);
-	let coursContent = $state(null);
+	let coursContent: ICoursContent|null = $state(null);
 	let modifier = $state(false);
-	let currentPageId = $state();
+	let currentPageId : ICoursContent |null | undefined = $state(null);
 	let textButton = $derived(modifier ? 'Annuler' : 'Modifier');
 
 	$effect(() => {
 		if (modifier ) {
-			textAreaAdjust(document.getElementById('text_area'));
+			textAreaAdjust(document.getElementById('text_area') as ITextArea);
 		}
 	});
 
@@ -48,11 +48,16 @@
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
 		cours = response.data;
 		if (cours) {
-			currentPageId = cours?.content.find((content) => content.numberPage == currentPage);
-			const response = await api('api/cours-contents/' + currentPageId?.id, 'GET');
-			coursContent = response.data;
-			coursContent.content = DOMPurify.sanitize(coursContent.content);
-			isLoading = false;
+			currentPageId = cours.content.find((content) => content.numberPage == currentPage);
+			if (currentPageId){
+				console.log(currentPageId)
+				const response = await api('api/cours-contents/' + currentPageId.id, 'GET');
+				coursContent = response.data as ICoursContent;
+				if(coursContent){
+					coursContent.content = DOMPurify.sanitize(coursContent.content);
+					isLoading = false;
+				}
+			}
 		}
 		
 	}
@@ -65,20 +70,20 @@
 	}
 
 	function goToNext() {
-		if (currentPage < cours.numberPage) {
+		if ( cours && currentPage < cours.numberPage) {
 			currentPage++;
 			getCours();
 		}
 	}
 
 	async function valider() {
+		const textArea:ITextArea=document.getElementById('text_area') as ITextArea
 		const response = await api('api/cours-contents/' + currentPageId?.id, 'PATCH', {
-			content: document.getElementById('text_area')?.value
+			content: textArea.value
 		});
 	}
 
-	function textAreaAdjust(element) {
-		console.log(element)
+	function textAreaAdjust(element:ITextArea) {
 		element.style.height = "1px";
 		element.style.height = (25+element.scrollHeight)+"px";
 	}
@@ -113,7 +118,7 @@
 			</div>
 
 			<div class="cours-main">
-				{#if authStore.user.role == 'instructor'}
+				{#if authStore.user?.role== 'instructor'}
 					<button
 						class="button_modify"
 						onclick={() => {handleModify()}}>{textButton}</button>
@@ -133,13 +138,13 @@
 				<button class="nav-btn prev-btn" disabled={currentPage === 1} onclick={goToPrevious}
 					>← Précédent</button
 				>
-				{#if authStore.user.role == 'instructor'}
+				{#if authStore.user?.role == 'instructor'}
 					<button
 						class="button_modify"
 						onclick={() => {deletePage()}}>Supprimer une Page</button>
 				{/if}
 				<span class="page-indicator">Page {currentPage} sur {cours?.numberPage}</span>
-				{#if authStore.user.role == 'instructor'}
+				{#if authStore.user?.role == 'instructor'}
 					<button
 						class="button_modify"
 						onclick={() => {createPage()}}>Ajouter une Page</button>
