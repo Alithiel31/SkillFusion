@@ -22,7 +22,6 @@ export default {
         if (!coursByUser) {
             throw new NotFoundError(`Cours active with id ${coursByUser} not found`);
         }
-        console.log(coursByUser[0].cours.category.backgroundColor)
         res.json(coursByUser);
     },
     // Requête pour récuperer un cours active par son id
