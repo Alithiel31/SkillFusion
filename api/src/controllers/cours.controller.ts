@@ -3,6 +3,8 @@ import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
 import { ConflictError, NotFoundError } from "../lib/errors";
+import type { AuthenticatedRequest } from "../@types/express";
+
 
 
 export default {
@@ -154,7 +156,7 @@ export default {
         const {
             title,
             slug,
-            numberPage, 
+            numberPage,
             littleSummary,
             urlImage,
             difficulty,
@@ -168,8 +170,8 @@ export default {
         if (!cours) { throw new NotFoundError("Cours not found"); }
 
         const alreadyExistingCours = await prisma.cours.findFirst({
-             where: { title: title, id: { not: coursId } } 
-            });
+            where: { title: title, id: { not: coursId } }
+        });
         if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
 
 
@@ -194,5 +196,32 @@ export default {
             }
         })
         res.json(updatedCours)
+    },
+
+// En cas de suppression de compte : 
+// si il y a des cours crées, 
+// On propose de transferer la propriété à un admin 
+    transferMyCoursToAdmin: async (req: AuthenticatedRequest, res: Response) => {
+        const userId = req.user!.userId;
+
+        const admin = await prisma.user.findFirst({ where: { roleId: 3 } });
+        if (!admin) throw new NotFoundError("Administrateur introuvable");
+
+        await prisma.cours.updateMany({
+            where: { authorId: userId },
+            data: { authorId: admin.id }
+        });
+
+        res.status(200).json({ message: "Cours transférés à l'administrateur." });
+    },
+// Ou on propose de supprimer tous les cours crées par l'utilisateur
+    deleteAllMyCours: async (req: AuthenticatedRequest, res: Response) => {
+        const userId = req.user!.userId;
+
+        await prisma.cours.deleteMany({ where: { authorId: userId } });
+
+        res.status(204).end();
     }
+
 }
+
