@@ -11,7 +11,7 @@ export default {
         res.json(coursActives);
 
     },
-
+    // Requête pour récuperer tous les cours actives d'un étudiant
     getByUser: async (req: Request, res: Response) => {
         const userId = await parseIdFromParams(req.params.id);
         const coursByUser = await prisma.coursActived.findMany({
