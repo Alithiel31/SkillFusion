@@ -13,7 +13,6 @@ import "../../../../app.css"
 		// Fetch tous les cours en cours
 		const response = await api('api/cours-active/user/' + authStore?.user?.id);
 		coursActive = response.data;
-		console.log(coursActive[0].cours.category);
 	});
 
 	const coursTermines = [
