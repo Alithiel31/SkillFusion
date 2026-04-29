@@ -6,11 +6,10 @@
 	import { writable } from 'svelte/store';
 	import { authStore } from '$lib/services/localstorage.service.svelte';
 
-
 	let user = writable({ firstname: '', lastname: '', email: '', password: '' });
 
 	let errorEmail = $state(false);
-	let succesMessage = writable('');
+	let succesMessage: string | null = $state(null);
 
 	onMount(async () => {
 		try {
@@ -22,7 +21,7 @@
 		}
 	});
 
-	async function handleSubmit(event: SubmitEvent){
+	async function handleSubmit(event: SubmitEvent) {
 		event.preventDefault();
 		const formData = new FormData(event.target);
 		const updatedUser = {
@@ -53,27 +52,27 @@
 
 		try {
 			const response = await api(`api/users/${authStore?.user?.id}`, 'PATCH', updatedUser);
-
+			console.log(response);
 			// Vérification du statut de la réponse
-			if (response.status !== 201) {
+			if (response.status !== 200) {
 				if (response.data.error === 'Email déjà utilisé') {
 					errorEmail = true;
-					setTimeout(() => errorEmail = false, 5000); // Message effacé après 5 secondes
+					setTimeout(() => (errorEmail = false), 5000); // Message effacé après 5 secondes
 				}
 			} else {
 				errorEmail = false;
-				succesMessage.set('Informations mises à jour avec succès !'); // Message de succès
+				succesMessage = 'Informations mises à jour avec succès !'; // Message de succès
 				// Réinitialiser le message après quelques secondes
-				setTimeout(() => succesMessage.set(''), 5000); // Message effacé après 5 secondes
+				setTimeout(() => (succesMessage = null), 5000); // Message effacé après 5 secondes
 			}
 		} catch (error) {
 			console.error('Erreur lors de la mise à jour des informations utilisateur :', error);
 			// Gestion d'une erreur générique
-			succesMessage.set('Une erreur est survenue. Veuillez réessayer.');
+			succesMessage = 'Une erreur est survenue. Veuillez réessayer.';
 		}
 	}
 
-	async function handleCancel(event: SubmitEvent){
+	async function handleCancel(event) {
 		event?.preventDefault();
 		const currentUser = $user;
 		user.set({ ...currentUser });
@@ -137,10 +136,10 @@
 					<button class="btn-update" type="submit">Enregistrer les modifications</button>
 					<button class="btn-cancel" type="submit" onclick={handleCancel}>Annuler</button>
 				</div>
+				{#if succesMessage}
+					<p style="color:green; font-weight: bold; margin-top: 20px;">{succesMessage}</p>
+				{/if}
 			</div>
-			{#if $succesMessage}
-				<p style="color:green; font-weight: bold; margin-top: 20px;">{$succesMessage}</p>
-			{/if}
 
 			<div class="avatar-box">
 				<button class="avatar-edit" type="button">✎</button>
