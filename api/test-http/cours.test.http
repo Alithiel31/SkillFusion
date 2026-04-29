@@ -1,19 +1,21 @@
-
 @BASE_URL=http://localhost:3000
 
 ### all cours
 GET {{BASE_URL}}/api/cours
 Content-Type: application/json
 
-
 ### cours avec id
 GET {{BASE_URL}}/api/cours/1
 Content-Type: application/json
-
-
 
 ### supprimer un cours
 DELETE {{BASE_URL}}/api/cours/1
 Content-Type: application/json
 
+### Transférer ses cours à l'admin
+PATCH {{BASE_URL}}/api/cours/mine/transfer
+Content-Type: application/json
 
+### Supprimer tous ses cours
+DELETE {{BASE_URL}}/api/cours/mine
+Content-Type: application/json
