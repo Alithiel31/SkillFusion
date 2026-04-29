@@ -102,9 +102,9 @@
 				/>
 			</div>
 
-			<div class="panel__list">
+			<div class="panel__list panel__list--cours">
 				{#each filteredCours as c}
-					<CoursCard isDashboard={true}
+					<CoursCard class="coursCardDashboard" isDashboard={true}
 					cours={c}
           --card__image__color={c.category.textColor}
 							--border_color={c.category.borderColor}
@@ -313,10 +313,14 @@
 		flex-direction: column;
 		gap: 8px;
 	}
+	.panel__list--cours{
+			overflow-y: auto;
+			flex-direction: row;
+	}
 
 	.panel__list--notifs {
 		max-height: 480px;
-		overflow-y: auto;
+		overflow-x: auto;
 		gap: 6px;
 	}
 
