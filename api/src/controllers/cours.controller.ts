@@ -6,56 +6,76 @@ import { ConflictError, NotFoundError } from "../lib/errors";
 
 
 export default {
-    getAll: async  (req:Request,res:Response) =>{
-        let data=null
-        if(req.query.slug){
+    getAll: async (req: Request, res: Response) => {
+        let data = null
+        if (req.query.slug) {
             const cours = await prisma.cours.findMany({
-            where:{slug:{contains:req.query.slug as string}},
-            include:{
-                category:true,
-                author:{
-                    omit:{password:true}
-                },
-                learningObjectives:{
-                    include:{objectif:true}
-                },
-                content:true,
-                tools:{
-                    include:{tools:true}
-                },
-                opinions:{
-                    include:{user:{
-                        omit:{password:true}
-                    }}}
-            }})
-            data=cours[0]
+                where: { slug: { contains: req.query.slug as string } },
+                include: {
+                    category: true,
+                    author: {
+                        omit: { password: true }
+                    },
+                    learningObjectives: {
+                        include: { objectif: true }
+                    },
+                    content: true,
+                    tools: {
+                        include: { tools: true }
+                    },
+                    opinions: {
+                        include: {
+                            user: {
+                                omit: { password: true }
+                            }
+                        }
+                    }
+                }
+            })
+            data = cours[0]
         }
-        else{
+        else {
             const cours = await prisma.cours.findMany({
-            include:{
-                category:true,
-                author:{
-                    omit:{password:true}
-                },
-                learningObjectives:{
-                    include:{objectif:true}
-                },
-                tools:{
-                    include:{tools:true}
-                },
-                opinions:{
-                    include:{user:{
-                        omit:{password:true}
-                    }}}
-            }})
-            data=cours
+                include: {
+                    category: true,
+                    author: {
+                        omit: { password: true }
+                    },
+                    learningObjectives: {
+                        include: { objectif: true }
+                    },
+                    tools: {
+                        include: { tools: true }
+                    },
+                    opinions: {
+                        include: {
+                            user: {
+                                omit: { password: true }
+                            }
+                        }
+                    }
+                }
+            })
+            data = cours
         }
         res.json(data)
+    },
+    getCoursByInstructor: async (req: Request, res: Response) => {
+        const userId = await parseIdFromParams(req.params.id);
+        const cours = await prisma.cours.findMany(
+            {
+                where: { authorId: userId },
+                include: { category: true,author: true }
+            })
+        if (!cours) {
+            throw new NotFoundError(`Cours from ${userId} not found`);
+        }
+        res.json(cours);
     },
     // Requête pour récuperer les cours récents
     getForHomePage: async (req: Request, res: Response) => {
         const cours = await prisma.cours.findMany({
-            include:{category:true},
+            include: { category: true },
             orderBy: { createdAt: "desc" }
         })
         res.json(cours)
@@ -107,7 +127,7 @@ export default {
         res.json(cours);
     },
     //Suprimer un cours par son id
-    deleteCours: async (req: Request, res: Response)=>{
+    deleteCours: async (req: Request, res: Response) => {
         const coursId = await parseIdFromParams(req.params.id);
         const cours = await prisma.cours.findUnique({ where: { id: coursId } });
         if (!cours) { throw new NotFoundError("Cours not found"); }
@@ -153,23 +173,25 @@ export default {
 
         const alreadyExistingCours = await prisma.cours.findFirst({ where: { title: title } });
         if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
-        
+
 
         // SHOULD TO DO ? 
         // if (req.user?.role !== "admin") { throw new UnauthorizedError('Not autorisation'); }
         // else if (req.user?.role !== "author" && req.user?.id !== quiz.user_id) { throw new UnauthorizedError('Not autorisation'); }
-    
+
         const updatedCours = await prisma.cours.update({
-            where: {id: coursId},
-            data:{title,
-            littleSummary,
-            urlImage,
-            difficulty,
-            summary,
-            visibility,
-            authorId,
-            categoryId,
-            updatedAt: new Date()}
+            where: { id: coursId },
+            data: {
+                title,
+                littleSummary,
+                urlImage,
+                difficulty,
+                summary,
+                visibility,
+                authorId,
+                categoryId,
+                updatedAt: new Date()
+            }
         })
         res.json(updatedCours)
     }

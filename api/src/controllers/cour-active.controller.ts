@@ -3,7 +3,6 @@ import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
 import { ConflictError, NotFoundError } from "../lib/errors";
-import { id } from "zod/v4/locales";
 
 export default {
     // Requête pour récuperer tous les cours actives
