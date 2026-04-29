@@ -6,6 +6,7 @@
 	import type { ICours } from '$lib/@types/types';
 	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '$lib/assets/components/Category/Category.svelte';
+	import {authStore, getAuth} from '$lib/services/localstorage.service.svelte'
 
 	let cours: ICours | null = $state(null);
 
@@ -13,6 +14,12 @@
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
 		cours = response.data;
 	});
+
+	async function  addCoursActiveToStudent(){
+		getAuth()
+		const data ={userId: authStore?.user?.id , "coursId": cours?.id, "IsEnd": false}
+		 await api('api/cours-active ', 'POST', data);
+	}
 
 	function getStars(note: number) {
 		const stars = [];
@@ -122,7 +129,7 @@
 					</div>
 				</div>
 
-				<a class="cta" href="/cours/{cours.slug}/cours">Démarrer le cours →</a>
+				<a onclick={addCoursActiveToStudent} class="cta" href="/cours/{cours.slug}/cours">Démarrer le cours →</a>
 			</div>
 		</div>
 	</div>
