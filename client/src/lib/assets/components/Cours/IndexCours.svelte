@@ -11,7 +11,7 @@
 	let cours: ICours | null = $state(null);
 
 	onMount(async () => {
-		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
+		const response = await api('api/cours?slug=' + page.params.slug);
 		cours = response.data;
 	});
 
