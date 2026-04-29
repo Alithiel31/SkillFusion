@@ -51,6 +51,7 @@ jobs:
           git checkout deploy/main -- client/tsconfig.json
           git checkout deploy/main -- client/src/lib/services/api.service.ts
           git rm --ignore-unmatch client/src/lib/services/api.service.js
+          git checkout deploy/main -- .github/ 2>/dev/null || git rm -rf --ignore-unmatch .github/
 
       - name: Commit and push
         run: |
