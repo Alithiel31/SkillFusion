@@ -126,7 +126,7 @@
 					{#if !modifier}
 						{@html marked.parse(coursContent.content)}
 					{:else}
-						<textarea class="text_area" id="text_area" onkeyup={()=>textAreaAdjust(this)}>{coursContent.content}</textarea>
+						<textarea class="text_area" id="text_area" onkeyup={(e)=>textAreaAdjust(e.currentTarget)}>{coursContent.content}</textarea>
 						<button onclick={valider} class="button_modify">Valider</button>
 						
 					{/if}
@@ -138,7 +138,7 @@
 				<button class="nav-btn prev-btn" disabled={currentPage === 1} onclick={goToPrevious}
 					>← Précédent</button
 				>
-				{#if authStore.user?.role == 'instructor'}
+				{#if authStore.user?.role == 'instructor' && cours.numberPage>1}
 					<button
 						class="button_modify"
 						onclick={() => {deletePage()}}>Supprimer une Page</button>

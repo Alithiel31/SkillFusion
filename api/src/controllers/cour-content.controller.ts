@@ -66,13 +66,15 @@ export default {
         if(coursToBeDeleted){
             const coursPages = await prisma.cours.findFirst({where:{id:coursToBeDeleted.coursId}});
             if (coursPages){
-                await prisma.cours.update({where:{id:coursPages.id},data:{numberPage:coursPages?.numberPage-1}})
-                const coursDeleted= await prisma.courContent.delete({ where: { id: courContentId } });
-                const allContentCours= await prisma.courContent.findMany({where:{coursId:coursPages.id}})
-                allContentCours.forEach(async (cours)=>{if(cours.numberPage>=coursDeleted.numberPage){
-                    cours.numberPage--
-                    await prisma.courContent.update({where:{id:cours.id},data:cours})
-                }})
+                if (coursPages.numberPage>1){
+                    await prisma.cours.update({where:{id:coursPages.id},data:{numberPage:coursPages?.numberPage-1}})
+                    const coursDeleted= await prisma.courContent.delete({ where: { id: courContentId } });
+                    const allContentCours= await prisma.courContent.findMany({where:{coursId:coursPages.id}})
+                    allContentCours.forEach(async (cours)=>{if(cours.numberPage>=coursDeleted.numberPage){
+                        cours.numberPage--
+                        await prisma.courContent.update({where:{id:cours.id},data:cours})
+                    }})
+                }
             }
 
         }
