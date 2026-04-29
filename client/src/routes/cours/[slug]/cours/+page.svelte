@@ -1,17 +1,23 @@
 <script lang="ts">
+	import DOMPurify from 'dompurify';
+	import { marked } from 'marked';
+	import { onMount } from 'svelte';
+	import { page } from '$app/state';
+
+	import '../../../../app.css';
+
 	import Header from '$lib/assets/components/Header.svelte';
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import App from '$lib/assets/components/App.svelte';
 	import Main from '$lib/assets/components/Main.svelte';
-	import '../../../../app.css';
-	import api from '$lib/services/api.service';
-	import { onMount } from 'svelte';
-	import { page } from '$app/state';
-	import type { ICours, ICoursContent, ITextArea } from '$lib/@types/types';
 	import Category from '$lib/assets/components/Category/Category.svelte';
-	import { marked } from 'marked';
+	
+	import api from '$lib/services/api.service';
 	import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
-	import DOMPurify from 'dompurify';
+
+		import type { ICours, ICoursContent, ITextArea } from '$lib/@types/types';
+	import ModalValidator from '$lib/assets/components/Validator/ModalValidator.svelte';
+	
 
 	let isLoading = $state(false);
 	let cours: ICours | null = $state(null);
@@ -76,11 +82,15 @@
 		}
 	}
 
+	
+
 	async function valider() {
 		const textArea:ITextArea=document.getElementById('text_area') as ITextArea
 		const response = await api('api/cours-contents/' + currentPageId?.id, 'PATCH', {
 			content: textArea.value
 		});
+		handleModify()
+		getCours()
 	}
 
 	function textAreaAdjust(element:ITextArea) {
@@ -92,9 +102,20 @@
 
 	}
 
+	function modalDeletePage(){
+		const modal = document.getElementById("ModalValidator")
+		modal.show()
+	}
+
+	function closeDeletePageModale(){
+		const modal = document.getElementById("ModalValidator")
+		modal.close()
+	}
 	async function deletePage(){
 		const response = await api('api/cours-contents/' + currentPageId?.id, 'DELETE')
+		closeDeletePageModale()
 		getCours()
+		
 	}
 </script>
 
@@ -120,14 +141,14 @@
 			<div class="cours-main">
 				{#if authStore.user?.role== 'instructor'}
 					<button
-						class="button_modify"
+						class="button_tools flex-end"
 						onclick={() => {handleModify()}}>{textButton}</button>
 
 					{#if !modifier}
 						{@html marked.parse(coursContent.content)}
 					{:else}
 						<textarea class="text_area" id="text_area" onkeyup={(e)=>textAreaAdjust(e.currentTarget)}>{coursContent.content}</textarea>
-						<button onclick={valider} class="button_modify">Valider</button>
+						<button onclick={valider} class="button_tools flex-end">Valider</button>
 						
 					{/if}
 				{:else}
@@ -138,22 +159,26 @@
 				<button class="nav-btn prev-btn" disabled={currentPage === 1} onclick={goToPrevious}
 					>← Précédent</button
 				>
-				{#if authStore.user?.role == 'instructor' && cours.numberPage>1}
-					<button
-						class="button_modify"
-						onclick={() => {deletePage()}}>Supprimer une Page</button>
-				{/if}
-				<span class="page-indicator">Page {currentPage} sur {cours?.numberPage}</span>
+
 				{#if authStore.user?.role == 'instructor'}
 					<button
-						class="button_modify"
+						class="button_tools"
+						disabled={cours.numberPage ==1}
+						onclick={() => {modalDeletePage()}}>Supprimer une Page</button>
+				{/if}
+				
+				<span class="page-indicator">Page {currentPage} sur {cours?.numberPage}</span>
+
+				{#if authStore.user?.role == 'instructor'}
+					<button
+						class="button_tools"
 						onclick={() => {createPage()}}>Ajouter une Page</button>
 				{/if}
+
 				<button
 					class="nav-btn next-btn"
 					disabled={currentPage === cours?.numberPage}
-					onclick={goToNext}
-				>
+					onclick={goToNext}>
 					Suivant →
 				</button>
 			</div>
@@ -162,6 +187,12 @@
 				<div class="reviews-title">Commentaires et avis</div>
 			</div>
 		{/if}
+		<ModalValidator
+		message="Voullez vous supprimer la page ?"
+		cancel={closeDeletePageModale}
+		confirm={deletePage}
+
+		/>
 	</Main>
 	<Footer />
 </App>
@@ -210,21 +241,7 @@
 		max-width:100%;
 
 	}
-
-
-	.button_modify {
-		width: max-content;
-		align-self: end;
-	}
-
-	.card :global(p) {
-		font-size: 14px;
-		color: #333;
-		line-height: 1.65;
-	}
-
 	
-	/* Reviews */
 	.reviews-title {
 		font-size: 15px;
 		font-weight: 700;
@@ -232,7 +249,6 @@
 		margin-bottom: 16px;
 	}
 
-	/* NAVIGATION FOOTER */
 	.navigation-footer {
 		display: flex;
 		justify-content: space-between;
@@ -247,6 +263,36 @@
 		margin-right: 20px;
 	}
 
+	.button_tools {
+		padding: 8px 16px;
+		border-radius: var(--border-radius);
+		border: none;
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--button-text-color);
+		background-color: var(--button-backgroung-color) ;
+		transition:
+			background 0.15s,
+			color 0.15s;
+		text-align: center;
+		width: max-content;
+	}
+
+	.button_tools:hover {
+		background: var(--button-backgroung-color-hover);
+		cursor: pointer;
+	}
+
+	.button_tools:disabled {
+		background: #d0d0d0;
+		cursor: not-allowed;
+		color: #999;
+	}
+
+	.flex-end {
+		align-self: end;
+	}
+
 	.nav-btn {
 		background: #f4a623;
 		color: #fff;
@@ -259,11 +305,9 @@
 		font-family: inherit;
 		transition: background 0.2s;
 		flex: 1;
-	}
-
-	.nav-btn:hover:not(:disabled) {
 		background: #e89b1c;
 	}
+
 
 	.nav-btn:disabled {
 		background: #d0d0d0;
