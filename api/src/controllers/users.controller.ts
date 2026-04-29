@@ -157,6 +157,8 @@ export async function createUser(req: Request, res: Response) {
 // Mettre à jour un utilisateur
 export async function updateUser(req: Request, res: Response) {
   const userId = await parseIdFromParams(req.params.id);
+  
+  // Schéma de validation des données
   const updateUserBodySchema = z.object({
     pseudo: z.string().min(1).optional(),
     email: z.string().optional(),
@@ -166,15 +168,23 @@ export async function updateUser(req: Request, res: Response) {
     urlProfilImage: z.string().optional(),
     rolesId: z.number().optional(),
   });
+  
   const data = await updateUserBodySchema.parseAsync(req.body);
 
+  // Si l'email est modifié, vérifie qu'il soit unique
   const { email } = data;
 
-      // vérifier que l'email est unique
-      const existingUser = await prisma.user.findUnique({ where: { email } });
-      if (existingUser) {
-          throw new ConflictError("Email déjà utilisé");
-      }
+  if (email) {
+    // Ne pas vérifier si l'email appartient déjà à l'utilisateur en cours
+    const existingUser = await prisma.user.findUnique({
+      where: { email }
+    });
+
+    // Si l'email existe et ce n'est pas celui de l'utilisateur actuel, alors renvoyer une erreur
+    if (existingUser && existingUser.id !== userId) {
+      throw new ConflictError("Email déjà utilisé");
+    }
+  }
 
   const updatedUser = await prisma.user.update({
     where: { id: userId },
@@ -188,6 +198,7 @@ export async function updateUser(req: Request, res: Response) {
       roleId: data.rolesId,
     }
   });
+
   res.status(200).json(updatedUser);
 }
 

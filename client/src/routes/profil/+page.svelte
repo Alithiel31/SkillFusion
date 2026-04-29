@@ -1,26 +1,28 @@
-<script>
+<script lang="ts">
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import Header from '$lib/assets/components/Header.svelte';
 	import { onMount } from 'svelte';
 	import api from '$lib/services/api.service';
 	import { writable } from 'svelte/store';
-	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
+	import { authStore } from '$lib/services/localstorage.service.svelte';
 
 
 	let user = writable({ firstname: '', lastname: '', email: '', password: '' });
 
 	let errorEmail = $state(false);
+	let succesMessage = writable('');
 
 	onMount(async () => {
 		try {
 			const response = await api('auth/me', 'GET');
 			user.set(response.data);
+			errorEmail = false;
 		} catch (error) {
 			console.error('Erreur lors de la récupération des informations utilisateur :', error);
 		}
 	});
 
-	async function handleSubmit(event) {
+	async function handleSubmit(event: SubmitEvent){
 		event.preventDefault();
 		const formData = new FormData(event.target);
 		const updatedUser = {
@@ -30,42 +32,48 @@
 			password: formData.get('password')
 		};
 
-
+		// Supprimer les champs vides pour éviter de les envoyer à l'API
 		if (!updatedUser.password) {
 			delete updatedUser.password; // Ne pas inclure le champ password si il est vide
-		};
-
-		if (!updatedUser.email) {
-			delete updatedUser.email; 
-		};
-
-		if (!updatedUser.firstname) {
-			delete updatedUser.firstname; 
-		};
-
-		if (!updatedUser.lastname) {
-			delete updatedUser.lastname; 
-		};
-
-		const response = await api(`api/users/${authStore?.user?.id}`, 'PATCH', updatedUser);
-		if (response.status!=201){
-			if (response.data.error=="Email déjà utilisé"){
-				errorEmail=true
-			}
-		}else{
-				errorEmail=false
 		}
 
+		if (updatedUser.email === String($user.email)) {
+			delete updatedUser.email;
+		}
+
+		if (!updatedUser.firstname) {
+			delete updatedUser.firstname;
+		}
+
+		if (!updatedUser.lastname) {
+			delete updatedUser.lastname;
+		}
+
+		errorEmail = false;
+
 		try {
-			getAuth();
 			const response = await api(`api/users/${authStore?.user?.id}`, 'PATCH', updatedUser);
-			console.log('Informations mises à jour avec succès :', response.data);
+
+			// Vérification du statut de la réponse
+			if (response.status !== 201) {
+				if (response.data.error === 'Email déjà utilisé') {
+					errorEmail = true;
+					setTimeout(() => errorEmail = false, 5000); // Message effacé après 5 secondes
+				}
+			} else {
+				errorEmail = false;
+				succesMessage.set('Informations mises à jour avec succès !'); // Message de succès
+				// Réinitialiser le message après quelques secondes
+				setTimeout(() => succesMessage.set(''), 5000); // Message effacé après 5 secondes
+			}
 		} catch (error) {
-			throw new Error('Erreur lors de la mise à jour des informations utilisateur :' + error);
+			console.error('Erreur lors de la mise à jour des informations utilisateur :', error);
+			// Gestion d'une erreur générique
+			succesMessage.set('Une erreur est survenue. Veuillez réessayer.');
 		}
 	}
 
-	async function handleCancel(event) {
+	async function handleCancel(event: SubmitEvent){
 		event?.preventDefault();
 		const currentUser = $user;
 		user.set({ ...currentUser });
@@ -130,6 +138,9 @@
 					<button class="btn-cancel" type="submit" onclick={handleCancel}>Annuler</button>
 				</div>
 			</div>
+			{#if $succesMessage}
+				<p style="color:green; font-weight: bold; margin-top: 20px;">{$succesMessage}</p>
+			{/if}
 
 			<div class="avatar-box">
 				<button class="avatar-edit" type="button">✎</button>
