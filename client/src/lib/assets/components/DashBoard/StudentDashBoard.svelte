@@ -77,7 +77,7 @@ import "../../../../app.css"
 
 			<div class="panel__list">
 				{#each coursActive as c}
-					<CoursCard isDashboard={true}
+					<CoursCard class="coursCardDashboard" isDashboard={true}
           cours={
             c.cours
           }
@@ -294,6 +294,9 @@ import "../../../../app.css"
 		display: flex;
 		flex-direction: row;
 		gap: 8px;
+	}
+	.panel__list:first-child{
+			overflow-y: auto;
 	}
 
 	.panel__empty {
