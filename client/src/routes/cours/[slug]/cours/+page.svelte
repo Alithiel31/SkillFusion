@@ -99,8 +99,14 @@
 		element.style.height = (25+element.scrollHeight)+"px";
 	}
 
-	function createPage(){
-
+	async function createPage(){
+		const response = await api('api/cours-contents', 'POST', {
+			content: `Nouvelle page n°${currentPage+1}`,
+			numberPage: currentPage+1,
+      		coursId: cours?.id
+		});
+		currentPage++
+		getCours()
 	}
 
 	function modalDeletePage(){
@@ -115,6 +121,9 @@
 	async function deletePage(){
 		const response = await api('api/cours-contents/' + currentPageId?.id, 'DELETE')
 		closeDeletePageModale()
+		if(currentPage!=1){
+			currentPage--
+		}
 		getCours()
 		
 	}
@@ -123,9 +132,6 @@
 <App>
 	<Header />
 	<Main class="main-cours">
-		{#if isLoading}
-			<p>Données en cours de chargement...</p>
-		{/if}
 		{#if cours && coursContent}
 			<div class="cours_header">
 				<h1>{cours.title}</h1>
