@@ -33,9 +33,10 @@ jobs:
 
       - name: Merge org main into deployment
         run: |
-          if ! git merge origin/main --no-commit --no-ff -X theirs; then
-            echo "::error::Erreur inattendue lors du merge — sync annulé"
-            git merge --abort
+          git merge origin/main --no-commit --no-ff -X theirs || true
+          git rm -rf --ignore-unmatch client/.svelte-kit/
+          if git ls-files --unmerged | grep -q .; then
+            echo "::error::Conflits non résolus — sync annulé"
             exit 1
           fi
 
@@ -50,6 +51,11 @@ jobs:
           git checkout deploy/main -- client/tsconfig.json
           git checkout deploy/main -- client/src/lib/services/api.service.ts
           git rm --ignore-unmatch client/src/lib/services/api.service.js
+
+      - name: Set deploy credentials
+        run: |
+          git config --local http.https://github.com/Alithiel31/SkillFusion.git.extraheader \
+            "AUTHORIZATION: basic $(echo -n 'x-access-token:${{ secrets.DEPLOY_REPO_TOKEN }}' | base64 -w 0)"
 
       - name: Commit and push
         run: |
