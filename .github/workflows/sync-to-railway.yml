@@ -33,20 +33,23 @@ jobs:
 
       - name: Merge org main into deployment
         run: |
-          git merge origin/main --no-commit --no-ff || true
+          if ! git merge origin/main --no-commit --no-ff; then
+            echo "::error::Conflit de merge détecté — sync annulé"
+            git merge --abort
+            exit 1
+          fi
 
       - name: Restore production files
         run: |
           git checkout deploy/main -- api/dockerfile
           git checkout deploy/main -- api/package.json
-          git checkout deploy/main -- api/src/models/seeding.ts
           git checkout deploy/main -- api/src/models/client.ts
           git checkout deploy/main -- client/dockerfile
           git checkout deploy/main -- client/svelte.config.js
           git checkout deploy/main -- client/package.json
           git checkout deploy/main -- client/tsconfig.json
           git checkout deploy/main -- client/src/lib/services/api.service.ts
-       
+          git rm --ignore-unmatch client/src/lib/services/api.service.js
 
       - name: Commit and push
         run: |
