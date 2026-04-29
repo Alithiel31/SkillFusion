@@ -18,7 +18,7 @@
 	async function  addCoursActiveToStudent(){
 		getAuth()
 		const data ={userId: authStore?.user?.id , "coursId": cours?.id, "IsEnd": false}
-		 await api('api/cours-active ', 'POST', data);
+		await api('api/cours-active ', 'POST', data);
 	}
 
 	function getStars(note: number) {
