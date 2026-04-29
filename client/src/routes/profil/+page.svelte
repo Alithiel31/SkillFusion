@@ -1,6 +1,7 @@
 <script>
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import Header from '$lib/assets/components/Header.svelte';
+	import BtnDeleteAccount from '$lib/assets/components/BtnDeleteAccount.svelte';
 </script>
 
 <Header />
@@ -45,6 +46,8 @@
 				<div class="btn-modify">
 					<button class="btn-update" type="submit">Enregistrer les modifications</button>
 					<button class="btn-cancel" type="submit">Annuler</button>
+					
+					<BtnDeleteAccount />
 				</div>
 			</div>
 

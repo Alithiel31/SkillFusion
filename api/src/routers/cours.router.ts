@@ -16,4 +16,5 @@ router.delete("/cours/mine", verifyToken, coursController.deleteAllMyCours) // A
 router.delete("/cours/:id", coursController.deleteCours)
 
 
+
 export default router;
