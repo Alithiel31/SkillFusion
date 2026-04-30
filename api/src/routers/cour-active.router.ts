@@ -4,6 +4,9 @@ import coursActiveController from "../controllers/cour-active.controller";
 const router = express.Router();
 
 router.get("/cours-active", coursActiveController.getAll)
+
+router.get("/cours-active/user/:id", coursActiveController.getByUser)
+
 router.get("/cours-active/:id", coursActiveController.getOneCoursActive)
 
 router.post("/cours-active", coursActiveController.createCoursActive)

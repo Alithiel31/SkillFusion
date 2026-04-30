@@ -1,4 +1,4 @@
-import { Role } from "../models/index";
+import { Role } from "../models/client.ts";
 
 export interface IUser {
         id: number;

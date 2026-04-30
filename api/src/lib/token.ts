@@ -6,7 +6,7 @@ import type { User } from "../models/client";
 export function generateAuthTokens(user: User) {
   const payload = {
     userId: user.id,
-    role: user.role,
+    role: user.roleId,
   };
 
   const accessToken = jwt.sign(payload, config.jwtSecret, { expiresIn: config.jwtAccesExpireIn, audience: "access" });

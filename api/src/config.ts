@@ -8,11 +8,11 @@ if (!process.env.ALLOWED_ORIGINS) {
 
 export const config = {
   port: parseInt(process.env.PORT || "3000"),
-  allowedOrigins: process.env.ALLOWED_ORIGINS,
+  allowedOrigins: process.env.ALLOWED_ORIGINS!,
   isProd: process.env.NODE_ENV === "production" || false,
-  jwtSecret: process.env.JWT_SECRET,
-  jwtAccesExpireIn: process.env.JWT_ACCES_EXPIRES_IN,
-  jwtRefreshExpireIn: process.env.JWT_ACCES_EXPIRES_IN,
+  jwtSecret: process.env.JWT_SECRET!,
+  jwtAccesExpireIn: 15 * 60,  
+jwtRefreshExpireIn: 7 * 24 * 60 * 60,
   emailUser: process.env.EMAIL_USER ?? "",
   emailPass: process.env.EMAIL_PASS ?? "",
 };

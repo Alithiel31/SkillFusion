@@ -41,6 +41,9 @@ model User {
   verified       Boolean @default(false)
   verifyToken    String? @map("verify_token")  
 
+  resetToken        String?  @map("reset_token")
+  resetTokenExpiry  DateTime? @map("reset_token_expiry")
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -78,7 +81,7 @@ model Cours {
   categoryId    Int                              @map("category_id")
   tools         CoursHasTool[]
   learningObjectives     CoursHasLearningObjective[]
-  content       CourContent[]
+  content       CoursContent[]
   enrollments   UserHasCours[]
   activations   CoursActived[]
   comments      Comment[]
@@ -88,7 +91,7 @@ model Cours {
   @@map("courses")
 }
 
-model CourContent {
+model CoursContent {
   id         Int    @id @default(autoincrement())
   coursId    Int    @map("cours_id")
   numberPage Int    @map("number_page")

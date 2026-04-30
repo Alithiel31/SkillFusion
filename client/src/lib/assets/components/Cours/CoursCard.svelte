@@ -1,19 +1,21 @@
 <script lang="ts">
-import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
+	import '../../../../app.css';
+	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '$lib/assets/components/Category/Category.svelte';
-	let props = $props();
-	
+	let { isDashboard = false, ...props } = $props();
 </script>
 
-<article class="cours-card">
+<article class="cours-card {props.class}">
 	<a class="cours__link" href="/cours/{props.cours.slug}">
 		<div class="card__image"></div>
 		<div class="card__body">
 			<h3 class="card__title">{props.cours.title}</h3>
 			<div class="card__information">
-				<Category category={props.cours.category}
-				--background_color={props.cours.category.backgroundColor}/>
-				<LevelBar level={props.cours.difficulty} />
+				<Category
+					category={props.cours.category}
+					--background_color={props.cours.category.backgroundColor}
+				/>
+				<LevelBar {isDashboard} level={props.cours.difficulty} />
 			</div>
 		</div>
 	</a>
@@ -30,6 +32,7 @@ import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 		border-radius: var(--border-radius);
 		overflow: hidden;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+		border: 1px lightgray solid;
 		transition:
 			transform 0.2s,
 			box-shadow 0.2s;
@@ -43,8 +46,8 @@ import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 	}
 
-	.cours__link{
-		width:100%;
+	.cours__link {
+		width: 100%;
 		text-decoration: none;
 	}
 
@@ -58,7 +61,7 @@ import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 		background-color: var(--card__image__color);
 	}
 
-	.card__body{
+	.card__body {
 		padding: 10px 10px;
 		height: 100px;
 		display: flex;
@@ -66,37 +69,35 @@ import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 		width: 100%;
 	}
 
-	.card__title{
+	.card__title {
 		width: 100%;
 		flex-grow: 1;
 	}
-	.card__information{
+	.card__information {
 		display: flex;
 		bottom: 0;
 		position: relative;
 		justify-content: space-between;
 		align-items: flex-end;
 	}
-	
+
 	@media (min-width: 768px) {
-		.card__body{
+		.card__body {
 			overflow: hidden;
 		}
 		.card__title {
 			align-self: flex-start;
 		}
-
 	}
 	@media (min-width: 1024px) {
-		
 		.cours-card {
 			height: 240px;
 			flex-direction: column;
 			min-width: unset;
 		}
 
-		.cours__link{
-			width:100%;
+		.cours__link {
+			width: 100%;
 			text-decoration: none;
 			height: 100%;
 			display: flex;
@@ -110,14 +111,18 @@ import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 			justify-content: center;
 			background-color: var(--card__image__color);
 		}
-		.card__body{
+		.card__body {
 			overflow: unset;
 			padding: 10px;
 			width: unset;
 			flex-grow: 1;
 		}
-		.card__title{
+		.card__title {
 			width: 100%;
 		}
+	}
+	.coursCardDashboard {
+		max-width: 15%;
+		min-width: 15%;
 	}
 </style>

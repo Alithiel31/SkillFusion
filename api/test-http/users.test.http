@@ -1,0 +1,41 @@
+
+@BASE_URL=http://localhost:3000
+
+### utilisateurs
+GET {{BASE_URL}}/api/users
+Content-Type: application/json
+
+### utilisateurs avec id
+GET {{BASE_URL}}/api/users/1
+Content-Type: application/json
+
+### creer une utilisateur
+POST {{BASE_URL}}/api/users
+Content-Type: application/json
+
+{
+    "pseudo": "jo_doe",
+    "email": "jo.doe@example.com",
+    "password": "password123",
+    "firstname": "Joh",
+    "lastname": "Doe",
+    "roleId": 1
+}
+
+
+### modifier une utilisateur
+PATCH {{BASE_URL}}/api/users/2
+Content-Type: application/json
+
+{
+    "pseudo": "john_doe",
+    "email": "john.doe@example.com",
+    "password": "password123",
+    "firstname": "John",
+    "lastname": "Doe",
+    "roleId": 2
+}
+
+### supprimer une utilisateur
+DELETE {{BASE_URL}}/api/users/2
+Content-Type: application/json
