@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as usersController from "../controllers/users.controller.js";
+import usersController from "../controllers/users.controller";
 import { verifyToken } from "../middlewares/auth.middleware";
 import { checkRoles, requireSelfOrAdmin, ROLES } from "../middlewares/rbac.middleware";
 
@@ -24,8 +24,4 @@ router.patch("/users/:id", verifyToken, requireSelfOrAdmin, usersController.upda
 // DELETE - self ou ADMIN
 router.delete("/users/:id", verifyToken, requireSelfOrAdmin, usersController.deleteUser);
 
-export const router = Router();
-
-router.get("/users", usersController.getAllUsers);
-router.get("/users/me/export", verifyToken, usersController.exportMyData);
 router.delete("/users/me", verifyToken, usersController.deleteMyAccount);

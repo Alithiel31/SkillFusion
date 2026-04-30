@@ -1,9 +1,8 @@
 import type { Request, Response } from "express"
-import type { AuthenticatedRequest } from "../@types/express";
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { ConflictError, NotFoundError } from "../lib/errors";
+import { ConflictError, ForbiddenError, NotFoundError } from "../lib/errors";
 import type { AuthenticatedRequest } from "../@types/express";
 
 
@@ -179,11 +178,13 @@ updatingCours: async (req: Request, res: Response) => {
     const coursId = await parseIdFromParams(req.params.id);
     const updateCoursBodyScheme = z.object({
         title: z.string().min(1),
+        slug: z.string().min(1),
         littleSummary: z.string().optional(),
         urlImage: z.string().optional(),
         difficulty: z.number().int().min(0).max(4),
         summary: z.string().optional(),
         visibility: z.boolean(),
+        numberPage:z.number().int(),
         authorId: z.number().int(),
         categoryId: z.number().int(),
         tools: z.array(z.number().int()),
@@ -197,6 +198,8 @@ updatingCours: async (req: Request, res: Response) => {
     });
     const {
         title,
+        slug,
+        numberPage,
         littleSummary,
         urlImage,
         difficulty,
@@ -261,6 +264,17 @@ updatingCours: async (req: Request, res: Response) => {
 
         res.status(204).end();
     changeVisibility:async (req: Request, res: Response)=>{
+        const coursId = await parseIdFromParams(req.params.id);
+        const cours= await prisma.cours.findFirst({where:{id:coursId}})
+        if(cours){
+            await prisma.cours.update({where:{id:coursId},data:{visibility:!cours.visibility}})
+            return res.status(204).end()
+        }
+        res.status(400).end()
+    }
+
+},
+changeVisibility:async (req: Request, res: Response)=>{
         const coursId = await parseIdFromParams(req.params.id);
         const cours= await prisma.cours.findFirst({where:{id:coursId}})
         if(cours){

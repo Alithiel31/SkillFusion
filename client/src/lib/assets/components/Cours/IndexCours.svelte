@@ -7,14 +7,14 @@
 	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '$lib/assets/components/Category/Category.svelte';
 	import ModalOpinion from '../Validator/ModalOpinion.svelte';
-	let cours: ICours | null = $state(null);
-	let alreadyOpinion = $state({IsOpinionExisting:false,opinion : {note: 0}});
+	
 	import {authStore, getAuth} from '$lib/services/localstorage.service.svelte'
 	import ModalValidator from '../Validator/ModalValidator.svelte';
 	import type { IModal } from '$lib/@types/html';
 
 	let cours: ICours | null = $state(null);
 	let visibility=$derived(cours?.visibility)
+	let alreadyOpinion = $state({IsOpinionExisting:false,opinion : {note: 0}});
 
 	onMount(async () => {
 		getAuth();
@@ -33,16 +33,14 @@
 		const data = { content: content, note: note, coursId: cours?.id, userId: authStore?.user?.id };
 		await api("api/opinions/" +response.data.opinion.id , 'PATCH', data);
 		closeDeleteOpinionModale();
+	}
+
 	async function  addCoursActiveToStudent(){
 		
 		const data ={userId: authStore?.user?.id , "coursId": cours?.id, "IsEnd": false}
 		await api('api/cours-active ', 'POST', data);
 	}
 
-	async function addCoursActiveToStudent() {
-		const data = { userId: authStore?.user?.id, coursId: cours?.id, IsEnd: false };
-		await api('api/cours-active ', 'POST', data);
-	}
 	function getStars(note: number) {
 		const stars = [];
 		for (let i = 1; i <= 5; i++) {
@@ -64,6 +62,7 @@
 		const data = { content: content, note: note, coursId: cours?.id, userId: authStore?.user?.id };
 		await api('api/opinions', 'POST', data);
 		closeDeleteOpinionModale();
+	}
 
 	function modalDeleteCours(){
 		const modal = document.getElementById("ModalValidator") as IModal
