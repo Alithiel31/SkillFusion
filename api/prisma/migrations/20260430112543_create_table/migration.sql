@@ -21,6 +21,8 @@ CREATE TABLE "users" (
     "note" INTEGER NOT NULL DEFAULT 0,
     "verified" BOOLEAN NOT NULL DEFAULT false,
     "verify_token" TEXT,
+    "reset_token" TEXT,
+    "reset_token_expiry" TIMESTAMP(3),
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
     "role_id" INTEGER NOT NULL DEFAULT 0,
