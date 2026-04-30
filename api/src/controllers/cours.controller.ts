@@ -1,8 +1,9 @@
 import type { Request, Response } from "express"
+import type { AuthenticatedRequest } from "../@types/express";
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { ConflictError, NotFoundError } from "../lib/errors";
+import { ConflictError, ForbiddenError, NotFoundError } from "../lib/errors";
 
 
 export default {
@@ -91,7 +92,7 @@ export default {
         const cours = await prisma.cours.findMany(
             {
                 where: { authorId: userId },
-                include: { category: true,author: true }
+                include: { category: true, author: true }
             })
         if (!cours) {
             throw new NotFoundError(`Cours from ${userId} not found`);
@@ -135,6 +136,8 @@ export default {
         const createdCours = await prisma.cours.create({
             data: {
                 title: data.title,
+                slug: data.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+                numberPage: 0,
                 littleSummary: data.littleSummary,
                 urlImage: data.urlImage,
                 difficulty: data.difficulty,
@@ -154,37 +157,60 @@ export default {
         res.json(cours);
     },
     //Suprimer un cours par son id
-    deleteCours: async (req: Request, res: Response) => {
+    deleteCours: async (req: AuthenticatedRequest, res: Response) => {
         const coursId = await parseIdFromParams(req.params.id);
         const cours = await prisma.cours.findUnique({ where: { id: coursId } });
         if (!cours) { throw new NotFoundError("Cours not found"); }
 
+        if (req.user?.userId !== cours.authorId) {
+            throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce cours");
+        }
+
         await prisma.cours.delete({ where: { id: coursId } });
 
         res.status(204).end();
-    },
-    // Requête pour modifier un cours
-    updatingCours: async (req: Request, res: Response) => {
-        const coursId = await parseIdFromParams(req.params.id);
-        const updateCoursBodyScheme = z.object({
-            title: z.string().min(1),
-            littleSummary: z.string().optional(),
-            urlImage: z.string().optional(),
-            difficulty: z.number().int().min(0).max(4),
-            summary: z.string().optional(),
-            visibility: z.boolean(),
-            authorId: z.number().int(),
-            categoryId: z.number().int(),
-            tools: z.array(z.number().int()),
-            learningObjectives: z.array(z.number().int()),
-            content: z.array(z.number().int()),
-            enrollments: z.array(z.number().int()),
-            activations: z.array(z.number().int()),
-            comments: z.array(z.number().int()),
-            opinions: z.array(z.number().int()),
-            notifications: z.array(z.number().int()),
-        });
-        const {
+},
+// Requête pour modifier un cours
+updatingCours: async (req: Request, res: Response) => {
+    const coursId = await parseIdFromParams(req.params.id);
+    const updateCoursBodyScheme = z.object({
+        title: z.string().min(1),
+        littleSummary: z.string().optional(),
+        urlImage: z.string().optional(),
+        difficulty: z.number().int().min(0).max(4),
+        summary: z.string().optional(),
+        visibility: z.boolean(),
+        authorId: z.number().int(),
+        categoryId: z.number().int(),
+        tools: z.array(z.number().int()),
+        learningObjectives: z.array(z.number().int()),
+        content: z.array(z.number().int()),
+        enrollments: z.array(z.number().int()),
+        activations: z.array(z.number().int()),
+        comments: z.array(z.number().int()),
+        opinions: z.array(z.number().int()),
+        notifications: z.array(z.number().int()),
+    });
+    const {
+        title,
+        littleSummary,
+        urlImage,
+        difficulty,
+        summary,
+        visibility,
+        authorId,
+        categoryId }
+        = await updateCoursBodyScheme.parseAsync(req.body);
+
+    const cours = await prisma.cours.findUnique({ where: { id: coursId } });
+    if (!cours) { throw new NotFoundError("Cours not found"); }
+
+    const alreadyExistingCours = await prisma.cours.findFirst({ where: { title: title } });
+    if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
+
+    const updatedCours = await prisma.cours.update({
+        where: { id: coursId },
+        data: {
             title,
             littleSummary,
             urlImage,
@@ -192,36 +218,12 @@ export default {
             summary,
             visibility,
             authorId,
-            categoryId }
-            = await updateCoursBodyScheme.parseAsync(req.body);
-
-        const cours = await prisma.cours.findUnique({ where: { id: coursId } });
-        if (!cours) { throw new NotFoundError("Cours not found"); }
-
-        const alreadyExistingCours = await prisma.cours.findFirst({ where: { title: title } });
-        if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
-
-
-        // SHOULD TO DO ? 
-        // if (req.user?.role !== "admin") { throw new UnauthorizedError('Not autorisation'); }
-        // else if (req.user?.role !== "author" && req.user?.id !== quiz.user_id) { throw new UnauthorizedError('Not autorisation'); }
-
-        const updatedCours = await prisma.cours.update({
-            where: { id: coursId },
-            data: {
-                title,
-                littleSummary,
-                urlImage,
-                difficulty,
-                summary,
-                visibility,
-                authorId,
-                categoryId,
-                updatedAt: new Date()
-            }
-        })
-        res.json(updatedCours)
-    },
+            categoryId,
+            updatedAt: new Date()
+        }
+    })
+    res.json(updatedCours)
+},
     changeVisibility:async (req: Request, res: Response)=>{
         const coursId = await parseIdFromParams(req.params.id);
         const cours= await prisma.cours.findFirst({where:{id:coursId}})

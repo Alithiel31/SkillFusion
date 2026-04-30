@@ -1,16 +1,27 @@
 import { Router } from "express";
 import * as usersController from "../controllers/users.controller.js";
-export const router = Router();
 import { verifyToken } from "../middlewares/auth.middleware";
+import { checkRoles, requireSelfOrAdmin, ROLES } from "../middlewares/rbac.middleware";
 
-router.get("/users", usersController.getAllUsers);
+export const router = Router();
+
+
+// GET - Accessible à STUDENT, TEACHER, ADMIN
+router.get("/users", verifyToken, checkRoles([ROLES.STUDENT, ROLES.TEACHER, ROLES.ADMIN]), usersController.getAllUsers);
+
+// GET export - Juste vérifier le token
 router.get("/users/me/export", verifyToken, usersController.exportMyData);
-router.get("/users/:id", usersController.getUserById);
 
-router.post("/users", usersController.createUser);
+// GET :id - Accessible à STUDENT, TEACHER, ADMIN
+router.get("/users/:id", verifyToken, checkRoles([ROLES.STUDENT, ROLES.TEACHER, ROLES.ADMIN]), usersController.getUserById);
 
-router.patch("/users/:id", usersController.updateUser);
+// POST - ADMIN only
+router.post("/users", verifyToken, checkRoles([ROLES.ADMIN]), usersController.createUser);
 
-router.delete("/users/:id", usersController.deleteUser);
+// PATCH - self ou ADMIN
+router.patch("/users/:id", verifyToken, requireSelfOrAdmin, usersController.updateUser);
+
+// DELETE - self ou ADMIN
+router.delete("/users/:id", verifyToken, requireSelfOrAdmin, usersController.deleteUser);
 
 export default router;
