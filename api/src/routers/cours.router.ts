@@ -1,13 +1,18 @@
 import express from 'express';
-import coursController from '../controlleurs/cours.controller';
+import coursController from '../controllers/cours.controller';
+import { verifyToken } from '../middlewares/auth.middleware';
+import { checkRoles, requireSelfOrAdmin, roles } from '../middlewares/rbac.middleware';
 
-const router= express.Router();
+export const router=express.Router()
 
 router.get("/cours",coursController.getAll)
-router.get("/cours/:id",coursController.getOneCours)
 router.get("/cours/homepage",coursController.getForHomePage)
-router.post("/cours",coursController.createCours)
-router.patch("/cours/:id",coursController.updatingCours)
-router.delete("/cours/:id",coursController.deleteCours)
+router.get("/cours/instructor/:id",coursController.getCoursByInstructor)
+router.get("/cours/:id",coursController.getOneCours)
+
+router.post("/cours", verifyToken, checkRoles([roles.instructor, roles.admin]), coursController.createCours)
+router.post("/cours/:id/visibility", verifyToken, checkRoles([roles.instructor, roles.admin]),coursController.changeVisibility)
+router.patch("/cours/:id", verifyToken, requireSelfOrAdmin, coursController.updatingCours)
+router.delete("/cours/:id", verifyToken, requireSelfOrAdmin, coursController.deleteCours)
 
 export default router;

@@ -1,0 +1,37 @@
+
+@BASE_URL=http://localhost:3000
+
+### opinions
+GET {{BASE_URL}}/api/opinions
+Content-Type: application/json
+
+### opinion avec id
+GET {{BASE_URL}}/api/opinions/1
+Content-Type: application/json
+
+### creer une opinion
+POST {{BASE_URL}}/api/opinions
+Content-Type: application/json
+
+{
+    "content": "Très bon cours !",
+    "note": 5,
+    "coursId": 2,
+    "userId": 1
+}
+
+
+### modifier une opinion
+PATCH {{BASE_URL}}/api/opinions/3
+Content-Type: application/json
+
+{
+    "content": "Excellent cours !",
+    "note": 5,
+    "coursId": 1,
+    "userId": 1
+}
+
+### supprimer une opinion
+DELETE {{BASE_URL}}/api/opinions/3
+Content-Type: application/json

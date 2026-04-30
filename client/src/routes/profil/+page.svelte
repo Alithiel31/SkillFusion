@@ -1,6 +1,85 @@
-<script>
+<script lang="ts">
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import Header from '$lib/assets/components/Header.svelte';
+	import BtnExportRGPD from '$lib/assets/components/BtnExportRGPD.svelte';
+
+	import BtnDeleteAccount from '$lib/assets/components/BtnDeleteAccount.svelte';
+	import { onMount } from 'svelte';
+	import api from '$lib/services/api.service';
+	import { writable } from 'svelte/store';
+	import { authStore } from '$lib/services/localstorage.service.svelte';
+
+	let user = writable({ firstname: '', lastname: '', email: '', password: '' });
+
+	let errorEmail = $state(false);
+	let succesMessage: string | null = $state(null);
+
+	onMount(async () => {
+		try {
+			const response = await api('auth/me', 'GET');
+			user.set(response.data);
+			errorEmail = false;
+		} catch (error) {
+			console.error('Erreur lors de la récupération des informations utilisateur :', error);
+		}
+	});
+
+	async function handleSubmit(event: SubmitEvent) {
+		event.preventDefault();
+		const formData = new FormData(event.target);
+		const updatedUser = {
+			lastname: formData.get('name'),
+			firstname: formData.get('firstname'),
+			email: formData.get('email'),
+			password: formData.get('password')
+		};
+
+		// Supprimer les champs vides pour éviter de les envoyer à l'API
+		if (!updatedUser.password) {
+			delete updatedUser.password; // Ne pas inclure le champ password si il est vide
+		}
+
+		if (updatedUser.email === String($user.email)) {
+			delete updatedUser.email;
+		}
+
+		if (!updatedUser.firstname) {
+			delete updatedUser.firstname;
+		}
+
+		if (!updatedUser.lastname) {
+			delete updatedUser.lastname;
+		}
+
+		errorEmail = false;
+
+		try {
+			const response = await api(`api/users/${authStore?.user?.id}`, 'PATCH', updatedUser);
+			console.log(response);
+			// Vérification du statut de la réponse
+			if (response.status !== 200) {
+				if (response.data.error === 'Email déjà utilisé') {
+					errorEmail = true;
+					setTimeout(() => (errorEmail = false), 5000); // Message effacé après 5 secondes
+				}
+			} else {
+				errorEmail = false;
+				succesMessage = 'Informations mises à jour avec succès !'; // Message de succès
+				// Réinitialiser le message après quelques secondes
+				setTimeout(() => (succesMessage = null), 5000); // Message effacé après 5 secondes
+			}
+		} catch (error) {
+			console.error('Erreur lors de la mise à jour des informations utilisateur :', error);
+			// Gestion d'une erreur générique
+			succesMessage = 'Une erreur est survenue. Veuillez réessayer.';
+		}
+	}
+
+	async function handleCancel(event) {
+		event?.preventDefault();
+		const currentUser = $user;
+		user.set({ ...currentUser });
+	}
 </script>
 
 <Header />
@@ -8,16 +87,28 @@
 <div class="profil-container">
 	<h1 class="title-page">Mes informations</h1>
 	<div class="profil-wrapper">
-		<form class="profil-form">
+		<form class="profil-form" onsubmit={handleSubmit}>
 			<div class="form-fields">
 				<div class="form-group">
 					<span class="form-name">
 						<label for="name">Nom </label>
-						<input type="text" id="name" name="name" placeholder="Dupont" />
+						<input
+							type="text"
+							id="name"
+							name="name"
+							bind:value={$user.lastname}
+							placeholder="Dupont"
+						/>
 					</span>
 					<span class="form-firstname">
 						<label for="firstname">Prénom </label>
-						<input type="text" id="firstname" name="firstname" placeholder="Jean" />
+						<input
+							type="text"
+							id="firstname"
+							name="firstname"
+							bind:value={$user.firstname}
+							placeholder="Jean"
+						/>
 					</span>
 				</div>
 				<div class="form-groups">
@@ -27,9 +118,12 @@
 							type="email"
 							id="email"
 							name="email"
+							value={$user?.email}
 							placeholder="jean.dupont@email.com"
-							required
 						/>
+						{#if errorEmail}
+							<p style="color:red;">Email déjà utilisé</p>
+						{/if}
 					</span>
 					<span class="form-password">
 						<label for="password">Mot de passe</label>
@@ -38,14 +132,20 @@
 							id="password"
 							name="password"
 							placeholder="Modifier mon mot de passe"
-							required
 						/>
 					</span>
 				</div>
 				<div class="btn-modify">
 					<button class="btn-update" type="submit">Enregistrer les modifications</button>
 					<button class="btn-cancel" type="submit">Annuler</button>
+					<BtnExportRGPD />
+
+					
+					<BtnDeleteAccount />
 				</div>
+				{#if succesMessage}
+					<p style="color:green; font-weight: bold; margin-top: 20px;">{succesMessage}</p>
+				{/if}
 			</div>
 
 			<div class="avatar-box">

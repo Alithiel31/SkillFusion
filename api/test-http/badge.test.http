@@ -1,0 +1,33 @@
+
+@BASE_URL=http://localhost:3000
+
+### badges
+GET {{BASE_URL}}/api/badges
+Content-Type: application/json
+
+### badges avec id
+GET {{BASE_URL}}/api/badges/1
+Content-Type: application/json
+
+### creer un badge
+POST {{BASE_URL}}/api/badges
+Content-Type: application/json
+
+{
+    "name": "Super Badge",
+    "description": "Tu as réussi à terminer un cours !"
+}
+
+### modifier un badge
+PATCH {{BASE_URL}}/api/badges/1
+Content-Type: application/json
+
+{
+    "name": "Bravo",
+    "description": "Tu as réussi à terminer un cours !"
+
+}
+
+### supprimer un badge
+DELETE {{BASE_URL}}/api/badges/1
+Content-Type: application/json

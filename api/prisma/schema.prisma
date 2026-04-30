@@ -18,6 +18,7 @@ datasource db {
 
 model Role{
   id             Int     @id @default(autoincrement())
+  frName String
   name  String
   users User[]
 
@@ -32,10 +33,16 @@ model User {
   firstname      String?
   lastname       String?
   password       String
-  pseudo         String
+  pseudo         String @unique
   urlProfilImage String? @map("url_profil_image")
 
   note           Int     @default(0)
+
+  verified       Boolean @default(false)
+  verifyToken    String? @map("verify_token")  
+
+  resetToken        String?  @map("reset_token")
+  resetTokenExpiry  DateTime? @map("reset_token_expiry")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -56,12 +63,14 @@ model User {
 
 model Cours {
   id            Int     @id @default(autoincrement())
-  title         String
+  title         String  @unique
+  slug          String  @unique
   littleSummary String? @map("little_summary")
   urlImage      String? @map("url_image")
   difficulty    Int
   summary       String?
   visibility    Boolean @default(false)
+  numberPage    Int @map("number_page")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -72,7 +81,7 @@ model Cours {
   categoryId    Int                              @map("category_id")
   tools         CoursHasTool[]
   learningObjectives     CoursHasLearningObjective[]
-  content       CourContent[]
+  content       CoursContent[]
   enrollments   UserHasCours[]
   activations   CoursActived[]
   comments      Comment[]
@@ -82,7 +91,7 @@ model Cours {
   @@map("courses")
 }
 
-model CourContent {
+model CoursContent {
   id         Int    @id @default(autoincrement())
   coursId    Int    @map("cours_id")
   numberPage Int    @map("number_page")
@@ -102,6 +111,7 @@ model Category {
   description String?
   textColor       String  @map("text_color")
   borderColor String   @map("border_color")
+  backgroundColor  String   @map("background_color")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -262,7 +272,7 @@ model Opinion {
 
 model Notification {
   id      Int    @id @default(autoincrement())
-  contenu String
+  content String
   coursId Int    @map("cours_id")
   userId  Int    @map("user_id")
 

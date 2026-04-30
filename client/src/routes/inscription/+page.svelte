@@ -1,5 +1,5 @@
 <script>
-    import Register from '$lib/assets/components/auth/Register.svelte';
+    import Register from '$lib/assets/components/Auth/componantRegister.svelte';
 </script>
 
 <Register />

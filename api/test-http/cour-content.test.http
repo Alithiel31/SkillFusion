@@ -1,0 +1,36 @@
+
+@BASE_URL=http://localhost:3000
+
+### contenu de tous les cours
+GET {{BASE_URL}}/api/cour-contents
+Content-Type: application/json
+
+### contenu d'un cours avec id
+GET {{BASE_URL}}/api/cour-contents/3
+Content-Type: application/json
+
+### creer un contenu de cours
+POST {{BASE_URL}}/api/cour-contents
+Content-Type: application/json
+
+{
+    "content": "Contenu du cours",
+    "numberPage": 7,
+    "coursId": 1
+}
+
+
+### modifier un contenu de cours
+PATCH {{BASE_URL}}/api/cour-contents/6
+Content-Type: application/json
+
+{
+    "content": "Contenu mis à jour",
+    "numberPage": 2,
+    "coursId": 1
+}
+
+
+### supprimer un contenu de cours
+DELETE {{BASE_URL}}/api/cour-contents/6
+Content-Type: application/json

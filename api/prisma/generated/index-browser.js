@@ -122,6 +122,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.RoleScalarFieldEnum = {
   id: 'id',
+  frName: 'frName',
   name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -136,6 +137,10 @@ exports.Prisma.UserScalarFieldEnum = {
   pseudo: 'pseudo',
   urlProfilImage: 'urlProfilImage',
   note: 'note',
+  verified: 'verified',
+  verifyToken: 'verifyToken',
+  resetToken: 'resetToken',
+  resetTokenExpiry: 'resetTokenExpiry',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   roleId: 'roleId'
@@ -144,18 +149,20 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.CoursScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  slug: 'slug',
   littleSummary: 'littleSummary',
   urlImage: 'urlImage',
   difficulty: 'difficulty',
   summary: 'summary',
   visibility: 'visibility',
+  numberPage: 'numberPage',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   authorId: 'authorId',
   categoryId: 'categoryId'
 };
 
-exports.Prisma.CourContentScalarFieldEnum = {
+exports.Prisma.CoursContentScalarFieldEnum = {
   id: 'id',
   coursId: 'coursId',
   numberPage: 'numberPage',
@@ -170,6 +177,7 @@ exports.Prisma.CategoryScalarFieldEnum = {
   description: 'description',
   textColor: 'textColor',
   borderColor: 'borderColor',
+  backgroundColor: 'backgroundColor',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -260,7 +268,7 @@ exports.Prisma.OpinionScalarFieldEnum = {
 
 exports.Prisma.NotificationScalarFieldEnum = {
   id: 'id',
-  contenu: 'contenu',
+  content: 'content',
   coursId: 'coursId',
   userId: 'userId',
   createdAt: 'createdAt',
@@ -295,7 +303,7 @@ exports.Prisma.ModelName = {
   Role: 'Role',
   User: 'User',
   Cours: 'Cours',
-  CourContent: 'CourContent',
+  CoursContent: 'CoursContent',
   Category: 'Category',
   LearningObjective: 'LearningObjective',
   Tool: 'Tool',

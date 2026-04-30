@@ -1,625 +1,460 @@
-<script>
-  const cours = {
-    titre: 'Installer un robinet mitigeur',
-    categorie: 'Plomberie',
-    auteur: 'Marc Dupuis',
-    difficulte: 'Débutant',
-    difficulteNiveau: 2, // barres remplies sur 5
-    resume: [
-      "Dans ce cours, vous apprendrez à démonter un ancien robinet mitigeur et à installer un nouveau modèle. Nous verrons les différents types de raccordements, comment couper l'eau, préparer les arrivées et sécuriser l'installation avant la mise en service.",
-      "Ce cours est adapté aux débutants complets. Aucune connaissance préalable en plomberie n'est nécessaire."
-    ],
-    resumeCourt: "Apprenez à démonter et installer un robinet mitigeur. Raccordements, coupure d'eau, mise en service.",
-    objectifs: [
-      "Couper l'arrivée d'eau en sécurité",
-      'Démonter l\'ancien robinet',
-      'Raccorder les flexibles',
-      'Tester et contrôler les fuites'
-    ],
-    objectifsMobile: [
-      "Couper l'arrivée d'eau",
-      "Démonter l'ancien robinet",
-      'Raccorder les flexibles'
-    ],
-    outils: 'Clé à molette · Téflon · Flexibles · Coupelle',
-    avis: [
-      {
-        initiales: 'AL',
-        nom: 'Antoine L.',
-        note: 4.5,
-        commentaire: "Très clair et bien expliqué, j'ai réussi du premier coup !"
-      },
-      {
-        initiales: 'SM',
-        nom: 'Sophie M.',
-        note: 4,
-        commentaire: 'Bon cours, peut-être un peu plus de photos serait utile.'
-      }
-    ]
-  }
+<script lang="ts">
+	import '../../../../app.css';
+	import api from '$lib/services/api.service';
+	import { onMount } from 'svelte';
+	import { page } from '$app/state';
+	import type { ICours } from '$lib/@types/types';
+	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
+	import Category from '$lib/assets/components/Category/Category.svelte';
+	import ModalOpinion from '../Validator/ModalOpinion.svelte';
 
-  function getStars(note) {
-    const stars = []
-    for (let i = 1; i <= 5; i++) {
-      if (note >= i) stars.push('full')
-      else if (note >= i - 0.5) stars.push('half')
-      else stars.push('empty')
-    }
-    return stars
-  }
+	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
+	import ModalValidator from '../Validator/ModalValidator.svelte';
+	import type { IModal } from '$lib/@types/html';
+
+	let cours: ICours | null = $state(null);
+	let visibility = $derived(cours?.visibility);
+	let alreadyOpinion = $state({ IsOpinionExisting: false, opinion: { note: 0 } });
+
+	onMount(async () => {
+		getAuth();
+		const response = await api('api/cours?slug=' + page.params.slug);
+		cours = response.data;
+		AlreadyHaveNoted();
+	});
+	async function AlreadyHaveNoted() {
+		const response = await api('api/opinions/' + cours?.id + '/user/' + authStore.user?.id, 'GET');
+		alreadyOpinion = response.data;
+	}
+
+	async function patchOpinions(note: number, content: string) {
+		const response = await api('api/opinions/' + cours?.id + '/user/' + authStore.user?.id, 'GET');
+		const data = { content: content, note: note, coursId: cours?.id, userId: authStore?.user?.id };
+		await api('api/opinions/' + response.data.opinion.id, 'PATCH', data);
+		closeDeleteOpinionModale();
+		const refresh = await api('api/cours?slug=' + page.params.slug);
+		cours = refresh.data;
+	}
+
+	async function addCoursActiveToStudent() {
+		const data = { userId: authStore?.user?.id, coursId: cours?.id, IsEnd: false };
+		await api('api/cours-active ', 'POST', data);
+	}
+
+	function getStars(note: number) {
+		const stars = [];
+		for (let i = 1; i <= 5; i++) {
+			if (note >= i) stars.push('full');
+			else if (note >= i - 0.5) stars.push('half');
+			else stars.push('empty');
+		}
+		return stars;
+	}
+	function modalAddOpinion() {
+		const modal = document.getElementById('ModalOpinion') as IModal;
+		modal.show();
+	}
+	function closeDeleteOpinionModale() {
+		const modal = document.getElementById('ModalOpinion') as IModal;
+		modal.close();
+	}
+	async function ValidateDataModal(note: number, content: string) {
+		const data = { content: content, note: note, coursId: cours?.id, userId: authStore?.user?.id };
+		await api('api/opinions', 'POST', data);
+		closeDeleteOpinionModale();
+		const refresh = await api('api/cours?slug=' + page.params.slug);
+		cours = refresh.data;
+		const response = await api('api/opinions/' + cours?.id + '/user/' + authStore.user?.id, 'GET');
+		alreadyOpinion = response.data;
+	}
+
+	function modalDeleteCours() {
+		const modal = document.getElementById('ModalValidator') as IModal;
+		modal.show();
+	}
+
+	function closeDeleteCoursModale() {
+		const modal = document.getElementById('ModalValidator') as IModal;
+		modal.close();
+	}
+	async function deleteCours() {
+		const response = await api('api/cours/' + cours?.id, 'DELETE');
+		closeDeleteCoursModale();
+	}
+	async function changeVisibility() {
+		await api('api/cours/' + cours?.id + '/visibility', 'POST');
+		const response = await api('api/cours?slug=' + page.params.slug);
+		cours = response.data;
+	}
 </script>
 
-<div class="desktop-view">
-  <div class="desktop-header">
-    <h1>{cours.titre}</h1>
-    <div class="header-right">
-      <span class="badge-categorie">{cours.categorie}</span>
-      <span class="author">par <span>{cours.auteur}</span></span>
-    </div>
-  </div>
-
-  <div class="desktop-main">
-    <!-- LEFT -->
-    <div class="left-col">
-      <!-- Résumé -->
-      <div class="card">
-        <div class="card-title">Résumé du cours</div>
-        {#each cours.resume as paragraphe}
-          <p>{paragraphe}</p>
-        {/each}
-      </div>
-
-      <!-- Avis -->
-      <div class="card">
-        <div class="reviews-title">Avis des apprenants</div>
-        {#each cours.avis as avis, i}
-          <div class="review-item" class:first={i === 0}>
-            <div class="reviewer">
-              <div class="avatar">{avis.initiales}</div>
-              <div class="reviewer-info">
-                <span class="reviewer-name">{avis.nom}</span>
-                <div class="stars">
-                  {#each getStars(avis.note) as type}
-                    <span class="star-{type}">★</span>
-                  {/each}
-                </div>
-              </div>
-            </div>
-            <div class="review-text">{avis.commentaire}</div>
-          </div>
-        {/each}
-      </div>
-    </div>
-
-    <!-- RIGHT -->
-    <div class="right-col">
-      <div class="info-card">
-        <!-- Difficulté -->
-        <div class="info-section-title">DIFFICULTÉ</div>
-        <div class="difficulty-row">
-          <div class="diff-bars">
-            {#each Array(5) as _, i}
-              <div class="diff-bar {i < cours.difficulteNiveau ? 'filled' : 'empty'}"></div>
-            {/each}
-          </div>
-          <span class="diff-label">{cours.difficulte}</span>
-        </div>
-
-        <!-- Objectifs -->
-        <div class="info-section-title">OBJECTIFS PÉDAGOGIQUES</div>
-        <ul class="obj-list">
-          {#each cours.objectifs as obj}
-            <li>{obj}</li>
-          {/each}
-        </ul>
-
-        <!-- Outils -->
-        <div class="info-section-title tools-title">OUTILS NÉCESSAIRES</div>
-        <div class="tools-text">{cours.outils}</div>
-      </div>
-
-      <button class="cta-btn">Démarrer le cours →</button>
-    </div>
-  </div>
+<div class="back-cours">
+	<a href="/cours" class="back-link">← Tous les cours</a>
 </div>
 
-<!-- ===== MOBILE VIEW ===== -->
-<div class="mobile-view">
-  <div class="mobile-topbar">
-    <div class="mobile-back">Tous les cours</div>
-    <div class="mobile-header-row">
-      <div class="mobile-title">{cours.titre}</div>
-      <div class="mobile-header-right">
-        <span class="mobile-badge">{cours.categorie}</span>
-        <span class="mobile-author">{cours.auteur}</span>
-      </div>
-    </div>
-  </div>
+{#if cours}
+	<div class="page">
+		<!-- HEADER -->
+		<div class="header">
+			<h1>{cours.title}</h1>
+			<Category
+				category={cours.category}
+				--border_color={cours.category.borderColor}
+				--text_color={cours.category.textColor}
+			/>
+		</div>
 
-  <div class="mobile-body">
-    <!-- Difficulté -->
-    <div class="m-card">
-      <div class="m-section-label">DIFFICULTÉ</div>
-      <div class="m-difficulty-row">
-        <div class="diff-bars">
-          {#each Array(5) as _, i}
-            <div class="diff-bar {i < cours.difficulteNiveau ? 'filled' : 'empty'}"></div>
-          {/each}
-        </div>
-        <span class="diff-label">{cours.difficulte}</span>
-      </div>
-    </div>
+		<!-- MAIN -->
+		{#if authStore.user?.role != 'student' && authStore.user?.id=== cours.authorId}
+			<div class="card top">
+				<button class="button" onclick={changeVisibility}
+					>Rendre le cours {visibility ? 'priver' : 'public'}</button
+				>
+				<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
+			</div>
+		{/if}
+		<div class="layout">
+			<div class="card side mobile-only">
+				<div class="section">
+					<p class="label">Difficulté</p>
+					<LevelBar class="difficulty-bar" level={cours.difficulty} />
+				</div>
+			</div>
+			<!-- LEFT -->
+			<div class="left">
+				<div class="card">
+					<div class="card-title">Résumé</div>
+					<p>{cours.littleSummary}</p>
+				</div>
 
-    <!-- Résumé -->
-    <div class="m-card">
-      <div class="m-card-title">Résumé</div>
-      <div class="m-resume-text">{cours.resumeCourt}</div>
-    </div>
+				<!-- MOBILE OBJECTIFS -->
+				<div class="card mobile-only">
+					<div class="card-title">Objectifs</div>
+					<ul class="list">
+						{#each cours.learningObjectives as obj}
+							<li>{obj.objectif.title}</li>
+						{/each}
+					</ul>
+				</div>
 
-    <!-- Objectifs -->
-    <div class="m-card">
-      <div class="m-card-title-dark">Objectifs</div>
-      <ul class="m-obj-list">
-        {#each cours.objectifsMobile as obj}
-          <li>{obj}</li>
-        {/each}
-      </ul>
-    </div>
-  </div>
+				<!-- AVIS -->
+				<div class="opinion">
+					<div class="card opinions">
+						<div class="opinions_presentation">
+							<div class="card-title dark">Avis des apprenants</div>
+							{#if authStore.user?.role === 'student'}
+								<button class="btn-add" onclick={modalAddOpinion}>
+									{#if alreadyOpinion?.IsOpinionExisting == true}
+										Modifier mon avis sur le cours
+									{:else}
+										Mettre un avis sur ce cours
+									{/if}
+								</button>
+							{/if}
+						</div>
+						{#each cours.opinions as opinion, i}
+							<div class="review {i === 0 ? 'first' : ''}">
+								<div class="review-top">
+									<div class="avatar"></div>
 
-  <div class="mobile-cta-wrap">
-    <button class="mobile-cta-btn">Démarrer le cours →</button>
-  </div>
-</div>
+									<div>
+										<div class="name">{opinion.user.pseudo}</div>
+										<div class="stars">
+											{#each getStars(opinion.note) as type}
+												<span class="star-{type}">★</span>
+											{/each}
+										</div>
+									</div>
+								</div>
+
+								<div class="text">{opinion.content}</div>
+							</div>
+						{/each}
+					</div>
+				</div>
+			</div>
+
+			<!-- RIGHT -->
+			<div class="right">
+				<div class="card side desktop-only">
+					<div class="section">
+						<p class="label">Difficulté</p>
+						<LevelBar class="difficulty-bar" level={cours.difficulty} />
+					</div>
+
+					<div class="section desktop-only">
+						<p class="label">OBJECTIFS PÉDAGOGIQUES</p>
+						<ul class="list">
+							{#each cours.learningObjectives as obj}
+								<li>{obj.objectif.title}</li>
+							{/each}
+						</ul>
+					</div>
+					<div class="tool-mobile">
+						<div class="section">
+							<p class="label">OUTILS NÉCESSAIRES</p>
+							<ul class="list">
+								{#each cours.tools as tool}
+									<li>{tool.tools.name}</li>
+								{/each}
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<a onclick={addCoursActiveToStudent} class="cta" href="/cours/{cours.slug}/cours"
+					>Démarrer le cours →</a
+				>
+			</div>
+		</div>
+	</div>
+	<ModalValidator
+		message="Voullez vous supprimer la page ?"
+		cancel={closeDeleteCoursModale}
+		confirm={deleteCours}
+	/>
+{/if}
+<ModalOpinion
+	message="Veuillez laisser votre avis : "
+	cancel={closeDeleteOpinionModale}
+	confirm={alreadyOpinion?.IsOpinionExisting == false ? ValidateDataModal : patchOpinions}
+	opinion={alreadyOpinion}
+/>
 
 <style>
-  /* ===================== RESET ===================== */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+	/* RESET */
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
 
-  /* ===================== DESKTOP ===================== */
-  .desktop-view {
-    display: block;
-    background: #f3f0eaff;
-    min-height: 100vh;
-    padding: 32px 48px;
-    font-family: 'Inter', sans-serif;
-  }
+	.opinions_presentation {
+		display: flex;
+		justify-content: space-between
+	}
+	.btn-add {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 10px;
+		font-weight: 500;
+		padding: 5px 10px;
+		cursor: pointer;
+		border: none;
+		color: white;
+		border-radius: 10px;
+		background: #1d4e89;
+	}
+	/* PAGE */
+	.page {
+		padding: 32px 48px;
+		background: var(--background-color);
+		min-height: 100vh;
+		font-family: 'Inter', sans-serif;
+	}
 
-  .desktop-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 32px;
-  }
+	/* BACK */
+	.back-link {
+		text-decoration: none;
+		font-size: 14px;
+		color: #555;
+	}
 
-  .desktop-header h1 {
-    font-size: 26px;
-    font-weight: 700;
-    color: #1a1a1a;
-  }
+	/* HEADER */
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 24px;
+	}
 
-  .header-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 4px;
-  }
+	.header h1 {
+		font-size: 26px;
+		font-weight: 700;
+	}
 
-  .badge-categorie {
-    border: 1.5px solid #1a1a1a;
-    border-radius: 20px;
-    padding: 3px 14px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #1a1a1a;
-  }
+	/* LAYOUT */
+	.layout {
+		display: grid;
+		grid-template-columns: 1fr 320px;
+		gap: 24px;
+	}
 
-  .author {
-    font-size: 13px;
-    color: #555;
-  }
+	.top {
+		margin-bottom: 20px;
+	}
 
-  .author span {
-    font-weight: 600;
-    color: #1a1a1a;
-  }
+	/* LEFT */
+	.left {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		order:2 ;
+	}
 
-  .desktop-main {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 24px;
-  }
+	/* RIGHT */
+	.right {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		order: 2;
+	}
 
-  /* Left column */
-  .left-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+	/* CARD */
+	.card {
+		background: white;
+		border: 1px solid #e8e8e8;
+		border-radius: 12px;
+		padding: 20px;
+	}
 
-  .card {
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    border-radius: 12px;
-    padding: 24px 28px;
-  }
+	.card-title {
+		font-weight: 700;
+		color: #f4a623;
+		margin-bottom: 10px;
+	}
 
-  .card-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: #e8a020;
-    margin-bottom: 14px;
-  }
+	.card-title.dark {
+		color: #1a1a1a;
+	}
 
-  .card :global(p) {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.65;
-  }
+	/* LIST */
+	.list {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
 
-  .card p + p {
-    margin-top: 12px;
-  }
+	.list li::before {
+		content: '✓';
+		color: #3ab55b;
+		margin-right: 6px;
+	}
 
-  /* Reviews */
-  .reviews-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 16px;
-  }
+	/* SIDE */
+	.side .section {
+		margin-bottom: 12px;
+	}
 
-  .review-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-bottom: 14px;
-    border-top: 1px solid #f0f0f0;
-    padding-top: 14px;
-  }
+	.label {
+		font-size: 11px;
+		font-weight: 700;
+		color: #888;
+		margin-bottom: 6px;
+	}
 
-  .review-item.first {
-    border-top: none;
-    padding-top: 0;
-  }
+	/* CTA */
+	.cta {
+		background: #f4a623;
+		color: #1d4e89;
+		border: none;
+		border-radius: 10px;
+		padding: 14px;
+		font-weight: 600;
+		cursor: pointer;
+	}
 
-  .reviewer {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+	.button {
+		padding: 8px 16px;
+		border-radius: var(--border-radius);
+		border: none;
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--button-text-color);
+		background-color: var(--button-backgroung-color);
+		transition:
+			background 0.15s,
+			color 0.15s;
+		text-align: center;
+		width: max-content;
+	}
 
-  .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #d0d0d0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 600;
-    color: #555;
-    flex-shrink: 0;
-  }
+	.button:hover {
+		background: var(--button-backgroung-color-hover);
+		cursor: pointer;
+	}
 
-  .reviewer-info {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
+	/* REVIEWS */
+	.review {
+		border-top: 1px solid #eee;
+		padding-top: 12px;
+		margin-top: 12px;
+	}
 
-  .reviewer-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1a1a1a;
-  }
+	.review.first {
+		border-top: none;
+		margin-top: 0;
+		padding-top: 0;
+	}
 
-  .stars {
-    display: flex;
-    gap: 1px;
-  }
+	.review-top {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+	}
 
-  .star-full,
-  .star-half {
-    color: #f4a623;
-    font-size: 13px;
-  }
+	.avatar {
+		width: 32px;
+		height: 32px;
+		background: #ddd;
+		border-radius: 50%;
+	}
 
-  .star-empty {
-    color: #ddd;
-    font-size: 13px;
-  }
+	.name {
+		font-weight: 600;
+		font-size: 13px;
+	}
 
-  .review-text {
-    font-size: 13px;
-    color: #555;
-    margin-left: 42px;
-  }
+	.text {
+		margin-left: 42px;
+		font-size: 13px;
+		color: #555;
+	}
 
-  /* Right column */
-  .right-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+	/* STARS */
+	.star-full,
+	.star-half {
+		color: #f4a623;
+	}
+	.star-empty {
+		color: #ddd;
+	}
+	.mobile-only {
+		display: none;
+	}
+	.desktop-only {
+		display: block;
+	}
 
-  .info-card {
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    border-radius: 12px;
-    padding: 20px 22px;
-  }
+	/* RESPONSIVE */
+	@media (max-width: 768px) {
+		.page {
+			padding: 16px;
+		}
 
-  .info-section-title {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #888;
-    margin-bottom: 8px;
-  }
+		.layout {
+			display: flex;
+			flex-direction: column;
+		}
 
-  /* Difficulty bars */
-  .difficulty-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 18px;
-  }
-
-  .diff-bars {
-    display: flex;
-    gap: 3px;
-    align-items: flex-end;
-  }
-
-  .diff-bar {
-    width: 5px;
-    border-radius: 2px;
-  }
-
-  .diff-bar.filled {
-    background: #3ab55b;
-  }
-
-  .diff-bar.empty {
-    background: #d8d8d8;
-  }
-
-  .diff-bar:nth-child(1) { height: 8px; }
-  .diff-bar:nth-child(2) { height: 12px; }
-  .diff-bar:nth-child(3) { height: 16px; }
-  .diff-bar:nth-child(4) { height: 16px; }
-  .diff-bar:nth-child(5) { height: 16px; }
-
-  .diff-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1a1a1a;
-  }
-
-  /* Objectives */
-  .obj-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 4px;
-  }
-
-  .obj-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 13px;
-    color: #1a1a1a;
-  }
-
-  .obj-list li::before {
-    content: '✓';
-    color: #3ab55b;
-    font-weight: 700;
-    font-size: 13px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  /* Tools */
-  .tools-title {
-    margin-top: 18px;
-  }
-
-  .tools-text {
-    font-size: 13px;
-    color: #1a1a1a;
-  }
-
-  /* CTA */
-  .cta-btn {
-    background: #f4a623;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 16px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    display: block;
-    font-family: inherit;
-  }
-
-  /* ===================== MOBILE ===================== */
-  .mobile-view {
-    display: none;
-    background-color: #f3f0ea;
-  }
-
-  @media (max-width: 640px) {
-    .desktop-view {
-      display: none;
-    }
-
-    .mobile-view {
-      display: block;
-      background: #f5f5f5;
-      min-height: 100vh;
-      padding: 0 0 24px;
-      font-family: 'Inter', sans-serif;
-    }
-  }
-
-  .mobile-topbar {
-    background: #fff;
-    padding: 14px 16px 0;
-  }
-
-  .mobile-back {
-    font-size: 13px;
-    color: #555;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-
-  .mobile-back::before {
-    content: '←';
-    font-size: 14px;
-  }
-
-  .mobile-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding-bottom: 14px;
-  }
-
-  .mobile-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #1a1a1a;
-    max-width: 210px;
-    line-height: 1.25;
-  }
-
-  .mobile-header-right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 3px;
-  }
-
-  .mobile-badge {
-    border: 1.5px solid #1a1a1a;
-    border-radius: 20px;
-    padding: 2px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    color: #1a1a1a;
-  }
-
-  .mobile-author {
-    font-size: 12px;
-    color: #555;
-  }
-
-  .mobile-body {
-    padding: 12px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .m-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 16px 18px;
-  }
-
-  .m-section-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #888;
-    margin-bottom: 8px;
-  }
-
-  .m-difficulty-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .m-card-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #e8a020;
-    margin-bottom: 8px;
-  }
-
-  .m-resume-text {
-    font-size: 13px;
-    color: #444;
-    line-height: 1.55;
-  }
-
-  .m-card-title-dark {
-    font-size: 14px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 10px;
-  }
-
-  .m-obj-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-  }
-
-  .m-obj-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 13px;
-    color: #1a1a1a;
-  }
-
-  .m-obj-list li::before {
-    content: '✓';
-    color: #3ab55b;
-    font-weight: 700;
-    font-size: 13px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .mobile-cta-wrap {
-    padding: 0 14px;
-    margin-top: 4px;
-  }
-
-  .mobile-cta-btn {
-    background: #f4a623;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 15px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    display: block;
-    font-family: inherit;
-  }
+		.desktop-only {
+			display: none;
+		}
+		.mobile-only {
+			display: block;
+		}
+		.cta {
+			position: sticky;
+			bottom: 10px;
+		}
+		.tool-mobile {
+			display: none;
+		}
+		.desktop-only {
+			display: none;
+		}
+		.right{
+			order: 1;
+		}
+	}
 </style>

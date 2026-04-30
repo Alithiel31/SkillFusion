@@ -1,0 +1,36 @@
+
+@BASE_URL=http://localhost:3000
+
+### categories
+GET {{BASE_URL}}/api/categories
+Content-Type: application/json
+
+### categories avec id
+GET {{BASE_URL}}/api/categories/1
+Content-Type: application/json
+
+### creer une categorie
+POST {{BASE_URL}}/api/categories
+Content-Type: application/json
+
+{
+    "name": "Informatique",
+    "description": "Cours d'informatique pour tous les niveaux",
+    "textColor": "#000000",
+    "borderColor": "#cccccc"
+}
+
+### modifier une categorie
+PATCH {{BASE_URL}}/api/categories/4
+Content-Type: application/json
+
+{
+    "name": "blabla",
+    "description": "Cours de charpente pour tous les niveaux",
+    "textColor": "#9e1212ff",
+    "borderColor": "#cccccc"
+}
+
+### supprimer une categorie
+DELETE {{BASE_URL}}/api/categories/4
+Content-Type: application/json

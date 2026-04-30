@@ -1,20 +1,27 @@
-<script>
-	import logoSkillFusion from '$lib/assets/img/testlogo.png';
-	import { browser } from '$app/environment';
+<script lang="ts">
+	import logoSkillFusion from '$lib/assets/img/logo_title.png';
+	import {getAuth, authStore, clearAuth} from "$lib/services/localstorage.service.svelte"
+	import { onMount } from 'svelte';
 
-	let user = $state(null);
+	import type {IUserLocalStorage} from "$lib/@types/type.localStorage"
+	import { goto } from '$app/navigation';
+	import api from '$lib/services/api.service';
 
-	if (browser) {
-	    const stored = localStorage.getItem('user');
-	    if (stored) user = JSON.parse(stored);
-	}
+	let user:IUserLocalStorage|null = $state(null);
 
-	function logout() {
-	    localStorage.removeItem('user');
-	    localStorage.removeItem('token');
+	onMount(()=>{
+		getAuth()
+		user= authStore.user
+	})
+
+	async function logout() {
+		const response= await api("auth/logout","POST")
+		clearAuth()
 	    user = null;
-	    window.location.href = '/';
+		goto('/')
 	}
+	
+
 </script>
 
 <header class="header">
@@ -24,11 +31,11 @@
 		<!-- Bouton de connxion/d'inscription -->
 		<div class="header__actions">
 			{#if user}
-				<span class="header__pseudo">{user?.pseudo}</span>
+				<a href="/profil" class="header__pseudo">{user.pseudo}</a>
 				<button class="header__btn-logout" onclick={logout}>⏻</button>
 			{:else}
-				<a href="/connection" class="header__btn-login">Connexion</a>
-				<a href="/register" class="header__btn-register">S'inscrire</a>
+				<a href="/connexion" class="header__btn-login">Connexion</a>
+				<a href="/inscription" class="header__btn-register">S'inscrire</a>
 			{/if}
 		</div>
 	</div>
@@ -36,7 +43,9 @@
 	<!-- Navigation -->
 	<nav class="header__nav" aria-label="Navigation principale">
 		<a href="/cours" class="header__nav-link"> Nos cours </a>
+		{#if user}
 		<a href="/tableau-de-bord" class="header__nav-link"> Tableau de bord </a>
+		{/if}
 	</nav>
 </header>
 
@@ -61,7 +70,7 @@
 		gap: 20px;
 	}
 	img {
-		width: 40px;
+		width: 100px;
 	}
 	.header_top {
 		display: flex;
@@ -94,6 +103,10 @@
 	.header__nav-link:hover {
 		background: var(--blue-light);
 		color: var(--blue);
+	}
+
+	.header__pseudo {
+		text-decoration: none;
 	}
 
 	.header__actions {
@@ -169,7 +182,7 @@
 	}
 
 	/* ── Responsive ── */
-	@media (min-width: 800px) {
+	@media (min-width: 768px) {
 		.header__nav {
 			position: absolute;
 			left: 50%;
@@ -179,5 +192,11 @@
 		.header__nav-link {
 			width: auto;
 		}
+	}
+
+	@media (min-width: 1024px) {
+		img {
+		width: 200px;
+	}
 	}
 </style>

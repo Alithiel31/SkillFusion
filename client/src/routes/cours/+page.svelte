@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import App from '$lib/assets/components/App.svelte';
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import Header from '$lib/assets/components/Header.svelte';
@@ -6,107 +6,82 @@
 	import CoursCard from '$lib/assets/components/Cours/CoursCard.svelte';
 	import api from '$lib/services/api.service';
 	import { onMount } from 'svelte';
+	import type { ICours, ICategory } from '$lib/@types/types';
 
-	let courses = $state([]);
+	let courses: ICours[] = $state([]);
+	let categories: ICategory[] = $state([]);
 
 	onMount(async () => {
-        categories = await api('api/cours');
-	    courses = await api('api/cours');
+		const categoriesResponse = await api('api/categories');
+		categories = categoriesResponse.data;
+		const coursesResponse = await api('api/cours?visibility=true');
+		courses = coursesResponse.data;
+		console.log(courses);
 	});
 	let searchQuery = $state('');
 	let selectedCategory = $state('Toutes les catégories');
-	let showDropdown = $state(false);
 
-	// --- DÉRIVÉ (Svelte 5 : $derived) ---
 	let filteredCourses = $derived(
-	    courses.filter((c) => {
-	        const matchSearch = c.title.toLowerCase().includes(searchQuery.toLowerCase());
-
-	        const matchCat =
-				selectedCategory === 'Toutes les catégories' || c.category === selectedCategory;
-
-	        return matchSearch && matchCat;
-	    })
+		courses
+			.filter(
+				(cours) =>
+					selectedCategory === 'Toutes les catégories' || cours.category.name == selectedCategory
+			)
+			.filter((cours) => cours.title.toLowerCase().includes(searchQuery.toLowerCase()))
 	);
 </script>
 
 <App>
 	<Header />
 	<Main>
-		<div class="page">
-			<main class="main">
-				<h1 class="page-title">Tous les cours</h1>
+		<h1 class="page-title">Tous les cours</h1>
 
-				<!-- Recherche & Filtre -->
-				<div class="search">
-					<input
-						class="search-input"
-						type="text"
-						placeholder="Rechercher un cours..."
-						bind:value={searchQuery}
-					/>
+		<!-- Recherche & Filtre -->
+		<div class="search">
+			<input
+				class="search-input"
+				type="text"
+				placeholder="Rechercher un cours..."
+				bind:value={searchQuery}
+			/>
 
-					<div class="dropdown-wrapper">
-						<select
-							id="categorie-select"
-							class="category-btn"
-							onclick={() => (showDropdown = !showDropdown)}
-						>
-							{selectedCategory}
-							<span class="chevron">▾</span>
-							<!-- {#each categories as category}
-								<option value="${category}">
-									{category}
-								</option>
-							{/each} -->
-						</select>
-					</div>
-
-					<button type="button" class="add-btn">+</button>
-				</div>
-				<div class="courses-grid">
-					{#each courses as cours (cours.id)}
-						<CoursCard
-							title={cours.title}
-							littleSummary={cours.littleSummary}
-							urlImage={cours.urlImage}
-							difficulty={cours.difficulty}
-							category={cours.category}
-							--card__image__color={cours.category.textColor}
-							--border_color={cours.category.borderColor}
-							--text_color={cours.category.textColor}
-						/>
+			<div class="dropdown-wrapper">
+				<select id="categorie-select" class="category-btn" bind:value={selectedCategory}>
+					<option value="Toutes les catégories"> Toutes les catégories </option>
+					{#each categories as category}
+						<option value={category.name}>
+							{category.name}
+						</option>
 					{/each}
-				</div>
-			</main>
-		</div></Main
-	>
+				</select>
+			</div>
+
+			<button type="button" class="add-btn">+</button>
+		</div>
+		<div class="courses-grid">
+			{#each filteredCourses as cours (cours.id)}
+				<CoursCard
+					{cours}
+					--card__image__color={cours.category.textColor}
+					--border_color={cours.category.borderColor}
+					--text_color={cours.category.textColor}
+				/>
+			{/each}
+		</div>
+	</Main>
 	<Footer />
 </App>
 
 <style>
 	:global(*, *::before, *::after) {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }	
-    :global(body) {
-        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-        background-color: #F3F0EA;
-        color: #1A1A1A;}
-	.page {
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-		background-color: #f3f0ea;
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
 	}
-
-	.main {
-		flex: 1;
-		max-width: 1120px;
-		width: 100%;
-		margin: 0 auto;
-		padding: 2.5rem 1.5rem 3rem;
+	:global(body) {
+		font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+		background-color: #f3f0ea;
+		color: #1a1a1a;
 	}
 
 	.page-title {
@@ -170,11 +145,6 @@
 		border-color: #9ca3af;
 	}
 
-	.chevron {
-		font-size: 0.8rem;
-		color: #6b7280;
-	}
-
 	.add-btn {
 		width: 40px;
 		height: 40px;
@@ -198,29 +168,12 @@
 	/* Grille */
 	.courses-grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(1, 1fr);
 		gap: 1.25rem;
 	}
 
-	@media (max-width: 1024px) {
-		.courses-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (max-width: 600px) {
-		.courses-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-
 	/* --- mobile view --- */
-	@media (max-width: 768px) {
-		.main {
-			max-width: 100%;
-			padding: 1rem;
-		}
-
+	@media (min-width: 768px) {
 		.page-title {
 			font-size: 1.4rem;
 			text-align: left;
@@ -247,11 +200,14 @@
 			flex-direction: row;
 		}
 
-		/* TRANSFORMATION GRID → LISTE MOBILE */
 		.courses-grid {
-			display: flex;
-			flex-direction: column;
-			gap: 0.8rem;
+			grid-template-columns: repeat(2, 1fr);
 		}
-    }
+	}
+
+	@media (min-width: 1024px) {
+		.courses-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
 </style>
