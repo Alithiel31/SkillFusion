@@ -30,6 +30,9 @@
 				<span class="desktop-text">Pas encore de compte ?</span>
 				<span class="mobile-text">Pas de compte ?</span>
 				<a class="btn-register" href="/inscription">S'inscrire</a>
+				<span class="reset-password">
+				<a  class="btn-reset-password" href="/reinitialiser-mdp">Mot de passe oublié ?</a>
+				</span>
 			</p>
 		</div>
 	</form>
@@ -106,6 +109,17 @@
 		padding: 5px;
 		border-radius: 10px;
 		border: 1px solid lightgray;
+	}
+
+	.reset-password {
+		display: block;
+		text-align: center;
+		margin-top: 10px;
+	}
+
+	.btn-reset-password {
+		text-decoration: none;
+		color: #1d4e89;
 	}
 
 	@media (min-width: 1024px) {

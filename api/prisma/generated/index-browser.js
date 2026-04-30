@@ -139,6 +139,8 @@ exports.Prisma.UserScalarFieldEnum = {
   note: 'note',
   verified: 'verified',
   verifyToken: 'verifyToken',
+  resetToken: 'resetToken',
+  resetTokenExpiry: 'resetTokenExpiry',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   roleId: 'roleId'
