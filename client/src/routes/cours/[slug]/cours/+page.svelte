@@ -15,9 +15,9 @@
 	import api from '$lib/services/api.service';
 	import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
 
-		import type { ICours, ICoursContent, ITextArea } from '$lib/@types/types';
+	import type { ICours, ICoursContent } from '$lib/@types/types';
 	import ModalValidator from '$lib/assets/components/Validator/ModalValidator.svelte';
-	import type { IModal } from '$lib/@types/html';
+	import type { IModal, ITextArea } from '$lib/@types/html';
 	
 
 	let isLoading = $state(false);
@@ -99,8 +99,14 @@
 		element.style.height = (25+element.scrollHeight)+"px";
 	}
 
-	function createPage(){
-
+	async function createPage(){
+		const response = await api('api/cours-contents', 'POST', {
+			content: `Nouvelle page n°${currentPage+1}`,
+			numberPage: currentPage+1,
+      		coursId: cours?.id
+		});
+		currentPage++
+		getCours()
 	}
 
 	function modalDeletePage(){
@@ -115,6 +121,9 @@
 	async function deletePage(){
 		const response = await api('api/cours-contents/' + currentPageId?.id, 'DELETE')
 		closeDeletePageModale()
+		if(currentPage!=1){
+			currentPage--
+		}
 		getCours()
 		
 	}
@@ -123,9 +132,6 @@
 <App>
 	<Header />
 	<Main class="main-cours">
-		{#if isLoading}
-			<p>Données en cours de chargement...</p>
-		{/if}
 		{#if cours && coursContent}
 			<div class="cours_header">
 				<h1>{cours.title}</h1>
@@ -140,7 +146,7 @@
 			</div>
 
 			<div class="cours-main">
-				{#if authStore.user?.role== 'instructor'}
+				{#if authStore.user?.role!= 'student'}
 					<button
 						class="button_tools flex-end"
 						onclick={() => {handleModify()}}>{textButton}</button>
@@ -161,7 +167,7 @@
 					>← Précédent</button
 				>
 
-				{#if authStore.user?.role == 'instructor'}
+				{#if authStore.user?.role != 'student'}
 					<button
 						class="button_tools"
 						disabled={cours.numberPage ==1}
@@ -170,7 +176,7 @@
 				
 				<span class="page-indicator">Page {currentPage} sur {cours?.numberPage}</span>
 
-				{#if authStore.user?.role == 'instructor'}
+				{#if authStore.user?.role != 'student'}
 					<button
 						class="button_tools"
 						onclick={() => {createPage()}}>Ajouter une Page</button>
@@ -192,7 +198,6 @@
 		message="Voullez vous supprimer la page ?"
 		cancel={closeDeletePageModale}
 		confirm={deletePage}
-
 		/>
 	</Main>
 	<Footer />

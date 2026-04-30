@@ -139,6 +139,8 @@ exports.Prisma.UserScalarFieldEnum = {
   note: 'note',
   verified: 'verified',
   verifyToken: 'verifyToken',
+  resetToken: 'resetToken',
+  resetTokenExpiry: 'resetTokenExpiry',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   roleId: 'roleId'
@@ -160,7 +162,7 @@ exports.Prisma.CoursScalarFieldEnum = {
   categoryId: 'categoryId'
 };
 
-exports.Prisma.CourContentScalarFieldEnum = {
+exports.Prisma.CoursContentScalarFieldEnum = {
   id: 'id',
   coursId: 'coursId',
   numberPage: 'numberPage',
@@ -301,7 +303,7 @@ exports.Prisma.ModelName = {
   Role: 'Role',
   User: 'User',
   Cours: 'Cours',
-  CourContent: 'CourContent',
+  CoursContent: 'CoursContent',
   Category: 'Category',
   LearningObjective: 'LearningObjective',
   Tool: 'Tool',

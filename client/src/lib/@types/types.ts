@@ -183,6 +183,3 @@ export interface Notification {
   user : IUser
 }
 
-export interface ITextArea extends HTMLElement{
-        value: string;
-}
