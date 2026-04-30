@@ -7,37 +7,35 @@
 	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '$lib/assets/components/Category/Category.svelte';
 	import ModalOpinion from '../Validator/ModalOpinion.svelte';
-	
-	import {authStore, getAuth} from '$lib/services/localstorage.service.svelte'
+
+	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
 	import ModalValidator from '../Validator/ModalValidator.svelte';
 	import type { IModal } from '$lib/@types/html';
 
 	let cours: ICours | null = $state(null);
-	let visibility=$derived(cours?.visibility)
-	let alreadyOpinion = $state({IsOpinionExisting:false,opinion : {note: 0}});
+	let visibility = $derived(cours?.visibility);
+	let alreadyOpinion = $state({ IsOpinionExisting: false, opinion: { note: 0 } });
 
 	onMount(async () => {
 		getAuth();
 		const response = await api('api/cours?slug=' + page.params.slug);
 		cours = response.data;
-		AlreadyHaveNoted()
-		
+		AlreadyHaveNoted();
 	});
-	async function AlreadyHaveNoted(){
-		const response = await api("api/opinions/" +cours?.id+"/user/"+ authStore.user?.id, "GET")
-		alreadyOpinion = response.data
+	async function AlreadyHaveNoted() {
+		const response = await api('api/opinions/' + cours?.id + '/user/' + authStore.user?.id, 'GET');
+		alreadyOpinion = response.data;
 	}
 
 	async function patchOpinions(note: number, content: string) {
-		const response = await api("api/opinions/" +cours?.id+"/user/"+ authStore.user?.id, "GET")
+		const response = await api('api/opinions/' + cours?.id + '/user/' + authStore.user?.id, 'GET');
 		const data = { content: content, note: note, coursId: cours?.id, userId: authStore?.user?.id };
-		await api("api/opinions/" +response.data.opinion.id , 'PATCH', data);
+		await api('api/opinions/' + response.data.opinion.id, 'PATCH', data);
 		closeDeleteOpinionModale();
 	}
 
-	async function  addCoursActiveToStudent(){
-		
-		const data ={userId: authStore?.user?.id , "coursId": cours?.id, "IsEnd": false}
+	async function addCoursActiveToStudent() {
+		const data = { userId: authStore?.user?.id, coursId: cours?.id, IsEnd: false };
 		await api('api/cours-active ', 'POST', data);
 	}
 
@@ -51,11 +49,11 @@
 		return stars;
 	}
 	function modalAddOpinion() {
-		const modal = document.getElementById('ModalValidator') as IModal;
+		const modal = document.getElementById('ModalOpinion') as IModal;
 		modal.show();
 	}
 	function closeDeleteOpinionModale() {
-		const modal = document.getElementById('ModalValidator') as IModal;
+		const modal = document.getElementById('ModalOpinion') as IModal;
 		modal.close();
 	}
 	async function ValidateDataModal(note: number, content: string) {
@@ -64,21 +62,21 @@
 		closeDeleteOpinionModale();
 	}
 
-	function modalDeleteCours(){
-		const modal = document.getElementById("ModalValidator") as IModal
-		modal.show()
+	function modalDeleteCours() {
+		const modal = document.getElementById('ModalValidator') as IModal;
+		modal.show();
 	}
 
-	function closeDeleteCoursModale(){
-		const modal = document.getElementById("ModalValidator") as IModal
-		modal.close()
+	function closeDeleteCoursModale() {
+		const modal = document.getElementById('ModalValidator') as IModal;
+		modal.close();
 	}
-	async function deleteCours(){
-		const response = await api('api/cours/' + cours?.id, 'DELETE')
-		closeDeleteCoursModale()
+	async function deleteCours() {
+		const response = await api('api/cours/' + cours?.id, 'DELETE');
+		closeDeleteCoursModale();
 	}
-	async function changeVisibility(){
-		await api('api/cours/' + cours?.id+"/visibility", 'POST')
+	async function changeVisibility() {
+		await api('api/cours/' + cours?.id + '/visibility', 'POST');
 		const response = await api('api/cours?slug=' + page.params.slug);
 		cours = response.data;
 	}
@@ -101,11 +99,13 @@
 		</div>
 
 		<!-- MAIN -->
-		 {#if authStore.user?.role!="student"}
-		<div class="card top">
-			<button class="button" onclick={changeVisibility}>Rendre le cours {visibility?"priver":"public"}</button>
-			<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
-		</div>
+		{#if authStore.user?.role != 'student'}
+			<div class="card top">
+				<button class="button" onclick={changeVisibility}
+					>Rendre le cours {visibility ? 'priver' : 'public'}</button
+				>
+				<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
+			</div>
 		{/if}
 		<div class="layout">
 			<div class="card side mobile-only">
@@ -138,12 +138,12 @@
 							<div class="card-title dark">Avis des apprenants</div>
 							{#if authStore.user?.role === 'student'}
 								<button class="btn-add" onclick={modalAddOpinion}>
-								{#if alreadyOpinion?.IsOpinionExisting == true }
-								Modifier mon commentaire
-								{:else}
-								Nouveau commentaire
-								{/if}
-									</button>
+									{#if alreadyOpinion?.IsOpinionExisting == true}
+										Modifier mon avis sur le cours
+									{:else}
+										Mettre un avis sur ce cours
+									{/if}
+								</button>
 							{/if}
 						</div>
 						{#each cours.opinions as opinion, i}
@@ -206,15 +206,13 @@
 		message="Voullez vous supprimer la page ?"
 		cancel={closeDeleteCoursModale}
 		confirm={deleteCours}
-		/>
+	/>
 {/if}
 <ModalOpinion
 	message="Veuillez laisser votre avis : "
 	cancel={closeDeleteOpinionModale}
-
-	confirm={ alreadyOpinion?.IsOpinionExisting == false ? ValidateDataModal : patchOpinions}
+	confirm={alreadyOpinion?.IsOpinionExisting == false ? ValidateDataModal : patchOpinions}
 	opinion={alreadyOpinion}
-	
 />
 
 <style>
@@ -227,12 +225,13 @@
 
 	.opinions_presentation {
 		display: flex;
+		justify-content: space-between
 	}
 	.btn-add {
 		font-family: 'DM Sans', sans-serif;
-		font-size: 14px;
+		font-size: 10px;
 		font-weight: 500;
-		padding: 10px 22px;
+		padding: 5px 10px;
 		cursor: pointer;
 		border: none;
 		color: white;
@@ -274,7 +273,7 @@
 		gap: 24px;
 	}
 
-	.top{
+	.top {
 		margin-bottom: 20px;
 	}
 
@@ -347,14 +346,14 @@
 		cursor: pointer;
 	}
 
-	.button{
+	.button {
 		padding: 8px 16px;
 		border-radius: var(--border-radius);
 		border: none;
 		font-size: 14px;
 		font-weight: 500;
 		color: var(--button-text-color);
-		background-color: var(--button-backgroung-color) ;
+		background-color: var(--button-backgroung-color);
 		transition:
 			background 0.15s,
 			color 0.15s;
