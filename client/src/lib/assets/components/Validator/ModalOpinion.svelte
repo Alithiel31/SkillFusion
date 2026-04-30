@@ -13,7 +13,7 @@
 	}
 </script>
 
-<dialog class="overlay" id="ModalValidator">
+<dialog class="overlay" id="ModalOpinion">
 	<div class="dialog">
 		<form action="">
 			<h2>Confirmation</h2>
