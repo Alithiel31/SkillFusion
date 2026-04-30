@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Footer from '$lib/assets/components/Footer.svelte';
 	import Header from '$lib/assets/components/Header.svelte';
+	import BtnDeleteAccount from '$lib/assets/components/BtnDeleteAccount.svelte';
 	import { onMount } from 'svelte';
 	import api from '$lib/services/api.service';
 	import { writable } from 'svelte/store';
@@ -134,7 +135,9 @@
 				</div>
 				<div class="btn-modify">
 					<button class="btn-update" type="submit">Enregistrer les modifications</button>
-					<button class="btn-cancel" type="submit" onclick={handleCancel}>Annuler</button>
+					<button class="btn-cancel" type="submit">Annuler</button>
+					
+					<BtnDeleteAccount />
 				</div>
 				{#if succesMessage}
 					<p style="color:green; font-weight: bold; margin-top: 20px;">{succesMessage}</p>

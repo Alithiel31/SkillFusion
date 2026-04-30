@@ -3,7 +3,9 @@ import type { AuthenticatedRequest } from "../@types/express";
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { ConflictError, ForbiddenError, NotFoundError } from "../lib/errors";
+import { ConflictError, NotFoundError } from "../lib/errors";
+import type { AuthenticatedRequest } from "../@types/express";
+
 
 
 export default {
@@ -127,6 +129,8 @@ export default {
             comments: z.array(z.number().int()),
             opinions: z.array(z.number().int()),
             notifications: z.array(z.number().int()),
+            slug: z.string().min(1),
+            numberPage: z.number().int().min(1),
         });
         const data = await createCoursBodySchema.parseAsync(req.body);
 
@@ -204,26 +208,58 @@ updatingCours: async (req: Request, res: Response) => {
 
     const cours = await prisma.cours.findUnique({ where: { id: coursId } });
     if (!cours) { throw new NotFoundError("Cours not found"); }
+    const alreadyExistingCours = await prisma.cours.findFirst({
+            where: { title: title, id: { not: coursId } }
+        });
+  if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
+  
+  const updatedCours = await prisma.cours.update({
+            where: { id: coursId },
+            data: {
+                title,
+                slug,
+                numberPage,
+                littleSummary,
+                urlImage,
+                difficulty,
+                summary,
+                visibility,
+                authorId,
+                categoryId,
+                updatedAt: new Date()
+            }
+        })
+        res.json(updatedCours)
+    },
 
-    const alreadyExistingCours = await prisma.cours.findFirst({ where: { title: title } });
-    if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
 
-    const updatedCours = await prisma.cours.update({
-        where: { id: coursId },
-        data: {
-            title,
-            littleSummary,
-            urlImage,
-            difficulty,
-            summary,
-            visibility,
-            authorId,
-            categoryId,
-            updatedAt: new Date()
-        }
-    })
-    res.json(updatedCours)
-},
+
+
+        
+
+// En cas de suppression de compte : 
+// si il y a des cours crées, 
+// On propose de transferer la propriété à un admin 
+    transferMyCoursToAdmin: async (req: AuthenticatedRequest, res: Response) => {
+        const userId = req.user!.userId;
+
+        const admin = await prisma.user.findFirst({ where: { roleId: 3 } });
+        if (!admin) throw new NotFoundError("Administrateur introuvable");
+
+        await prisma.cours.updateMany({
+            where: { authorId: userId },
+            data: { authorId: admin.id }
+        });
+
+        res.status(200).json({ message: "Cours transférés à l'administrateur." });
+    },
+// Ou on propose de supprimer tous les cours crées par l'utilisateur
+    deleteAllMyCours: async (req: AuthenticatedRequest, res: Response) => {
+        const userId = req.user!.userId;
+
+        await prisma.cours.deleteMany({ where: { authorId: userId } });
+
+        res.status(204).end();
     changeVisibility:async (req: Request, res: Response)=>{
         const coursId = await parseIdFromParams(req.params.id);
         const cours= await prisma.cours.findFirst({where:{id:coursId}})
@@ -233,4 +269,6 @@ updatingCours: async (req: Request, res: Response) => {
         }
         res.status(400).end()
     }
+
 }
+

@@ -24,4 +24,8 @@ router.patch("/users/:id", verifyToken, requireSelfOrAdmin, usersController.upda
 // DELETE - self ou ADMIN
 router.delete("/users/:id", verifyToken, requireSelfOrAdmin, usersController.deleteUser);
 
-export default router;
+export const router = Router();
+
+router.get("/users", usersController.getAllUsers);
+router.get("/users/me/export", verifyToken, usersController.exportMyData);
+router.delete("/users/me", verifyToken, usersController.deleteMyAccount);

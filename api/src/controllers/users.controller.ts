@@ -10,18 +10,14 @@ import rolesController from "./roles.controller";
 
 
 export async function getAllUsers(req: Request, res: Response) {
-  // Requête pour la BDD
   const users = await prisma.user.findMany({
     omit: { password: true },
-    include: {
-      role: true
-    }
+    include: { role: true }
   });
-  // Réponse envoyé coté client
   res.json(users);
 }
 
-// Export des données de l'utiliateur connecté (RGPD) ------------------------------------------------
+// Export des données de l'utilisateur connecté (RGPD) -----------------------------------------------
 
 export async function exportMyData(req: AuthenticatedRequest, res: Response) {
   const user = await prisma.user.findUnique({
@@ -37,9 +33,7 @@ export async function exportMyData(req: AuthenticatedRequest, res: Response) {
       createdCours: { select: { id: true, title: true, createdAt: true } },
     },
   });
-  if (!user) {
-    throw new NotFoundError("Utilisateur non trouvé");
-  }
+  if (!user) throw new NotFoundError("Utilisateur non trouvé");
 
   const exportData = {
     exportedAt: new Date().toISOString(),
@@ -101,6 +95,26 @@ export async function exportMyData(req: AuthenticatedRequest, res: Response) {
   res.status(200).json(exportData);
 }
 
+// Suppression du compte de l'utilisateur connecté (RGPD) --------------------------------------------
+
+export async function deleteMyAccount(req: AuthenticatedRequest, res: Response) {
+  const userId = req.user!.userId;
+
+  const coursCreés = await prisma.cours.findMany({
+    where: { authorId: userId },
+    select: { id: true, title: true }
+  });
+
+  if (coursCreés.length > 0) {
+    res.status(409).json({
+      code: "HAS_CREATED_COURSES",
+      message: "Vous avez des cours créés. Veuillez les transférer ou les supprimer avant de continuer.",
+      cours: coursCreés
+    });
+    return;
+  }
+
+  await prisma.user.delete({ where: { id: userId } });
 // Récupérer un utilisateur par son id
 export async function getUserById(req: Request, res: Response) {
   const userId = await parseIdFromParams(req.params.id);
