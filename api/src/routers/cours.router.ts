@@ -3,6 +3,7 @@ import coursController from '../controllers/cours.controller';
 import { verifyToken } from '../middlewares/auth.middleware';
 import { checkRoles, requireSelfOrAdmin, ROLES } from '../middlewares/rbac.middleware';
 
+export const router=express.Router()
 
 router.get("/cours",verifyToken,coursController.getAll)
 router.get("/cours/homepage",coursController.getForHomePage)
