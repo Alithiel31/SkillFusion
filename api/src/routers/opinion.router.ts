@@ -4,12 +4,10 @@ import opinionController from '../controllers/opinion.controller';
 const router = express.Router();
 
 router.get("/opinions", opinionController.getAll)
+router.get("/opinions/:coursId/user/:id",opinionController.getByUser)
 router.get("/opinions/:id", opinionController.getOneOpinion)
-
 router.post("/opinions", opinionController.createOpinion)
-
 router.patch("/opinions/:id", opinionController.updateOpinion)
-
 router.delete("/opinions/:id", opinionController.deleteOpinion)
 
 export default router;  

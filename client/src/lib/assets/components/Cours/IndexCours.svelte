@@ -6,21 +6,34 @@
 	import type { ICours } from '$lib/@types/types';
 	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '$lib/assets/components/Category/Category.svelte';
-	import {authStore, getAuth} from '$lib/services/localstorage.service.svelte'
-
+	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
+	import ModalOpinion from '../Validator/ModalOpinion.svelte';
+	import type { IModal } from '$lib/@types/html';
 	let cours: ICours | null = $state(null);
-
+	let alreadyOpinion = $state({IsOpinionExisting:false,opinion : {note: 0}});
 	onMount(async () => {
+		getAuth();
 		const response = await api('api/cours?slug=' + page.params.slug);
 		cours = response.data;
+		AlreadyHaveNoted()
+		
 	});
-
-	async function  addCoursActiveToStudent(){
-		getAuth()
-		const data ={userId: authStore?.user?.id , "coursId": cours?.id, "IsEnd": false}
-		await api('api/cours-active ', 'POST', data);
+	async function AlreadyHaveNoted(){
+		const response = await api("api/opinions/" +cours?.id+"/user/"+ authStore.user?.id, "GET")
+		alreadyOpinion = response.data
 	}
 
+	async function patchOpinions(note: number, content: string) {
+		const response = await api("api/opinions/" +cours?.id+"/user/"+ authStore.user?.id, "GET")
+		const data = { content: content, note: note, coursId: cours?.id, userId: authStore?.user?.id };
+		await api("api/opinions/" +response.data.opinion.id , 'PATCH', data);
+		closeDeleteOpinionModale();
+	}
+
+	async function addCoursActiveToStudent() {
+		const data = { userId: authStore?.user?.id, coursId: cours?.id, IsEnd: false };
+		await api('api/cours-active ', 'POST', data);
+	}
 	function getStars(note: number) {
 		const stars = [];
 		for (let i = 1; i <= 5; i++) {
@@ -29,6 +42,19 @@
 			else stars.push('empty');
 		}
 		return stars;
+	}
+	function modalAddOpinion() {
+		const modal = document.getElementById('ModalValidator') as IModal;
+		modal.show();
+	}
+	function closeDeleteOpinionModale() {
+		const modal = document.getElementById('ModalValidator') as IModal;
+		modal.close();
+	}
+	async function ValidateDataModal(note: number, content: string) {
+		const data = { content: content, note: note, coursId: cours?.id, userId: authStore?.user?.id };
+		await api('api/opinions', 'POST', data);
+		closeDeleteOpinionModale();
 	}
 </script>
 
@@ -77,8 +103,18 @@
 				<!-- AVIS -->
 				<div class="opinion">
 					<div class="card opinions">
-						<div class="card-title dark">Avis des apprenants</div>
-
+						<div class="opinions_presentation">
+							<div class="card-title dark">Avis des apprenants</div>
+							{#if authStore.user?.role === 'student'}
+								<button class="btn-add" onclick={modalAddOpinion}>
+								{#if alreadyOpinion?.IsOpinionExisting == true }
+								Modifier mon commentaire
+								{:else}
+								Nouveau commentaire
+								{/if}
+									</button>
+							{/if}
+						</div>
 						{#each cours.opinions as opinion, i}
 							<div class="review {i === 0 ? 'first' : ''}">
 								<div class="review-top">
@@ -129,11 +165,21 @@
 					</div>
 				</div>
 
-				<a onclick={addCoursActiveToStudent} class="cta" href="/cours/{cours.slug}/cours">Démarrer le cours →</a>
+				<a onclick={addCoursActiveToStudent} class="cta" href="/cours/{cours.slug}/cours"
+					>Démarrer le cours →</a
+				>
 			</div>
 		</div>
 	</div>
 {/if}
+<ModalOpinion
+	message="Veuillez laisser votre avis : "
+	cancel={closeDeleteOpinionModale}
+
+	confirm={ alreadyOpinion?.IsOpinionExisting == false ? ValidateDataModal : patchOpinions}
+	opinion={alreadyOpinion}
+	
+/>
 
 <style>
 	/* RESET */
@@ -143,6 +189,20 @@
 		padding: 0;
 	}
 
+	.opinions_presentation {
+		display: flex;
+	}
+	.btn-add {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 14px;
+		font-weight: 500;
+		padding: 10px 22px;
+		cursor: pointer;
+		border: none;
+		color: white;
+		border-radius: 10px;
+		background: #1d4e89;
+	}
 	/* PAGE */
 	.page {
 		padding: 32px 48px;
@@ -313,17 +373,12 @@
 		.desktop-only {
 			display: none;
 		}
-
 		.mobile-only {
 			display: block;
 		}
-
 		.cta {
 			position: sticky;
 			bottom: 10px;
-		}
-		.opinion {
-			display: none;
 		}
 		.tool-mobile {
 			display: none;
