@@ -10,7 +10,8 @@ import jwt from "jsonwebtoken";
 import { AuthenticatedRequest } from "../@types/express";
 import { send } from "node:process";
 import crypto from "crypto";
-import { sendVerificationEmail } from "../lib/mailer";
+import { sendVerificationEmail, sendResetPasswordEmail } from "../lib/mailer";
+
 
 
 // Token management functions --------------------------------------------------------------------
@@ -166,7 +167,7 @@ export async function getAuthenticatedUser(req: AuthenticatedRequest, res: Respo
         email: user.email,
         firstname: user.firstname,
         lastname: user.lastname,
-        role: user.role,
+        role: user.roleId,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
     });
@@ -241,4 +242,57 @@ export async function verifyEmail(req: Request, res: Response) {
     });
 
     res.json({ message: "Compte vérifié ! Tu peux maintenant te connecter." });
+}
+
+// Demande de réinitialisation
+export async function forgotPassword(req: Request, res: Response) {
+    const { email } = req.body;
+
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    // On répond toujours OK pour ne pas révéler si l'email existe
+    if (!user) {
+        return res.json({ message: "Si cet email existe, un lien a été envoyé." });
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+    const expiry = new Date(Date.now() + 60 * 60 * 1000); // 1 heure
+
+    await prisma.user.update({
+        where: { id: user.id },
+        data: { resetToken: token, resetTokenExpiry: expiry },
+    });
+
+    await sendResetPasswordEmail(email, token);
+
+    res.json({ message: "Si cet email existe, un lien a été envoyé." });
+}
+
+// Réinitialisation du mot de passe
+export async function resetPassword(req: Request, res: Response) {
+    const { token, password } = req.body;
+
+    const user = await prisma.user.findFirst({
+        where: {
+            resetToken: token,
+            resetTokenExpiry: { gt: new Date() }, // vérifie que le token n'est pas expiré
+        },
+    });
+
+    if (!user) {
+        throw new BadRequestError("Token invalide ou expiré.");
+    }
+
+    const hashedPassword = await argon2.hash(password);
+
+    await prisma.user.update({
+        where: { id: user.id },
+        data: {
+            password: hashedPassword,
+            resetToken: null,
+            resetTokenExpiry: null,
+        },
+    });
+
+    res.json({ message: "Mot de passe réinitialisé avec succès !" });
 }

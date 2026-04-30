@@ -23,9 +23,9 @@ export interface IUser {
         createdCours: ICours[]
         badges: UserHasBadge[]
         enrollments: UserHasCours[]
-        activations: CoursActived[]
+        activations: ICoursActived[]
         commentaires: Comment[]
-        opinions: Opinion[]
+        opinions: IOpinion[]
         notifications: Notification[]
 }
 
@@ -47,23 +47,23 @@ export interface ICours {
         numberPage:number
         tools: CoursHasTool[]
         learningObjectives: CoursHasLearningObjective[]
-        content: CourContent[]
+        content: ICoursContent[]
         enrollments: UserHasCours[]
-        activations: CoursActived[]
+        activations: ICoursActived[]
         comments: Comment[]
-        opinions: Opinion[]
+        opinions: IOpinion[]
         notifications: Notification[]
+        cours: ICours
 }
-export interface CourContent {
-        id: Number
-        coursId: Number
-        numberPage: Number
-        content: String
+export interface ICoursContent {
+        id: number
+        coursId: number
+        numberPage: number
+        content: string
         createdAt: Date
         updatedAt: Date
         cours: ICours
 }
-
 export interface ICategory {
         id: Number
         name: string
@@ -112,7 +112,7 @@ export interface UserHasCours {
         cours: ICours
 }
 
-export interface CoursActived {
+export interface ICoursActived {
         id: Number
         userId: Number
         coursId: Number
@@ -120,7 +120,7 @@ export interface CoursActived {
         createdAt: Date
         updatedAt: Date
         user: IUser
-        cours: ICours
+        cours: ICours[]
 }
 export interface UserHasBadge {
         id: Number
@@ -129,7 +129,7 @@ export interface UserHasBadge {
         createdAt: Date
         updatedAt: Date
         user: IUser
-        badge: Badge
+        badge: Badge[]
 }
 export interface CoursHasTool {
         id: Number
@@ -138,7 +138,7 @@ export interface CoursHasTool {
         createdAt: Date
         updatedAt: Date
         cours: ICours
-        tools: Tool
+        tools: Tool[]
 }
 export interface CoursHasLearningObjective {
         id: Number
@@ -160,7 +160,7 @@ export interface Comment {
         cours: ICours
         auteur: IUser
 }
-export interface Opinion {
+export interface IOpinion {
   id :number
   content: string
   note  :  number
@@ -182,3 +182,4 @@ export interface Notification {
   cours :ICours
   user : IUser
 }
+

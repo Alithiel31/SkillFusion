@@ -9,8 +9,22 @@ export default {
     getAll: async (req: Request, res: Response) => {
         const coursActives = await prisma.coursActived.findMany();
         res.json(coursActives);
-    },
 
+    },
+    // Requête pour récuperer tous les cours actives d'un étudiant
+    getByUser: async (req: Request, res: Response) => {
+        const userId = await parseIdFromParams(req.params.id);
+        const coursByUser = await prisma.coursActived.findMany({
+            where: { userId: userId },
+            include: {
+                cours: { include: { category: true } },
+            }
+        })
+        if (!coursByUser) {
+            throw new NotFoundError(`Cours active with id ${coursByUser} not found`);
+        }
+        res.json(coursByUser);
+    },
     // Requête pour récuperer un cours active par son id
     getOneCoursActive: async (req: Request, res: Response) => {
         const coursActiveId = await parseIdFromParams(req.params.id);
@@ -30,6 +44,10 @@ export default {
         });
         const data = await createCoursActiveBodySchema.parseAsync(req.body);
 
+        const alreadyExistingCours = await prisma.coursActived.findFirst({ where: { coursId: data.coursId, userId: data.userId } });
+        if (alreadyExistingCours) {
+            return res.status(204).end()
+        }
         const createdCoursActive = await prisma.coursActived.create({
             data: {
                 coursId: data.coursId,
@@ -64,7 +82,7 @@ export default {
     // Requête pour supprimer un cours active
     deleteCoursActive: async (req: Request, res: Response) => {
         const coursActiveId = await parseIdFromParams(req.params.id);
-        await prisma.coursActived.delete({ where: { id: coursActiveId } });
+        const coursDeleted = await prisma.coursActived.delete({ where: { id: coursActiveId } });
         res.status(204).send();
     },
 

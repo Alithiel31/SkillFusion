@@ -2,7 +2,11 @@
     --background-color:#f7f4ef;
     --background-white: #FFFFFF;
 
+    --button-text-color:#fff;;
+    --button-backgroung-color:#1d4e89;
+    --button-backgroung-color-hover:#629adf;
     --border-radius:12px;
+    --h1-color:#1D4E89;
 
 }
 body{

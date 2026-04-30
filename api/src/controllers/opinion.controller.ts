@@ -10,6 +10,16 @@ export default {
         const opinions = await prisma.opinion.findMany();
         res.json(opinions);
     },
+// Requête pour récuperer une opinion pour un  utilisateur
+    getByUser:async (req: Request, res: Response) => {
+        const coursId=await parseIdFromParams(req.params.coursId);
+        const userId = await parseIdFromParams(req.params.id);
+        const opinion = await prisma.opinion.findFirst({where: {userId:userId, coursId: coursId }})   
+        if (!opinion) {
+           return res.json({IsOpinionExisting:false})
+        }
+       res.json({IsOpinionExisting:true, opinion: opinion})
+    },
 
     // Requête pour récuperer une opinion par son id
     getOneOpinion: async (req: Request, res: Response) => {
@@ -39,6 +49,10 @@ export default {
                 userId: data.userId,
             }
         });
+          const alreadyExistingOpinion = await prisma.coursActived.findFirst({ where: { coursId: data.coursId, userId: data.userId } });
+        if (alreadyExistingOpinion) {
+            return res.status(204).end()
+        }
         res.status(201).json(createdOpinion);
 
     },

@@ -24,3 +24,20 @@ export async function sendVerificationEmail(email: string, token: string) {
         `,
     });
 }
+
+export async function sendResetPasswordEmail(email: string, token: string) {
+    await transporter.sendMail({
+        from: config.emailUser,
+        to: email,
+        subject: "Réinitialisation de ton mot de passe SkillFusion",
+        html: `
+            <h2>Réinitialisation de mot de passe</h2>
+            <p>Clique sur ce lien pour réinitialiser ton mot de passe :</p>
+            <a href="http://localhost:5173/page-reset-mdp?token=${token}">
+                Réinitialiser mon mot de passe
+            </a>
+            <p>Ce lien est valable 1 heure.</p>
+            <p>Si tu n'as pas demandé cette réinitialisation, ignore cet email.</p>
+        `,
+    });
+}

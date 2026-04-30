@@ -1,62 +1,112 @@
 import type { Request, Response } from "express"
+import type { AuthenticatedRequest } from "../@types/express";
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
 import { ConflictError, NotFoundError } from "../lib/errors";
+import type { AuthenticatedRequest } from "../@types/express";
+
 
 
 export default {
-    getAll: async  (req:Request,res:Response) =>{
-        let data=null
-        if(req.query.slug){
+    getAll: async (req: Request, res: Response) => {
+        let data = null
+        if (req.query.slug) {
             const cours = await prisma.cours.findMany({
-            where:{slug:{contains:req.query.slug as string}},
-            include:{
-                category:true,
-                author:{
-                    omit:{password:true}
-                },
-                learningObjectives:{
-                    include:{objectif:true}
-                },
-                content:true,
-                tools:{
-                    include:{tools:true}
-                },
-                opinions:{
-                    include:{user:{
-                        omit:{password:true}
-                    }}}
-            }})
-            data=cours[0]
+                where: { slug: { contains: req.query.slug as string } },
+                include: {
+                    category: true,
+                    author: {
+                        omit: { password: true }
+                    },
+                    learningObjectives: {
+                        include: { objectif: true }
+                    },
+                    content: true,
+                    tools: {
+                        include: { tools: true }
+                    },
+                    opinions: {
+                        include: {
+                            user: {
+                                omit: { password: true }
+                            }
+                        }
+                    }
+                }
+            })
+            data = cours[0]
+        }else if (req.query.visibility){
+            const cours = await prisma.cours.findMany({
+                where: { visibility:true},
+                include: {
+                    category: true,
+                    author: {
+                        omit: { password: true }
+                    },
+                    learningObjectives: {
+                        include: { objectif: true }
+                    },
+                    content: true,
+                    tools: {
+                        include: { tools: true }
+                    },
+                    opinions: {
+                        include: {
+                            user: {
+                                omit: { password: true }
+                            }
+                        }
+                    }
+                }
+            })
+            data = cours
         }
-        else{
+
+        else {
             const cours = await prisma.cours.findMany({
-            include:{
-                category:true,
-                author:{
-                    omit:{password:true}
-                },
-                learningObjectives:{
-                    include:{objectif:true}
-                },
-                tools:{
-                    include:{tools:true}
-                },
-                opinions:{
-                    include:{user:{
-                        omit:{password:true}
-                    }}}
-            }})
-            data=cours
+                include: {
+                    category: true,
+                    author: {
+                        omit: { password: true }
+                    },
+                    learningObjectives: {
+                        include: { objectif: true }
+                    },
+                    tools: {
+                        include: { tools: true }
+                    },
+                    opinions: {
+                        include: {
+                            user: {
+                                omit: { password: true }
+                            }
+                        }
+                    }
+                }
+            })
+            data = cours
         }
         res.json(data)
+    },
+    getCoursByInstructor: async (req: Request, res: Response) => {
+        const userId = await parseIdFromParams(req.params.id);
+        const cours = await prisma.cours.findMany(
+            {
+                where: { authorId: userId },
+                include: { category: true, author: true }
+            })
+        if (!cours) {
+            throw new NotFoundError(`Cours from ${userId} not found`);
+        }
+        res.json(cours);
     },
     // Requête pour récuperer les cours récents
     getForHomePage: async (req: Request, res: Response) => {
         const cours = await prisma.cours.findMany({
-            include:{category:true},
-            orderBy: { createdAt: "desc" }
+            where:{visibility:true},
+            include: { category: true },
+            orderBy: { createdAt: "desc" },
         })
         res.json(cours)
     },
@@ -79,6 +129,8 @@ export default {
             comments: z.array(z.number().int()),
             opinions: z.array(z.number().int()),
             notifications: z.array(z.number().int()),
+            slug: z.string().min(1),
+            numberPage: z.number().int().min(1),
         });
         const data = await createCoursBodySchema.parseAsync(req.body);
 
@@ -88,6 +140,8 @@ export default {
         const createdCours = await prisma.cours.create({
             data: {
                 title: data.title,
+                slug: data.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+                numberPage: 0,
                 littleSummary: data.littleSummary,
                 urlImage: data.urlImage,
                 difficulty: data.difficulty,
@@ -107,70 +161,114 @@ export default {
         res.json(cours);
     },
     //Suprimer un cours par son id
-    deleteCours: async (req: Request, res: Response)=>{
+    deleteCours: async (req: AuthenticatedRequest, res: Response) => {
         const coursId = await parseIdFromParams(req.params.id);
         const cours = await prisma.cours.findUnique({ where: { id: coursId } });
         if (!cours) { throw new NotFoundError("Cours not found"); }
+
+        if (req.user?.userId !== cours.authorId) {
+            throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce cours");
+        }
 
         await prisma.cours.delete({ where: { id: coursId } });
 
         res.status(204).end();
-    },
-    // Requête pour modifier un cours
-    updatingCours: async (req: Request, res: Response) => {
-        const coursId = await parseIdFromParams(req.params.id);
-        const updateCoursBodyScheme = z.object({
-            title: z.string().min(1),
-            littleSummary: z.string().optional(),
-            urlImage: z.string().optional(),
-            difficulty: z.number().int().min(0).max(4),
-            summary: z.string().optional(),
-            visibility: z.boolean(),
-            authorId: z.number().int(),
-            categoryId: z.number().int(),
-            tools: z.array(z.number().int()),
-            learningObjectives: z.array(z.number().int()),
-            content: z.array(z.number().int()),
-            enrollments: z.array(z.number().int()),
-            activations: z.array(z.number().int()),
-            comments: z.array(z.number().int()),
-            opinions: z.array(z.number().int()),
-            notifications: z.array(z.number().int()),
+},
+// Requête pour modifier un cours
+updatingCours: async (req: Request, res: Response) => {
+    const coursId = await parseIdFromParams(req.params.id);
+    const updateCoursBodyScheme = z.object({
+        title: z.string().min(1),
+        littleSummary: z.string().optional(),
+        urlImage: z.string().optional(),
+        difficulty: z.number().int().min(0).max(4),
+        summary: z.string().optional(),
+        visibility: z.boolean(),
+        authorId: z.number().int(),
+        categoryId: z.number().int(),
+        tools: z.array(z.number().int()),
+        learningObjectives: z.array(z.number().int()),
+        content: z.array(z.number().int()),
+        enrollments: z.array(z.number().int()),
+        activations: z.array(z.number().int()),
+        comments: z.array(z.number().int()),
+        opinions: z.array(z.number().int()),
+        notifications: z.array(z.number().int()),
+    });
+    const {
+        title,
+        littleSummary,
+        urlImage,
+        difficulty,
+        summary,
+        visibility,
+        authorId,
+        categoryId }
+        = await updateCoursBodyScheme.parseAsync(req.body);
+
+    const cours = await prisma.cours.findUnique({ where: { id: coursId } });
+    if (!cours) { throw new NotFoundError("Cours not found"); }
+    const alreadyExistingCours = await prisma.cours.findFirst({
+            where: { title: title, id: { not: coursId } }
         });
-        const {
-            title,
-            littleSummary,
-            urlImage,
-            difficulty,
-            summary,
-            visibility,
-            authorId,
-            categoryId }
-            = await updateCoursBodyScheme.parseAsync(req.body);
-
-        const cours = await prisma.cours.findUnique({ where: { id: coursId } });
-        if (!cours) { throw new NotFoundError("Cours not found"); }
-
-        const alreadyExistingCours = await prisma.cours.findFirst({ where: { title: title } });
-        if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
-        
-
-        // SHOULD TO DO ? 
-        // if (req.user?.role !== "admin") { throw new UnauthorizedError('Not autorisation'); }
-        // else if (req.user?.role !== "author" && req.user?.id !== quiz.user_id) { throw new UnauthorizedError('Not autorisation'); }
-    
-        const updatedCours = await prisma.cours.update({
-            where: {id: coursId},
-            data:{title,
-            littleSummary,
-            urlImage,
-            difficulty,
-            summary,
-            visibility,
-            authorId,
-            categoryId,
-            updatedAt: new Date()}
+  if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
+  
+  const updatedCours = await prisma.cours.update({
+            where: { id: coursId },
+            data: {
+                title,
+                slug,
+                numberPage,
+                littleSummary,
+                urlImage,
+                difficulty,
+                summary,
+                visibility,
+                authorId,
+                categoryId,
+                updatedAt: new Date()
+            }
         })
         res.json(updatedCours)
+    },
+
+
+
+
+        
+
+// En cas de suppression de compte : 
+// si il y a des cours crées, 
+// On propose de transferer la propriété à un admin 
+    transferMyCoursToAdmin: async (req: AuthenticatedRequest, res: Response) => {
+        const userId = req.user!.userId;
+
+        const admin = await prisma.user.findFirst({ where: { roleId: 3 } });
+        if (!admin) throw new NotFoundError("Administrateur introuvable");
+
+        await prisma.cours.updateMany({
+            where: { authorId: userId },
+            data: { authorId: admin.id }
+        });
+
+        res.status(200).json({ message: "Cours transférés à l'administrateur." });
+    },
+// Ou on propose de supprimer tous les cours crées par l'utilisateur
+    deleteAllMyCours: async (req: AuthenticatedRequest, res: Response) => {
+        const userId = req.user!.userId;
+
+        await prisma.cours.deleteMany({ where: { authorId: userId } });
+
+        res.status(204).end();
+    changeVisibility:async (req: Request, res: Response)=>{
+        const coursId = await parseIdFromParams(req.params.id);
+        const cours= await prisma.cours.findFirst({where:{id:coursId}})
+        if(cours){
+            await prisma.cours.update({where:{id:coursId},data:{visibility:!cours.visibility}})
+            return res.status(204).end()
+        }
+        res.status(400).end()
     }
+
 }
+
