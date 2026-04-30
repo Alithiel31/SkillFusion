@@ -32,6 +32,8 @@
 		const data = { content: content, note: note, coursId: cours?.id, userId: authStore?.user?.id };
 		await api('api/opinions/' + response.data.opinion.id, 'PATCH', data);
 		closeDeleteOpinionModale();
+		const refresh = await api('api/cours?slug=' + page.params.slug);
+		cours = refresh.data;
 	}
 
 	async function addCoursActiveToStudent() {
@@ -60,6 +62,8 @@
 		const data = { content: content, note: note, coursId: cours?.id, userId: authStore?.user?.id };
 		await api('api/opinions', 'POST', data);
 		closeDeleteOpinionModale();
+		const refresh = await api('api/cours?slug=' + page.params.slug);
+		cours = refresh.data;
 	}
 
 	function modalDeleteCours() {
@@ -282,6 +286,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+		order:2 ;
 	}
 
 	/* RIGHT */
@@ -289,6 +294,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 16px;
+		order: 2;
 	}
 
 	/* CARD */
@@ -444,6 +450,9 @@
 		}
 		.desktop-only {
 			display: none;
+		}
+		.right{
+			order: 1;
 		}
 	}
 </style>
