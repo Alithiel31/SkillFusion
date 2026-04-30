@@ -16,55 +16,59 @@
 		categories = categoriesResponse.data;
 		const coursesResponse = await api('api/cours');
 		courses = coursesResponse.data;
-		console.log(courses)
+		console.log(courses);
 	});
 	let searchQuery = $state('');
 	let selectedCategory = $state('Toutes les catégories');
 
 	let filteredCourses = $derived(
-		courses.filter((cours) => selectedCategory === 'Toutes les catégories' || cours.category.name == selectedCategory)
-		.filter((cours) => cours.title.toLowerCase().includes(searchQuery.toLowerCase()))
+		courses
+			.filter(
+				(cours) =>
+					selectedCategory === 'Toutes les catégories' || cours.category.name == selectedCategory
+			)
+			.filter((cours) => cours.title.toLowerCase().includes(searchQuery.toLowerCase()))
 	);
 </script>
 
 <App>
 	<Header />
 	<Main>
-				<h1 class="page-title">Tous les cours</h1>
+		<h1 class="page-title">Tous les cours</h1>
 
-				<!-- Recherche & Filtre -->
-				<div class="search">
-					<input
-						class="search-input"
-						type="text"
-						placeholder="Rechercher un cours..."
-						bind:value={searchQuery}
-					/>
+		<!-- Recherche & Filtre -->
+		<div class="search">
+			<input
+				class="search-input"
+				type="text"
+				placeholder="Rechercher un cours..."
+				bind:value={searchQuery}
+			/>
 
-					<div class="dropdown-wrapper">
-						<select id="categorie-select" class="category-btn" bind:value={selectedCategory}>
-							<option value="Toutes les catégories"> Toutes les catégories </option>
-							{#each categories as category}
-								<option value={category.name}>
-									{category.name}
-								</option>
-							{/each}
-						</select>
-					</div>
-
-					<button type="button" class="add-btn">+</button>
-				</div>
-				<div class="courses-grid">
-					{#each filteredCourses as cours (cours.id)}
-						<CoursCard
-							cours={cours}
-							--card__image__color={cours.category.textColor}
-							--border_color={cours.category.borderColor}
-							--text_color={cours.category.textColor}
-						/>
+			<div class="dropdown-wrapper">
+				<select id="categorie-select" class="category-btn" bind:value={selectedCategory}>
+					<option value="Toutes les catégories"> Toutes les catégories </option>
+					{#each categories as category}
+						<option value={category.name}>
+							{category.name}
+						</option>
 					{/each}
-				</div>
-		</Main>
+				</select>
+			</div>
+
+			<button type="button" class="add-btn">+</button>
+		</div>
+		<div class="courses-grid">
+			{#each filteredCourses as cours (cours.id)}
+				<CoursCard
+					{cours}
+					--card__image__color={cours.category.textColor}
+					--border_color={cours.category.borderColor}
+					--text_color={cours.category.textColor}
+				/>
+			{/each}
+		</div>
+	</Main>
 	<Footer />
 </App>
 
@@ -141,7 +145,6 @@
 		border-color: #9ca3af;
 	}
 
-
 	.add-btn {
 		width: 40px;
 		height: 40px;
@@ -169,11 +172,8 @@
 		gap: 1.25rem;
 	}
 
-
 	/* --- mobile view --- */
 	@media (min-width: 768px) {
-
-
 		.page-title {
 			font-size: 1.4rem;
 			text-align: left;
@@ -203,7 +203,6 @@
 		.courses-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
-
 	}
 
 	@media (min-width: 1024px) {

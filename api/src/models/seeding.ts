@@ -241,6 +241,7 @@ async function seed() {
         authorId: 4,
         categoryId: 1,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Assembler une étagère en kit",
@@ -251,6 +252,7 @@ async function seed() {
         authorId: 4,
         categoryId: 1,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Réparer une porte qui grince",
@@ -261,6 +263,7 @@ async function seed() {
         authorId: 4,
         categoryId: 1,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Poser du parquet flottant",
@@ -271,6 +274,7 @@ async function seed() {
         authorId: 4,
         categoryId: 1,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Fabriquer une boîte de rangement",
@@ -281,6 +285,7 @@ async function seed() {
         authorId: 4,
         categoryId: 1,
         numberPage: 4,
+        visibility:true
       },
       // Plomberie (5 cours)
       {
@@ -291,7 +296,7 @@ async function seed() {
         difficulty: 3,
         authorId: 5,
         categoryId: 2,
-        numberPage: 4,
+        numberPage: 4,visibility:true
       },
       {
         title: "Réparer une fuite d'eau",
@@ -302,6 +307,7 @@ async function seed() {
         authorId: 5,
         categoryId: 2,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Installer un WC suspendu",
@@ -312,6 +318,7 @@ async function seed() {
         authorId: 5,
         categoryId: 2,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Changer un robinet de douche",
@@ -322,6 +329,7 @@ async function seed() {
         authorId: 5,
         categoryId: 2,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Installer une douche",
@@ -332,6 +340,7 @@ async function seed() {
         authorId: 5,
         categoryId: 2,
         numberPage: 4,
+        visibility:true
       },
       // Electricité (5 cours)
       {
@@ -343,6 +352,7 @@ async function seed() {
         authorId: 5,
         categoryId: 3,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Installer une prise électrique",
@@ -353,6 +363,7 @@ async function seed() {
         authorId: 5,
         categoryId: 3,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Changer un fusible",
@@ -363,6 +374,7 @@ async function seed() {
         authorId: 5,
         categoryId: 3,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Changer une ampoule",
@@ -373,6 +385,7 @@ async function seed() {
         authorId: 5,
         categoryId: 3,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Installer un détecteur de fumée",
@@ -383,6 +396,7 @@ async function seed() {
         authorId: 5,
         categoryId: 3,
         numberPage: 4,
+        visibility:true
       },
       // Chauffage (5 cours)
       {
@@ -394,6 +408,7 @@ async function seed() {
         authorId: 8,
         categoryId: 4,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Changer un radiateur",
@@ -404,6 +419,7 @@ async function seed() {
         authorId: 8,
         categoryId: 4,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Nettoyer un conduit de cheminée",
@@ -414,6 +430,7 @@ async function seed() {
         authorId: 8,
         categoryId: 4,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Installer un thermostat programmable",
@@ -424,6 +441,7 @@ async function seed() {
         authorId: 8,
         categoryId: 4,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Isoler un mur intérieur",
@@ -434,6 +452,7 @@ async function seed() {
         authorId: 8,
         categoryId: 4,
         numberPage: 4,
+        visibility:true
       },
       // Carrelage (5 cours)
       {
@@ -445,6 +464,7 @@ async function seed() {
         authorId: 8,
         categoryId: 5,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Poser du carrelage au sol",
@@ -455,6 +475,7 @@ async function seed() {
         authorId: 8,
         categoryId: 5,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Réparer une fissure dans le carrelage",
@@ -465,6 +486,7 @@ async function seed() {
         authorId: 8,
         categoryId: 5,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Poser une moquette",
@@ -475,6 +497,7 @@ async function seed() {
         authorId: 8,
         categoryId: 5,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Changer un carreau de carrelage",
@@ -485,6 +508,7 @@ async function seed() {
         authorId: 8,
         categoryId: 5,
         numberPage: 4,
+        visibility:true
       },
       // Peinture (5 cours)
       {
@@ -496,6 +520,7 @@ async function seed() {
         authorId: 4,
         categoryId: 6,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Poser du papier peint",
@@ -506,6 +531,7 @@ async function seed() {
         authorId: 4,
         categoryId: 6,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Peindre une porte",
@@ -516,6 +542,7 @@ async function seed() {
         authorId: 4,
         categoryId: 6,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Appliquer une peinture décorative",
@@ -526,6 +553,7 @@ async function seed() {
         authorId: 4,
         categoryId: 6,
         numberPage: 4,
+        visibility:true
       },
       {
         title: "Peindre un plafond",
@@ -536,6 +564,7 @@ async function seed() {
         authorId: 4,
         categoryId: 6,
         numberPage: 4,
+        visibility:true
       },
     ],
   });

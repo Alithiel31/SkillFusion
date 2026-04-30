@@ -7,16 +7,20 @@
 	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '$lib/assets/components/Category/Category.svelte';
 	import {authStore, getAuth} from '$lib/services/localstorage.service.svelte'
+	import ModalValidator from '../Validator/ModalValidator.svelte';
+	import type { IModal } from '$lib/@types/html';
 
 	let cours: ICours | null = $state(null);
 
 	onMount(async () => {
 		const response = await api('api/cours?slug=' + page.params.slug);
 		cours = response.data;
+		getAuth()
+		console.log(cours?.visibility)
 	});
 
 	async function  addCoursActiveToStudent(){
-		getAuth()
+		
 		const data ={userId: authStore?.user?.id , "coursId": cours?.id, "IsEnd": false}
 		await api('api/cours-active ', 'POST', data);
 	}
@@ -29,6 +33,24 @@
 			else stars.push('empty');
 		}
 		return stars;
+	}
+
+	function modalDeleteCours(){
+		const modal = document.getElementById("ModalValidator") as IModal
+		modal.show()
+	}
+
+	function closeDeleteCoursModale(){
+		const modal = document.getElementById("ModalValidator") as IModal
+		modal.close()
+	}
+	async function deleteCours(){
+		const response = await api('api/cours/' + cours?.id, 'DELETE')
+		closeDeleteCoursModale()
+	}
+	async function change(){
+		const response = await api('api/cours/' + cours?.id, 'DELETE')
+		closeDeleteCoursModale()
 	}
 </script>
 
@@ -49,7 +71,12 @@
 		</div>
 
 		<!-- MAIN -->
-
+		 {#if authStore.user?.role!="student"}
+		<div class="card top">
+			<button class="button" onclick={changeVisibility}>Rendre le cours {cours.visibility?"priver":"public"}</button>
+			<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
+		</div>
+		{/if}
 		<div class="layout">
 			<div class="card side mobile-only">
 				<div class="section">
@@ -133,6 +160,11 @@
 			</div>
 		</div>
 	</div>
+	<ModalValidator
+		message="Voullez vous supprimer la page ?"
+		cancel={closeDeleteCoursModale}
+		confirm={deleteCours}
+		/>
 {/if}
 
 <style>
@@ -176,6 +208,10 @@
 		display: grid;
 		grid-template-columns: 1fr 320px;
 		gap: 24px;
+	}
+
+	.top{
+		margin-bottom: 20px;
 	}
 
 	/* LEFT */
@@ -244,6 +280,26 @@
 		border-radius: 10px;
 		padding: 14px;
 		font-weight: 600;
+		cursor: pointer;
+	}
+
+	.button{
+		padding: 8px 16px;
+		border-radius: var(--border-radius);
+		border: none;
+		font-size: 14px;
+		font-weight: 500;
+		color: var(--button-text-color);
+		background-color: var(--button-backgroung-color) ;
+		transition:
+			background 0.15s,
+			color 0.15s;
+		text-align: center;
+		width: max-content;
+	}
+
+	.button:hover {
+		background: var(--button-backgroung-color-hover);
 		cursor: pointer;
 	}
 

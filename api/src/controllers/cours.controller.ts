@@ -194,5 +194,12 @@ export default {
             }
         })
         res.json(updatedCours)
+    },
+    changeVisibility:async (req: Request, res: Response)=>{
+        const coursId = await parseIdFromParams(req.params.id);
+        const cours= await prisma.cours.findFirst({where:{id:coursId}})
+        if(cours){
+            await prisma.cours.update({where:{id:coursId},data:{visibility:!cours.visibility}})
+        }
     }
 }

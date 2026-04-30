@@ -8,6 +8,7 @@ router.get("/cours/homepage",coursController.getForHomePage)
 router.get("/cours/instructor/:id",coursController.getCoursByInstructor)
 router.get("/cours/:id",coursController.getOneCours)
 router.post("/cours",coursController.createCours)
+router.post("/cours/:id/vibility",coursController.changeVisibility)
 router.patch("/cours/:id",coursController.updatingCours)
 router.delete("/cours/:id",coursController.deleteCours)
 
