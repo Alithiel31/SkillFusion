@@ -92,7 +92,7 @@
 	}
 
 	async function updateRole(userId: number, role: string) {
-		await api.updateUserRole(userId, role);
+		await api(`api/users/${userId}`, 'PATCH', { role });
 	}
 </script>
 
@@ -143,9 +143,9 @@
 						<span class="table-row__cell">{user.lastname}</span>
 						<span class="table-row__cell">{user.firstname}</span>
 						<span class="table-row__cell table-row__cell--pseudo">{user.pseudo}</span>
-						<span class="badge"
-							>
-							<select class="role-user"
+						<span class="badge">
+							<select
+								class="role-user"
 								bind:value={user.role.name}
 								onchange={(e) => updateRole(user.id, e.target.value)}
 							>
