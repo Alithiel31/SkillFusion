@@ -1,7 +1,7 @@
 import express from 'express';
 import coursController from '../controllers/cours.controller';
 import { verifyToken } from '../middlewares/auth.middleware';
-import { checkRoles, requireSelfOrAdmin, ROLES } from '../middlewares/rbac.middleware';
+import { checkRoles, requireSelfOrAdmin, roles } from '../middlewares/rbac.middleware';
 
 export const router=express.Router()
 
@@ -10,8 +10,8 @@ router.get("/cours/homepage",coursController.getForHomePage)
 router.get("/cours/instructor/:id",coursController.getCoursByInstructor)
 router.get("/cours/:id",coursController.getOneCours)
 
-router.post("/cours", verifyToken, checkRoles([ROLES.TEACHER, ROLES.ADMIN]), coursController.createCours)
-router.post("/cours/:id/visibility", verifyToken, checkRoles([ROLES.TEACHER, ROLES.ADMIN]),coursController.changeVisibility)
+router.post("/cours", verifyToken, checkRoles([roles.instructor, roles.admin]), coursController.createCours)
+router.post("/cours/:id/visibility", verifyToken, checkRoles([roles.instructor, roles.admin]),coursController.changeVisibility)
 router.patch("/cours/:id", verifyToken, requireSelfOrAdmin, coursController.updatingCours)
 router.delete("/cours/:id", verifyToken, requireSelfOrAdmin, coursController.deleteCours)
 
