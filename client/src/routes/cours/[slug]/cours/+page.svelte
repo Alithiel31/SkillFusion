@@ -146,7 +146,7 @@
 			</div>
 
 			<div class="cours-main">
-				{#if authStore.user?.role!= 'student'}
+				{#if authStore.user?.role!= 'student' && authStore.user?.id=== cours.authorId }
 					<button
 						class="button_tools flex-end"
 						onclick={() => {handleModify()}}>{textButton}</button>
@@ -167,7 +167,7 @@
 					>← Précédent</button
 				>
 
-				{#if authStore.user?.role != 'student'}
+				{#if authStore.user?.role != 'student' && authStore.user?.id=== cours.authorId } 
 					<button
 						class="button_tools"
 						disabled={cours.numberPage ==1}
@@ -176,7 +176,7 @@
 				
 				<span class="page-indicator">Page {currentPage} sur {cours?.numberPage}</span>
 
-				{#if authStore.user?.role != 'student'}
+				{#if authStore.user?.role != 'student' && authStore.user?.id=== cours.authorId }
 					<button
 						class="button_tools"
 						onclick={() => {createPage()}}>Ajouter une Page</button>
