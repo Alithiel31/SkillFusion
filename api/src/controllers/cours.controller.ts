@@ -93,7 +93,7 @@ export default {
         const cours = await prisma.cours.findMany(
             {
                 where: { authorId: userId },
-                include: { category: true, author: true }
+                include: { category: true, author: true },
             })
         if (!cours) {
             throw new NotFoundError(`Cours from ${userId} not found`);
@@ -106,6 +106,7 @@ export default {
             where:{visibility:true},
             include: { category: true },
             orderBy: { createdAt: "desc" },
+            take:4
         })
         res.json(cours)
     },

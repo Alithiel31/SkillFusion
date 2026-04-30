@@ -5,7 +5,7 @@ import { checkRoles, requireSelfOrAdmin, ROLES } from '../middlewares/rbac.middl
 
 export const router=express.Router()
 
-router.get("/cours",verifyToken,coursController.getAll)
+router.get("/cours",coursController.getAll)
 router.get("/cours/homepage",coursController.getForHomePage)
 router.get("/cours/instructor/:id",coursController.getCoursByInstructor)
 router.get("/cours/:id",coursController.getOneCours)
