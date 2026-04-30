@@ -33,7 +33,33 @@ export default {
                 }
             })
             data = cours[0]
+        }else if (req.query.visibility){
+            const cours = await prisma.cours.findMany({
+                where: { visibility:true},
+                include: {
+                    category: true,
+                    author: {
+                        omit: { password: true }
+                    },
+                    learningObjectives: {
+                        include: { objectif: true }
+                    },
+                    content: true,
+                    tools: {
+                        include: { tools: true }
+                    },
+                    opinions: {
+                        include: {
+                            user: {
+                                omit: { password: true }
+                            }
+                        }
+                    }
+                }
+            })
+            data = cours
         }
+
         else {
             const cours = await prisma.cours.findMany({
                 include: {
@@ -75,8 +101,9 @@ export default {
     // Requête pour récuperer les cours récents
     getForHomePage: async (req: Request, res: Response) => {
         const cours = await prisma.cours.findMany({
+            where:{visibility:true},
             include: { category: true },
-            orderBy: { createdAt: "desc" }
+            orderBy: { createdAt: "desc" },
         })
         res.json(cours)
     },
@@ -200,6 +227,8 @@ export default {
         const cours= await prisma.cours.findFirst({where:{id:coursId}})
         if(cours){
             await prisma.cours.update({where:{id:coursId},data:{visibility:!cours.visibility}})
+            return res.status(204).end()
         }
+        res.status(400).end()
     }
 }

@@ -15,9 +15,9 @@
 	import api from '$lib/services/api.service';
 	import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
 
-	import type { ICours, ICoursContent, ITextArea } from '$lib/@types/types';
+	import type { ICours, ICoursContent } from '$lib/@types/types';
 	import ModalValidator from '$lib/assets/components/Validator/ModalValidator.svelte';
-	import type { IModal } from '$lib/@types/html';
+	import type { IModal, ITextArea } from '$lib/@types/html';
 	
 
 	let isLoading = $state(false);

@@ -14,7 +14,7 @@
 	onMount(async () => {
 		const categoriesResponse = await api('api/categories');
 		categories = categoriesResponse.data;
-		const coursesResponse = await api('api/cours');
+		const coursesResponse = await api('api/cours?visibility=true');
 		courses = coursesResponse.data;
 		console.log(courses);
 	});

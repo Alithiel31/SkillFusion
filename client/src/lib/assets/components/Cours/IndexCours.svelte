@@ -11,12 +11,12 @@
 	import type { IModal } from '$lib/@types/html';
 
 	let cours: ICours | null = $state(null);
+	let visibility=$derived(cours?.visibility)
 
 	onMount(async () => {
 		const response = await api('api/cours?slug=' + page.params.slug);
 		cours = response.data;
 		getAuth()
-		console.log(cours?.visibility)
 	});
 
 	async function  addCoursActiveToStudent(){
@@ -48,9 +48,10 @@
 		const response = await api('api/cours/' + cours?.id, 'DELETE')
 		closeDeleteCoursModale()
 	}
-	async function change(){
-		const response = await api('api/cours/' + cours?.id, 'DELETE')
-		closeDeleteCoursModale()
+	async function changeVisibility(){
+		await api('api/cours/' + cours?.id+"/visibility", 'POST')
+		const response = await api('api/cours?slug=' + page.params.slug);
+		cours = response.data;
 	}
 </script>
 
@@ -73,7 +74,7 @@
 		<!-- MAIN -->
 		 {#if authStore.user?.role!="student"}
 		<div class="card top">
-			<button class="button" onclick={changeVisibility}>Rendre le cours {cours.visibility?"priver":"public"}</button>
+			<button class="button" onclick={changeVisibility}>Rendre le cours {visibility?"priver":"public"}</button>
 			<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
 		</div>
 		{/if}
