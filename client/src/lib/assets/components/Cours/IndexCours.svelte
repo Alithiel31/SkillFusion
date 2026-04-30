@@ -103,7 +103,7 @@
 		</div>
 
 		<!-- MAIN -->
-		{#if authStore.user?.role != 'student'}
+		{#if authStore.user?.role != 'student' && authStore.user?.id=== cours.authorId}
 			<div class="card top">
 				<button class="button" onclick={changeVisibility}
 					>Rendre le cours {visibility ? 'priver' : 'public'}</button
