@@ -37,12 +37,12 @@
 				<div class="icon icon--success">✓</div>
 				<h1>Email confirmé !</h1>
 				<p>{message}</p>
-				<a href="/connection" class="btn-login">Se connecter</a>
+				<a href="/connexion" class="btn-login">Se connecter</a>
 			{:else}
 				<div class="icon icon--error">✕</div>
 				<h1>Erreur</h1>
 				<p>{message}</p>
-				<a href="/register" class="btn-register">Réessayer</a>
+				<a href="/inscription" class="btn-register">Réessayer</a>
 			{/if}
 		</div>
 	{/if}

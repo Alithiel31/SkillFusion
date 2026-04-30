@@ -6,6 +6,7 @@ import { checkRoles, requireSelfOrAdmin, ROLES } from '../middlewares/rbac.middl
 const router = express.Router();
 
 router.get("/opinions", opinionController.getAll)
+router.get("/opinions/:coursId/user/:id",opinionController.getByUser)
 router.get("/opinions/:id", opinionController.getOneOpinion)
 
 router.post("/opinions", verifyToken, checkRoles([ROLES.STUDENT, ROLES.TEACHER, ROLES.ADMIN]), opinionController.createOpinion)

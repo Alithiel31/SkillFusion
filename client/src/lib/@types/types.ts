@@ -23,9 +23,9 @@ export interface IUser {
         createdCours: ICours[]
         badges: UserHasBadge[]
         enrollments: UserHasCours[]
-        activations: CoursActived[]
+        activations: ICoursActived[]
         commentaires: Comment[]
-        opinions: Opinion[]
+        opinions: IOpinion[]
         notifications: Notification[]
 }
 
@@ -49,11 +49,11 @@ export interface ICours {
         learningObjectives: CoursHasLearningObjective[]
         content: ICoursContent[]
         enrollments: UserHasCours[]
-        activations: CoursActived[]
+        activations: ICoursActived[]
         comments: Comment[]
-        opinions: Opinion[]
+        opinions: IOpinion[]
         notifications: Notification[]
-        cours: 
+        cours: ICours
 }
 export interface ICoursContent {
         id: number
@@ -64,7 +64,6 @@ export interface ICoursContent {
         updatedAt: Date
         cours: ICours
 }
-
 export interface ICategory {
         id: Number
         name: string
@@ -161,7 +160,7 @@ export interface Comment {
         cours: ICours
         auteur: IUser
 }
-export interface Opinion {
+export interface IOpinion {
   id :number
   content: string
   note  :  number
@@ -184,6 +183,3 @@ export interface Notification {
   user : IUser
 }
 
-export interface ITextArea extends HTMLElement{
-        value: string;
-}

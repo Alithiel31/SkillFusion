@@ -61,9 +61,7 @@
 	// ── État ────────────────────────────────────────────────────
 	let searchCours = $state('');
 	let filteredCours = $derived(
-    cours.filter(
-      (c) =>  !searchCours || c.title.toLowerCase().includes(searchCours.toLowerCase())
-		)
+		cours.filter((c) => !searchCours || c.title.toLowerCase().includes(searchCours.toLowerCase()))
 	);
 
 	const nonLues = $derived(notifications.filter((n) => !n.lu).length);
@@ -104,13 +102,15 @@
 
 			<div class="panel__list panel__list--cours">
 				{#each filteredCours as c}
-					<CoursCard class="coursCardDashboard" isDashboard={true}
-					cours={c}
-          --card__image__color={c.category.textColor}
-							--border_color={c.category.borderColor}
-							--text_color={c.category.textColor}
-							--background-color={c.category.backgroundColor}
-          />
+					<CoursCard
+						class="coursCardDashboard"
+						isDashboard={true}
+						cours={c}
+						--card__image__color={c.category.textColor}
+						--border_color={c.category.borderColor}
+						--text_color={c.category.textColor}
+						--background-color={c.category.backgroundColor}
+					/>
 				{/each}
 
 				{#if filteredCours.length === 0}
@@ -313,9 +313,9 @@
 		flex-direction: column;
 		gap: 8px;
 	}
-	.panel__list--cours{
-			overflow-y: auto;
-			flex-direction: row;
+	.panel__list--cours {
+		overflow-y: auto;
+		flex-direction: row;
 	}
 
 	.panel__list--notifs {
@@ -463,19 +463,15 @@
 
 	/* ── Boutons ─────────────────────────────────────────────── */
 	.btn-add {
-		padding: 6px 12px;
-		border-radius: var(--r-md);
-		border: 1.5px solid var(--amber);
-		background: var(--amber-l);
-		color: #ba7517;
-		font-family: var(--font);
-		font-size: 12px;
+		font-family: 'DM Sans', sans-serif;
+		font-size: 14px;
 		font-weight: 500;
+		padding: 10px 22px;
+		border-radius: var(--radius-md);
 		cursor: pointer;
-		transition:
-			background 0.15s,
-			color 0.15s;
-		white-space: nowrap;
+		border: none;
+		background: var(--blue);
+		color: #fff;
 	}
 
 	.btn-add:hover {
