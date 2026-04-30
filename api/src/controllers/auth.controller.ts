@@ -166,7 +166,7 @@ export async function getAuthenticatedUser(req: AuthenticatedRequest, res: Respo
         email: user.email,
         firstname: user.firstname,
         lastname: user.lastname,
-        role: user.role,
+        role: user.roleId,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
     });
