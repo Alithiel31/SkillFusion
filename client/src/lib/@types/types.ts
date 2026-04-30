@@ -37,7 +37,7 @@ export interface ICours {
         urlImage: String
         difficulty: number
         summary: String
-        visibility: Boolean
+        visibility: boolean
         createdAt: Date
         updatedAt: Date
         author: IUser
