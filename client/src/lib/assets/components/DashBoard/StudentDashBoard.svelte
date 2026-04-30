@@ -1,5 +1,5 @@
 <script lang="ts">
-import "../../../../app.css"
+	import '../../../../app.css';
 	import { onMount } from 'svelte';
 	import api from '$lib/services/api.service';
 	import type { ICours } from '$lib/@types/types';
@@ -77,15 +77,15 @@ import "../../../../app.css"
 
 			<div class="panel__list">
 				{#each coursActive as c}
-					<CoursCard class="coursCardDashboard" isDashboard={true}
-          cours={
-            c.cours
-          }
-          --card__image__color={c.cours.category.textColor}
-							--border_color={c.cours.category.borderColor}
-							--text_color={c.cours.category.textColor}
-							--background-color={c.cours.category.backgroundColor}
-          />
+					<CoursCard
+						class="coursCardDashboard"
+						isDashboard={true}
+						cours={c.cours}
+						--card__image__color={c.cours.category.textColor}
+						--border_color={c.cours.category.borderColor}
+						--text_color={c.cours.category.textColor}
+						--background-color={c.cours.category.backgroundColor}
+					/>
 				{/each}
 
 				{#if coursActive.length === 0}
@@ -262,6 +262,7 @@ import "../../../../app.css"
 		gap: 14px;
 		min-width: 0;
 		overflow: hidden;
+		overflow-x: auto;
 	}
 
 	.panel--wide {
@@ -295,8 +296,8 @@ import "../../../../app.css"
 		flex-direction: row;
 		gap: 8px;
 	}
-	.panel__list:first-child{
-			overflow-y: auto;
+	.panel__list:first-child {
+		overflow-y: auto;
 	}
 
 	.panel__empty {
