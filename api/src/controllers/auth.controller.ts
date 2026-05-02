@@ -7,8 +7,7 @@ import type { Token } from "../@types/index.d.ts";
 import { BadRequestError, ConflictError, UnauthorizedError } from "../lib/errors";
 import { generateAuthTokens } from "../lib/token";
 import jwt from "jsonwebtoken";
-import { AuthenticatedRequest } from "../@types/express";
-import { send } from "node:process";
+import type { AuthenticatedRequest } from "../@types/express";
 import crypto from "crypto";
 import { sendVerificationEmail, sendResetPasswordEmail } from "../lib/mailer";
 
@@ -219,7 +218,6 @@ export async function refreshAccessToken(req: Request, res: Response) {
 
     await replaceRefreshTokenInDatabase(refreshToken, existingRefreshToken.user);
 
-    setAccessTokenCookie(res, accessToken);
     setRefreshTokenCookie(res, refreshToken);
 
     res.json({ accessToken });
