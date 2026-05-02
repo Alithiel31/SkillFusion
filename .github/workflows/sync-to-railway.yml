@@ -40,19 +40,6 @@ jobs:
             exit 1
           fi
 
-      - name: Restore production files
-        run: |
-          git checkout deploy/main -- api/dockerfile
-          git checkout deploy/main -- api/package.json
-          git checkout deploy/main -- api/src/models/client.ts
-          git checkout deploy/main -- client/dockerfile
-          git checkout deploy/main -- client/svelte.config.js
-          git checkout deploy/main -- client/package.json
-          git checkout deploy/main -- client/tsconfig.json
-          git checkout deploy/main -- client/src/lib/services/api.service.ts
-          git rm --ignore-unmatch client/src/lib/services/api.service.js
-          git checkout deploy/main -- .github/ 2>/dev/null || git rm -rf --ignore-unmatch .github/
-
       - name: Commit and push
         run: |
           git config --local --unset http.https://github.com/.extraheader

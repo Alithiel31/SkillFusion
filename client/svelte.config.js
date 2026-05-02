@@ -1,4 +1,8 @@
-import adapter from '@sveltejs/adapter-static';
+// import adapter from '@sveltejs/adapter-static';
+
+// Passage a cet import de node pour que cela fonctionne avec Railway
+import adapter from '@sveltejs/adapter-node';
+
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

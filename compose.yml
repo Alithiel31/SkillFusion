@@ -5,6 +5,8 @@ networks:
   skillfusion_network:
 
 services:
+
+# Service de base de données PostgreSQL
   db:
     image: postgres:18
     container_name: skillfusion_db
@@ -21,8 +23,12 @@ services:
     networks:
       - skillfusion_network
 
+# Service de l'API Node.js
   api:
-    build: ./api
+    build:
+      context: ./api
+# Permet de dire a Docker de s'arreter a l'étape Développement du DockerFile 
+      target: development
     container_name: skillfusion_api
     depends_on:
       - db
@@ -38,7 +44,10 @@ services:
     command: sh -c "if [ ! -d node_modules ]; then npm install; fi && npm run dev"
 
   client:
-    build: ./client
+    build:
+      context: ./client
+# Permet de dire a Docker de s'arreter a l'étape Développement du DockerFile 
+      target: development
     container_name: skillfusion_client
     ports:
       - "5173:5173"

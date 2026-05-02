@@ -7,5 +7,5 @@ export * from "../../prisma/generated";
 
 // On exporte une connexion à la base de données
 export const prisma = new PrismaClient({
-  adapter: new PrismaPg(process.env.DATABASE_URL_DOCKER?? "")
+  adapter: new PrismaPg(process.env.DATABASE_URL_DOCKER ?? process.env.DATABASE_URL ?? "")
 });
