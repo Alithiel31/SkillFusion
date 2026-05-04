@@ -12,9 +12,13 @@ jobs:
   create-pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - uses: repo-sync/pull-request@v2
+      - name: Créer ou mettre à jour la PR
+        uses: repo-sync/pull-request@v2
         with:
           source_branch: main-dev
           destination_branch: main

@@ -1,0 +1,48 @@
+name: Sync to Railway
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout org repo (main)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "GitHub Actions"
+
+      - name: Add deployment repo as remote
+        run: |
+          git remote add deploy https://x-access-token:${{ secrets.DEPLOY_REPO_TOKEN }}@github.com/Alithiel31/SkillFusion.git
+
+      - name: Fetch deployment repo
+        run: git fetch deploy
+
+      - name: Checkout deployment main branch
+        run: |
+          git checkout -b deploy-main deploy/main
+
+      - name: Merge org main into deployment
+        run: |
+          git merge origin/main --no-commit --no-ff -X theirs || true
+          git rm -rf --ignore-unmatch client/.svelte-kit/
+          if git ls-files --unmerged | grep -q .; then
+            echo "::error::Conflits non résolus — sync annulé"
+            exit 1
+          fi
+
+      - name: Commit and push
+        run: |
+          git config --local --unset http.https://github.com/.extraheader
+          git add .
+          git diff --cached --quiet || git commit -m "sync: merge from org main [$(date +'%Y-%m-%d')]"
+          git push deploy deploy-main:main

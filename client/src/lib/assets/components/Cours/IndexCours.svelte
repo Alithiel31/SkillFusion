@@ -64,6 +64,8 @@
 		closeDeleteOpinionModale();
 		const refresh = await api('api/cours?slug=' + page.params.slug);
 		cours = refresh.data;
+		const response = await api('api/opinions/' + cours?.id + '/user/' + authStore.user?.id, 'GET');
+		alreadyOpinion = response.data;
 	}
 
 	function modalDeleteCours() {

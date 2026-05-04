@@ -1,14 +1,17 @@
 <script lang="ts">
+	import type { ITextArea } from "$lib/@types/html";
+
 	const props = $props();
 	let hovered = $state(0);
 	let currentContent= $state();
 	let currentNote=$state(0);
+
 	$effect(()=>{
 		currentNote=props.opinion.opinion.note
 	})
 
 	async function submitNote(): Promise<void> {
-		currentContent = document.getElementById("textarea")?.value;
+		currentContent = document.getElementById("textarea")?.value as ITextArea;
 		props.confirm(currentNote, currentContent )
 	}
 </script>

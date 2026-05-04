@@ -1,7 +1,7 @@
 import express from "express";
 import categorieController from "../controllers/categorie.controller";
 import { verifyToken } from '../middlewares/auth.middleware';
-import { checkRoles, ROLES } from '../middlewares/rbac.middleware';
+import { checkRoles, roles } from '../middlewares/rbac.middleware';
 
 const router = express.Router();
 

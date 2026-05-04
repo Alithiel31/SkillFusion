@@ -4,13 +4,13 @@ import type { AuthenticatedRequest } from '../@types/express';
 import { extractAccessToken, verifyAndDecodeJWT } from './auth.middleware';
 
 //  Définition des constantes des rôles 
-const ROLES = {
-  STUDENT: 1,
-  TEACHER: 2,
-  ADMIN: 3,
+const roles = {
+  student: 1,
+  instructor: 2,
+  admin: 3,
 } as const;
 
-export { ROLES };
+export { roles };
 
 //  Middleware d'autorisation basé sur les rôles (rappatrié du auth.middleware)
 

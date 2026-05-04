@@ -2,7 +2,7 @@ import type { Request, Response } from "express"
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { ConflictError, NotFoundError } from "../lib/errors";
+import { ConflictError, NotFoundError, UnauthorizedError } from "../lib/errors";
 
 export default {
     // Requête pour récuperer toutes les opinions
@@ -16,7 +16,7 @@ export default {
         const userId = await parseIdFromParams(req.params.id);
         const opinion = await prisma.opinion.findFirst({where: {userId:userId, coursId: coursId }})   
         if (!opinion) {
-           return res.json({IsOpinionExisting:false})
+           return res.json({IsOpinionExisting:false,opinion:{note:0}})
         }
        res.json({IsOpinionExisting:true, opinion: opinion})
     },
@@ -67,7 +67,10 @@ export default {
             userId: z.number(),
         });
         const data = await updateOpinionBodySchema.parseAsync(req.body);
-        const updatedOpinion = await prisma.opinion.update({
+
+        const opinionToUpdate = await prisma.opinion.findFirst({where:{id:opinionId}})
+        if(opinionToUpdate && opinionToUpdate.userId===data.userId){
+            const updatedOpinion = await prisma.opinion.update({
             where: { id: opinionId },
             data: {
                 content: data.content,
@@ -76,7 +79,12 @@ export default {
                 userId: data.userId,
             }
         });
-        res.json(updatedOpinion);
+        return res.json(updatedOpinion);
+        }else{
+            throw new UnauthorizedError("tu n'a pas les droits")
+        }
+
+        
     },
 
     // Requête pour supprimer une opinion
