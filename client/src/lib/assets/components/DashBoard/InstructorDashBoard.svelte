@@ -5,6 +5,8 @@
 	import api from '$lib/services/api.service';
 	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
 	import CoursCard from '../Cours/CoursCard.svelte';
+	import ModalNewCours from '../Modal/ModalNewCours.svelte';
+	import type { IModal } from '$lib/@types/html';
 
 	let cours: ICours[] = $state([]);
 
@@ -14,6 +16,21 @@
 		const responseCours = await api('api/cours/instructor/' + authStore?.user?.id);
 		cours = responseCours.data;
 	});
+
+	function openModalNewCours(){
+		const modalNewCours=document.getElementById("modalNewCours") as IModal
+		modalNewCours.show()
+	}
+
+	function cancelModalNewCours(){
+		const modalNewCours=document.getElementById("modalNewCours") as IModal
+		modalNewCours.close()
+	}
+
+	function comfirmModalNewCours(data){
+		console.log(data)
+		cancelModalNewCours()
+	}
 
 	const notifications = [
 		{
@@ -87,7 +104,7 @@
 				<h2 class="panel__title">Mes cours</h2>
 				<div class="panel__head-actions">
 					<span class="panel__count">{filteredCours.length}</span>
-					<button class="btn-add" title="Nouveau cours">+ Nouveau cours</button>
+					<button class="btn-add" title="Nouveau cours" onclick={openModalNewCours}>+ Nouveau cours</button>
 				</div>
 			</div>
 
@@ -152,6 +169,9 @@
 			</div>
 		</div>
 	</div>
+	<ModalNewCours
+	cancel={cancelModalNewCours}
+	confirm={comfirmModalNewCours}/>
 </div>
 
 <style>

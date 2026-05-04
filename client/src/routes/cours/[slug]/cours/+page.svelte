@@ -16,7 +16,7 @@
 	import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
 
 	import type { ICours, ICoursContent } from '$lib/@types/types';
-	import ModalValidator from '$lib/assets/components/Validator/ModalValidator.svelte';
+	import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 	import type { IModal, ITextArea } from '$lib/@types/html';
 	
 
