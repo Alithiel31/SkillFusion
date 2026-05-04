@@ -3,6 +3,13 @@ import argon2 from "argon2";
 import { prisma } from "./client_seeding";
 
 async function seed() {
+  const existing = await prisma.role.findFirst();
+  if (existing) {
+    console.log("Base de données déjà peuplée — seeding ignoré.");
+    await prisma.$disconnect();
+    return;
+  }
+
   const roles = await prisma.role.createMany({
     data: [
       { name: "student", frName: "Etudiant" },

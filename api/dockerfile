@@ -1,11 +1,25 @@
-FROM node:24
-
+# Etape de base pour les deux developpements
+FROM node:24-alpine AS base
 WORKDIR /app
-
 COPY package*.json ./
 
-RUN rm -rf node_modules package-lock.json && \npm install
-
+# Consignes de developpement
+FROM base AS development
+RUN npm install
 COPY . .
+CMD ["npm", "run", "dev"]
 
-CMD ["npm", "run","dev"]
+# Consignes de production
+FROM base AS production
+RUN npm ci
+COPY . .
+# L'adresse est bidon, 
+# Car prisma generate a besoin d'une adresse pour generer les fichiers, 
+# Mais elle ne sont pas utilisés dans le projet.
+# L'idée est d'avoir une URL valide de type postgresql 
+# Pour que prisma generate puisse fonctionner.
+
+# Pourquoi ne pas mettre la vraie, car au moment du build, 
+# Elle n'existe simplement pas encore
+RUN DATABASE_URL="postgresql://dummy:dummy@localhost:5432/dummy" npx prisma generate
+CMD ["npm", "run", "start"]
