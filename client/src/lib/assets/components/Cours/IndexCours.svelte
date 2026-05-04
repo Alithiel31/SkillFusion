@@ -105,11 +105,12 @@
 		</div>
 
 		<!-- MAIN -->
-		{#if authStore.user?.role != 'student' && authStore.user?.id=== cours.authorId}
+		{#if authStore.user?.role === 'admin' || authStore.user?.id === cours.authorId}
 			<div class="card top">
 				<button class="button" onclick={changeVisibility}
 					>Rendre le cours {visibility ? 'priver' : 'public'}</button
 				>
+				<button class="button">Modifier</button>
 				<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
 			</div>
 		{/if}
@@ -231,7 +232,7 @@
 
 	.opinions_presentation {
 		display: flex;
-		justify-content: space-between
+		justify-content: space-between;
 	}
 	.btn-add {
 		font-family: 'DM Sans', sans-serif;
@@ -288,7 +289,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-		order:2 ;
+		order: 2;
 	}
 
 	/* RIGHT */
@@ -453,7 +454,7 @@
 		.desktop-only {
 			display: none;
 		}
-		.right{
+		.right {
 			order: 1;
 		}
 	}
