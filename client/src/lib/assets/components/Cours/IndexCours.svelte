@@ -6,10 +6,10 @@
 	import type { ICours } from '$lib/@types/types';
 	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '$lib/assets/components/Category/Category.svelte';
-	import ModalOpinion from '../Validator/ModalOpinion.svelte';
+	import ModalOpinion from '../Modal/ModalOpinion.svelte';
 
 	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
-	import ModalValidator from '../Validator/ModalValidator.svelte';
+	import ModalValidator from '../Modal/ModalValidator.svelte';
 	import type { IModal } from '$lib/@types/html';
 
 	let cours: ICours | null = $state(null);
