@@ -12,9 +12,9 @@ router.get("/cours/instructor/:id",coursController.getCoursByInstructor)
 router.get("/cours/:id",coursController.getOneCours)
 
 // Routes de modification
-router.post("/cours", verifyToken, checkRoles([ROLES.TEACHER, ROLES.ADMIN]), coursController.createCours)
-router.post("/cours/:id/visibility", verifyToken, checkRoles([ROLES.TEACHER, ROLES.ADMIN]),coursController.changeVisibility)
-router.patch("/cours/:id", verifyToken, checkRoles([ROLES.TEACHER, ROLES.ADMIN]), coursController.updatingCours)
-router.delete("/cours/:id", verifyToken, checkRoles([ROLES.TEACHER, ROLES.ADMIN]), coursController.deleteCours)
+router.post("/cours", verifyToken, checkRoles([ROLES.INSTRUCTOR, ROLES.ADMIN]), coursController.createCours)
+router.post("/cours/:id/visibility", verifyToken, checkRoles([ROLES.INSTRUCTOR, ROLES.ADMIN]),coursController.changeVisibility)
+router.patch("/cours/:id", verifyToken, checkRoles([ROLES.INSTRUCTOR, ROLES.ADMIN]), coursController.updatingCours)
+router.delete("/cours/:id", verifyToken, checkRoles([ROLES.INSTRUCTOR, ROLES.ADMIN]), coursController.deleteCours)
 
 export default router;

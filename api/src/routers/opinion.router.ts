@@ -11,7 +11,7 @@ router.get("/opinions/:coursId/user/:id",opinionController.getByUser)
 router.get("/opinions/:id", opinionController.getOneOpinion)
 
  
-router.post("/opinions", verifyToken, checkRoles([ROLES.STUDENT, ROLES.TEACHER, ROLES.ADMIN]), opinionController.createOpinion)
+router.post("/opinions", verifyToken, checkRoles([ROLES.STUDENT, ROLES.INSTRUCTOR, ROLES.ADMIN]), opinionController.createOpinion)
 router.patch("/opinions/:id", verifyToken, opinionController.updateOpinion)
 router.delete("/opinions/:id", verifyToken, opinionController.deleteOpinion)
 

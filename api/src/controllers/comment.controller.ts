@@ -4,7 +4,7 @@ import z from "zod";
 import { parseIdFromParams } from "./utils";
 import type { AuthenticatedRequest } from "../@types/express";
 import { ConflictError, ForbiddenError, NotFoundError } from "../lib/errors";
-import { ROLES } from '../middlewares/rbac.middleware';
+import { roles } from '../middlewares/rbac.middleware';
 
 export default {
     // Requête pour récuperer tous les commentaires
@@ -81,15 +81,12 @@ export default {
         if (!comment) {
             throw new NotFoundError(`Comment with id ${commentId} not found`);
         }
-        if (req.user?.userId !== comment.authorId) {
+
+        // By-pass admin pour la suppression d'un commentaire
+        if (req.user?.userId !== comment.authorId && req.user?.role !== roles.admin) {
             throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce commentaire");
         }
 
-        // By-pass admin pour la suppression d'un commentaire
-        if (req.user?.userId !== comment.authorId && req.user?.role !== ROLES.ADMIN) {
-            throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce commentaire");
-        }
-        
         await prisma.comment.delete({ where: { id: commentId } });
         res.status(204).send();
     },
