@@ -21,7 +21,6 @@
 		getAuth();
 		user = authStore.user;
 		await getCours();
-		console.log(cours);
 		AlreadyHaveNoted();
 	});
 	async function getCours() {

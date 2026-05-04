@@ -18,8 +18,10 @@
 	import type { ICours, ICoursContent } from '$lib/@types/types';
 import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 	import type { IModal, ITextArea } from '$lib/@types/html';
+	import type { IUserLocalStorage } from '$lib/@types/type.localStorage';
 	
-
+	
+let user: IUserLocalStorage | null = $state(null);
 	let isLoading = $state(false);
 	let cours: ICours | null = $state(null);
 	let currentPage: number = $state(1);
@@ -38,9 +40,9 @@ import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 
 	onMount(async () => {
 		isLoading = true;
+		user = authStore.user;
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
 		cours = response.data;
-		console.log(cours);
 		if (cours) {
 			getCours();
 			isLoading = false;
@@ -61,6 +63,8 @@ import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 	}
 	async function DeleteComment(data:number){
 	 await api('api/comments/' + data, 'DELETE');
+	const refresh = await api('api/cours?slug=' + page.params.slug);
+		cours = refresh.data;
 
 	}
 
@@ -75,7 +79,6 @@ import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 		if (cours) {
 			currentPageId = cours.content.find((content) => content.numberPage == currentPage);
 			if (currentPageId) {
-				console.log(currentPageId);
 				const response = await api('api/cours-contents/' + currentPageId.id, 'GET');
 				coursContent = response.data as ICoursContent;
 				if (coursContent) {
@@ -240,7 +243,9 @@ import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 											})}
 										</span>
 									</div>
+									{#if user?.id == c.authorId || user?.role === "admin"}
 									<button onclick={()=>DeleteComment(c.id)}>X</button>
+									{/if}
 								</div>
 								<p class="comment__content">{c.description}</p>
 							</div>

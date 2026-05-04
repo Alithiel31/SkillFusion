@@ -18,7 +18,6 @@
 		categories = categoriesResponse.data;
 		const coursesResponse = await api('api/cours?visibility=true');
 		courses = coursesResponse.data;
-		console.log(courses);
 	});
 	let searchQuery = $state('');
 	let selectedCategory = $state('Toutes les catégories');
