@@ -203,7 +203,9 @@
 									<option value={r.name}>{r.frName}</option>
 								{/each}
 							</select>
-							<button class="delete-btn delete-btn--edit" onclick={() => openModalDelete(user.id)}> x</button>
+							<button class="delete-btn delete-btn--edit" onclick={() => openModalDelete(user.id)}>
+								x</button
+							>
 						</span>
 					</div>
 				{/each}
@@ -230,6 +232,11 @@
 			<div class="panel__list">
 				{#each filteredCours as c}
 					<div class="list-row">
+						{#if c.visibility == true}
+							🟢
+						{:else if c.visibility == false}
+							🔴
+						{/if}
 						<div class="list-row__info">
 							<p class="list-row__title">{c.title}</p>
 							<span class="badge badge--cat" style="color:{c.category.textColor}"
@@ -538,7 +545,6 @@
 		color: var(--gray);
 		font-size: 12px;
 	}
-
 
 	/* ── List rows (cours, badges, cats) ─────────────────────── */
 	.list-row {

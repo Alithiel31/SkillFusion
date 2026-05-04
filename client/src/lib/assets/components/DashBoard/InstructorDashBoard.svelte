@@ -120,7 +120,7 @@
 
 			<div class="panel__list panel__list--cours">
 				{#each filteredCours as c}
-					<CoursCard
+				<CoursCard
 						class="coursCardDashboard"
 						isDashboard={true}
 						cours={c}
