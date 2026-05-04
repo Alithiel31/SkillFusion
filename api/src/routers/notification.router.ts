@@ -1,15 +1,20 @@
 import express from 'express';
 import notificationController from '../controllers/notification.controller';
+import { verifyToken } from '../middlewares/auth.middleware';
+import { checkRoles, roles } from '../middlewares/rbac.middleware';
 
 const router = express.Router();
 
-router.get("/notifications", notificationController.getAll)
-router.get("/notifications/:id", notificationController.getOneNotification)
+// Route dédiée a l'admin pour la gestion des notifications
+router.get("/notifications", verifyToken, checkRoles([roles.admin]), notificationController.getAll)
 
-router.post("/notifications", notificationController.createNotification)
+// Utilisateur connecté — Propiété vérifiée dans le controller
+router.get("/notifications/:id", verifyToken, notificationController.getOneNotification)
+router.patch("/notifications/:id", verifyToken, notificationController.updatingNotification)
+router.delete("/notifications/:id", verifyToken, notificationController.deleteNotification)
 
-router.patch("/notifications/:id", notificationController.updatingNotification)
+// Créées par le système via l'admin
+router.post("/notifications", verifyToken, checkRoles([roles.admin]), notificationController.createNotification)
 
-router.delete("/notifications/:id", notificationController.deleteNotification)
 
 export default router;

@@ -3787,13 +3787,11 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     id: number | null
-    note: number | null
     roleId: number | null
   }
 
   export type UserSumAggregateOutputType = {
     id: number | null
-    note: number | null
     roleId: number | null
   }
 
@@ -3805,7 +3803,6 @@ export namespace Prisma {
     password: string | null
     pseudo: string | null
     urlProfilImage: string | null
-    note: number | null
     verified: boolean | null
     verifyToken: string | null
     resetToken: string | null
@@ -3823,7 +3820,6 @@ export namespace Prisma {
     password: string | null
     pseudo: string | null
     urlProfilImage: string | null
-    note: number | null
     verified: boolean | null
     verifyToken: string | null
     resetToken: string | null
@@ -3841,7 +3837,6 @@ export namespace Prisma {
     password: number
     pseudo: number
     urlProfilImage: number
-    note: number
     verified: number
     verifyToken: number
     resetToken: number
@@ -3855,13 +3850,11 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     id?: true
-    note?: true
     roleId?: true
   }
 
   export type UserSumAggregateInputType = {
     id?: true
-    note?: true
     roleId?: true
   }
 
@@ -3873,7 +3866,6 @@ export namespace Prisma {
     password?: true
     pseudo?: true
     urlProfilImage?: true
-    note?: true
     verified?: true
     verifyToken?: true
     resetToken?: true
@@ -3891,7 +3883,6 @@ export namespace Prisma {
     password?: true
     pseudo?: true
     urlProfilImage?: true
-    note?: true
     verified?: true
     verifyToken?: true
     resetToken?: true
@@ -3909,7 +3900,6 @@ export namespace Prisma {
     password?: true
     pseudo?: true
     urlProfilImage?: true
-    note?: true
     verified?: true
     verifyToken?: true
     resetToken?: true
@@ -4014,7 +4004,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage: string | null
-    note: number
     verified: boolean
     verifyToken: string | null
     resetToken: string | null
@@ -4051,7 +4040,6 @@ export namespace Prisma {
     password?: boolean
     pseudo?: boolean
     urlProfilImage?: boolean
-    note?: boolean
     verified?: boolean
     verifyToken?: boolean
     resetToken?: boolean
@@ -4079,7 +4067,6 @@ export namespace Prisma {
     password?: boolean
     pseudo?: boolean
     urlProfilImage?: boolean
-    note?: boolean
     verified?: boolean
     verifyToken?: boolean
     resetToken?: boolean
@@ -4098,7 +4085,6 @@ export namespace Prisma {
     password?: boolean
     pseudo?: boolean
     urlProfilImage?: boolean
-    note?: boolean
     verified?: boolean
     verifyToken?: boolean
     resetToken?: boolean
@@ -4117,7 +4103,6 @@ export namespace Prisma {
     password?: boolean
     pseudo?: boolean
     urlProfilImage?: boolean
-    note?: boolean
     verified?: boolean
     verifyToken?: boolean
     resetToken?: boolean
@@ -4127,7 +4112,7 @@ export namespace Prisma {
     roleId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "pseudo" | "urlProfilImage" | "note" | "verified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "createdAt" | "updatedAt" | "roleId", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "pseudo" | "urlProfilImage" | "verified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "createdAt" | "updatedAt" | "roleId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
     createdCours?: boolean | User$createdCoursArgs<ExtArgs>
@@ -4168,7 +4153,6 @@ export namespace Prisma {
       password: string
       pseudo: string
       urlProfilImage: string | null
-      note: number
       verified: boolean
       verifyToken: string | null
       resetToken: string | null
@@ -4615,7 +4599,6 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly pseudo: FieldRef<"User", 'String'>
     readonly urlProfilImage: FieldRef<"User", 'String'>
-    readonly note: FieldRef<"User", 'Int'>
     readonly verified: FieldRef<"User", 'Boolean'>
     readonly verifyToken: FieldRef<"User", 'String'>
     readonly resetToken: FieldRef<"User", 'String'>
@@ -5250,6 +5233,7 @@ export namespace Prisma {
     id: number | null
     difficulty: number | null
     numberPage: number | null
+    note: number | null
     authorId: number | null
     categoryId: number | null
   }
@@ -5258,6 +5242,7 @@ export namespace Prisma {
     id: number | null
     difficulty: number | null
     numberPage: number | null
+    note: number | null
     authorId: number | null
     categoryId: number | null
   }
@@ -5272,6 +5257,7 @@ export namespace Prisma {
     summary: string | null
     visibility: boolean | null
     numberPage: number | null
+    note: number | null
     createdAt: Date | null
     updatedAt: Date | null
     authorId: number | null
@@ -5288,6 +5274,7 @@ export namespace Prisma {
     summary: string | null
     visibility: boolean | null
     numberPage: number | null
+    note: number | null
     createdAt: Date | null
     updatedAt: Date | null
     authorId: number | null
@@ -5304,6 +5291,7 @@ export namespace Prisma {
     summary: number
     visibility: number
     numberPage: number
+    note: number
     createdAt: number
     updatedAt: number
     authorId: number
@@ -5316,6 +5304,7 @@ export namespace Prisma {
     id?: true
     difficulty?: true
     numberPage?: true
+    note?: true
     authorId?: true
     categoryId?: true
   }
@@ -5324,6 +5313,7 @@ export namespace Prisma {
     id?: true
     difficulty?: true
     numberPage?: true
+    note?: true
     authorId?: true
     categoryId?: true
   }
@@ -5338,6 +5328,7 @@ export namespace Prisma {
     summary?: true
     visibility?: true
     numberPage?: true
+    note?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -5354,6 +5345,7 @@ export namespace Prisma {
     summary?: true
     visibility?: true
     numberPage?: true
+    note?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -5370,6 +5362,7 @@ export namespace Prisma {
     summary?: true
     visibility?: true
     numberPage?: true
+    note?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -5473,6 +5466,7 @@ export namespace Prisma {
     summary: string | null
     visibility: boolean
     numberPage: number
+    note: number
     createdAt: Date
     updatedAt: Date
     authorId: number
@@ -5508,6 +5502,7 @@ export namespace Prisma {
     summary?: boolean
     visibility?: boolean
     numberPage?: boolean
+    note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
@@ -5535,6 +5530,7 @@ export namespace Prisma {
     summary?: boolean
     visibility?: boolean
     numberPage?: boolean
+    note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
@@ -5553,6 +5549,7 @@ export namespace Prisma {
     summary?: boolean
     visibility?: boolean
     numberPage?: boolean
+    note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
@@ -5571,13 +5568,14 @@ export namespace Prisma {
     summary?: boolean
     visibility?: boolean
     numberPage?: boolean
+    note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
     categoryId?: boolean
   }
 
-  export type CoursOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "littleSummary" | "urlImage" | "difficulty" | "summary" | "visibility" | "numberPage" | "createdAt" | "updatedAt" | "authorId" | "categoryId", ExtArgs["result"]["cours"]>
+  export type CoursOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "littleSummary" | "urlImage" | "difficulty" | "summary" | "visibility" | "numberPage" | "note" | "createdAt" | "updatedAt" | "authorId" | "categoryId", ExtArgs["result"]["cours"]>
   export type CoursInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
@@ -5624,6 +5622,7 @@ export namespace Prisma {
       summary: string | null
       visibility: boolean
       numberPage: number
+      note: number
       createdAt: Date
       updatedAt: Date
       authorId: number
@@ -6070,6 +6069,7 @@ export namespace Prisma {
     readonly summary: FieldRef<"Cours", 'String'>
     readonly visibility: FieldRef<"Cours", 'Boolean'>
     readonly numberPage: FieldRef<"Cours", 'Int'>
+    readonly note: FieldRef<"Cours", 'Int'>
     readonly createdAt: FieldRef<"Cours", 'DateTime'>
     readonly updatedAt: FieldRef<"Cours", 'DateTime'>
     readonly authorId: FieldRef<"Cours", 'Int'>
@@ -22385,7 +22385,6 @@ export namespace Prisma {
     password: 'password',
     pseudo: 'pseudo',
     urlProfilImage: 'urlProfilImage',
-    note: 'note',
     verified: 'verified',
     verifyToken: 'verifyToken',
     resetToken: 'resetToken',
@@ -22408,6 +22407,7 @@ export namespace Prisma {
     summary: 'summary',
     visibility: 'visibility',
     numberPage: 'numberPage',
+    note: 'note',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     authorId: 'authorId',
@@ -22743,7 +22743,6 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     pseudo?: StringFilter<"User"> | string
     urlProfilImage?: StringNullableFilter<"User"> | string | null
-    note?: IntFilter<"User"> | number
     verified?: BoolFilter<"User"> | boolean
     verifyToken?: StringNullableFilter<"User"> | string | null
     resetToken?: StringNullableFilter<"User"> | string | null
@@ -22770,7 +22769,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrderInput | SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrderInput | SortOrder
     resetToken?: SortOrderInput | SortOrder
@@ -22800,7 +22798,6 @@ export namespace Prisma {
     lastname?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     urlProfilImage?: StringNullableFilter<"User"> | string | null
-    note?: IntFilter<"User"> | number
     verified?: BoolFilter<"User"> | boolean
     verifyToken?: StringNullableFilter<"User"> | string | null
     resetToken?: StringNullableFilter<"User"> | string | null
@@ -22827,7 +22824,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrderInput | SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrderInput | SortOrder
     resetToken?: SortOrderInput | SortOrder
@@ -22853,7 +22849,6 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     pseudo?: StringWithAggregatesFilter<"User"> | string
     urlProfilImage?: StringNullableWithAggregatesFilter<"User"> | string | null
-    note?: IntWithAggregatesFilter<"User"> | number
     verified?: BoolWithAggregatesFilter<"User"> | boolean
     verifyToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     resetToken?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -22876,6 +22871,7 @@ export namespace Prisma {
     summary?: StringNullableFilter<"Cours"> | string | null
     visibility?: BoolFilter<"Cours"> | boolean
     numberPage?: IntFilter<"Cours"> | number
+    note?: IntFilter<"Cours"> | number
     createdAt?: DateTimeFilter<"Cours"> | Date | string
     updatedAt?: DateTimeFilter<"Cours"> | Date | string
     authorId?: IntFilter<"Cours"> | number
@@ -22902,6 +22898,7 @@ export namespace Prisma {
     summary?: SortOrderInput | SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -22931,6 +22928,7 @@ export namespace Prisma {
     summary?: StringNullableFilter<"Cours"> | string | null
     visibility?: BoolFilter<"Cours"> | boolean
     numberPage?: IntFilter<"Cours"> | number
+    note?: IntFilter<"Cours"> | number
     createdAt?: DateTimeFilter<"Cours"> | Date | string
     updatedAt?: DateTimeFilter<"Cours"> | Date | string
     authorId?: IntFilter<"Cours"> | number
@@ -22957,6 +22955,7 @@ export namespace Prisma {
     summary?: SortOrderInput | SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -22981,6 +22980,7 @@ export namespace Prisma {
     summary?: StringNullableWithAggregatesFilter<"Cours"> | string | null
     visibility?: BoolWithAggregatesFilter<"Cours"> | boolean
     numberPage?: IntWithAggregatesFilter<"Cours"> | number
+    note?: IntWithAggregatesFilter<"Cours"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Cours"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Cours"> | Date | string
     authorId?: IntWithAggregatesFilter<"Cours"> | number
@@ -23924,7 +23924,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -23950,7 +23949,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -23975,7 +23973,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24001,7 +23998,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24027,7 +24023,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -24044,7 +24039,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24061,7 +24055,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24080,6 +24073,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -24104,6 +24098,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -24127,6 +24122,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -24151,6 +24147,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -24175,6 +24172,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -24190,6 +24188,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24204,6 +24203,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -25269,7 +25269,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrder
     resetToken?: SortOrder
@@ -25281,7 +25280,6 @@ export namespace Prisma {
 
   export type UserAvgOrderByAggregateInput = {
     id?: SortOrder
-    note?: SortOrder
     roleId?: SortOrder
   }
 
@@ -25293,7 +25291,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrder
     resetToken?: SortOrder
@@ -25311,7 +25308,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrder
     resetToken?: SortOrder
@@ -25323,7 +25319,6 @@ export namespace Prisma {
 
   export type UserSumOrderByAggregateInput = {
     id?: SortOrder
-    note?: SortOrder
     roleId?: SortOrder
   }
 
@@ -25417,6 +25412,7 @@ export namespace Prisma {
     summary?: SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -25427,6 +25423,7 @@ export namespace Prisma {
     id?: SortOrder
     difficulty?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     authorId?: SortOrder
     categoryId?: SortOrder
   }
@@ -25441,6 +25438,7 @@ export namespace Prisma {
     summary?: SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -25457,6 +25455,7 @@ export namespace Prisma {
     summary?: SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -25467,6 +25466,7 @@ export namespace Prisma {
     id?: SortOrder
     difficulty?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     authorId?: SortOrder
     categoryId?: SortOrder
   }
@@ -27421,7 +27421,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -27446,7 +27445,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -27500,7 +27498,6 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     pseudo?: StringFilter<"User"> | string
     urlProfilImage?: StringNullableFilter<"User"> | string | null
-    note?: IntFilter<"User"> | number
     verified?: BoolFilter<"User"> | boolean
     verifyToken?: StringNullableFilter<"User"> | string | null
     resetToken?: StringNullableFilter<"User"> | string | null
@@ -27539,6 +27536,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutCoursesInput
@@ -27562,6 +27560,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryId: number
@@ -27811,6 +27810,7 @@ export namespace Prisma {
     summary?: StringNullableFilter<"Cours"> | string | null
     visibility?: BoolFilter<"Cours"> | boolean
     numberPage?: IntFilter<"Cours"> | number
+    note?: IntFilter<"Cours"> | number
     createdAt?: DateTimeFilter<"Cours"> | Date | string
     updatedAt?: DateTimeFilter<"Cours"> | Date | string
     authorId?: IntFilter<"Cours"> | number
@@ -28018,7 +28018,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -28043,7 +28042,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -28305,7 +28303,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28330,7 +28327,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28550,6 +28546,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28573,6 +28570,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28611,6 +28609,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -28634,6 +28633,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -28656,6 +28656,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28679,6 +28680,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28842,7 +28844,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -28867,7 +28868,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -28898,6 +28898,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28921,6 +28922,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28957,7 +28959,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28982,7 +28983,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29019,6 +29019,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29042,6 +29043,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29062,7 +29064,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29087,7 +29088,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29118,6 +29118,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29141,6 +29142,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29177,7 +29179,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29202,7 +29203,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29239,6 +29239,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29262,6 +29263,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29282,7 +29284,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29307,7 +29308,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29367,7 +29367,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29392,7 +29391,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29444,6 +29442,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29467,6 +29466,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29525,6 +29525,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29548,6 +29549,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29596,6 +29598,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29619,6 +29622,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29677,6 +29681,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29700,6 +29705,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29748,6 +29754,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29771,6 +29778,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29796,7 +29804,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29821,7 +29828,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29863,6 +29869,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29886,6 +29893,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29917,7 +29925,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29942,7 +29949,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29968,6 +29974,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29991,6 +29998,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -30016,7 +30024,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30041,7 +30048,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30083,6 +30089,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -30106,6 +30113,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -30137,7 +30145,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30162,7 +30169,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30188,6 +30194,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -30211,6 +30218,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -30236,7 +30244,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30261,7 +30268,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30303,6 +30309,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -30326,6 +30333,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -30357,7 +30365,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30382,7 +30389,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30406,7 +30412,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30431,7 +30436,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30471,7 +30475,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30496,7 +30499,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30521,7 +30523,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30537,7 +30538,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30562,7 +30562,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30587,7 +30586,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30606,6 +30604,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryId: number
@@ -30674,6 +30673,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutCoursesNestedInput
@@ -30697,6 +30697,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: IntFieldUpdateOperationsInput | number
@@ -30720,6 +30721,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: IntFieldUpdateOperationsInput | number
@@ -31130,6 +31132,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -31144,6 +31147,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -31167,6 +31171,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -31190,6 +31195,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number

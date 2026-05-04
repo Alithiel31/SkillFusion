@@ -7,15 +7,11 @@ import type { Token } from "../@types/index.d.ts";
 import { BadRequestError, ConflictError, UnauthorizedError } from "../lib/errors";
 import { generateAuthTokens } from "../lib/token";
 import jwt from "jsonwebtoken";
-import { AuthenticatedRequest } from "../@types/express";
-import { send } from "node:process";
+import type { AuthenticatedRequest } from "../@types/express";
 import crypto from "crypto";
 import { sendVerificationEmail, sendResetPasswordEmail } from "../lib/mailer";
 
-
-
 // Token management functions --------------------------------------------------------------------
-
 
 function setRefreshTokenCookie(res: Response, refreshToken: Token) {
     res.cookie("refreshToken", refreshToken.token, {
@@ -44,10 +40,10 @@ export async function registerUser(req: Request, res: Response) {
         password: z
             .string()
             .min(2)
-            .max(100),
-        /*            .regex(/[a-z]/)
-                    .regex(/[A-Z]/)
-                    .regex(/[!@#$%&*-+{}?]/), */
+            .max(100)
+            .regex(/[a-z]/)
+            .regex(/[A-Z]/)
+            .regex(/[!@#$%&*-+{}?]/),
         confirmPassword: z.string(),
     });
 
@@ -129,10 +125,10 @@ export async function loginUser(req: Request, res: Response) {
     }
 
     if (!user.verified) {
-    throw new UnauthorizedError(
-        "Confirme ton email avant de te connecter.",
-    );
-}
+        throw new UnauthorizedError(
+            "Confirme ton email avant de te connecter.",
+        );
+    }
     // vérifier que le mot de passe et le hash correspondent
     const isMatching = await argon2.verify(user.password, password);
     if (!isMatching) {
@@ -219,7 +215,6 @@ export async function refreshAccessToken(req: Request, res: Response) {
 
     await replaceRefreshTokenInDatabase(refreshToken, existingRefreshToken.user);
 
-    setAccessTokenCookie(res, accessToken);
     setRefreshTokenCookie(res, refreshToken);
 
     res.json({ accessToken });

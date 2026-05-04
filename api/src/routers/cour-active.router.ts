@@ -1,18 +1,21 @@
 import express from "express";
 import coursActiveController from "../controllers/cour-active.controller";
+import { verifyToken } from '../middlewares/auth.middleware';
+import { checkRoles, requireSelfOrAdmin, roles } from '../middlewares/rbac.middleware';
 
 const router = express.Router();
 
-router.get("/cours-active", coursActiveController.getAll)
 
-router.get("/cours-active/user/:id", coursActiveController.getByUser)
+router.get("/cours-active", verifyToken, checkRoles( [roles.admin]), coursActiveController.getAll)
 
-router.get("/cours-active/:id", coursActiveController.getOneCoursActive)
+router.get("/cours-active/user/:id", verifyToken, requireSelfOrAdmin, coursActiveController.getByUser)
 
-router.post("/cours-active", coursActiveController.createCoursActive)
+router.get("/cours-active/:id", verifyToken, coursActiveController.getOneCoursActive)
 
-router.patch("/cours-active/:id", coursActiveController.updatingCoursActive)
+router.post("/cours-active", verifyToken, coursActiveController.createCoursActive)
 
-router.delete("/cours-active/:id", coursActiveController.deleteCoursActive)
+router.patch("/cours-active/:id", verifyToken, coursActiveController.updatingCoursActive)
+
+router.delete("/cours-active/:id", verifyToken, coursActiveController.deleteCoursActive)
 
 export default router;

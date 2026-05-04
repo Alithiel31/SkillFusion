@@ -5,9 +5,11 @@ import { checkRoles, roles } from '../middlewares/rbac.middleware';
 
 const router = express.Router();
 
+// Routes publiques
 router.get("/roles", rolesController.getAll)
 router.get("/roles/:id", rolesController.getOneRoles)
 
+// Routes dédiées à l'admin pour la gestion des roles
 router.post("/roles", verifyToken, checkRoles([roles.admin]), rolesController.createRoles)
 router.patch("/roles/:id", verifyToken, checkRoles([roles.admin]), rolesController.updateRoles)
 router.delete("/roles/:id", verifyToken, checkRoles([roles.admin]), rolesController.deleteRoles)
