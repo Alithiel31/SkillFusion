@@ -16,9 +16,10 @@
         const title = document.getElementById("title")?.value
         const littleSummary= document.getElementById("littleSummary")?.value
         const summary= document.getElementById("summary")?.value
-        const category= document.getElementById("category")?.value
+        const categoryId= Number(document.getElementById("categoryId")?.value)
+        const difficulty= Number(document.getElementById("difficulty")?.value)
 
-        props.confirm({title,littleSummary,summary,category})
+        props.confirm({title,littleSummary,summary,categoryId ,difficulty})
     }
 
 </script>
@@ -39,8 +40,8 @@
                 <input type="texte" id="summary" placeholder="Resumé du cours" required>
             </div>
             <div>   
-                <label for="category">Catégorie</label>
-                <select id="category">
+                <label for="categoryId">Catégorie</label>
+                <select id="categoryId">
                     <option value="">Selectionner une categorie</option>
                     {#each categories as category}
                         <option value={category.id}>{category.name}</option>

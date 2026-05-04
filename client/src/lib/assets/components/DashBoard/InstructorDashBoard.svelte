@@ -27,8 +27,9 @@
 		modalNewCours.close()
 	}
 
-	function comfirmModalNewCours(data){
+	async function comfirmModalNewCours(data){
 		console.log(data)
+		await api("api/cours","POST",data)
 		cancelModalNewCours()
 	}
 
