@@ -7,6 +7,7 @@
 	import CoursCard from '../Cours/CoursCard.svelte';
 	import ModalNewCours from '../Modal/ModalNewCours.svelte';
 	import type { IModal } from '$lib/@types/html';
+	import type { IPropsComfirmeNewCours } from '$lib/@types/typeUtils';
 
 	let cours: ICours[] = $state([]);
 
@@ -27,8 +28,7 @@
 		modalNewCours.close()
 	}
 
-	async function comfirmModalNewCours(data){
-		console.log(data)
+	async function comfirmModalNewCours(data:IPropsComfirmeNewCours){
 		await api("api/cours","POST",data)
 		cancelModalNewCours()
 	}
