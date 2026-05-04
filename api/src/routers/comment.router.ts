@@ -6,6 +6,7 @@ import { checkRoles, requireSelfOrAdmin, roles } from '../middlewares/rbac.middl
 const router = express.Router();
 
 router.get("/comments", commentController.getAll)
+
 router.get("/comments/:id", commentController.getOneComment)
 
 router.post("/comments", verifyToken, checkRoles([roles.student, roles.instructor, roles.admin]), commentController.createComment)
