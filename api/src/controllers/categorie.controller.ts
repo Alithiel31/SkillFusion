@@ -3,6 +3,7 @@ import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
 import { ConflictError, NotFoundError } from "../lib/errors";
+import { AuthenticatedRequest } from "../@types/express";
 
 export default {
     // Requête pour récuperer toutes les catégories
@@ -22,7 +23,7 @@ export default {
     },
 
     // Requête pour créer une catégorie
-    createCategorie: async (req: Request, res: Response) => {
+    createCategorie: async (req: AuthenticatedRequest, res: Response) => {
         const createCategoryBodySchema = z.object({
             name: z.string().min(1),
             description: z.string().optional(),
@@ -48,7 +49,7 @@ export default {
     },
 
     // Requête pour mettre à jour une catégorie
-    updatingCategorie: async (req: Request, res: Response) => {
+    updatingCategorie: async (req: AuthenticatedRequest, res: Response) => {
         const categoryId = await parseIdFromParams(req.params.id);
         const updateCategoryBodySchema = z.object({
             name: z.string().min(1).optional(),
