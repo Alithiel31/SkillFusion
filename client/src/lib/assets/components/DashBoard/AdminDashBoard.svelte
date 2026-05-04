@@ -91,8 +91,29 @@
 		}
 	}
 
-	async function updateRole(userId: number, role: string) {
-		await api(`api/users/${userId}`, 'PATCH', { role });
+	async function updateRole(userId: number, roleName: string) {
+		const role = roles.find((r) => r.name === roleName);
+		if (!role) return;
+
+		const response = await api(`api/users/${userId}`, 'PATCH', { rolesId: role.id });
+
+		if (response.status === 200) {
+			users = users.map((u) =>
+				u.id === userId
+					? {
+							...u,
+							role: {
+								...u.role,
+								name: roleName,
+								frName: roles.find((r) => r.name === roleName)?.frName ?? ''
+							}
+						}
+					: u
+			);
+			successMessage = 'Rôle mis à jour avec succès';
+		} else {
+			errorMessage = 'Erreur lors de la mise à jour du rôle';
+		}
 	}
 </script>
 
@@ -146,13 +167,11 @@
 						<span class="badge">
 							<select
 								class="role-user"
-								bind:value={user.role.name}
-								onchange={(e) => updateRole(user.id, e.target.value)}
+								value={user.role.name}
+								onchange={(e) => updateRole(user.id, e.currentTarget.value)}
 							>
 								{#each roles as r}
-									<option value={r.name}>
-										{r.frName}
-									</option>
+									<option value={r.name}>{r.frName}</option>
 								{/each}
 							</select>
 							<button class="delete-btn delete-btn--edit" onclick={() => deleteUser(user.id)}
