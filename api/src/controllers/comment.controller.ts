@@ -3,8 +3,8 @@ import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
 import type { AuthenticatedRequest } from "../@types/express";
-import { ConflictError, ForbiddenError, NotFoundError } from "../lib/errors";
-import { roles } from '../middlewares/rbac.middleware';
+import { ForbiddenError, NotFoundError } from "../lib/errors";
+import { ROLES } from '../middlewares/rbac.middleware';
 
 export default {
     // Requête pour récuperer tous les commentaires
@@ -83,7 +83,7 @@ export default {
         }
 
         // By-pass admin pour la suppression d'un commentaire
-        if (req.user?.userId !== comment.authorId && req.user?.role !== roles.admin) {
+        if (req.user?.userId !== comment.authorId && req.user?.role !== ROLES.ADMIN) {
             throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce commentaire");
         }
 
