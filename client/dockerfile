@@ -1,11 +1,22 @@
-FROM node:24
-
+# Etape de base pour les deux développements
+FROM node:24-alpine AS base
 WORKDIR /app
+COPY package*.json svelte.config.js ./
 
-COPY package*.json ./
-
-RUN rm -rf node_modules package-lock.json && \npm install
-
+# Consignes de développement
+FROM base AS development
+RUN npm install
 COPY . .
-
 CMD ["npm", "run", "dev", "--", "--host"]
+
+# Consignes de production
+FROM base AS production
+RUN npm ci
+COPY . .
+# VITE_API_URL doit être déclarée ici car Vite intègre les variables d'env
+# dans le bundle au moment du build, pas au runtime.
+# Railway doit donc la fournir comme "Build Variable", pas "Runtime Variable"
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+RUN npm run build
+CMD ["node", "build"]
