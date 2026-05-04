@@ -163,7 +163,7 @@ export default {
         const cours = await prisma.cours.findUnique({ where: { id: coursId } });
         if (!cours) { throw new NotFoundError("Cours not found"); }
 
-        if (req.user?.userId !== cours.authorId) {
+        if (req.user?.userId !== cours.authorId && req.user?.role !== 3 ) {
             throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce cours");
         }
 

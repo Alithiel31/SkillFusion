@@ -10,12 +10,23 @@
 	import ModalOpinion from '../Modal/ModalOpinion.svelte';
 	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
 	import ModalValidator from '../Modal/ModalValidator.svelte';
-	import type { IModal } from '$lib/@types/html';
+	import type { IModal, ITextArea } from '$lib/@types/html';
+	import { marked } from 'marked';
+
 
 	let cours: ICours | null = $state(null);
 	let user: IUserLocalStorage | null = $state(null);
 	let visibility = $derived(cours?.visibility);
 	let alreadyOpinion = $state({ IsOpinionExisting: false, opinion: { note: 0, id: 0 } });
+	let modifier = $state(false);
+	let textButton = $derived(modifier ? 'Annuler' : 'Modifier');
+
+
+	$effect(() => {
+		if (modifier) {
+			textAreaAdjust(document.getElementById('text_area') as ITextArea);
+		}
+	});
 
 	onMount(async () => {
 		getAuth();
@@ -111,6 +122,15 @@
 		const response = await api('api/cours?slug=' + page.params.slug);
 		cours = response.data;
 	}
+
+	function handleModify() {
+		modifier = !modifier;
+	}
+
+	function textAreaAdjust(element: ITextArea) {
+		element.style.height = '1px';
+		element.style.height = element.scrollHeight + 'px';
+	}
 </script>
 
 <div class="back-cours">
@@ -135,7 +155,13 @@
 				<button class="button" onclick={changeVisibility}
 					>Rendre le cours {visibility ? 'priver' : 'public'}</button
 				>
-				<button class="button">Modifier</button>
+				<button class="button" onclick={() => { 
+					handleModify();
+						}}>{textButton}</button>
+
+
+
+
 				<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
 			</div>
 		{/if}
