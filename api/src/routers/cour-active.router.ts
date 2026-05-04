@@ -1,12 +1,12 @@
 import express from "express";
 import coursActiveController from "../controllers/cour-active.controller";
 import { verifyToken } from '../middlewares/auth.middleware';
-import { checkRoles, requireSelfOrAdmin, roles } from '../middlewares/rbac.middleware';
+import { checkRoles, requireSelfOrAdmin, ROLES } from '../middlewares/rbac.middleware';
 
 const router = express.Router();
 
 
-router.get("/cours-active", verifyToken, checkRoles( [roles.admin]), coursActiveController.getAll)
+router.get("/cours-active", verifyToken, checkRoles( [ROLES.ADMIN]), coursActiveController.getAll)
 
 router.get("/cours-active/user/:id", verifyToken, requireSelfOrAdmin, coursActiveController.getByUser)
 

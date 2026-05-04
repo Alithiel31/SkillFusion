@@ -1,7 +1,7 @@
 import express from 'express';
 import coursController from '../controllers/cours.controller';
 import { verifyToken } from '../middlewares/auth.middleware';
-import { checkRoles, roles } from '../middlewares/rbac.middleware';
+import { checkRoles, ROLES } from '../middlewares/rbac.middleware';
 
 export const router=express.Router()
 

@@ -10,8 +10,8 @@ router.get("/roles", rolesController.getAll)
 router.get("/roles/:id", rolesController.getOneRoles)
 
 // Routes dédiées à l'admin pour la gestion des roles
-router.post("/roles", verifyToken, checkRoles([roles.admin]), rolesController.createRoles)
-router.patch("/roles/:id", verifyToken, checkRoles([roles.admin]), rolesController.updateRoles)
-router.delete("/roles/:id", verifyToken, checkRoles([roles.admin]), rolesController.deleteRoles)
+router.post("/roles", verifyToken, checkRoles([ROLES.ADMIN]), rolesController.createRoles)
+router.patch("/roles/:id", verifyToken, checkRoles([ROLES.ADMIN]), rolesController.updateRoles)
+router.delete("/roles/:id", verifyToken, checkRoles([ROLES.ADMIN]), rolesController.deleteRoles)
 
 export default router;  
