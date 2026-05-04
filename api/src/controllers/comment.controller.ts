@@ -2,7 +2,9 @@ import type { Request, Response } from "express"
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { ConflictError, NotFoundError } from "../lib/errors";
+import type { AuthenticatedRequest } from "../@types/express";
+import { ConflictError, ForbiddenError, NotFoundError } from "../lib/errors";
+import { ROLES } from '../middlewares/rbac.middleware';
 
 export default {
     // Requête pour récuperer tous les commentaires
@@ -22,7 +24,7 @@ export default {
     },
 
     // Requête pour créer un commentaire
-    createComment: async (req: Request, res: Response) => {
+    createComment: async (req: AuthenticatedRequest, res: Response) => {
         const createCommentBodySchema = z.object({
             description: z.string().min(1),
             authorId: z.number(),
@@ -33,7 +35,7 @@ export default {
         const createdComment = await prisma.comment.create({
             data: {
                 description: data.description,
-                authorId: data.authorId,
+                authorId: req.user!.userId,
                 coursId: data.coursId,
             }
         });
@@ -41,20 +43,30 @@ export default {
     },
 
     // Requête pour mettre à jour un commentaire
-    updatingComment: async (req: Request, res: Response) => {
+    updatingComment: async (req: AuthenticatedRequest, res: Response) => {
         const commentId = await parseIdFromParams(req.params.id);
         const updateCommentBodySchema = z.object({
             description: z.string().min(1),
             authorId: z.number(),
             coursId: z.number(),
         });
-        const { description, authorId, coursId } = await updateCommentBodySchema.parseAsync(req.body);
+        const { description, coursId } = await updateCommentBodySchema.parseAsync(req.body);
+
+        const comment = await prisma.comment.findUnique({ where: { id: commentId } });
+        if (!comment) {
+            throw new NotFoundError(`Comment with id ${commentId} not found`);
+        }
+
+        // Vérifier la propriété du commentaire avant de permettre la mise à jour
+        if (req.user?.userId !== comment.authorId) {
+            throw new ForbiddenError("Vous n'êtes pas autorisé à modifier ce commentaire");
+        }
 
         const updatedComment = await prisma.comment.update({
             where: { id: commentId },
             data: {
                 description: description,
-                authorId: authorId,
+                authorId: req.user!.userId,
                 coursId: coursId,
             }
         });
@@ -62,8 +74,22 @@ export default {
     },
 
     // Requête pour supprimer un commentaire
-    deleteComment: async (req: Request, res: Response) => {
+    deleteComment: async (req: AuthenticatedRequest, res: Response) => {
         const commentId = await parseIdFromParams(req.params.id);
+
+        const comment = await prisma.comment.findUnique({ where: { id: commentId } });
+        if (!comment) {
+            throw new NotFoundError(`Comment with id ${commentId} not found`);
+        }
+        if (req.user?.userId !== comment.authorId) {
+            throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce commentaire");
+        }
+
+        // By-pass admin pour la suppression d'un commentaire
+        if (req.user?.userId !== comment.authorId && req.user?.role !== ROLES.ADMIN) {
+            throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce commentaire");
+        }
+        
         await prisma.comment.delete({ where: { id: commentId } });
         res.status(204).send();
     },
