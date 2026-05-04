@@ -45,7 +45,9 @@ export default {
             }
         });
         const coursPages = await prisma.cours.findFirst({where:{id:data.coursId}});
-        await prisma.cours.update({where:{id:coursPages?.id},data:{numberPage:coursPages?.numberPage+1}})
+        if (coursPages){
+            await prisma.cours.update({where:{id:coursPages?.id},data:{numberPage:coursPages?.numberPage+1}})
+        }
 
         res.status(201).json(createdCourContent);
     },
