@@ -1,7 +1,7 @@
 import express from 'express';
 import opinionController from '../controllers/opinion.controller';
 import { verifyToken } from '../middlewares/auth.middleware';
-import { checkRoles, roles } from '../middlewares/rbac.middleware';
+import { checkRoles, ROLES } from '../middlewares/rbac.middleware';
 
 const router = express.Router();
 
