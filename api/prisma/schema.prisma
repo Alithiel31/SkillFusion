@@ -36,8 +36,6 @@ model User {
   pseudo         String @unique
   urlProfilImage String? @map("url_profil_image")
 
-  note           Int     @default(0)
-
   verified       Boolean @default(false)
   verifyToken    String? @map("verify_token")  
 
@@ -71,6 +69,8 @@ model Cours {
   summary       String?
   visibility    Boolean @default(false)
   numberPage    Int @map("number_page")
+
+  note           Int     @default(0)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

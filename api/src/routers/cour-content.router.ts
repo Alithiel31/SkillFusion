@@ -1,7 +1,7 @@
 import express from "express";
 import courContent from "../controllers/cour-content.controller";
 import { verifyToken } from '../middlewares/auth.middleware';
-import { checkRoles, ROLES } from '../middlewares/rbac.middleware';
+import { checkRoles, roles } from '../middlewares/rbac.middleware';
 
 const router = express.Router();
 
@@ -10,8 +10,8 @@ router.get("/cours-contents", courContent.getAll)
 router.get("/cours-contents/:id", courContent.getOneCourContent)
 
 // Routes dédiées aux enseignants et à l'admin pour les modifications
-router.post("/cours-contents", verifyToken, checkRoles([ROLES.TEACHER, ROLES.ADMIN]), courContent.createCourContent)
-router.patch("/cours-contents/:id", verifyToken, checkRoles([ROLES.TEACHER, ROLES.ADMIN]), courContent.updatingCourContent)
-router.delete("/cours-contents/:id", verifyToken, checkRoles([ROLES.TEACHER, ROLES.ADMIN]), courContent.deleteCourContent)
+router.post("/cours-contents", verifyToken, checkRoles([roles.instructor, roles.admin]), courContent.createCourContent)
+router.patch("/cours-contents/:id", verifyToken, checkRoles([roles.instructor, roles.admin]), courContent.updatingCourContent)
+router.delete("/cours-contents/:id", verifyToken, checkRoles([roles.instructor, roles.admin]), courContent.deleteCourContent)
 
 export default router;

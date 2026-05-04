@@ -1,25 +1,31 @@
 <script lang='ts'>
 	import api from "$lib/services/api.service";
 	import { onMount } from "svelte";
-	import Category from "../Category/Category.svelte";
+	import type { IInput } from "$lib/@types/html";
+	import type { ICategory } from "$lib/@types/types";
 
     const props=$props()
-    let categories:Category[]=$state([])
+    let categories:ICategory[]=$state([])
 
     onMount(async()=>{
         const response = await api("api/categories")
         categories=response.data
     })
 
-    function valideForm(event){
+    function valideForm(event:SubmitEvent){
         event.preventDefault()
-        const title = document.getElementById("title")?.value
-        const littleSummary= document.getElementById("littleSummary")?.value
-        const summary= document.getElementById("summary")?.value
-        const categoryId= Number(document.getElementById("categoryId")?.value)
-        const difficulty= Number(document.getElementById("difficulty")?.value)
+        const titleElement = document.getElementById("title") as IInput
+        const littleSummary= document.getElementById("littleSummary") as IInput
+        const summary= document.getElementById("summary") as IInput
+        const categoryId= document.getElementById("categoryId") as IInput
+        const difficulty= document.getElementById("difficulty") as IInput
 
-        props.confirm({title,littleSummary,summary,categoryId ,difficulty})
+        props.confirm({
+			title:titleElement.value,
+			littleSummar:littleSummary.value,
+			summar:summary.value,
+			categoryId:Number(categoryId.value),
+			difficulty:Number(difficulty.value)})
     }
 
 </script>

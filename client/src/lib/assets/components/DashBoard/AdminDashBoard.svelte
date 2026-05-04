@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import type { ICategory, ICours, IRole, IUser } from '$lib/@types/types';
 	import '../../../../app.css';
-	import ModalValidator from '../Validator/ModalValidator.svelte';
+	import ModalValidator from '../Modal/ModalValidator.svelte';
 	import type { IModal } from '$lib/@types/html';
 
 	let users: IUser[] = $state([]);
