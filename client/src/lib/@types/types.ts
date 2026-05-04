@@ -9,17 +9,17 @@ export interface IRole {
 
 export interface IUser {
         id: number
-        email: String
-        firstname: String
-        lastname: String
-        password: String
-        pseudo: String
-        urlProfilImage: String
+        email: string
+        firstname: string
+        lastname: string
+        password: string
+        pseudo: string
+        urlProfilImage: string
         note: number
         createdAt: Date
         updatedAt: Date
         role: IRole
-        roleId: String
+        roleId: string
         createdCours: ICours[]
         badges: UserHasBadge[]
         enrollments: UserHasCours[]
@@ -30,20 +30,20 @@ export interface IUser {
 }
 
 export interface ICours {
-        id: Number
+        id: number
         slug:string
-        title: String
-        littleSummary: String
-        urlImage: String
+        title: string
+        littleSummary: string
+        urlImage: string
         difficulty: number
-        summary: String
+        summary: string
         visibility: boolean
         createdAt: Date
         updatedAt: Date
         author: IUser
-        authorId: Number
+        authorId: number
         category: ICategory
-        categoryId: Number
+        categoryId: number
         numberPage:number
         tools: CoursHasTool[]
         learningObjectives: CoursHasLearningObjective[]
@@ -65,7 +65,7 @@ export interface ICoursContent {
         cours: ICours
 }
 export interface ICategory {
-        id: Number
+        id: number
         name: string
         description: string    
         textColor: string
@@ -77,35 +77,35 @@ export interface ICategory {
 }
 
 export interface LearningObjective {
-        id: Number
-        title: String
-        description: String
+        id: number
+        title: string
+        description: string
         createdAt: Date
         updatedAt: Date
         courses: CoursHasLearningObjective[]
 }
 
 export interface Tool {
-        id: Number
-        name: String
-        description: String
+        id: number
+        name: string
+        description: string
         createdAt: Date
         updatedAt: Date
         cours: CoursHasTool[]
 }
 export interface Badge {
-        id: Number
-        name: String
-        description: String
+        id: number
+        name: string
+        description: string
         createdAt: Date
         updatedAt: Date
         users: UserHasBadge[]
 }
 
 export interface UserHasCours {
-        id: Number
-        userId: Number
-        coursId: Number
+        id: number
+        userId: number
+        coursId: number
         createdAt: Date
         updatedAt: Date
         user: IUser
@@ -113,9 +113,9 @@ export interface UserHasCours {
 }
 
 export interface ICoursActived {
-        id: Number
-        userId: Number
-        coursId: Number
+        id: number
+        userId: number
+        coursId: number
         IsEnd: Boolean
         createdAt: Date
         updatedAt: Date
@@ -123,27 +123,27 @@ export interface ICoursActived {
         cours: ICours[]
 }
 export interface UserHasBadge {
-        id: Number
-        userId: Number
-        badgeId: Number
+        id: number
+        userId: number
+        badgeId: number
         createdAt: Date
         updatedAt: Date
         user: IUser
         badge: Badge[]
 }
 export interface CoursHasTool {
-        id: Number
-        coursId: Number
-        toolsId: Number
+        id: number
+        coursId: number
+        toolsId: number
         createdAt: Date
         updatedAt: Date
         cours: ICours
         tools: Tool[]
 }
 export interface CoursHasLearningObjective {
-        id: Number
-        coursId: Number
-        learningObjectiveId: Number
+        id: number
+        coursId: number
+        learningObjectiveId: number
         createdAt: Date
         updatedAt: Date
         cours: ICours
@@ -151,10 +151,10 @@ export interface CoursHasLearningObjective {
 }
 
 export interface IComment {
-        id: Number
-        description: String
-        coursId: Number
-        authorId: Number
+        id: number
+        description: string
+        coursId: number
+        authorId: number
         createdAt: Date
         updatedAt: Date
         cours: ICours
@@ -173,10 +173,10 @@ export interface IOpinion {
 }
 
 export interface Notification {
-   id :Number
-  contenu :String
-  coursId  :Number
-  userId  :Number
+   id :number
+  contenu :string
+  coursId  :number
+  userId  :number
   createdAt :Date
   updatedAt :Date
   cours :ICours

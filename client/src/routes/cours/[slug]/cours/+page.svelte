@@ -15,7 +15,7 @@
 	import api from '$lib/services/api.service';
 	import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
 
-	import type {  ICours, ICoursContent } from '$lib/@types/types';
+	import type {  IComment ,ICours, ICoursContent } from '$lib/@types/types';
 	import ModalValidator from '$lib/assets/components/Validator/ModalValidator.svelte';
 	import type { IModal, ITextArea } from '$lib/@types/html';
 
@@ -26,6 +26,8 @@
 	let modifier = $state(false);
 	let currentPageId: ICoursContent | null | undefined = $state(null);
 	let textButton = $derived(modifier ? 'Annuler' : 'Modifier');
+
+	let commentContent = $state();
 
 	$effect(() => {
 		if (modifier) {
@@ -44,6 +46,22 @@
 		}
 		getAuth();
 	});
+
+	async function submitComment(): Promise<void>{
+		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
+		cours = response.data;
+		 const commentContentElement = document.getElementById('inputComment') as ITextArea;
+		commentContent = commentContentElement.value
+		const data = {description: commentContent, authorId: authStore.user?.id, coursId: cours?.id }
+		await api('api/comments',"POST", data)
+		const refresh = await api('api/cours?slug=' + page.params.slug);
+		cours = refresh.data;
+		commentContentElement.value = ""
+	}
+	async function DeleteComment(data:number){
+	 await api('api/comments/' + data, 'DELETE');
+
+	}
 
 	function handleModify() {
 		modifier = !modifier;
@@ -221,6 +239,7 @@
 											})}
 										</span>
 									</div>
+									<button onclick={()=>DeleteComment(c.id)}>X</button>
 								</div>
 								<p class="comment__content">{c.description}</p>
 							</div>
@@ -231,12 +250,13 @@
 				<!-- Zone de saisie nouveau commentaire -->
 				<div class="comment-form">
 					<textarea
+					id="inputComment"
 						class="comment-form__input"
 						placeholder="Posez votre question ou laissez un commentaire..."
 						rows="3"
 					></textarea>
 					<div class="comment-form__footer">
-						<button class="comment-form__btn" >Envoyer</button>
+						<button class="comment-form__btn" onclick={submitComment} >Envoyer</button>
 					</div>
 				</div>
 			</div>
