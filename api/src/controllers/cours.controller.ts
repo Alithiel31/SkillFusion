@@ -116,9 +116,7 @@ export default {
     // Requête pour créer un cours
     createCours: async (req: Request, res: Response) => {
         req.body.slug=req.body.title.replaceAll(" ","-")
-        console.log(req.user)
         req.body.authorId=req.user.userId
-        console.log(req.body)
         const createCoursBodySchema = z.object({
             title: z.string().min(1),
             littleSummary: z.string().optional(),
