@@ -16,7 +16,7 @@
 	import { getAuth, authStore } from '$lib/services/localstorage.service.svelte';
 
 	import type { ICours, ICoursContent } from '$lib/@types/types';
-import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
+	import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 	import type { IModal, ITextArea } from '$lib/@types/html';
 	import type { IUserLocalStorage } from '$lib/@types/type.localStorage';
 	
@@ -50,16 +50,16 @@ let user: IUserLocalStorage | null = $state(null);
 		getAuth();
 	});
 
-	async function submitComment(): Promise<void>{
+	async function submitComment(): Promise<void> {
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
 		cours = response.data;
-		 const commentContentElement = document.getElementById('inputComment') as ITextArea;
-		commentContent = commentContentElement.value
-		const data = {description: commentContent, authorId: authStore.user?.id, coursId: cours?.id }
-		await api('api/comments',"POST", data)
+		const commentContentElement = document.getElementById('inputComment') as ITextArea;
+		commentContent = commentContentElement.value;
+		const data = { description: commentContent, authorId: authStore.user?.id, coursId: cours?.id };
+		await api('api/comments', 'POST', data);
 		const refresh = await api('api/cours?slug=' + page.params.slug);
 		cours = refresh.data;
-		commentContentElement.value = ""
+		commentContentElement.value = '';
 	}
 	async function DeleteComment(data:number){
 	 await api('api/comments/' + data, 'DELETE');
@@ -164,7 +164,7 @@ let user: IUserLocalStorage | null = $state(null);
 			</div>
 
 			<div class="cours-main">
-				{#if authStore.user?.role != 'student' && authStore.user?.id === cours.authorId}
+				{#if authStore.user?.role === 'admin' || authStore.user?.id === cours.authorId}
 					<button
 						class="button_tools flex-end"
 						onclick={() => {
@@ -191,7 +191,7 @@ let user: IUserLocalStorage | null = $state(null);
 					>← Précédent</button
 				>
 
-				{#if authStore.user?.role != 'student' && authStore.user?.id === cours.authorId}
+				{#if authStore.user?.role === 'admin' || authStore.user?.id === cours.authorId}
 					<button
 						class="button_tools"
 						disabled={cours.numberPage == 1}
@@ -203,7 +203,7 @@ let user: IUserLocalStorage | null = $state(null);
 
 				<span class="page-indicator">Page {currentPage} sur {cours?.numberPage}</span>
 
-				{#if authStore.user?.role != 'student' && authStore.user?.id === cours.authorId}
+				{#if authStore.user?.role === 'admin' || authStore.user?.id === cours.authorId}
 					<button
 						class="button_tools"
 						onclick={() => {
@@ -256,13 +256,13 @@ let user: IUserLocalStorage | null = $state(null);
 				<!-- Zone de saisie nouveau commentaire -->
 				<div class="comment-form">
 					<textarea
-					id="inputComment"
+						id="inputComment"
 						class="comment-form__input"
 						placeholder="Posez votre question ou laissez un commentaire..."
 						rows="3"
 					></textarea>
 					<div class="comment-form__footer">
-						<button class="comment-form__btn" onclick={submitComment} >Envoyer</button>
+						<button class="comment-form__btn" onclick={submitComment}>Envoyer</button>
 					</div>
 				</div>
 			</div>
@@ -320,137 +320,138 @@ let user: IUserLocalStorage | null = $state(null);
 		max-width: 100%;
 	}
 	.comments-card {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
- 
-  .comments-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    font-weight: 400;
-    color: #1D4E89;
-    margin: 0;
-  }
- 
-  .comments-empty {
-    font-size: 13px;
-    color: #6B7280;
-    text-align: center;
-    padding: 16px 0;
-    margin: 0;
-  }
- 
-  /* ── Liste ── */
-  .comments-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
- 
-  /* ── Un commentaire ── */
-  .comment {
-    background: #FFFFFF;
-    border: 0.5px solid rgba(44, 62, 80, 0.1);
-    border-radius: 12px;
-    padding: 14px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: border-color 0.15s;
-  }
- 
-  .comment:hover {
-    border-color: #B5D4F4;
-  }
- 
-  /* Header : avatar + meta */
-  .comment__header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
- 
-  .comment__meta {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
- 
-  .comment__pseudo {
-    font-size: 13px;
-    font-weight: 500;
-    color: #2C3E50;
-  }
- 
-  .comment__date {
-    font-size: 11px;
-    color: #6B7280;
-  }
- 
-  /* Contenu */
-  .comment__content {
-    font-size: 13px;
-    color: #2C3E50;
-    line-height: 1.6;
-    margin: 0;
-    padding-left: 44px; /* aligné avec le texte du header */
-  }
- 
-  /* ── Formulaire ── */
-  .comment-form {
-    border-top: 1px solid rgba(44, 62, 80, 0.1);
-    padding-top: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
- 
-  .comment-form__input {
-    width: 100%;
-    border: 1px solid rgba(44, 62, 80, 0.12);
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    color: #2C3E50;
-    background: #FFFFFF;
-    resize: vertical;
-    outline: none;
-    transition: border-color 0.15s, background 0.15s;
-  }
- 
-  .comment-form__input:focus {
-    border-color: #1D4E89;
-    background: #ffffff;
-  }
- 
-  .comment-form__input::placeholder {
-    color: #9CA3AF;
-  }
- 
-  .comment-form__footer {
-    display: flex;
-    justify-content: flex-end;
-  }
- 
-  .comment-form__btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 8px 20px;
-    border-radius: 10px;
-    border: none;
-    background: #1D4E89;
-    color: #ffffff;
-    cursor: pointer;
-    transition: opacity 0.15s;
-  }
- 
-  .comment-form__btn:hover {
-    opacity: 0.88;
-  }
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
 
+	.comments-title {
+		font-family: 'DM Serif Display', serif;
+		font-size: 18px;
+		font-weight: 400;
+		color: #1d4e89;
+		margin: 0;
+	}
+
+	.comments-empty {
+		font-size: 13px;
+		color: #6b7280;
+		text-align: center;
+		padding: 16px 0;
+		margin: 0;
+	}
+
+	/* ── Liste ── */
+	.comments-list {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	/* ── Un commentaire ── */
+	.comment {
+		background: #ffffff;
+		border: 0.5px solid rgba(44, 62, 80, 0.1);
+		border-radius: 12px;
+		padding: 14px 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		transition: border-color 0.15s;
+	}
+
+	.comment:hover {
+		border-color: #b5d4f4;
+	}
+
+	/* Header : avatar + meta */
+	.comment__header {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+
+	.comment__meta {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+	}
+
+	.comment__pseudo {
+		font-size: 13px;
+		font-weight: 500;
+		color: #2c3e50;
+	}
+
+	.comment__date {
+		font-size: 11px;
+		color: #6b7280;
+	}
+
+	/* Contenu */
+	.comment__content {
+		font-size: 13px;
+		color: #2c3e50;
+		line-height: 1.6;
+		margin: 0;
+		padding-left: 44px; /* aligné avec le texte du header */
+	}
+
+	/* ── Formulaire ── */
+	.comment-form {
+		border-top: 1px solid rgba(44, 62, 80, 0.1);
+		padding-top: 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.comment-form__input {
+		width: 100%;
+		border: 1px solid rgba(44, 62, 80, 0.12);
+		border-radius: 10px;
+		padding: 10px 14px;
+		font-family: 'DM Sans', sans-serif;
+		font-size: 13px;
+		color: #2c3e50;
+		background: #ffffff;
+		resize: vertical;
+		outline: none;
+		transition:
+			border-color 0.15s,
+			background 0.15s;
+	}
+
+	.comment-form__input:focus {
+		border-color: #1d4e89;
+		background: #ffffff;
+	}
+
+	.comment-form__input::placeholder {
+		color: #9ca3af;
+	}
+
+	.comment-form__footer {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.comment-form__btn {
+		font-family: 'DM Sans', sans-serif;
+		font-size: 13px;
+		font-weight: 500;
+		padding: 8px 20px;
+		border-radius: 10px;
+		border: none;
+		background: #1d4e89;
+		color: #ffffff;
+		cursor: pointer;
+		transition: opacity 0.15s;
+	}
+
+	.comment-form__btn:hover {
+		opacity: 0.88;
+	}
 
 	.navigation-footer {
 		display: flex;
