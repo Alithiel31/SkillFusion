@@ -4,6 +4,7 @@ import z from "zod";
 import { parseIdFromParams } from "./utils";
 import type { AuthenticatedRequest } from "../@types/express";
 import { ConflictError, ForbiddenError, NotFoundError } from "../lib/errors";
+import { ROLES } from '../middlewares/rbac.middleware';
 
 export default {
     // Requête pour récuperer tous les commentaires
@@ -56,9 +57,10 @@ export default {
             throw new NotFoundError(`Comment with id ${commentId} not found`);
         }
 
-// Vérifier la propriété duc ommentaire avant de permettre la mise à jour
+        // Vérifier la propriété du commentaire avant de permettre la mise à jour
         if (req.user?.userId !== comment.authorId) {
-            throw new ForbiddenError("Vous n'êtes pas autorisé à modifier ce commentaire");}
+            throw new ForbiddenError("Vous n'êtes pas autorisé à modifier ce commentaire");
+        }
 
         const updatedComment = await prisma.comment.update({
             where: { id: commentId },
@@ -82,6 +84,12 @@ export default {
         if (req.user?.userId !== comment.authorId) {
             throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce commentaire");
         }
+
+        // By-pass admin pour la suppression d'un commentaire
+        if (req.user?.userId !== comment.authorId && req.user?.role !== ROLES.ADMIN) {
+            throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce commentaire");
+        }
+        
         await prisma.comment.delete({ where: { id: commentId } });
         res.status(204).send();
     },
