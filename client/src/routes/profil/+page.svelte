@@ -55,7 +55,6 @@
 
 		try {
 			const response = await api(`api/users/${authStore?.user?.id}`, 'PATCH', updatedUser);
-			console.log(response);
 			// Vérification du statut de la réponse
 			if (response.status !== 200) {
 				if (response.data.error === 'Email déjà utilisé') {

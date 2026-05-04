@@ -19,7 +19,7 @@
 		cours = responseCours.data;
 		const responseNotification = await api('api/notifications/instructor/' + authStore?.user?.id);
 		notifications = responseNotification.data;
-		console.log(notifications)
+
 	});
 
 	function openModalNewCours(){
@@ -416,24 +416,6 @@
 		margin: 0;
 	}
 
-	.notif__reply-btn {
-		align-self: flex-start;
-		font-family: var(--font);
-		font-size: 11px;
-		font-weight: 500;
-		padding: 4px 10px;
-		border-radius: 6px;
-		background: var(--blue);
-		color: var(--white);
-		border: none;
-		cursor: pointer;
-		margin-top: 2px;
-		transition: opacity 0.15s;
-	}
-
-	.notif__reply-btn:hover {
-		opacity: 0.85;
-	}
 
 
 	/* ── Responsive ──────────────────────────────────────────── */

@@ -16,7 +16,6 @@ export default {
             include:{cours:{select:{authorId:true,title:true,slug:true}}},
             where:{cours:{authorId:instructorId}}
         })
-        console.log(comments)
         res.json(comments)
     },
 

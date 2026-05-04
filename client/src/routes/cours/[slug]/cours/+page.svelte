@@ -40,7 +40,6 @@ import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 		isLoading = true;
 		const response = await api('api/cours?slug=' + page.params.slug, 'GET');
 		cours = response.data;
-		console.log(cours);
 		if (cours) {
 			getCours();
 			isLoading = false;
@@ -75,7 +74,6 @@ import ModalValidator from '$lib/assets/components/Modal/ModalValidator.svelte';
 		if (cours) {
 			currentPageId = cours.content.find((content) => content.numberPage == currentPage);
 			if (currentPageId) {
-				console.log(currentPageId);
 				const response = await api('api/cours-contents/' + currentPageId.id, 'GET');
 				coursContent = response.data as ICoursContent;
 				if (coursContent) {
