@@ -4,8 +4,7 @@ import z from "zod";
 import { parseIdFromParams } from "./utils";
 import { ConflictError, ForbiddenError, NotFoundError } from "../lib/errors";
 import type { AuthenticatedRequest } from "../@types/express";
-
-
+import { ROLES } from "../middlewares/rbac.middleware";
 
 export default {
     getAll: async (req: Request, res: Response) => {
@@ -88,6 +87,7 @@ export default {
         }
         res.json(data)
     },
+    // Requête pour récuperer les cours d'un utilisateur (instructeur) ---------------
     getCoursByInstructor: async (req: Request, res: Response) => {
         const userId = await parseIdFromParams(req.params.id);
         const cours = await prisma.cours.findMany(
@@ -95,9 +95,7 @@ export default {
                 where: { authorId: userId },
                 include: { category: true, author: true },
             })
-        if (!cours) {
-            throw new NotFoundError(`Cours from ${userId} not found`);
-        }
+
         res.json(cours);
     },
     // Requête pour récuperer les cours récents
@@ -166,7 +164,8 @@ export default {
         const cours = await prisma.cours.findUnique({ where: { id: coursId } });
         if (!cours) { throw new NotFoundError("Cours not found"); }
 
-        if (req.user?.userId !== cours.authorId) {
+        // Bypass admin ajouté
+        if (req.user?.userId !== cours.authorId && req.user?.role !== ROLES.ADMIN) {
             throw new ForbiddenError("Vous n'êtes pas autorisé à supprimer ce cours");
         }
 
@@ -216,10 +215,11 @@ export default {
             where: { title: title, id: { not: coursId } }
         });
 
-        // Vérification de l'autorisation : 
-        if (req.user?.userId !== cours.authorId) {
+        // Vérification de l'autorisation Admin : 
+        if (req.user?.userId !== cours.authorId && req.user?.role !== ROLES.ADMIN) {
             throw new ForbiddenError("Vous n'êtes pas autorisé à modifier ce cours");
         }
+
 
         if (alreadyExistingCours) { throw new ConflictError(`Title name already taken : ${title}`); }
 
@@ -259,7 +259,7 @@ export default {
 
         res.status(200).json({ message: "Cours transférés à l'administrateur." });
     },
-    // Ou on propose de supprimer tous les cours crées par l'utilisateur
+    // On propose de supprimer tous les cours crées par l'utilisateur
     deleteAllMyCours: async (req: AuthenticatedRequest, res: Response) => {
         const userId = req.user!.userId;
 
@@ -267,14 +267,20 @@ export default {
 
         res.status(204).end();
     },
-    changeVisibility: async (req: Request, res: Response) => {
+
+    changeVisibility: async (req: AuthenticatedRequest, res: Response) => {
         const coursId = await parseIdFromParams(req.params.id);
-        const cours = await prisma.cours.findFirst({ where: { id: coursId } })
-        if (cours) {
-            await prisma.cours.update({ where: { id: coursId }, data: { visibility: !cours.visibility } })
-            return res.status(204).end()
+        const cours = await prisma.cours.findFirst({ where: { id: coursId } });
+        if (!cours) {
+            throw new NotFoundError("Cours not found");
         }
-        res.status(400).end()
+        // Seul l'auteur ou un admin peut changer la visibilité
+        if (req.user?.userId !== cours.authorId && req.user?.role !== ROLES.ADMIN) {
+            throw new ForbiddenError("Vous n'êtes pas autorisé à modifier la visibilité de ce cours");
+        }
+
+        await prisma.cours.update({ where: { id: coursId }, data: { visibility: !cours.visibility } });
+        return res.status(204).end();
     }
 }
 
