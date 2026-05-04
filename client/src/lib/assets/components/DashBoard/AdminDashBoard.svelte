@@ -3,12 +3,14 @@
 	import api from '$lib/services/api.service';
 	import { onMount } from 'svelte';
 	import type { ICategory, ICours, IRole, IUser } from '$lib/@types/types';
-  import "../../../../app.css";
+	import '../../../../app.css';
+	import ModalValidator from '../Modal/ModalValidator.svelte';
+	import type { IModal } from '$lib/@types/html';
 
 	let users: IUser[] = $state([]);
-  let roles: IRole [] = $state([]);
-  let cours: ICours[] = $state([]);
-  let categories: ICategory[] = $state([]);
+	let roles: IRole[] = $state([]);
+	let cours: ICours[] = $state([]);
+	let categories: ICategory[] = $state([]);
 
 	onMount(async () => {
 		// Fetch tous les roles
@@ -23,10 +25,9 @@
 		const responseCours = await api('api/cours');
 		cours = responseCours.data;
 
-		// Fetch toutes les categories 
+		// Fetch toutes les categories
 		const responseCategories = await api('api/categories');
 		categories = responseCategories.data;
-
 	});
 
 	const badges = [
@@ -36,10 +37,10 @@
 		{ nom: 'Expert bricoleur', icone: '🏆', couleur: 'amber' }
 	];
 
-  function capitalizeFirst(str: string): string {
-  if (!str) return '';
-  return str[0].toUpperCase() + str.slice(1);
-}
+	function capitalizeFirst(str: string): string {
+		if (!str) return '';
+		return str[0].toUpperCase() + str.slice(1);
+	}
 
 	// ── Filtres ─────────────────────────────────────────────────
 	let searchUsers = $state('');
@@ -73,12 +74,90 @@
 	);
 
 	// ── Rôle badge config ────────────────────────────────────────
+
+	let errorMessage = $state('');
+	let successMessage = $state('');
+
+	let userToDelete = $state<number | null>(null);
+
+	function askDeleteUser(userId: number) {
+		userToDelete = userId;
+	}
+
+	async function confirmDelete() {
+		if (!userToDelete) return;
+
+		const response = await api(`api/users/${userToDelete}`, 'DELETE');
+
+		if (response.status === 204 || response.status === 200) {
+			users = users.filter((u) => u.id !== userToDelete);
+			successMessage = 'Utilisateur supprimé avec succès';
+			errorMessage = '';
+			setTimeout(() => (successMessage = ''), 5000);
+		} else {
+			errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+			successMessage = '';
+			setTimeout(() => (errorMessage = ''), 5000);
+		}
+		userToDelete = null;
+		cancelDelete();
+	}
+
+	function cancelDelete() {
+		const modal = document.getElementById('ModalValidator') as IModal;
+		if (modal) {
+			modal.close();
+		}
+	}
+
+	function openModalDelete(userId: number) {
+		userToDelete = userId;
+		const modal = document.getElementById('ModalValidator') as IModal;
+		if (modal) {
+			modal.show();
+		}
+	}
+
+	async function updateRole(userId: number, roleName: string) {
+		const role = roles.find((r) => r.name === roleName);
+		if (!role) return;
+
+		const response = await api(`api/users/${userId}`, 'PATCH', { rolesId: role.id });
+
+		if (response.status === 200) {
+			users = users.map((u) =>
+				u.id === userId
+					? {
+							...u,
+							role: {
+								...u.role,
+								name: roleName,
+								frName: roles.find((r) => r.name === roleName)?.frName ?? ''
+							}
+						}
+					: u
+			);
+			successMessage = 'Rôle mis à jour avec succès';
+			setTimeout(() => (successMessage = ''), 5000);
+		} else {
+			errorMessage = 'Erreur lors de la mise à jour du rôle';
+			setTimeout(() => (errorMessage = ''), 5000);
+		}
+	}
 </script>
 
 <div class="dashboard">
 	<div class="dashboard__header">
 		<h1 class="dashboard__title">Mon tableau de bord</h1>
 	</div>
+
+	{#if successMessage}
+		<p class="success" style="color:green">{successMessage}</p>
+	{/if}
+
+	{#if errorMessage}
+		<p class="error" style="color:red">{errorMessage}</p>
+	{/if}
 
 	<div class="dashboard__grid">
 		<!-- ══════════════════════════════
@@ -94,10 +173,9 @@
 				<input class="input" type="text" placeholder="Rechercher..." bind:value={searchUsers} />
 				<select class="input input--select" bind:value={filterRole}>
 					<option value="">Tous les rôles</option>
-          {#each roles as r}
-            <option value="{r.name}">{r.frName}</option>
-          {/each}
-					
+					{#each roles as r}
+						<option value={r.name}>{r.frName}</option>
+					{/each}
 				</select>
 			</div>
 
@@ -115,7 +193,20 @@
 						<span class="table-row__cell">{user.lastname}</span>
 						<span class="table-row__cell">{user.firstname}</span>
 						<span class="table-row__cell table-row__cell--pseudo">{user.pseudo}</span>
-            <span class="badge" >{capitalizeFirst(user.role.frName)}</span>
+						<span class="badge">
+							<select
+								class="role-user"
+								value={user.role.name}
+								onchange={(e) => updateRole(user.id, e.currentTarget.value)}
+							>
+								{#each roles as r}
+									<option value={r.name}>{r.frName}</option>
+								{/each}
+							</select>
+							<button class="delete-btn delete-btn--edit" onclick={() => openModalDelete(user.id)}>
+								x</button
+							>
+						</span>
 					</div>
 				{/each}
 
@@ -141,11 +232,18 @@
 			<div class="panel__list">
 				{#each filteredCours as c}
 					<div class="list-row">
+						{#if c.visibility == true}
+							🟢
+						{:else if c.visibility == false}
+							🔴
+						{/if}
 						<div class="list-row__info">
 							<p class="list-row__title">{c.title}</p>
-							<span class="badge badge--cat" style="color:{c.category.textColor}" >{c.category.name}</span>
+							<span class="badge badge--cat" style="color:{c.category.textColor}"
+								>{c.category.name}</span
+							>
 						</div>
-						<span class="list-row__date">{new Date (c.updatedAt).toLocaleDateString()}</span>
+						<span class="list-row__date">{new Date(c.updatedAt).toLocaleDateString()}</span>
 					</div>
 				{/each}
 
@@ -218,6 +316,11 @@
 			</div>
 		</div>
 	</div>
+	<ModalValidator
+		message="Êtes-vous sûr de vouloir supprimer cet utilisateur ?"
+		cancel={cancelDelete}
+		confirm={confirmDelete}
+	/>
 </div>
 
 <style>
@@ -269,6 +372,18 @@
 		font-weight: 400;
 		color: var(--dark);
 		margin: 0;
+	}
+
+	.role-user {
+		background: transparent;
+		border: none;
+		color: var(--pink-d);
+		font-size: 11px;
+		font-weight: 600;
+		padding: 3px 10px;
+		border-radius: 100px;
+		letter-spacing: 0.04em;
+		cursor: pointer;
 	}
 
 	.dashboard__role-pill {
@@ -325,7 +440,7 @@
 
 	.panel__filters {
 		display: flex;
-    flex-wrap: wrap;
+		flex-wrap: wrap;
 		gap: 8px;
 	}
 
@@ -390,8 +505,8 @@
 	}
 
 	.table-head span {
-    display: flex;
-    justify-content: start;
+		display: flex;
+		justify-content: start;
 		font-size: 11px;
 		font-weight: 600;
 		color: var(--gray);
@@ -627,6 +742,19 @@
 		background: var(--pink-l);
 		color: var(--pink-d);
 		border-color: var(--pink-m);
+	}
+
+	.delete-btn {
+		background: transparent;
+		border: none;
+		color: var(--pink-d);
+		font-size: 12px;
+		cursor: pointer;
+		margin-left: 8px;
+	}
+
+	.delete-btn:hover {
+		color: red;
 	}
 
 	.action-btn--delete:hover {

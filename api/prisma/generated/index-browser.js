@@ -136,7 +136,6 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   pseudo: 'pseudo',
   urlProfilImage: 'urlProfilImage',
-  note: 'note',
   verified: 'verified',
   verifyToken: 'verifyToken',
   resetToken: 'resetToken',
@@ -156,6 +155,7 @@ exports.Prisma.CoursScalarFieldEnum = {
   summary: 'summary',
   visibility: 'visibility',
   numberPage: 'numberPage',
+  note: 'note',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   authorId: 'authorId',
@@ -269,6 +269,7 @@ exports.Prisma.OpinionScalarFieldEnum = {
 exports.Prisma.NotificationScalarFieldEnum = {
   id: 'id',
   content: 'content',
+  seen: 'seen',
   coursId: 'coursId',
   userId: 'userId',
   createdAt: 'createdAt',

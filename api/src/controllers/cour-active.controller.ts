@@ -2,7 +2,9 @@ import type { Request, Response } from "express"
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { ConflictError, NotFoundError } from "../lib/errors";
+import { ForbiddenError, NotFoundError } from "../lib/errors";
+import type { AuthenticatedRequest } from "../@types/express";
+import { ROLES } from "../middlewares/rbac.middleware";
 
 export default {
     // Requête pour récuperer tous les cours actives
@@ -15,7 +17,7 @@ export default {
     getByUser: async (req: Request, res: Response) => {
         const userId = await parseIdFromParams(req.params.id);
         const coursByUser = await prisma.coursActived.findMany({
-            where: { userId: userId },
+            where: { userId: userId, cours: {visibility: true }},
             include: {
                 cours: { include: { category: true } },
             }

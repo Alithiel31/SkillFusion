@@ -6,22 +6,39 @@
 	import type { ICours } from '$lib/@types/types';
 	import LevelBar from '$lib/assets/components/Levelbar/LevelBar.svelte';
 	import Category from '$lib/assets/components/Category/Category.svelte';
-	import ModalOpinion from '../Validator/ModalOpinion.svelte';
-
+	import type { IUserLocalStorage } from '$lib/@types/type.localStorage';
+	import ModalOpinion from '../Modal/ModalOpinion.svelte';
 	import { authStore, getAuth } from '$lib/services/localstorage.service.svelte';
-	import ModalValidator from '../Validator/ModalValidator.svelte';
-	import type { IModal } from '$lib/@types/html';
+	import ModalValidator from '../Modal/ModalValidator.svelte';
+	import type { IModal, ITextArea } from '$lib/@types/html';
+	import { marked } from 'marked';
+
 
 	let cours: ICours | null = $state(null);
+	let user: IUserLocalStorage | null = $state(null);
 	let visibility = $derived(cours?.visibility);
-	let alreadyOpinion = $state({ IsOpinionExisting: false, opinion: { note: 0 } });
+	let alreadyOpinion = $state({ IsOpinionExisting: false, opinion: { note: 0, id: 0 } });
+	let modifier = $state(false);
+	let textButton = $derived(modifier ? 'Annuler' : 'Modifier');
+
+
+	$effect(() => {
+		if (modifier) {
+			textAreaAdjust(document.getElementById('text_area') as ITextArea);
+		}
+	});
 
 	onMount(async () => {
 		getAuth();
-		const response = await api('api/cours?slug=' + page.params.slug);
-		cours = response.data;
+		user = authStore.user;
+		await getCours();
 		AlreadyHaveNoted();
 	});
+	async function getCours() {
+		const response = await api('api/cours?slug=' + page.params.slug);
+		cours = response.data;
+	}
+
 	async function AlreadyHaveNoted() {
 		const response = await api('api/opinions/' + cours?.id + '/user/' + authStore.user?.id, 'GET');
 		alreadyOpinion = response.data;
@@ -69,22 +86,49 @@
 	}
 
 	function modalDeleteCours() {
-		const modal = document.getElementById('ModalValidator') as IModal;
+		const modal = document.getElementById('DeleteCours') as IModal;
 		modal.show();
 	}
 
 	function closeDeleteCoursModale() {
-		const modal = document.getElementById('ModalValidator') as IModal;
+		const modal = document.getElementById('DeleteCours') as IModal;
 		modal.close();
+	}
+
+	function modalDeleteOpinion() {
+		const modal = document.getElementById('DeleteOpinion') as IModal;
+		modal.show();
+	}
+
+	function closeDeleteOpinion() {
+		const modal = document.getElementById('DeleteOpinion') as IModal;
+		modal.close();
+	}
+
+	async function deleteOpinion() {
+		const response = await api('api/opinions/' + alreadyOpinion.opinion?.id, 'DELETE');
+		await getCours();
+		await AlreadyHaveNoted();
+		closeDeleteOpinion();
 	}
 	async function deleteCours() {
 		const response = await api('api/cours/' + cours?.id, 'DELETE');
+
 		closeDeleteCoursModale();
 	}
 	async function changeVisibility() {
 		await api('api/cours/' + cours?.id + '/visibility', 'POST');
 		const response = await api('api/cours?slug=' + page.params.slug);
 		cours = response.data;
+	}
+
+	function handleModify() {
+		modifier = !modifier;
+	}
+
+	function textAreaAdjust(element: ITextArea) {
+		element.style.height = '1px';
+		element.style.height = element.scrollHeight + 'px';
 	}
 </script>
 
@@ -105,11 +149,18 @@
 		</div>
 
 		<!-- MAIN -->
-		{#if authStore.user?.role != 'student' && authStore.user?.id=== cours.authorId}
+		{#if authStore.user?.role === 'admin' || authStore.user?.id === cours.authorId}
 			<div class="card top">
 				<button class="button" onclick={changeVisibility}
 					>Rendre le cours {visibility ? 'priver' : 'public'}</button
 				>
+				<button class="button" onclick={() => { 
+					handleModify();
+						}}>{textButton}</button>
+
+
+
+
 				<button class="button" onclick={modalDeleteCours}>Supprimer le cours</button>
 			</div>
 		{/if}
@@ -143,13 +194,16 @@
 						<div class="opinions_presentation">
 							<div class="card-title dark">Avis des apprenants</div>
 							{#if authStore.user?.role === 'student'}
-								<button class="btn-add" onclick={modalAddOpinion}>
-									{#if alreadyOpinion?.IsOpinionExisting == true}
+								{#if alreadyOpinion?.IsOpinionExisting == true}
+									<button class="btn-add" onclick={modalAddOpinion}>
 										Modifier mon avis sur le cours
-									{:else}
+									</button>
+									<button class="btn-add" onclick={modalDeleteOpinion}>Supprimer mon avis</button>
+								{:else}
+									<button class="btn-add" onclick={modalAddOpinion}>
 										Mettre un avis sur ce cours
-									{/if}
-								</button>
+									</button>
+								{/if}
 							{/if}
 						</div>
 						{#each cours.opinions as opinion, i}
@@ -201,17 +255,31 @@
 						</div>
 					</div>
 				</div>
-
-				<a onclick={addCoursActiveToStudent} class="cta" href="/cours/{cours.slug}/cours"
-					>Démarrer le cours →</a
-				>
+				{#if user}
+					<a onclick={addCoursActiveToStudent} class="cta" href="/cours/{cours.slug}/cours"
+						>Démarrer le cours →</a
+					>
+				{:else}
+					<p>Pour commencer le cours, vous devez être connectés :</p>
+					<div class="btn-content">
+						<a href="/connexion" class="header__btn-login">Connexion</a>
+						<a href="/inscription" class="header__btn-register">S'inscrire</a>
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>
 	<ModalValidator
-		message="Voullez vous supprimer la page ?"
+		id="DeleteCours"
+		message="Voulez vous supprimer la page ?"
 		cancel={closeDeleteCoursModale}
 		confirm={deleteCours}
+	/>
+	<ModalValidator
+		id="DeleteOpinion"
+		message="Êtes vous sur de vouloir supprimer votre avis ?"
+		cancel={closeDeleteOpinion}
+		confirm={deleteOpinion}
 	/>
 {/if}
 <ModalOpinion
@@ -228,10 +296,55 @@
 		margin: 0;
 		padding: 0;
 	}
+	.btn-content {
+		display: flex;
+		justify-content: space-evenly;
+		gap: 5px;
+	}
+	.header__btn-login {
+		padding: 8px 18px;
+		border-radius: 10px;
+		font-size: 14px;
+		width: 50%;
+		justify-content: center;
+		display: flex;
+		font-weight: 500;
+		color: #1d4e89;
+		text-decoration: none;
+		border: 1.5px solid #1d4e89;
+		background: transparent;
+		transition:
+			background 0.15s,
+			color 0.15s;
+		white-space: nowrap;
+	}
 
+	.header__btn-login:hover {
+		background: #ebf2fa;
+	}
+
+	.header__btn-register {
+		padding: 8px 18px;
+		width: 50%;
+		display: flex;
+		justify-content: center;
+		border-radius: 10px;
+		font-size: 14px;
+		font-weight: 500;
+		color: #ffffff;
+		text-decoration: none;
+		background: #f5a623;
+		border: none;
+		transition: opacity 0.15s;
+		white-space: nowrap;
+	}
+
+	.header__btn-register:hover {
+		opacity: 0.88;
+	}
 	.opinions_presentation {
 		display: flex;
-		justify-content: space-between
+		justify-content: space-between;
 	}
 	.btn-add {
 		font-family: 'DM Sans', sans-serif;
@@ -288,7 +401,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
-		order:2 ;
+		order: 2;
 	}
 
 	/* RIGHT */
@@ -352,6 +465,7 @@
 		padding: 14px;
 		font-weight: 600;
 		cursor: pointer;
+		text-decoration: none;
 	}
 
 	.button {
@@ -453,7 +567,7 @@
 		.desktop-only {
 			display: none;
 		}
-		.right{
+		.right {
 			order: 1;
 		}
 	}

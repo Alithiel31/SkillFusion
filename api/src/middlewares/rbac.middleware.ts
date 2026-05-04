@@ -4,13 +4,13 @@ import type { AuthenticatedRequest } from '../@types/express';
 import { extractAccessToken, verifyAndDecodeJWT } from './auth.middleware';
 
 //  Définition des constantes des rôles 
-const roles = {
-  student: 1,
-  instructor: 2,
-  admin: 3,
+const ROLES = {
+  STUDENT: 1,
+  INSTRUCTOR: 2,
+  ADMIN: 3,
 } as const;
 
-export { roles };
+export { ROLES };
 
 //  Middleware d'autorisation basé sur les rôles (rappatrié du auth.middleware)
 
@@ -38,7 +38,7 @@ export function requireSelfOrAdmin(req: AuthenticatedRequest, res: Response, nex
 
   const resourceId = parseInt(req.params.id as string);
 
-  if (userId !== resourceId && role !== ROLES.ADMIN) {
+  if (userId !== resourceId && role !== role.admin) {
     throw new ForbiddenError(
       "Vous ne pouvez modifier que votre propre ressource"
     );

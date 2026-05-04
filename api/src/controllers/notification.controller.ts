@@ -2,7 +2,10 @@ import type { Request, Response } from "express"
 import { prisma } from "../models/client"
 import z from "zod";
 import { parseIdFromParams } from "./utils";
-import { ConflictError, NotFoundError } from "../lib/errors";
+import { ForbiddenError, NotFoundError } from "../lib/errors";
+import type { AuthenticatedRequest } from "../@types/express";
+import { ROLES } from "../middlewares/rbac.middleware";
+
 
 export default {
     // Requête pour récuperer toutes les notifications
@@ -10,14 +13,27 @@ export default {
         const notifications = await prisma.notification.findMany();
         res.json(notifications);
     },
+    getNotificationByInstructor:async (req: Request, res: Response)=>{
+        const instructorId = await parseIdFromParams(req.params.id)
+        const comments = await prisma.notification.findMany({
+            include:{cours:{select:{authorId:true,title:true,slug:true}}},
+            where:{cours:{authorId:instructorId}}
+        })
+        res.json(comments)
+    },
 
     // Requête pour récuperer une notification par son id
-    getOneNotification: async (req: Request, res: Response) => {
+    getOneNotification: async (req: AuthenticatedRequest, res: Response) => {
         const notificationId = await parseIdFromParams(req.params.id);
         const notification = await prisma.notification.findUnique({ where: { id: notificationId } });
         if (!notification) {
             throw new NotFoundError(`Notification with id ${notificationId} not found`);
         }
+        // Seul le propriétaire ou un admin peut lire la notification
+        if (notification.userId !== req.user!.userId && req.user?.role !== ROLES.ADMIN) {
+            throw new ForbiddenError("Vous n'êtes pas autorisé à accéder à cette notification");
+        }
+
         res.json(notification);
     },
 
