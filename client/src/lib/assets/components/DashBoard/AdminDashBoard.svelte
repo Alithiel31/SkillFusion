@@ -4,6 +4,8 @@
 	import { onMount } from 'svelte';
 	import type { ICategory, ICours, IRole, IUser } from '$lib/@types/types';
 	import '../../../../app.css';
+	import ModalValidator from '../Validator/ModalValidator.svelte';
+	import type { IModal } from '$lib/@types/html';
 
 	let users: IUser[] = $state([]);
 	let roles: IRole[] = $state([]);
@@ -76,18 +78,43 @@
 	let errorMessage = $state('');
 	let successMessage = $state('');
 
-	async function deleteUser(userId: number) {
-		if (confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
-			const response = await api(`api/users/${userId}`, 'DELETE');
+	let userToDelete = $state<number | null>(null);
 
-			if (response.status === 204 || response.status === 200) {
-				users = users.filter((u) => u.id !== userId);
-				successMessage = 'Utilisateur supprimé avec succès';
-				errorMessage = '';
-			} else {
-				errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
-				successMessage = '';
-			}
+	function askDeleteUser(userId: number) {
+		userToDelete = userId;
+	}
+
+	async function confirmDelete() {
+		if (!userToDelete) return;
+
+		const response = await api(`api/users/${userToDelete}`, 'DELETE');
+
+		if (response.status === 204 || response.status === 200) {
+			users = users.filter((u) => u.id !== userToDelete);
+			successMessage = 'Utilisateur supprimé avec succès';
+			errorMessage = '';
+			setTimeout(() => (successMessage = ''), 5000);
+		} else {
+			errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+			successMessage = '';
+			setTimeout(() => (errorMessage = ''), 5000);
+		}
+		userToDelete = null;
+		cancelDelete();
+	}
+
+	function cancelDelete() {
+		const modal = document.getElementById('ModalValidator') as IModal;
+		if (modal) {
+			modal.close();
+		}
+	}
+
+	function openModalDelete(userId: number) {
+		userToDelete = userId;
+		const modal = document.getElementById('ModalValidator') as IModal;
+		if (modal) {
+			modal.show();
 		}
 	}
 
@@ -111,8 +138,10 @@
 					: u
 			);
 			successMessage = 'Rôle mis à jour avec succès';
+			setTimeout(() => (successMessage = ''), 5000);
 		} else {
 			errorMessage = 'Erreur lors de la mise à jour du rôle';
+			setTimeout(() => (errorMessage = ''), 5000);
 		}
 	}
 </script>
@@ -174,9 +203,7 @@
 									<option value={r.name}>{r.frName}</option>
 								{/each}
 							</select>
-							<button class="delete-btn delete-btn--edit" onclick={() => deleteUser(user.id)}
-								>x</button
-							>
+							<button class="delete-btn delete-btn--edit" onclick={() => openModalDelete(user.id)}> x</button>
 						</span>
 					</div>
 				{/each}
@@ -282,6 +309,11 @@
 			</div>
 		</div>
 	</div>
+	<ModalValidator
+		message="Êtes-vous sûr de vouloir supprimer cet utilisateur ?"
+		cancel={cancelDelete}
+		confirm={confirmDelete}
+	/>
 </div>
 
 <style>
@@ -506,6 +538,7 @@
 		color: var(--gray);
 		font-size: 12px;
 	}
+
 
 	/* ── List rows (cours, badges, cats) ─────────────────────── */
 	.list-row {
