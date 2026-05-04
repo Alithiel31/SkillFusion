@@ -12,7 +12,9 @@ router.get("/opinions/:id", opinionController.getOneOpinion)
 
  
 router.post("/opinions", verifyToken, checkRoles([roles.student, roles.instructor, roles.admin]), opinionController.createOpinion)
-router.patch("/opinions/:id", verifyToken, opinionController.updateOpinion)
-router.delete("/opinions/:id", verifyToken, opinionController.deleteOpinion)
+
+router.patch("/opinions/:id", verifyToken, checkRoles([roles.student, roles.admin]), opinionController.updateOpinion)
+
+router.delete("/opinions/:id", verifyToken,checkRoles([roles.student, roles.admin]), opinionController.deleteOpinion)
 
 export default router;  

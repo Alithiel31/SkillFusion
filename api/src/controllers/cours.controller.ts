@@ -5,8 +5,6 @@ import { parseIdFromParams } from "./utils";
 import { ConflictError, ForbiddenError, NotFoundError } from "../lib/errors";
 import type { AuthenticatedRequest } from "../@types/express";
 
-
-
 export default {
     getAll: async (req: Request, res: Response) => {
         let data = null
@@ -15,6 +13,11 @@ export default {
                 where: { slug: { contains: req.query.slug as string } },
                 include: {
                     category: true,
+                    comments:{
+                        include:{
+                            author:true
+                        }
+                    },
                     author: {
                         omit: { password: true }
                     },
