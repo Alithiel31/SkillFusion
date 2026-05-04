@@ -13,6 +13,6 @@ router.post("/opinions", verifyToken, checkRoles([roles.student, roles.instructo
 
 router.patch("/opinions/:id", verifyToken, checkRoles([roles.student, roles.admin]), opinionController.updateOpinion)
 
-router.delete("/opinions/:id", verifyToken, requireSelfOrAdmin, opinionController.deleteOpinion)
+router.delete("/opinions/:id", verifyToken,checkRoles([roles.student, roles.admin]), opinionController.deleteOpinion)
 
 export default router;  

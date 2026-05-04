@@ -83,8 +83,6 @@ export default {
         }else{
             throw new UnauthorizedError("tu n'a pas les droits")
         }
-
-        
     },
 
     // Requête pour supprimer une opinion

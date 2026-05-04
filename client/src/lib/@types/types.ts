@@ -24,7 +24,7 @@ export interface IUser {
         badges: UserHasBadge[]
         enrollments: UserHasCours[]
         activations: ICoursActived[]
-        commentaires: Comment[]
+        commentaires: IComment[]
         opinions: IOpinion[]
         notifications: Notification[]
 }
@@ -50,7 +50,7 @@ export interface ICours {
         content: ICoursContent[]
         enrollments: UserHasCours[]
         activations: ICoursActived[]
-        comments: Comment[]
+        comments: IComment[]
         opinions: IOpinion[]
         notifications: Notification[]
         cours: ICours
@@ -150,7 +150,7 @@ export interface CoursHasLearningObjective {
         objectif: LearningObjective
 }
 
-export interface Comment {
+export interface IComment {
         id: Number
         description: String
         coursId: Number
@@ -158,7 +158,7 @@ export interface Comment {
         createdAt: Date
         updatedAt: Date
         cours: ICours
-        auteur: IUser
+        author: IUser
 }
 export interface IOpinion {
   id :number

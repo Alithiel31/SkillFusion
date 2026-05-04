@@ -18071,7 +18071,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18082,7 +18082,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18093,7 +18093,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectScalar = {
@@ -18108,22 +18108,22 @@ export namespace Prisma {
   export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "description" | "coursId" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comment"
     objects: {
       cours: Prisma.$CoursPayload<ExtArgs>
-      auteur: Prisma.$UserPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -18527,7 +18527,7 @@ export namespace Prisma {
   export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     cours<T extends CoursDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CoursDefaultArgs<ExtArgs>>): Prisma__CoursClient<$Result.GetResult<Prisma.$CoursPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    auteur<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23613,7 +23613,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
     cours?: XOR<CoursScalarRelationFilter, CoursWhereInput>
-    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type CommentOrderByWithRelationInput = {
@@ -23624,7 +23624,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     cours?: CoursOrderByWithRelationInput
-    auteur?: UserOrderByWithRelationInput
+    author?: UserOrderByWithRelationInput
   }
 
   export type CommentWhereUniqueInput = Prisma.AtLeast<{
@@ -23638,7 +23638,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
     cours?: XOR<CoursScalarRelationFilter, CoursWhereInput>
-    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type CommentOrderByWithAggregationInput = {
@@ -23936,7 +23936,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -23962,7 +23962,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -23987,7 +23987,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -24013,7 +24013,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -24785,7 +24785,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     cours: CoursCreateNestedOneWithoutCommentsInput
-    auteur: UserCreateNestedOneWithoutCommentairesInput
+    author: UserCreateNestedOneWithoutCommentairesInput
   }
 
   export type CommentUncheckedCreateInput = {
@@ -24802,7 +24802,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cours?: CoursUpdateOneRequiredWithoutCommentsNestedInput
-    auteur?: UserUpdateOneRequiredWithoutCommentairesNestedInput
+    author?: UserUpdateOneRequiredWithoutCommentairesNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
@@ -26128,10 +26128,10 @@ export namespace Prisma {
     connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
   }
 
-  export type CommentCreateNestedManyWithoutAuteurInput = {
-    create?: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput> | CommentCreateWithoutAuteurInput[] | CommentUncheckedCreateWithoutAuteurInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutAuteurInput | CommentCreateOrConnectWithoutAuteurInput[]
-    createMany?: CommentCreateManyAuteurInputEnvelope
+  export type CommentCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: CommentCreateManyAuthorInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
@@ -26184,10 +26184,10 @@ export namespace Prisma {
     connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
   }
 
-  export type CommentUncheckedCreateNestedManyWithoutAuteurInput = {
-    create?: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput> | CommentCreateWithoutAuteurInput[] | CommentUncheckedCreateWithoutAuteurInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutAuteurInput | CommentCreateOrConnectWithoutAuteurInput[]
-    createMany?: CommentCreateManyAuteurInputEnvelope
+  export type CommentUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: CommentCreateManyAuthorInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
@@ -26288,17 +26288,17 @@ export namespace Prisma {
     deleteMany?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
   }
 
-  export type CommentUpdateManyWithoutAuteurNestedInput = {
-    create?: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput> | CommentCreateWithoutAuteurInput[] | CommentUncheckedCreateWithoutAuteurInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutAuteurInput | CommentCreateOrConnectWithoutAuteurInput[]
-    upsert?: CommentUpsertWithWhereUniqueWithoutAuteurInput | CommentUpsertWithWhereUniqueWithoutAuteurInput[]
-    createMany?: CommentCreateManyAuteurInputEnvelope
+  export type CommentUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutAuthorInput | CommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: CommentCreateManyAuthorInputEnvelope
     set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    update?: CommentUpdateWithWhereUniqueWithoutAuteurInput | CommentUpdateWithWhereUniqueWithoutAuteurInput[]
-    updateMany?: CommentUpdateManyWithWhereWithoutAuteurInput | CommentUpdateManyWithWhereWithoutAuteurInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutAuthorInput | CommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutAuthorInput | CommentUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
@@ -26400,17 +26400,17 @@ export namespace Prisma {
     deleteMany?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
   }
 
-  export type CommentUncheckedUpdateManyWithoutAuteurNestedInput = {
-    create?: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput> | CommentCreateWithoutAuteurInput[] | CommentUncheckedCreateWithoutAuteurInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutAuteurInput | CommentCreateOrConnectWithoutAuteurInput[]
-    upsert?: CommentUpsertWithWhereUniqueWithoutAuteurInput | CommentUpsertWithWhereUniqueWithoutAuteurInput[]
-    createMany?: CommentCreateManyAuteurInputEnvelope
+  export type CommentUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutAuthorInput | CommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: CommentCreateManyAuthorInputEnvelope
     set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    update?: CommentUpdateWithWhereUniqueWithoutAuteurInput | CommentUpdateWithWhereUniqueWithoutAuteurInput[]
-    updateMany?: CommentUpdateManyWithWhereWithoutAuteurInput | CommentUpdateManyWithWhereWithoutAuteurInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutAuthorInput | CommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutAuthorInput | CommentUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
@@ -27432,7 +27432,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -27457,7 +27457,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -27656,14 +27656,14 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CommentCreateWithoutAuteurInput = {
+  export type CommentCreateWithoutAuthorInput = {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
     cours: CoursCreateNestedOneWithoutCommentsInput
   }
 
-  export type CommentUncheckedCreateWithoutAuteurInput = {
+  export type CommentUncheckedCreateWithoutAuthorInput = {
     id?: number
     description: string
     coursId: number
@@ -27671,13 +27671,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CommentCreateOrConnectWithoutAuteurInput = {
+  export type CommentCreateOrConnectWithoutAuthorInput = {
     where: CommentWhereUniqueInput
-    create: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput>
+    create: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput>
   }
 
-  export type CommentCreateManyAuteurInputEnvelope = {
-    data: CommentCreateManyAuteurInput | CommentCreateManyAuteurInput[]
+  export type CommentCreateManyAuthorInputEnvelope = {
+    data: CommentCreateManyAuthorInput | CommentCreateManyAuthorInput[]
     skipDuplicates?: boolean
   }
 
@@ -27899,20 +27899,20 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"CoursActived"> | Date | string
   }
 
-  export type CommentUpsertWithWhereUniqueWithoutAuteurInput = {
+  export type CommentUpsertWithWhereUniqueWithoutAuthorInput = {
     where: CommentWhereUniqueInput
-    update: XOR<CommentUpdateWithoutAuteurInput, CommentUncheckedUpdateWithoutAuteurInput>
-    create: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput>
+    update: XOR<CommentUpdateWithoutAuthorInput, CommentUncheckedUpdateWithoutAuthorInput>
+    create: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput>
   }
 
-  export type CommentUpdateWithWhereUniqueWithoutAuteurInput = {
+  export type CommentUpdateWithWhereUniqueWithoutAuthorInput = {
     where: CommentWhereUniqueInput
-    data: XOR<CommentUpdateWithoutAuteurInput, CommentUncheckedUpdateWithoutAuteurInput>
+    data: XOR<CommentUpdateWithoutAuthorInput, CommentUncheckedUpdateWithoutAuthorInput>
   }
 
-  export type CommentUpdateManyWithWhereWithoutAuteurInput = {
+  export type CommentUpdateManyWithWhereWithoutAuthorInput = {
     where: CommentScalarWhereInput
-    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutAuteurInput>
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutAuthorInput>
   }
 
   export type CommentScalarWhereInput = {
@@ -28029,7 +28029,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -28054,7 +28054,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -28214,7 +28214,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    auteur: UserCreateNestedOneWithoutCommentairesInput
+    author: UserCreateNestedOneWithoutCommentairesInput
   }
 
   export type CommentUncheckedCreateWithoutCoursInput = {
@@ -28316,7 +28316,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -28341,7 +28341,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -28853,7 +28853,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -28878,7 +28878,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -28968,7 +28968,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -28993,7 +28993,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29073,7 +29073,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -29098,7 +29098,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29188,7 +29188,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -29213,7 +29213,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29293,7 +29293,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -29318,7 +29318,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29378,7 +29378,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -29403,7 +29403,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30028,7 +30028,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
@@ -30053,7 +30053,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
@@ -30149,7 +30149,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
@@ -30174,7 +30174,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -30248,7 +30248,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
@@ -30273,7 +30273,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
@@ -30369,7 +30369,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
@@ -30394,7 +30394,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -30418,7 +30418,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
   }
@@ -30443,7 +30443,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
   }
@@ -30483,7 +30483,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
   }
@@ -30508,7 +30508,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -30548,7 +30548,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -30573,7 +30573,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30633,7 +30633,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CommentCreateManyAuteurInput = {
+  export type CommentCreateManyAuthorInput = {
     id?: number
     description: string
     coursId: number
@@ -30788,14 +30788,14 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CommentUpdateWithoutAuteurInput = {
+  export type CommentUpdateWithoutAuthorInput = {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cours?: CoursUpdateOneRequiredWithoutCommentsNestedInput
   }
 
-  export type CommentUncheckedUpdateWithoutAuteurInput = {
+  export type CommentUncheckedUpdateWithoutAuthorInput = {
     id?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     coursId?: IntFieldUpdateOperationsInput | number
@@ -30803,7 +30803,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CommentUncheckedUpdateManyWithoutAuteurInput = {
+  export type CommentUncheckedUpdateManyWithoutAuthorInput = {
     id?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     coursId?: IntFieldUpdateOperationsInput | number
@@ -31052,7 +31052,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    auteur?: UserUpdateOneRequiredWithoutCommentairesNestedInput
+    author?: UserUpdateOneRequiredWithoutCommentairesNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutCoursInput = {
