@@ -3787,13 +3787,11 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     id: number | null
-    note: number | null
     roleId: number | null
   }
 
   export type UserSumAggregateOutputType = {
     id: number | null
-    note: number | null
     roleId: number | null
   }
 
@@ -3805,7 +3803,6 @@ export namespace Prisma {
     password: string | null
     pseudo: string | null
     urlProfilImage: string | null
-    note: number | null
     verified: boolean | null
     verifyToken: string | null
     resetToken: string | null
@@ -3823,7 +3820,6 @@ export namespace Prisma {
     password: string | null
     pseudo: string | null
     urlProfilImage: string | null
-    note: number | null
     verified: boolean | null
     verifyToken: string | null
     resetToken: string | null
@@ -3841,7 +3837,6 @@ export namespace Prisma {
     password: number
     pseudo: number
     urlProfilImage: number
-    note: number
     verified: number
     verifyToken: number
     resetToken: number
@@ -3855,13 +3850,11 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     id?: true
-    note?: true
     roleId?: true
   }
 
   export type UserSumAggregateInputType = {
     id?: true
-    note?: true
     roleId?: true
   }
 
@@ -3873,7 +3866,6 @@ export namespace Prisma {
     password?: true
     pseudo?: true
     urlProfilImage?: true
-    note?: true
     verified?: true
     verifyToken?: true
     resetToken?: true
@@ -3891,7 +3883,6 @@ export namespace Prisma {
     password?: true
     pseudo?: true
     urlProfilImage?: true
-    note?: true
     verified?: true
     verifyToken?: true
     resetToken?: true
@@ -3909,7 +3900,6 @@ export namespace Prisma {
     password?: true
     pseudo?: true
     urlProfilImage?: true
-    note?: true
     verified?: true
     verifyToken?: true
     resetToken?: true
@@ -4014,7 +4004,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage: string | null
-    note: number
     verified: boolean
     verifyToken: string | null
     resetToken: string | null
@@ -4051,7 +4040,6 @@ export namespace Prisma {
     password?: boolean
     pseudo?: boolean
     urlProfilImage?: boolean
-    note?: boolean
     verified?: boolean
     verifyToken?: boolean
     resetToken?: boolean
@@ -4079,7 +4067,6 @@ export namespace Prisma {
     password?: boolean
     pseudo?: boolean
     urlProfilImage?: boolean
-    note?: boolean
     verified?: boolean
     verifyToken?: boolean
     resetToken?: boolean
@@ -4098,7 +4085,6 @@ export namespace Prisma {
     password?: boolean
     pseudo?: boolean
     urlProfilImage?: boolean
-    note?: boolean
     verified?: boolean
     verifyToken?: boolean
     resetToken?: boolean
@@ -4117,7 +4103,6 @@ export namespace Prisma {
     password?: boolean
     pseudo?: boolean
     urlProfilImage?: boolean
-    note?: boolean
     verified?: boolean
     verifyToken?: boolean
     resetToken?: boolean
@@ -4127,7 +4112,7 @@ export namespace Prisma {
     roleId?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "pseudo" | "urlProfilImage" | "note" | "verified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "createdAt" | "updatedAt" | "roleId", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "pseudo" | "urlProfilImage" | "verified" | "verifyToken" | "resetToken" | "resetTokenExpiry" | "createdAt" | "updatedAt" | "roleId", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     role?: boolean | RoleDefaultArgs<ExtArgs>
     createdCours?: boolean | User$createdCoursArgs<ExtArgs>
@@ -4168,7 +4153,6 @@ export namespace Prisma {
       password: string
       pseudo: string
       urlProfilImage: string | null
-      note: number
       verified: boolean
       verifyToken: string | null
       resetToken: string | null
@@ -4615,7 +4599,6 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly pseudo: FieldRef<"User", 'String'>
     readonly urlProfilImage: FieldRef<"User", 'String'>
-    readonly note: FieldRef<"User", 'Int'>
     readonly verified: FieldRef<"User", 'Boolean'>
     readonly verifyToken: FieldRef<"User", 'String'>
     readonly resetToken: FieldRef<"User", 'String'>
@@ -5250,6 +5233,7 @@ export namespace Prisma {
     id: number | null
     difficulty: number | null
     numberPage: number | null
+    note: number | null
     authorId: number | null
     categoryId: number | null
   }
@@ -5258,6 +5242,7 @@ export namespace Prisma {
     id: number | null
     difficulty: number | null
     numberPage: number | null
+    note: number | null
     authorId: number | null
     categoryId: number | null
   }
@@ -5272,6 +5257,7 @@ export namespace Prisma {
     summary: string | null
     visibility: boolean | null
     numberPage: number | null
+    note: number | null
     createdAt: Date | null
     updatedAt: Date | null
     authorId: number | null
@@ -5288,6 +5274,7 @@ export namespace Prisma {
     summary: string | null
     visibility: boolean | null
     numberPage: number | null
+    note: number | null
     createdAt: Date | null
     updatedAt: Date | null
     authorId: number | null
@@ -5304,6 +5291,7 @@ export namespace Prisma {
     summary: number
     visibility: number
     numberPage: number
+    note: number
     createdAt: number
     updatedAt: number
     authorId: number
@@ -5316,6 +5304,7 @@ export namespace Prisma {
     id?: true
     difficulty?: true
     numberPage?: true
+    note?: true
     authorId?: true
     categoryId?: true
   }
@@ -5324,6 +5313,7 @@ export namespace Prisma {
     id?: true
     difficulty?: true
     numberPage?: true
+    note?: true
     authorId?: true
     categoryId?: true
   }
@@ -5338,6 +5328,7 @@ export namespace Prisma {
     summary?: true
     visibility?: true
     numberPage?: true
+    note?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -5354,6 +5345,7 @@ export namespace Prisma {
     summary?: true
     visibility?: true
     numberPage?: true
+    note?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -5370,6 +5362,7 @@ export namespace Prisma {
     summary?: true
     visibility?: true
     numberPage?: true
+    note?: true
     createdAt?: true
     updatedAt?: true
     authorId?: true
@@ -5473,6 +5466,7 @@ export namespace Prisma {
     summary: string | null
     visibility: boolean
     numberPage: number
+    note: number
     createdAt: Date
     updatedAt: Date
     authorId: number
@@ -5508,6 +5502,7 @@ export namespace Prisma {
     summary?: boolean
     visibility?: boolean
     numberPage?: boolean
+    note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
@@ -5535,6 +5530,7 @@ export namespace Prisma {
     summary?: boolean
     visibility?: boolean
     numberPage?: boolean
+    note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
@@ -5553,6 +5549,7 @@ export namespace Prisma {
     summary?: boolean
     visibility?: boolean
     numberPage?: boolean
+    note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
@@ -5571,13 +5568,14 @@ export namespace Prisma {
     summary?: boolean
     visibility?: boolean
     numberPage?: boolean
+    note?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     authorId?: boolean
     categoryId?: boolean
   }
 
-  export type CoursOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "littleSummary" | "urlImage" | "difficulty" | "summary" | "visibility" | "numberPage" | "createdAt" | "updatedAt" | "authorId" | "categoryId", ExtArgs["result"]["cours"]>
+  export type CoursOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "littleSummary" | "urlImage" | "difficulty" | "summary" | "visibility" | "numberPage" | "note" | "createdAt" | "updatedAt" | "authorId" | "categoryId", ExtArgs["result"]["cours"]>
   export type CoursInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     author?: boolean | UserDefaultArgs<ExtArgs>
     category?: boolean | CategoryDefaultArgs<ExtArgs>
@@ -5624,6 +5622,7 @@ export namespace Prisma {
       summary: string | null
       visibility: boolean
       numberPage: number
+      note: number
       createdAt: Date
       updatedAt: Date
       authorId: number
@@ -6070,6 +6069,7 @@ export namespace Prisma {
     readonly summary: FieldRef<"Cours", 'String'>
     readonly visibility: FieldRef<"Cours", 'Boolean'>
     readonly numberPage: FieldRef<"Cours", 'Int'>
+    readonly note: FieldRef<"Cours", 'Int'>
     readonly createdAt: FieldRef<"Cours", 'DateTime'>
     readonly updatedAt: FieldRef<"Cours", 'DateTime'>
     readonly authorId: FieldRef<"Cours", 'Int'>
@@ -18071,7 +18071,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18082,7 +18082,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -18093,7 +18093,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectScalar = {
@@ -18108,22 +18108,22 @@ export namespace Prisma {
   export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "description" | "coursId" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cours?: boolean | CoursDefaultArgs<ExtArgs>
-    auteur?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comment"
     objects: {
       cours: Prisma.$CoursPayload<ExtArgs>
-      auteur: Prisma.$UserPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -18527,7 +18527,7 @@ export namespace Prisma {
   export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     cours<T extends CoursDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CoursDefaultArgs<ExtArgs>>): Prisma__CoursClient<$Result.GetResult<Prisma.$CoursPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    auteur<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20152,6 +20152,7 @@ export namespace Prisma {
   export type NotificationMinAggregateOutputType = {
     id: number | null
     content: string | null
+    seen: boolean | null
     coursId: number | null
     userId: number | null
     createdAt: Date | null
@@ -20161,6 +20162,7 @@ export namespace Prisma {
   export type NotificationMaxAggregateOutputType = {
     id: number | null
     content: string | null
+    seen: boolean | null
     coursId: number | null
     userId: number | null
     createdAt: Date | null
@@ -20170,6 +20172,7 @@ export namespace Prisma {
   export type NotificationCountAggregateOutputType = {
     id: number
     content: number
+    seen: number
     coursId: number
     userId: number
     createdAt: number
@@ -20193,6 +20196,7 @@ export namespace Prisma {
   export type NotificationMinAggregateInputType = {
     id?: true
     content?: true
+    seen?: true
     coursId?: true
     userId?: true
     createdAt?: true
@@ -20202,6 +20206,7 @@ export namespace Prisma {
   export type NotificationMaxAggregateInputType = {
     id?: true
     content?: true
+    seen?: true
     coursId?: true
     userId?: true
     createdAt?: true
@@ -20211,6 +20216,7 @@ export namespace Prisma {
   export type NotificationCountAggregateInputType = {
     id?: true
     content?: true
+    seen?: true
     coursId?: true
     userId?: true
     createdAt?: true
@@ -20307,6 +20313,7 @@ export namespace Prisma {
   export type NotificationGroupByOutputType = {
     id: number
     content: string
+    seen: boolean
     coursId: number
     userId: number
     createdAt: Date
@@ -20335,6 +20342,7 @@ export namespace Prisma {
   export type NotificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
+    seen?: boolean
     coursId?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -20346,6 +20354,7 @@ export namespace Prisma {
   export type NotificationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
+    seen?: boolean
     coursId?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -20357,6 +20366,7 @@ export namespace Prisma {
   export type NotificationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     content?: boolean
+    seen?: boolean
     coursId?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -20368,13 +20378,14 @@ export namespace Prisma {
   export type NotificationSelectScalar = {
     id?: boolean
     content?: boolean
+    seen?: boolean
     coursId?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "coursId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["notification"]>
+  export type NotificationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "seen" | "coursId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["notification"]>
   export type NotificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     cours?: boolean | CoursDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -20397,6 +20408,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       content: string
+      seen: boolean
       coursId: number
       userId: number
       createdAt: Date
@@ -20828,6 +20840,7 @@ export namespace Prisma {
   interface NotificationFieldRefs {
     readonly id: FieldRef<"Notification", 'Int'>
     readonly content: FieldRef<"Notification", 'String'>
+    readonly seen: FieldRef<"Notification", 'Boolean'>
     readonly coursId: FieldRef<"Notification", 'Int'>
     readonly userId: FieldRef<"Notification", 'Int'>
     readonly createdAt: FieldRef<"Notification", 'DateTime'>
@@ -22385,7 +22398,6 @@ export namespace Prisma {
     password: 'password',
     pseudo: 'pseudo',
     urlProfilImage: 'urlProfilImage',
-    note: 'note',
     verified: 'verified',
     verifyToken: 'verifyToken',
     resetToken: 'resetToken',
@@ -22408,6 +22420,7 @@ export namespace Prisma {
     summary: 'summary',
     visibility: 'visibility',
     numberPage: 'numberPage',
+    note: 'note',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     authorId: 'authorId',
@@ -22560,6 +22573,7 @@ export namespace Prisma {
   export const NotificationScalarFieldEnum: {
     id: 'id',
     content: 'content',
+    seen: 'seen',
     coursId: 'coursId',
     userId: 'userId',
     createdAt: 'createdAt',
@@ -22743,7 +22757,6 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     pseudo?: StringFilter<"User"> | string
     urlProfilImage?: StringNullableFilter<"User"> | string | null
-    note?: IntFilter<"User"> | number
     verified?: BoolFilter<"User"> | boolean
     verifyToken?: StringNullableFilter<"User"> | string | null
     resetToken?: StringNullableFilter<"User"> | string | null
@@ -22770,7 +22783,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrderInput | SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrderInput | SortOrder
     resetToken?: SortOrderInput | SortOrder
@@ -22800,7 +22812,6 @@ export namespace Prisma {
     lastname?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     urlProfilImage?: StringNullableFilter<"User"> | string | null
-    note?: IntFilter<"User"> | number
     verified?: BoolFilter<"User"> | boolean
     verifyToken?: StringNullableFilter<"User"> | string | null
     resetToken?: StringNullableFilter<"User"> | string | null
@@ -22827,7 +22838,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrderInput | SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrderInput | SortOrder
     resetToken?: SortOrderInput | SortOrder
@@ -22853,7 +22863,6 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     pseudo?: StringWithAggregatesFilter<"User"> | string
     urlProfilImage?: StringNullableWithAggregatesFilter<"User"> | string | null
-    note?: IntWithAggregatesFilter<"User"> | number
     verified?: BoolWithAggregatesFilter<"User"> | boolean
     verifyToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     resetToken?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -22876,6 +22885,7 @@ export namespace Prisma {
     summary?: StringNullableFilter<"Cours"> | string | null
     visibility?: BoolFilter<"Cours"> | boolean
     numberPage?: IntFilter<"Cours"> | number
+    note?: IntFilter<"Cours"> | number
     createdAt?: DateTimeFilter<"Cours"> | Date | string
     updatedAt?: DateTimeFilter<"Cours"> | Date | string
     authorId?: IntFilter<"Cours"> | number
@@ -22902,6 +22912,7 @@ export namespace Prisma {
     summary?: SortOrderInput | SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -22931,6 +22942,7 @@ export namespace Prisma {
     summary?: StringNullableFilter<"Cours"> | string | null
     visibility?: BoolFilter<"Cours"> | boolean
     numberPage?: IntFilter<"Cours"> | number
+    note?: IntFilter<"Cours"> | number
     createdAt?: DateTimeFilter<"Cours"> | Date | string
     updatedAt?: DateTimeFilter<"Cours"> | Date | string
     authorId?: IntFilter<"Cours"> | number
@@ -22957,6 +22969,7 @@ export namespace Prisma {
     summary?: SortOrderInput | SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -22981,6 +22994,7 @@ export namespace Prisma {
     summary?: StringNullableWithAggregatesFilter<"Cours"> | string | null
     visibility?: BoolWithAggregatesFilter<"Cours"> | boolean
     numberPage?: IntWithAggregatesFilter<"Cours"> | number
+    note?: IntWithAggregatesFilter<"Cours"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Cours"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Cours"> | Date | string
     authorId?: IntWithAggregatesFilter<"Cours"> | number
@@ -23613,7 +23627,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
     cours?: XOR<CoursScalarRelationFilter, CoursWhereInput>
-    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type CommentOrderByWithRelationInput = {
@@ -23624,7 +23638,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     cours?: CoursOrderByWithRelationInput
-    auteur?: UserOrderByWithRelationInput
+    author?: UserOrderByWithRelationInput
   }
 
   export type CommentWhereUniqueInput = Prisma.AtLeast<{
@@ -23638,7 +23652,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
     cours?: XOR<CoursScalarRelationFilter, CoursWhereInput>
-    auteur?: XOR<UserScalarRelationFilter, UserWhereInput>
+    author?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type CommentOrderByWithAggregationInput = {
@@ -23744,6 +23758,7 @@ export namespace Prisma {
     NOT?: NotificationWhereInput | NotificationWhereInput[]
     id?: IntFilter<"Notification"> | number
     content?: StringFilter<"Notification"> | string
+    seen?: BoolFilter<"Notification"> | boolean
     coursId?: IntFilter<"Notification"> | number
     userId?: IntFilter<"Notification"> | number
     createdAt?: DateTimeFilter<"Notification"> | Date | string
@@ -23755,6 +23770,7 @@ export namespace Prisma {
   export type NotificationOrderByWithRelationInput = {
     id?: SortOrder
     content?: SortOrder
+    seen?: SortOrder
     coursId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -23769,6 +23785,7 @@ export namespace Prisma {
     OR?: NotificationWhereInput[]
     NOT?: NotificationWhereInput | NotificationWhereInput[]
     content?: StringFilter<"Notification"> | string
+    seen?: BoolFilter<"Notification"> | boolean
     coursId?: IntFilter<"Notification"> | number
     userId?: IntFilter<"Notification"> | number
     createdAt?: DateTimeFilter<"Notification"> | Date | string
@@ -23780,6 +23797,7 @@ export namespace Prisma {
   export type NotificationOrderByWithAggregationInput = {
     id?: SortOrder
     content?: SortOrder
+    seen?: SortOrder
     coursId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -23797,6 +23815,7 @@ export namespace Prisma {
     NOT?: NotificationScalarWhereWithAggregatesInput | NotificationScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Notification"> | number
     content?: StringWithAggregatesFilter<"Notification"> | string
+    seen?: BoolWithAggregatesFilter<"Notification"> | boolean
     coursId?: IntWithAggregatesFilter<"Notification"> | number
     userId?: IntWithAggregatesFilter<"Notification"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Notification"> | Date | string
@@ -23924,7 +23943,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -23936,7 +23954,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -23950,7 +23968,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -23962,7 +23979,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -23975,7 +23992,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -23987,7 +24003,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -24001,7 +24017,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24013,7 +24028,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -24027,7 +24042,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -24044,7 +24058,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24061,7 +24074,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24080,6 +24092,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -24104,6 +24117,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -24127,6 +24141,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -24151,6 +24166,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -24175,6 +24191,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -24190,6 +24207,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24204,6 +24222,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -24785,7 +24804,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     cours: CoursCreateNestedOneWithoutCommentsInput
-    auteur: UserCreateNestedOneWithoutCommentairesInput
+    author: UserCreateNestedOneWithoutCommentairesInput
   }
 
   export type CommentUncheckedCreateInput = {
@@ -24802,7 +24821,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cours?: CoursUpdateOneRequiredWithoutCommentsNestedInput
-    auteur?: UserUpdateOneRequiredWithoutCommentairesNestedInput
+    author?: UserUpdateOneRequiredWithoutCommentairesNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
@@ -24905,6 +24924,7 @@ export namespace Prisma {
 
   export type NotificationCreateInput = {
     content: string
+    seen?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     cours: CoursCreateNestedOneWithoutNotificationsInput
@@ -24914,6 +24934,7 @@ export namespace Prisma {
   export type NotificationUncheckedCreateInput = {
     id?: number
     content: string
+    seen?: boolean
     coursId: number
     userId: number
     createdAt?: Date | string
@@ -24922,6 +24943,7 @@ export namespace Prisma {
 
   export type NotificationUpdateInput = {
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cours?: CoursUpdateOneRequiredWithoutNotificationsNestedInput
@@ -24931,6 +24953,7 @@ export namespace Prisma {
   export type NotificationUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     coursId?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24940,6 +24963,7 @@ export namespace Prisma {
   export type NotificationCreateManyInput = {
     id?: number
     content: string
+    seen?: boolean
     coursId: number
     userId: number
     createdAt?: Date | string
@@ -24948,6 +24972,7 @@ export namespace Prisma {
 
   export type NotificationUpdateManyMutationInput = {
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24955,6 +24980,7 @@ export namespace Prisma {
   export type NotificationUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     coursId?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -25269,7 +25295,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrder
     resetToken?: SortOrder
@@ -25281,7 +25306,6 @@ export namespace Prisma {
 
   export type UserAvgOrderByAggregateInput = {
     id?: SortOrder
-    note?: SortOrder
     roleId?: SortOrder
   }
 
@@ -25293,7 +25317,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrder
     resetToken?: SortOrder
@@ -25311,7 +25334,6 @@ export namespace Prisma {
     password?: SortOrder
     pseudo?: SortOrder
     urlProfilImage?: SortOrder
-    note?: SortOrder
     verified?: SortOrder
     verifyToken?: SortOrder
     resetToken?: SortOrder
@@ -25323,7 +25345,6 @@ export namespace Prisma {
 
   export type UserSumOrderByAggregateInput = {
     id?: SortOrder
-    note?: SortOrder
     roleId?: SortOrder
   }
 
@@ -25417,6 +25438,7 @@ export namespace Prisma {
     summary?: SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -25427,6 +25449,7 @@ export namespace Prisma {
     id?: SortOrder
     difficulty?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     authorId?: SortOrder
     categoryId?: SortOrder
   }
@@ -25441,6 +25464,7 @@ export namespace Prisma {
     summary?: SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -25457,6 +25481,7 @@ export namespace Prisma {
     summary?: SortOrder
     visibility?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     authorId?: SortOrder
@@ -25467,6 +25492,7 @@ export namespace Prisma {
     id?: SortOrder
     difficulty?: SortOrder
     numberPage?: SortOrder
+    note?: SortOrder
     authorId?: SortOrder
     categoryId?: SortOrder
   }
@@ -25966,6 +25992,7 @@ export namespace Prisma {
   export type NotificationCountOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
+    seen?: SortOrder
     coursId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -25981,6 +26008,7 @@ export namespace Prisma {
   export type NotificationMaxOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
+    seen?: SortOrder
     coursId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -25990,6 +26018,7 @@ export namespace Prisma {
   export type NotificationMinOrderByAggregateInput = {
     id?: SortOrder
     content?: SortOrder
+    seen?: SortOrder
     coursId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -26128,10 +26157,10 @@ export namespace Prisma {
     connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
   }
 
-  export type CommentCreateNestedManyWithoutAuteurInput = {
-    create?: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput> | CommentCreateWithoutAuteurInput[] | CommentUncheckedCreateWithoutAuteurInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutAuteurInput | CommentCreateOrConnectWithoutAuteurInput[]
-    createMany?: CommentCreateManyAuteurInputEnvelope
+  export type CommentCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: CommentCreateManyAuthorInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
@@ -26184,10 +26213,10 @@ export namespace Prisma {
     connect?: CoursActivedWhereUniqueInput | CoursActivedWhereUniqueInput[]
   }
 
-  export type CommentUncheckedCreateNestedManyWithoutAuteurInput = {
-    create?: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput> | CommentCreateWithoutAuteurInput[] | CommentUncheckedCreateWithoutAuteurInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutAuteurInput | CommentCreateOrConnectWithoutAuteurInput[]
-    createMany?: CommentCreateManyAuteurInputEnvelope
+  export type CommentUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: CommentCreateManyAuthorInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
@@ -26288,17 +26317,17 @@ export namespace Prisma {
     deleteMany?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
   }
 
-  export type CommentUpdateManyWithoutAuteurNestedInput = {
-    create?: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput> | CommentCreateWithoutAuteurInput[] | CommentUncheckedCreateWithoutAuteurInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutAuteurInput | CommentCreateOrConnectWithoutAuteurInput[]
-    upsert?: CommentUpsertWithWhereUniqueWithoutAuteurInput | CommentUpsertWithWhereUniqueWithoutAuteurInput[]
-    createMany?: CommentCreateManyAuteurInputEnvelope
+  export type CommentUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutAuthorInput | CommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: CommentCreateManyAuthorInputEnvelope
     set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    update?: CommentUpdateWithWhereUniqueWithoutAuteurInput | CommentUpdateWithWhereUniqueWithoutAuteurInput[]
-    updateMany?: CommentUpdateManyWithWhereWithoutAuteurInput | CommentUpdateManyWithWhereWithoutAuteurInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutAuthorInput | CommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutAuthorInput | CommentUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
@@ -26400,17 +26429,17 @@ export namespace Prisma {
     deleteMany?: CoursActivedScalarWhereInput | CoursActivedScalarWhereInput[]
   }
 
-  export type CommentUncheckedUpdateManyWithoutAuteurNestedInput = {
-    create?: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput> | CommentCreateWithoutAuteurInput[] | CommentUncheckedCreateWithoutAuteurInput[]
-    connectOrCreate?: CommentCreateOrConnectWithoutAuteurInput | CommentCreateOrConnectWithoutAuteurInput[]
-    upsert?: CommentUpsertWithWhereUniqueWithoutAuteurInput | CommentUpsertWithWhereUniqueWithoutAuteurInput[]
-    createMany?: CommentCreateManyAuteurInputEnvelope
+  export type CommentUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput> | CommentCreateWithoutAuthorInput[] | CommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutAuthorInput | CommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutAuthorInput | CommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: CommentCreateManyAuthorInputEnvelope
     set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
-    update?: CommentUpdateWithWhereUniqueWithoutAuteurInput | CommentUpdateWithWhereUniqueWithoutAuteurInput[]
-    updateMany?: CommentUpdateManyWithWhereWithoutAuteurInput | CommentUpdateManyWithWhereWithoutAuteurInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutAuthorInput | CommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutAuthorInput | CommentUpdateManyWithWhereWithoutAuthorInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
@@ -27421,7 +27450,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -27432,7 +27460,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -27446,7 +27474,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -27457,7 +27484,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -27500,7 +27527,6 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     pseudo?: StringFilter<"User"> | string
     urlProfilImage?: StringNullableFilter<"User"> | string | null
-    note?: IntFilter<"User"> | number
     verified?: BoolFilter<"User"> | boolean
     verifyToken?: StringNullableFilter<"User"> | string | null
     resetToken?: StringNullableFilter<"User"> | string | null
@@ -27539,6 +27565,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutCoursesInput
@@ -27562,6 +27589,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryId: number
@@ -27656,14 +27684,14 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CommentCreateWithoutAuteurInput = {
+  export type CommentCreateWithoutAuthorInput = {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
     cours: CoursCreateNestedOneWithoutCommentsInput
   }
 
-  export type CommentUncheckedCreateWithoutAuteurInput = {
+  export type CommentUncheckedCreateWithoutAuthorInput = {
     id?: number
     description: string
     coursId: number
@@ -27671,13 +27699,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CommentCreateOrConnectWithoutAuteurInput = {
+  export type CommentCreateOrConnectWithoutAuthorInput = {
     where: CommentWhereUniqueInput
-    create: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput>
+    create: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput>
   }
 
-  export type CommentCreateManyAuteurInputEnvelope = {
-    data: CommentCreateManyAuteurInput | CommentCreateManyAuteurInput[]
+  export type CommentCreateManyAuthorInputEnvelope = {
+    data: CommentCreateManyAuthorInput | CommentCreateManyAuthorInput[]
     skipDuplicates?: boolean
   }
 
@@ -27710,6 +27738,7 @@ export namespace Prisma {
 
   export type NotificationCreateWithoutUserInput = {
     content: string
+    seen?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     cours: CoursCreateNestedOneWithoutNotificationsInput
@@ -27718,6 +27747,7 @@ export namespace Prisma {
   export type NotificationUncheckedCreateWithoutUserInput = {
     id?: number
     content: string
+    seen?: boolean
     coursId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -27811,6 +27841,7 @@ export namespace Prisma {
     summary?: StringNullableFilter<"Cours"> | string | null
     visibility?: BoolFilter<"Cours"> | boolean
     numberPage?: IntFilter<"Cours"> | number
+    note?: IntFilter<"Cours"> | number
     createdAt?: DateTimeFilter<"Cours"> | Date | string
     updatedAt?: DateTimeFilter<"Cours"> | Date | string
     authorId?: IntFilter<"Cours"> | number
@@ -27899,20 +27930,20 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"CoursActived"> | Date | string
   }
 
-  export type CommentUpsertWithWhereUniqueWithoutAuteurInput = {
+  export type CommentUpsertWithWhereUniqueWithoutAuthorInput = {
     where: CommentWhereUniqueInput
-    update: XOR<CommentUpdateWithoutAuteurInput, CommentUncheckedUpdateWithoutAuteurInput>
-    create: XOR<CommentCreateWithoutAuteurInput, CommentUncheckedCreateWithoutAuteurInput>
+    update: XOR<CommentUpdateWithoutAuthorInput, CommentUncheckedUpdateWithoutAuthorInput>
+    create: XOR<CommentCreateWithoutAuthorInput, CommentUncheckedCreateWithoutAuthorInput>
   }
 
-  export type CommentUpdateWithWhereUniqueWithoutAuteurInput = {
+  export type CommentUpdateWithWhereUniqueWithoutAuthorInput = {
     where: CommentWhereUniqueInput
-    data: XOR<CommentUpdateWithoutAuteurInput, CommentUncheckedUpdateWithoutAuteurInput>
+    data: XOR<CommentUpdateWithoutAuthorInput, CommentUncheckedUpdateWithoutAuthorInput>
   }
 
-  export type CommentUpdateManyWithWhereWithoutAuteurInput = {
+  export type CommentUpdateManyWithWhereWithoutAuthorInput = {
     where: CommentScalarWhereInput
-    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutAuteurInput>
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutAuthorInput>
   }
 
   export type CommentScalarWhereInput = {
@@ -27978,6 +28009,7 @@ export namespace Prisma {
     NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
     id?: IntFilter<"Notification"> | number
     content?: StringFilter<"Notification"> | string
+    seen?: BoolFilter<"Notification"> | boolean
     coursId?: IntFilter<"Notification"> | number
     userId?: IntFilter<"Notification"> | number
     createdAt?: DateTimeFilter<"Notification"> | Date | string
@@ -28018,7 +28050,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -28029,7 +28060,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -28043,7 +28074,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -28054,7 +28084,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -28214,7 +28244,7 @@ export namespace Prisma {
     description: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    auteur: UserCreateNestedOneWithoutCommentairesInput
+    author: UserCreateNestedOneWithoutCommentairesInput
   }
 
   export type CommentUncheckedCreateWithoutCoursInput = {
@@ -28264,6 +28294,7 @@ export namespace Prisma {
 
   export type NotificationCreateWithoutCoursInput = {
     content: string
+    seen?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutNotificationsInput
@@ -28272,6 +28303,7 @@ export namespace Prisma {
   export type NotificationUncheckedCreateWithoutCoursInput = {
     id?: number
     content: string
+    seen?: boolean
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -28305,7 +28337,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28316,7 +28347,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -28330,7 +28361,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28341,7 +28371,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -28550,6 +28580,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28573,6 +28604,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28611,6 +28643,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -28634,6 +28667,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -28656,6 +28690,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28679,6 +28714,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28842,7 +28878,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -28853,7 +28888,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -28867,7 +28902,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -28878,7 +28912,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -28898,6 +28932,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -28921,6 +28956,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -28957,7 +28993,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28968,7 +29003,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -28982,7 +29017,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -28993,7 +29027,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29019,6 +29053,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29042,6 +29077,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29062,7 +29098,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29073,7 +29108,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -29087,7 +29122,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29098,7 +29132,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29118,6 +29152,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29141,6 +29176,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29177,7 +29213,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29188,7 +29223,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -29202,7 +29237,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29213,7 +29247,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29239,6 +29273,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29262,6 +29297,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29282,7 +29318,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29293,7 +29328,7 @@ export namespace Prisma {
     createdCours?: CoursCreateNestedManyWithoutAuthorInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
@@ -29307,7 +29342,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29318,7 +29352,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedCreateNestedManyWithoutAuthorInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
@@ -29367,7 +29401,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29378,7 +29411,7 @@ export namespace Prisma {
     createdCours?: CoursUpdateManyWithoutAuthorNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -29392,7 +29425,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29403,7 +29435,7 @@ export namespace Prisma {
     createdCours?: CoursUncheckedUpdateManyWithoutAuthorNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -29444,6 +29476,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29467,6 +29500,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29525,6 +29559,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29548,6 +29583,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29596,6 +29632,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29619,6 +29656,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29677,6 +29715,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29700,6 +29739,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29748,6 +29788,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29771,6 +29812,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -29796,7 +29838,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29821,7 +29862,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -29863,6 +29903,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -29886,6 +29927,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -29917,7 +29959,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29942,7 +29983,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -29968,6 +30008,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -29991,6 +30032,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -30016,7 +30058,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30028,7 +30069,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
@@ -30041,7 +30082,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30053,7 +30093,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
@@ -30083,6 +30123,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -30106,6 +30147,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -30137,7 +30179,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30149,7 +30190,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
@@ -30162,7 +30203,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30174,7 +30214,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -30188,6 +30228,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     author: UserCreateNestedOneWithoutCreatedCoursInput
@@ -30211,6 +30252,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -30236,7 +30278,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30248,7 +30289,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
   }
@@ -30261,7 +30302,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30273,7 +30313,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
   }
@@ -30303,6 +30343,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -30326,6 +30367,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -30357,7 +30399,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30369,7 +30410,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
   }
@@ -30382,7 +30423,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30394,7 +30434,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -30406,7 +30446,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30418,7 +30457,7 @@ export namespace Prisma {
     badges?: UserHasBadgeCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursCreateNestedManyWithoutUserInput
     activations?: CoursActivedCreateNestedManyWithoutUserInput
-    commentaires?: CommentCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentCreateNestedManyWithoutAuthorInput
     opinions?: OpinionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
   }
@@ -30431,7 +30470,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30443,7 +30481,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedCreateNestedManyWithoutUserInput
     enrollments?: UserHasCoursUncheckedCreateNestedManyWithoutUserInput
     activations?: CoursActivedUncheckedCreateNestedManyWithoutUserInput
-    commentaires?: CommentUncheckedCreateNestedManyWithoutAuteurInput
+    commentaires?: CommentUncheckedCreateNestedManyWithoutAuthorInput
     opinions?: OpinionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
   }
@@ -30471,7 +30509,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30483,7 +30520,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
   }
@@ -30496,7 +30533,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30508,7 +30544,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -30521,7 +30557,6 @@ export namespace Prisma {
     password: string
     pseudo: string
     urlProfilImage?: string | null
-    note?: number
     verified?: boolean
     verifyToken?: string | null
     resetToken?: string | null
@@ -30537,7 +30572,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30548,7 +30582,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
@@ -30562,7 +30596,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30573,7 +30606,7 @@ export namespace Prisma {
     badges?: UserHasBadgeUncheckedUpdateManyWithoutUserNestedInput
     enrollments?: UserHasCoursUncheckedUpdateManyWithoutUserNestedInput
     activations?: CoursActivedUncheckedUpdateManyWithoutUserNestedInput
-    commentaires?: CommentUncheckedUpdateManyWithoutAuteurNestedInput
+    commentaires?: CommentUncheckedUpdateManyWithoutAuthorNestedInput
     opinions?: OpinionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -30587,7 +30620,6 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     pseudo?: StringFieldUpdateOperationsInput | string
     urlProfilImage?: NullableStringFieldUpdateOperationsInput | string | null
-    note?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     verifyToken?: NullableStringFieldUpdateOperationsInput | string | null
     resetToken?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30606,6 +30638,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryId: number
@@ -30633,7 +30666,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type CommentCreateManyAuteurInput = {
+  export type CommentCreateManyAuthorInput = {
     id?: number
     description: string
     coursId: number
@@ -30653,6 +30686,7 @@ export namespace Prisma {
   export type NotificationCreateManyUserInput = {
     id?: number
     content: string
+    seen?: boolean
     coursId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -30674,6 +30708,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutCoursesNestedInput
@@ -30697,6 +30732,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: IntFieldUpdateOperationsInput | number
@@ -30720,6 +30756,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: IntFieldUpdateOperationsInput | number
@@ -30788,14 +30825,14 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CommentUpdateWithoutAuteurInput = {
+  export type CommentUpdateWithoutAuthorInput = {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cours?: CoursUpdateOneRequiredWithoutCommentsNestedInput
   }
 
-  export type CommentUncheckedUpdateWithoutAuteurInput = {
+  export type CommentUncheckedUpdateWithoutAuthorInput = {
     id?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     coursId?: IntFieldUpdateOperationsInput | number
@@ -30803,7 +30840,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CommentUncheckedUpdateManyWithoutAuteurInput = {
+  export type CommentUncheckedUpdateManyWithoutAuthorInput = {
     id?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     coursId?: IntFieldUpdateOperationsInput | number
@@ -30839,6 +30876,7 @@ export namespace Prisma {
 
   export type NotificationUpdateWithoutUserInput = {
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     cours?: CoursUpdateOneRequiredWithoutNotificationsNestedInput
@@ -30847,6 +30885,7 @@ export namespace Prisma {
   export type NotificationUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     coursId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30855,6 +30894,7 @@ export namespace Prisma {
   export type NotificationUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     coursId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -30937,6 +30977,7 @@ export namespace Prisma {
   export type NotificationCreateManyCoursInput = {
     id?: number
     content: string
+    seen?: boolean
     userId: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -31052,7 +31093,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    auteur?: UserUpdateOneRequiredWithoutCommentairesNestedInput
+    author?: UserUpdateOneRequiredWithoutCommentairesNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutCoursInput = {
@@ -31099,6 +31140,7 @@ export namespace Prisma {
 
   export type NotificationUpdateWithoutCoursInput = {
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutNotificationsNestedInput
@@ -31107,6 +31149,7 @@ export namespace Prisma {
   export type NotificationUncheckedUpdateWithoutCoursInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31115,6 +31158,7 @@ export namespace Prisma {
   export type NotificationUncheckedUpdateManyWithoutCoursInput = {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
+    seen?: BoolFieldUpdateOperationsInput | boolean
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -31130,6 +31174,7 @@ export namespace Prisma {
     summary?: string | null
     visibility?: boolean
     numberPage: number
+    note?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     authorId: number
@@ -31144,6 +31189,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: UserUpdateOneRequiredWithoutCreatedCoursNestedInput
@@ -31167,6 +31213,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number
@@ -31190,6 +31237,7 @@ export namespace Prisma {
     summary?: NullableStringFieldUpdateOperationsInput | string | null
     visibility?: BoolFieldUpdateOperationsInput | boolean
     numberPage?: IntFieldUpdateOperationsInput | number
+    note?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authorId?: IntFieldUpdateOperationsInput | number

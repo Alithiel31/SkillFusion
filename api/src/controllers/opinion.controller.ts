@@ -94,6 +94,10 @@ export default {
             }
         });
         res.json(updatedOpinion);
+        return res.json(updatedOpinion);
+        }else{
+            throw new UnauthorizedError("tu n'a pas les droits")
+        }
     },
 
 

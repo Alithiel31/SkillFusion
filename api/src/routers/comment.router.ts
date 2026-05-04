@@ -6,12 +6,13 @@ import { checkRoles, requireSelfOrAdmin, ROLES } from '../middlewares/rbac.middl
 const router = express.Router();
 
 router.get("/comments", commentController.getAll)
+
 router.get("/comments/:id", commentController.getOneComment)
 
 router.post("/comments", verifyToken, checkRoles([ROLES.STUDENT, ROLES.INSTRUCTOR, ROLES.ADMIN]), commentController.createComment)
 
-router.patch("/comments/:id", verifyToken, requireSelfOrAdmin, commentController.updatingComment)
+router.patch("/comments/:id", verifyToken,  commentController.updatingComment)
 
-router.delete("/comments/:id", verifyToken, requireSelfOrAdmin, commentController.deleteComment)
+router.delete("/comments/:id", verifyToken, commentController.deleteComment)
 
 export default router;

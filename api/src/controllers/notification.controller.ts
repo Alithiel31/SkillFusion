@@ -13,6 +13,14 @@ export default {
         const notifications = await prisma.notification.findMany();
         res.json(notifications);
     },
+    getNotificationByInstructor:async (req: Request, res: Response)=>{
+        const instructorId = await parseIdFromParams(req.params.id)
+        const comments = await prisma.notification.findMany({
+            include:{cours:{select:{authorId:true,title:true,slug:true}}},
+            where:{cours:{authorId:instructorId}}
+        })
+        res.json(comments)
+    },
 
     // Requête pour récuperer une notification par son id
     getOneNotification: async (req: AuthenticatedRequest, res: Response) => {

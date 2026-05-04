@@ -40,7 +40,7 @@ async function seed() {
         verified: true,
       },
       {
-        email: "jacques@suchamplecheval.oclock",
+        email: "jacques@duchamplecheval.oclock",
         firstname: "Jacques",
         lastname: "Cheval",
         pseudo: "President",
