@@ -19,6 +19,9 @@ Thumbs.db
 # Env
 .env
 .env.test
+*.pem
+*.key
+credentials*
 
 # Vite
 vite.config.js.timestamp-*
