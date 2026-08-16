@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { xss } from 'express-xss-sanitizer';
-/* import helmet from 'helmet'; */
+import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 
@@ -59,11 +59,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-/* app.use(
+app.use(
     helmet({
         crossOriginResourcePolicy: { policy: 'cross-origin' },
     })
-); */
+);
 
 app.use(cookieParser());
 app.use(express.json({ limit: '5mb' })); // Limite à 5mb pour la photo

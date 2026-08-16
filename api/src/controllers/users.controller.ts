@@ -212,6 +212,11 @@ export default {
 
         const data = await updateUserBodySchema.parseAsync(req.body);
 
+        // Seul un admin peut changer le rôle d'un utilisateur
+        if (data.roleId !== undefined && req.user?.role !== ROLES.ADMIN) {
+            throw new ForbiddenError("Vous n'êtes pas autorisé à modifier le rôle de cet utilisateur");
+        }
+
         if (data.email) {
             // Ne pas vérifier si l'email appartient déjà à l'utilisateur en cours
             const existingUser = await prisma.user.findUnique({
