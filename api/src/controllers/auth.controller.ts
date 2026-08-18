@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken';
 import type { AuthenticatedRequest } from '../@types/express';
 import crypto from 'crypto';
 import { sendVerificationEmail, sendResetPasswordEmail } from '../lib/mailer';
+import logger from '../lib/logger';
 
 // Token management functions --------------------------------------------------------------------
 
@@ -177,7 +178,8 @@ export async function refreshAccessToken(req: Request, res: Response) {
     // Vérifier la signature JWT avant d'interroger la base de données
     try {
         jwt.verify(receivedRefreshToken, config.jwtSecret, { audience: 'refresh' });
-    } catch {
+    } catch (error) {
+        logger.warn('Refresh token verification failed', error);
         throw new UnauthorizedError("Vous n'êtes pas autorisé à accéder à cette resource");
     }
 
@@ -228,7 +230,11 @@ export async function verifyEmail(req: Request, res: Response) {
 
 // Demande de réinitialisation
 export async function forgotPassword(req: Request, res: Response) {
-    const { email } = req.body;
+    const forgotPasswordSchema = z.object({
+        email: z.string().email(),
+    });
+
+    const { email } = await forgotPasswordSchema.parseAsync(req.body);
 
     const user = await prisma.user.findUnique({ where: { email } });
 

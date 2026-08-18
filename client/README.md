@@ -1,42 +1,43 @@
-# sv
+# SkillFusion — Client
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Client web de SkillFusion, construit avec [SvelteKit](https://svelte.dev/docs/kit) et TypeScript.
 
-## Creating a project
+## Prérequis
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Node.js et npm
+- L'API SkillFusion doit être accessible (voir le `README.md` à la racine du dépôt pour lancer l'ensemble du projet avec Docker)
+
+## Configuration
+
+Copier `.env.example` en `.env` et renseigner l'URL de l'API :
 
 ```sh
-# create a new project
-npx sv create my-app
+cp .env.example .env
 ```
 
-To recreate this project with the same configuration:
+## Développement
 
 ```sh
-# recreate this project
-npx sv@0.15.1 create --template minimal --types ts --add eslint vitest="usages:unit,component" sveltekit-adapter="adapter:auto" prettier --install npm client
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+npm install
 npm run dev
 
-# or start the server and open the app in a new browser tab
+# ou pour ouvrir automatiquement un onglet navigateur
 npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
+## Build
 
 ```sh
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+Prévisualiser le build de production avec `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Qualité
+
+```sh
+npm run lint        # vérification ESLint + Prettier
+npm run lint:fix     # correction automatique
+npm run check        # vérification des types (svelte-check)
+npm run test          # tests unitaires (Vitest)
+```

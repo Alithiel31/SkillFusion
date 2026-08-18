@@ -22,7 +22,7 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "CC-BY-NC-4.0",
     "type": "module",
     "dependencies": {
         "@prisma/adapter-pg": "^7.6.0",

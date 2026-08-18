@@ -93,9 +93,6 @@
             if (currentPageId) {
                 const response = await api('api/cours-contents/' + currentPageId.id, 'GET');
                 coursContent = response.data as ICoursContent;
-                if (coursContent) {
-                    coursContent.content = DOMPurify.sanitize(coursContent.content);
-                }
             }
         }
     }
@@ -208,7 +205,9 @@
                     >
 
                     {#if !modifier}
-                        {@html marked.parse(coursContent.content)}
+                        {@html DOMPurify.sanitize(
+                            marked.parse(coursContent.content, { async: false })
+                        )}
                     {:else}
                         <textarea
                             class="text_area"
@@ -219,7 +218,7 @@
                         <button onclick={valider} class="button_tools flex-end">Valider</button>
                     {/if}
                 {:else}
-                    {@html marked.parse(coursContent.content)}
+                    {@html DOMPurify.sanitize(marked.parse(coursContent.content, { async: false }))}
                 {/if}
             </div>
             <div class="navigation-footer">

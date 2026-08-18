@@ -12,7 +12,7 @@ export function globalErrorHandler(error: Error, req: Request, res: Response, ne
 
     // 1) Gérer les erreurs de validation Zod -> 400 (note : techniquement il faudrait 422, mais on trouve très souvent 400)
     if (error instanceof z.ZodError) {
-        console.info('ZodError', error);
+        logger.info('ZodError', error);
 
         return res.status(400).json({
             status: 400,
@@ -24,7 +24,7 @@ export function globalErrorHandler(error: Error, req: Request, res: Response, ne
     // 2) Gérer les erreurs client controllées
 
     if (error instanceof HttpClientError) {
-        console.info('HttpClientError', error); // Niveau info pour la traçabilité
+        logger.info('HttpClientError', error); // Niveau info pour la traçabilité
 
         return res.status(error.status).json({
             status: error.status,

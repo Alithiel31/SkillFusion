@@ -214,7 +214,9 @@ export default {
 
         // Seul un admin peut changer le rôle d'un utilisateur
         if (data.roleId !== undefined && req.user?.role !== ROLES.ADMIN) {
-            throw new ForbiddenError("Vous n'êtes pas autorisé à modifier le rôle de cet utilisateur");
+            throw new ForbiddenError(
+                "Vous n'êtes pas autorisé à modifier le rôle de cet utilisateur"
+            );
         }
 
         if (data.email) {
